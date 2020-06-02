@@ -9,7 +9,7 @@ export class LayoutConfig {
         md: 768,
         lg: 992,
         xl: 1200,
-        xxl: 1200,
+        xxl: 1920,
       },
       colors: {
         theme: {
@@ -102,18 +102,8 @@ export class LayoutConfig {
         },
       },
     },
-    subheader: {
-      display: true,
-      displayDesc: false,
-      displayDaterangepicker: true,
-      layout: 'subheader-v1', // 'subheader-v2'|'subheader-v3'
-      fixed: true,
-      width: 'fluid', // fixed|fluid
-      clear: false,
-      style: 'solid', // transparent/solid
-    },
     content: {
-      width: 'fixed', // fluid/fixed
+      width: 'fluid', // fluid/fixed
     },
     brand: {
       self: {
@@ -154,23 +144,6 @@ export class LayoutConfig {
       fixed: false
     },
     extras: {
-      search: {
-        display: true,
-        layout: 'dropdown', // offcanvas, dropdown
-        offcanvas: {
-          direction: 'right'
-        }
-      },
-      notifications: {
-        display: true,
-        layout: 'dropdown', // offcanvas, dropdown
-        dropdown: {
-          style: 'dark' // light|dark
-        },
-        offcanvas: {
-          direction: 'right'
-        }
-      },
       user: {
         display: true,
         layout: 'offcanvas', // offcanvas, dropdown
@@ -183,28 +156,6 @@ export class LayoutConfig {
       },
       languages: {
         display: true
-      },
-      cart: {
-        display: true,
-        dropdown: {
-          style: 'dark'
-        }
-      },
-      'quick-actions': {
-        display: true,
-        layout: 'dropdown', // offcanvas, dropdown
-        dropdown: {
-          style: 'dark'
-        },
-        offcanvas: {
-          direction: 'right'
-        }
-      },
-      'quick-panel': {
-        display: true,
-        offcanvas: {
-          direction: 'right'
-        }
       },
       chat: {
         display: false

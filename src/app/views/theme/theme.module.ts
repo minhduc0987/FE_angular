@@ -29,7 +29,6 @@ import { CoreModule } from '../../core/core.module';
 import { HeaderComponent } from './header/header.component';
 import { AsideLeftComponent } from './aside/aside-left.component';
 import { FooterComponent } from './footer/footer.component';
-import { SubheaderComponent } from './subheader/subheader.component';
 import { BrandComponent } from './brand/brand.component';
 import { TopbarComponent } from './header/topbar/topbar.component';
 import { MenuHorizontalComponent } from './header/menu-horizontal/menu-horizontal.component';
@@ -50,9 +49,6 @@ import { PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from
     BrandComponent,
     HeaderMobileComponent,
 
-    // subheader
-    SubheaderComponent,
-
     // topbar components
     TopbarComponent,
 
@@ -70,9 +66,6 @@ import { PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from
     HeaderComponent,
     BrandComponent,
     HeaderMobileComponent,
-
-    // subheader
-    SubheaderComponent,
 
     // topbar components
     TopbarComponent,

@@ -47,7 +47,7 @@ export class HeaderMobileComponent implements OnInit {
   getLogoUrl() {
     const headerSelfTheme = this.layoutConfigService.getConfig('header.self.theme') || '';
     const brandSelfTheme = this.layoutConfigService.getConfig('brand.self.theme') || '';
-    let result = 'logo-light.png';
+    let result = 'logo-dark.png';
     if (!this.asideSelfDisplay) {
       if (headerSelfTheme === 'light') {
         result = 'logo-dark.png';

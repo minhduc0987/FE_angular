@@ -123,7 +123,10 @@ export function getHighlightLanguages() {
     TranslateModule.forRoot(),
     MatProgressSpinnerModule,
     InlineSVGModule.forRoot(),
-    ThemeModule
+    ThemeModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    })
   ],
   exports: [],
   providers: [

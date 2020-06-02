@@ -13,8 +13,6 @@ export interface ClassType {
   header_mobile: string[];
   header_menu: string[];
   aside_menu: string[];
-  subheader: string[];
-  subheader_container: string[];
   content: string[];
   content_container: string[];
   footer_container: string[];
@@ -55,8 +53,6 @@ export class HtmlClassService {
       header_mobile: [],
       header_menu: [],
       aside_menu: [],
-      subheader: [],
-      subheader_container: [],
       content: [],
       content_container: [],
       footer_container: []
@@ -194,9 +190,9 @@ export class HtmlClassService {
     // Fixed content head
     const subheaderFixed = objectPath.get(this.config, 'subheader.fixed');
     const headerSelfFixedDesktop = objectPath.get(this.config, 'header.self.fixed.desktop');
-    if (subheaderFixed && headerSelfFixedDesktop) {
-      document.body.classList.add('subheader-fixed');
-    }
+    // if (subheaderFixed && headerSelfFixedDesktop) {
+    //   document.body.classList.add('subheader-fixed');
+    // }
     
     const subheaderStyle = objectPath.get(this.config, 'subheader.style');
     if (subheaderStyle) {

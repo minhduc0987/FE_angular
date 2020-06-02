@@ -49,7 +49,7 @@ export class BrandComponent implements OnInit, AfterViewInit {
   }
 
   getAsideLogo() {
-    let result = 'logo-light.png';
+    let result = 'logo-dark.png';
     const brandSelfTheme = this.layoutConfigService.getConfig('brand.self.theme') || '';
     if (brandSelfTheme === 'light') {
       result = 'logo-dark.png';

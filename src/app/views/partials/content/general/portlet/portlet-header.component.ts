@@ -102,9 +102,9 @@ export class PortletHeaderComponent implements OnInit, AfterViewInit, OnDestroy 
 							if (document.body.classList.contains('header-fixed')) {
 								height += headerElement.offsetHeight;
 							}
-							// if (document.body.classList.contains('subheader-fixed')) {
-							// 	height += subheaderElement.offsetHeight;
-							// }
+							if (document.body.classList.contains('subheader-fixed')) {
+								height += subheaderElement.offsetHeight;
+							}
 						}
 					}
 				}

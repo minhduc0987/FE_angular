@@ -190,9 +190,9 @@ export class HtmlClassService {
     // Fixed content head
     const subheaderFixed = objectPath.get(this.config, 'subheader.fixed');
     const headerSelfFixedDesktop = objectPath.get(this.config, 'header.self.fixed.desktop');
-    // if (subheaderFixed && headerSelfFixedDesktop) {
-    //   document.body.classList.add('subheader-fixed');
-    // }
+    if (subheaderFixed && headerSelfFixedDesktop) {
+      document.body.classList.add('subheader-fixed');
+    }
     
     const subheaderStyle = objectPath.get(this.config, 'subheader.style');
     if (subheaderStyle) {

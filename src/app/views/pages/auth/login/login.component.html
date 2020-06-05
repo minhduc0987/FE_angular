@@ -2,9 +2,9 @@
   <!--begin::Signin-->
   <div class="login-form login-signin">
     <div class="text-center mb-10 mb-lg-20">
-      <h3 class="font-size-h1">Sign In</h3>
+      <h3 class="font-size-h1">{{ "COMMON.BTN.SIGN_IN" | translate }}</h3>
       <p class="text-muted font-weight-bold">
-        Enter your username and password
+        {{ "AUTH.LOGIN" | translate }}
       </p>
     </div>
 
@@ -18,16 +18,16 @@
           <input matInput type="email" placeholder="{{ 'AUTH.INPUT.EMAIL' | translate }}" formControlName="email"
             autocomplete="off" />
           <mat-error *ngIf="isControlHasError('email', 'required')">
-            <strong>{{ "AUTH.VALIDATION.REQUIRED_FIELD" | translate }}</strong>
+            <strong>{{ "VALIDATION.REQUIRED_FIELD" | translate }}</strong>
           </mat-error>
           <mat-error *ngIf="isControlHasError('email', 'email')">
-            <strong>{{ "AUTH.VALIDATION.INVALID_FIELD" | translate }}</strong>
+            <strong>{{ "VALIDATION.INVALID_FIELD" | translate }}</strong>
           </mat-error>
           <mat-error *ngIf="isControlHasError('email', 'minlength')">
-            <strong>{{ "AUTH.VALIDATION.MIN_LENGTH_FIELD" | translate }} 3</strong>
+            <strong>{{ "VALIDATION.MIN_LENGTH_FIELD" | translate }} 3</strong>
           </mat-error>
           <mat-error *ngIf="isControlHasError('email', 'maxlength')">
-            <strong>{{ "AUTH.VALIDATION.MAX_LENGTH_FIELD" | translate }} 320</strong>
+            <strong>{{ "VALIDATION.MAX_LENGTH_FIELD" | translate }} 320</strong>
           </mat-error>
         </mat-form-field>
       </div>
@@ -37,23 +37,23 @@
           <input matInput type="password" placeholder="{{ 'AUTH.INPUT.PASSWORD' | translate }}"
             formControlName="password" autocomplete="off" />
           <mat-error *ngIf="isControlHasError('password', 'required')">
-            <strong>{{ "AUTH.VALIDATION.REQUIRED_FIELD" | translate }}</strong>
+            <strong>{{ "VALIDATION.REQUIRED_FIELD" | translate }}</strong>
           </mat-error>
           <mat-error *ngIf="isControlHasError('password', 'minlength')">
-            <strong>{{ "AUTH.VALIDATION.MIN_LENGTH_FIELD" | translate }} 3</strong>
+            <strong>{{ "VALIDATION.MIN_LENGTH_FIELD" | translate }} 3</strong>
           </mat-error>
           <mat-error *ngIf="isControlHasError('password', 'maxlength')">
-            <strong>{{ "AUTH.VALIDATION.MAX_LENGTH_FIELD" | translate }} 100</strong>
+            <strong>{{ "VALIDATION.MAX_LENGTH_FIELD" | translate }} 100</strong>
           </mat-error>
         </mat-form-field>
       </div>
       <!--begin::Action-->
       <div class="form-group d-flex flex-wrap justify-content-between align-items-center">
         <a href="javascript:;" routerLink="/auth/forgot-password" class="text-dark-50 text-hover-primary my-3 mr-2"
-          id="kt_login_forgot">{{ "AUTH.GENERAL.FORGOT_BUTTON" | translate }}</a>
+          id="kt_login_forgot">{{ "COMMON.BTN.FORGOT_PASSWORD" | translate }}</a>
         <button id="kt_login_signin_submit" (click)="submit()" [ngClass]="{
             'spinner spinner-right spinner-md spinner-light': loading
-          }" class="btn btn-primary font-weight-bold px-9 py-4 my-3">{{ "AUTH.LOGIN.BUTTON" | translate }}</button>
+          }" class="btn btn-primary font-weight-bold px-9 py-4 my-3">{{ "COMMON.BTN.SIGN_IN" | translate }}</button>
       </div>
       <!--end::Action-->
     </form>

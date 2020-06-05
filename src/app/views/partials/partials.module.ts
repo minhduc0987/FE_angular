@@ -10,6 +10,8 @@ import { NgbDropdownModule, NgbTabsetModule, NgbTooltipModule } from '@ng-bootst
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 // Core module
 import { CoreModule } from '../../core/core.module';
+// Translate
+import { TranslateModule } from '@ngx-translate/core';
 // CRUD Partials
 import {
   ActionNotificationComponent,
@@ -124,6 +126,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     NgbDropdownModule,
     NgbTabsetModule,
     NgbTooltipModule,
+
+    TranslateModule.forChild(),
   ],
 })
 export class PartialsModule {

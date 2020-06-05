@@ -13,10 +13,9 @@
 
 				<!--begin: Aside content-->
 				<div class="flex-column-fluid d-flex flex-column justify-content-center">
-					<h3 class="font-size-h1 mb-5 text-white">Welcome to Metronic!</h3>
+					<h3 class="font-size-h1 mb-5 text-white">{{ "AUTH.WELLCOME" | translate }}</h3>
 					<p class="font-weight-lighter text-white opacity-80">
-						The ultimate Bootstrap, Angular 8, React & VueJS admin theme framework for next generation web
-						apps.
+						
 					</p>
 				</div>
 				<!--end: Aside content-->
@@ -24,13 +23,13 @@
 				<!--begin: Aside footer for desktop-->
 				<div class="d-none flex-column-auto d-lg-flex justify-content-between mt-10">
 					<div class="opacity-70 font-weight-bold	text-white">
-						&copy; 2020 Metronic
+						&copy; 2020 Nhóm 4
 					</div>
-					<div class="d-flex">
+					<!-- <div class="d-flex">
 						<a href="#" class="text-white">Privacy</a>
 						<a href="#" class="text-white ml-10">Legal</a>
 						<a href="#" class="text-white ml-10">Contact</a>
-					</div>
+					</div> -->
 				</div>
 				<!--end: Aside footer for desktop-->
 			</div>
@@ -45,14 +44,14 @@
 				class="position-absolute top-0 right-0 text-right mt-5 mb-15 mb-lg-0 flex-column-auto justify-content-center py-5 px-10"
 			>
 				<span class="font-weight-bold text-dark-50">
-					Don't have an account yet?
+					{{ "AUTH.HAVE_ACCOUNT" | translate }}
 				</span>
 				<a
 					href="javascript:;"
 					routerLink="/auth/register"
 					class="font-weight-bold ml-2"
 					id="kt_login_signup"
-				>{{ "AUTH.GENERAL.SIGNUP_BUTTON" | translate }}</a>
+				>{{ "COMMON.BTN.SIGN_UP" | translate }}</a>
 			</div>
 			<!--end::Content header-->
 			

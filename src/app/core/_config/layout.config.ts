@@ -113,7 +113,7 @@ export class LayoutConfig {
       style: 'solid', // transparent/solid
     },
     content: {
-      width: 'fixed', // fluid/fixed
+      width: 'fluid', // fluid/fixed
     },
     brand: {
       self: {

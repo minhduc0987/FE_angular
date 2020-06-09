@@ -193,7 +193,7 @@ export class HtmlClassService {
     if (subheaderFixed && headerSelfFixedDesktop) {
       document.body.classList.add('subheader-fixed');
     }
-    
+
     const subheaderStyle = objectPath.get(this.config, 'subheader.style');
     if (subheaderStyle) {
       objectPath.push(this.classes, 'subheader', `subheader-${subheaderStyle}`);

@@ -4,6 +4,10 @@ export const locale = {
   data: {
     MENU: {
       DASHBOARD: 'Trang chủ',
+      DESK_MANAGER: 'Quản lý bàn',
+      MENU_MANAGER: 'Quản lý thực đơn',
+      EVENT_MANAGER: 'Quản lý sự kiện',
+      PERSONNEL: 'Quản lý nhân sự',
     },
     AUTH: {
       WELLCOME: 'Xin chào',

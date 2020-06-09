@@ -4,10 +4,10 @@ export const locale = {
   data: {
     MENU: {
       DASHBOARD: 'Dashboard',
-      DESK_MANAGER: 'Desk Manager',
-      MENU_MANAGER: 'Menu Manager',
-      EVENT_MANAGER: 'Event Manager',
-      PERSONNEL: 'Human Resource Management'
+      DESK_MANAGER: 'Desk Manage',
+      MENU_MANAGER: 'Menu Manage',
+      EVENT_MANAGER: 'Event Manage',
+      USER_MANAGEMENT: 'Users Management'
     },
     AUTH: {
       WELLCOME: 'Wellcome',

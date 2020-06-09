@@ -27,12 +27,9 @@ const routes: Routes = [
         loadChildren: () => import('./views/pages/event-manager/event-manager.module').then(m => m.EventManagerModule),
       },
       {
-        path: 'menu-manager',
-        loadChildren: () => import('./views/pages/menu-manager/menu-manager.module').then(m => m.MenuManagerModule),
-      },
-      {
-        path: 'human-resoucer-manager',
-        loadChildren: () => import('./views/pages/human-resource/human-resource.module').then(m => m.HumanResourceModule),
+        path: 'user-management',
+        loadChildren: () => import('./views/pages/user-management/user-management.module')
+          .then(m => m.UserManagementModule),
       },
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       {path: '**', redirectTo: 'dashboard', pathMatch: 'full'},

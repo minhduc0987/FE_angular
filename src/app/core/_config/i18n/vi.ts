@@ -7,7 +7,7 @@ export const locale = {
       DESK_MANAGER: 'Quản lý bàn',
       MENU_MANAGER: 'Quản lý thực đơn',
       EVENT_MANAGER: 'Quản lý sự kiện',
-      PERSONNEL: 'Quản lý nhân sự',
+      USER_MANAGEMENT: 'Quản lý nhân sự',
     },
     AUTH: {
       WELLCOME: 'Xin chào',

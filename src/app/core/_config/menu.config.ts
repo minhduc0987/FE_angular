@@ -11,7 +11,6 @@ export class MenuConfig {
           translate: 'MENU.DASHBOARD',
           bullet: 'dot'
         },
-        { section: 'Quản lý' },
         {
           title: 'Quản lý bàn',
           root: true,
@@ -27,18 +26,28 @@ export class MenuConfig {
           translate: 'MENU.MENU_MANAGER'
         },
         {
-          title: 'Quản lý event',
+          title: 'Quản lý sự kiện',
           root: true,
           icon: 'flaticon2-gift-1',
           page: '/event-manager',
           translate: 'MENU.EVENT_MANAGER'
         },
         {
-          title: 'Quản lý nhân sự',
+          title: 'User Management',
           root: true,
-          icon: 'flaticon2-avatar',
-          page: '/human-resoucer-manager',
-          translate: 'MENU.PERSONNEL'
+          bullet: 'dot',
+          icon: 'flaticon2-user-outline-symbol',
+          translate: 'MENU.USER_MANAGEMENT',
+          submenu: [
+            {
+              title: 'Users',
+              page: '/user-management/users'
+            },
+            {
+              title: 'Roles',
+              page: '/user-management/roles'
+            }
+          ]
         },
       ]
     },

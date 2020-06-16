@@ -76,8 +76,6 @@ export class HtmlClassService {
 
     // init content
     this.initContent();
-    // init aside and aside menu
-    this.initAside();
 
     // init footer
     this.initFooter();
@@ -197,7 +195,7 @@ export class HtmlClassService {
     if (subheaderFixed && headerSelfFixedDesktop) {
       document.body.classList.add('subheader-fixed');
     }
-    
+
     const subheaderStyle = objectPath.get(this.config, 'subheader.style');
     if (subheaderStyle) {
       objectPath.push(this.classes, 'subheader', `subheader-${subheaderStyle}`);
@@ -228,64 +226,6 @@ export class HtmlClassService {
       objectPath.push(this.classes, 'content_container', 'container-fluid');
     } else {
       objectPath.push(this.classes, 'content_container', 'container');
-    }
-  }
-
-  /**
-   * Init Aside
-   */
-  private initAside() {
-    if (objectPath.get(this.config, 'aside.self.display') !== true) {
-      return;
-    }
-
-    // Enable Aside
-    document.body.classList.add('aside-enabled');
-
-    // Fixed Aside
-    if (objectPath.get(this.config, 'aside.self.fixed')) {
-      document.body.classList.add('aside-fixed');
-      objectPath.push(this.classes, 'aside', 'aside-fixed');
-    } else {
-      document.body.classList.add('aside-static');
-    }
-
-    // Check Aside
-    if (objectPath.get(this.config, 'aside.self.display') !== true) {
-      return;
-    }
-
-    // Default fixed
-    if (objectPath.get(this.config, 'aside.self.minimize.default')) {
-      document.body.classList.add('aside-minimize');
-    }
-
-    if (objectPath.get(this.config, 'aside.self.minimize.hoverable')) {
-      document.body.classList.add('aside-minimize-hoverable');
-    }
-
-    // Menu
-    // Dropdown Submenu
-    const asideMenuDropdown = objectPath.get(this.config, 'aside.menu.dropdown');
-    if (asideMenuDropdown) {
-      objectPath.push(this.classes, 'aside_menu', 'aside-menu-dropdown');
-      // tslint:disable-next-line
-      this.attrs['aside_menu']['data-menu-dropdown'] = '1';
-    }
-
-    // Scrollable Menu
-    if (asideMenuDropdown !== true) {
-      // tslint:disable-next-line
-      this.attrs['aside_menu']['data-menu-scroll'] = '1';
-    } else {
-      // tslint:disable-next-line
-      this.attrs['aside_menu']['data-menu-scroll'] = '0';
-    }
-
-    const asideMenuSubmenuDropdownHoverTimout = objectPath.get(this.config, 'aside.menu.submenu.dropdown.hover-timeout');
-    if (asideMenuSubmenuDropdownHoverTimout) {
-      // tslint:disable-next-line
-      this.attrs['aside_menu']['data-menu-dropdown-timeout'] = asideMenuSubmenuDropdownHoverTimout;
     }
   }
 

@@ -72,10 +72,10 @@ export class LayoutConfig {
     header: {
       self: {
         display: true,
-        width: 'fluid', // fixed|fluid,
+        width: 'fixed', // fixed|fluid,
         theme: 'light', // light|dark
         fixed: {
-          desktop: true,
+          desktop: false,
           mobile: true,
         },
       },
@@ -83,7 +83,7 @@ export class LayoutConfig {
         self: {
           display: true,
           layout: 'default', // tab/default,
-          rootArrow: false,
+          rootArrow: true,
           'icon-style': 'duotone', // duotone, line, bold, solid
         },
         desktop: {
@@ -108,7 +108,7 @@ export class LayoutConfig {
       displayDaterangepicker: true,
       layout: 'subheader-v1', // 'subheader-v2'|'subheader-v3'
       fixed: true,
-      width: 'fluid', // fixed|fluid
+      width: 'fixed', // fixed|fluid
       clear: false,
       style: 'solid', // transparent/solid
     },
@@ -120,57 +120,11 @@ export class LayoutConfig {
         theme: 'dark', // light/dark
       },
     },
-    aside: {
-      self: {
-        theme: 'dark', // light/dark
-        display: true,
-        fixed: true,
-        minimize: {
-          toggle: true, // allow toggle
-          default: false, // default state
-          hoverable: true
-        },
-      },
-      footer: {
-        self: {
-          display: true,
-        },
-      },
-      menu: {
-        dropdown: false, // ok
-        scroll: false, // ok
-        'icon-style': 'duotone',
-        submenu: {
-          accordion: true,
-          dropdown: {
-            arrow: true,
-            'hover-timeout': 500 // in milliseconds
-          },
-        },
-      },
-    },
     footer: {
-      width: 'fluid',
+      width: 'fixed',
       fixed: false
     },
     extras: {
-      search: {
-        display: true,
-        layout: 'dropdown', // offcanvas, dropdown
-        offcanvas: {
-          direction: 'right'
-        }
-      },
-      notifications: {
-        display: true,
-        layout: 'dropdown', // offcanvas, dropdown
-        dropdown: {
-          style: 'dark' // light|dark
-        },
-        offcanvas: {
-          direction: 'right'
-        }
-      },
       user: {
         display: true,
         layout: 'offcanvas', // offcanvas, dropdown
@@ -184,33 +138,11 @@ export class LayoutConfig {
       languages: {
         display: true
       },
-      cart: {
-        display: true,
-        dropdown: {
-          style: 'dark'
-        }
-      },
-      'quick-actions': {
-        display: true,
-        layout: 'dropdown', // offcanvas, dropdown
-        dropdown: {
-          style: 'dark'
-        },
-        offcanvas: {
-          direction: 'right'
-        }
-      },
       'quick-panel': {
         display: true,
         offcanvas: {
           direction: 'right'
         }
-      },
-      chat: {
-        display: false
-      },
-      toolbar: {
-        display: true
       },
       scrolltop: {
         display: true

@@ -27,7 +27,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 // Core Module
 import { CoreModule } from '../../core/core.module';
 import { HeaderComponent } from './header/header.component';
-import { AsideLeftComponent } from './aside/aside-left.component';
 import { FooterComponent } from './footer/footer.component';
 import { SubheaderComponent } from './subheader/subheader.component';
 import { BrandComponent } from './brand/brand.component';
@@ -56,9 +55,6 @@ import { PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from
     // topbar components
     TopbarComponent,
 
-    // aside left menu components
-    AsideLeftComponent,
-
     // horizontal menu components
     MenuHorizontalComponent,
   ],
@@ -76,10 +72,6 @@ import { PermissionEffects, permissionsReducer, RoleEffects, rolesReducer } from
 
     // topbar components
     TopbarComponent,
-
-    // aside left menu components
-    AsideLeftComponent,
-
     // horizontal menu components
     MenuHorizontalComponent,
   ],

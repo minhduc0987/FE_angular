@@ -23,49 +23,19 @@ import {
   ContextMenu2Component,
   ContextMenuComponent,
   LanguageSelectorComponent,
-  NotificationComponent,
-  QuickActionComponent,
-  QuickPanelComponent,
   QuickUserPanelComponent,
   ScrollTopComponent,
-  SearchDefaultComponent,
-  SearchDropdownComponent,
-  SearchResultComponent,
   SplashScreenComponent,
   StickyToolbarComponent,
   Subheader1Component,
-  Subheader2Component,
-  Subheader3Component,
-  SubheaderSearchComponent,
-  UserProfile2Component,
-  UserProfile3Component,
   UserProfileComponent,
   UserProfile4Component
 } from './layout';
-import {
-  Widget1SalesStatComponent,
-  Widget9RecentActivitiesComponent,
-  Widget12NewUsersComponent,
-  Widget7WeeklySalesComponent,
-  Widget1TasksOverviewComponent,
-  Widget2NewArrivalsComponent,
-  Widget3NewArrivalsAuthorsComponent,
-  Widget4TodoComponent,
-  Widget8TrendsComponent,
-  Dropdown1Component,
-  Dropdown2Component,
-  Dropdown3Component,
-  Dropdown4Component,
-  Dropdown5Component
-} from './content/dashboard-widgets';
 // General
 import { NoticeComponent } from './content/general/notice/notice.component';
 import { PortletModule } from './content/general/portlet/portlet.module';
-// Extra module
-import { WidgetModule } from './content/widgets/widget.module';
 // SVG inline
 import { InlineSVGModule } from 'ng-inline-svg';
-import { CartComponent } from './layout/topbar/cart/cart.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
@@ -96,49 +66,19 @@ import { MatDialogModule } from '@angular/material/dialog';
     FetchEntityDialogComponent,
     UpdateStatusDialogComponent,
     AlertComponent,
-
-    // topbar components
     ContextMenu2Component,
     ContextMenuComponent,
-    QuickPanelComponent,
     QuickUserPanelComponent,
     ScrollTopComponent,
-    SearchResultComponent,
     SplashScreenComponent,
     StickyToolbarComponent,
     Subheader1Component,
-    Subheader2Component,
-    Subheader3Component,
-    SubheaderSearchComponent,
     LanguageSelectorComponent,
-    NotificationComponent,
-    QuickActionComponent,
-    SearchDefaultComponent,
-    SearchDropdownComponent,
     UserProfileComponent,
-    UserProfile2Component,
-    UserProfile3Component,
     UserProfile4Component,
-    CartComponent,
-    Widget1SalesStatComponent,
-    Widget9RecentActivitiesComponent,
-    Widget12NewUsersComponent,
-    Widget7WeeklySalesComponent,
-    Widget1TasksOverviewComponent,
-    Widget2NewArrivalsComponent,
-    Widget3NewArrivalsAuthorsComponent,
-    Widget4TodoComponent,
-    Widget8TrendsComponent,
-    Dropdown1Component,
-    Dropdown2Component,
-    Dropdown3Component,
-    Dropdown4Component,
-    Dropdown5Component
   ],
   exports: [
-    WidgetModule,
     PortletModule,
-
     ScrollTopComponent,
     NoticeComponent,
     ActionNotificationComponent,
@@ -146,44 +86,16 @@ import { MatDialogModule } from '@angular/material/dialog';
     FetchEntityDialogComponent,
     UpdateStatusDialogComponent,
     AlertComponent,
-
-    // topbar components
     ContextMenu2Component,
     ContextMenuComponent,
-    QuickPanelComponent,
     QuickUserPanelComponent,
     ScrollTopComponent,
-    SearchResultComponent,
     SplashScreenComponent,
     StickyToolbarComponent,
     Subheader1Component,
-    Subheader2Component,
-    Subheader3Component,
-    SubheaderSearchComponent,
     LanguageSelectorComponent,
-    NotificationComponent,
-    QuickActionComponent,
-    SearchDefaultComponent,
-    SearchDropdownComponent,
     UserProfileComponent,
-    UserProfile2Component,
-    UserProfile3Component,
     UserProfile4Component,
-    CartComponent,
-    Widget1SalesStatComponent,
-    Widget9RecentActivitiesComponent,
-    Widget12NewUsersComponent,
-    Widget7WeeklySalesComponent,
-    Widget1TasksOverviewComponent,
-    Widget2NewArrivalsComponent,
-    Widget3NewArrivalsAuthorsComponent,
-    Widget4TodoComponent,
-    Widget8TrendsComponent,
-    Dropdown1Component,
-    Dropdown2Component,
-    Dropdown3Component,
-    Dropdown4Component,
-    Dropdown5Component
   ],
   imports: [
     CommonModule,
@@ -194,9 +106,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     InlineSVGModule,
     CoreModule,
     PortletModule,
-    WidgetModule,
     NgApexchartsModule,
-    // angular material modules
     MatButtonModule,
     MatMenuModule,
     MatSelectModule,
@@ -217,8 +127,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTabsModule,
     MatTooltipModule,
     MatDialogModule,
-
-    // ng-bootstrap modules
     NgbDropdownModule,
     NgbTabsetModule,
     NgbTooltipModule,

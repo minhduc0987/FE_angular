@@ -76,67 +76,11 @@ export interface LayoutConfigModel {
       theme: 'light' | 'dark'
     }
   };
-  aside?: {
-    self: {
-      theme?: 'dark' | 'light';
-      display: boolean;
-      fixed?: boolean | any;
-      minimize?: {
-        toggle: boolean;
-        default: boolean;
-        hoverable: boolean;
-      }
-    };
-    footer?: {
-      self: {
-        display: boolean
-      }
-    };
-    menu: {
-      dropdown: boolean;
-      scroll: boolean;
-      'icon-style'?: 'duotone' | 'line' | 'bold' | 'solid';
-      submenu: {
-        accordion: boolean;
-        dropdown: {
-          arrow: boolean;
-          'hover-timeout': number
-        }
-      }
-    }
-  };
   footer?: {
     width?: 'fluid' | 'fixed';
     fixed?: boolean
   };
   extras: {
-    search?: {
-      display?: boolean;
-      layout?: 'dropdown' | 'offcanvas';
-      offcanvas?: {
-        direction: 'right' | 'left'
-      };
-    };
-    notifications?: {
-      display?: boolean;
-      layout?: 'dropdown' | 'offcanvas';
-      dropdown?: {
-        style?: 'dark' | 'light';
-      };
-      offcanvas?: {
-        direction?: 'right' | 'left'
-      }
-    },
-    'quick-actions'?: {
-      display?: boolean;
-      layout?: 'dropdown' | 'offcanvas';
-      dropdown?: {
-        style: 'light' | 'dark';
-      };
-      offcanvas?: {
-        direction: 'right' | 'left'
-      };
-    };
     user?: {
       display?: boolean;
       layout?: 'offcanvas' | 'dropdown',
@@ -150,23 +94,11 @@ export interface LayoutConfigModel {
     languages?: {
       display?: boolean;
     };
-    cart?: {
-      display?: boolean;
-      dropdown?: {
-        style: 'dark' | 'light'
-      };
-    };
     'quick-panel'?: {
       display?: true;
       offcanvas?: {
         direction: 'right' | 'left'
       };
-    };
-    chat?: {
-      display?: boolean;
-    };
-    toolbar?: {
-      display?: boolean;
     };
     scrolltop?: {
       display: boolean;

@@ -13,7 +13,7 @@ import { PartialsModule } from '../../partials/partials.module';
 // Services
 import { HttpUtilsService, TypesUtilsService, InterceptService, LayoutUtilsService} from '../../../core/_base/crud';
 // Shared
-import { ActionNotificationComponent } from '../../partials/content/crud';
+import { ActionNotificationComponent, FetchEntityDialogComponent } from '../../partials/content/crud';
 // Components
 import { UserManagementComponent } from './user-management.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
@@ -148,7 +148,8 @@ const routes: Routes = [
 		LayoutUtilsService
 	],
 	entryComponents: [
-		ActionNotificationComponent,
+    ActionNotificationComponent,
+    FetchEntityDialogComponent,
 		RoleEditDialogComponent
 	],
 	declarations: [

@@ -1,11 +1,20 @@
-<ng-container *ngIf="layout === 'subheader-v1'">
-    <kt-subheader1
-      [fixed]="fixed"
-      [clear]="clear"
-      [style]="style"
-      [displayDesc]="displayDesc"
-      [subheaderClasses]="subheaderClasses"
-      [subheaderContainerClasses]="subheaderContainerClasses"
-      [displayDaterangepicker]="displayDaterangepicker"
-    ></kt-subheader1>
-</ng-container>
+<div class="subheader py-2 py-lg-4" [ngClass]="subheaderClasses" id="kt_subheader">
+	<div [ngClass]="subheaderContainerClasses" class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+    <!--begin::Info-->
+    <div class="d-flex align-items-center flex-wrap mr-1">
+      <!--begin::Page Heading-->
+      <div class="d-flex align-items-baseline mr-5">
+        1231231
+        <!--end::Breadcrumb-->
+      </div>
+      <!--end::Page Heading-->
+    </div>
+    <!--end::Info-->
+
+    <div class="d-flex align-items-center">
+      ádasdasd
+      <!--end::Dropdown-->
+    </div>
+	</div>
+</div>
+<!--end::Subheader-->

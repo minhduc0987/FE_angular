@@ -14,7 +14,7 @@ export class SubheaderComponent implements OnInit {
   // Public properties
   // subheader layout
   layout = 'subheader-v1';
-  width = 'fluid';
+  width = 'fixed';
   clear = false;
   displayDesc = false;
   displayDaterangepicker = true;

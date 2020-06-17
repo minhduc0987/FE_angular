@@ -27,7 +27,6 @@ import {
   ScrollTopComponent,
   SplashScreenComponent,
   StickyToolbarComponent,
-  Subheader1Component,
   UserProfileComponent,
   UserProfile4Component
 } from './layout';
@@ -72,7 +71,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     ScrollTopComponent,
     SplashScreenComponent,
     StickyToolbarComponent,
-    Subheader1Component,
     LanguageSelectorComponent,
     UserProfileComponent,
     UserProfile4Component,
@@ -92,7 +90,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     ScrollTopComponent,
     SplashScreenComponent,
     StickyToolbarComponent,
-    Subheader1Component,
     LanguageSelectorComponent,
     UserProfileComponent,
     UserProfile4Component,

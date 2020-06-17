@@ -6,8 +6,6 @@ export { ScrollTopComponent } from './scroll-top/scroll-top.component';
 export { SplashScreenComponent } from './splash-screen/splash-screen.component';
 export { StickyToolbarComponent } from './sticky-toolbar/sticky-toolbar.component';
 
-export { Subheader1Component } from './subheader/subheader1/subheader1.component';
-
 // Topbar components
 export { LanguageSelectorComponent } from './topbar/language-selector/language-selector.component';
 export { UserProfileComponent } from './topbar/user-profile/user-profile.component';

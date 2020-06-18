@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 import { QueryParamsModel, QueryResultsModel } from '../../_base/crud';
 import { environment } from '../../../../environments/environment';
 
-const API_USERS_URL = 'api/users';
+const API_USERS_URL = environment.url + 'api/auth/login';
 const API_PERMISSION_URL = 'api/permissions';
 const API_ROLES_URL = 'api/roles';
 
@@ -18,8 +18,8 @@ export class AuthService {
   }
 
   // Authentication/Authorization
-  login(email: string, password: string): Observable<User> {
-    return this.http.post<User>(API_USERS_URL, {email, password});
+  login(usernameOrEmail: string, password: string): Observable<User> {
+    return this.http.post<User>(API_USERS_URL, {usernameOrEmail, password});
   }
 
   getUserByToken(): Observable<User> {

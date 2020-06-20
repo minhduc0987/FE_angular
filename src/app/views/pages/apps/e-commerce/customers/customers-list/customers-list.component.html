@@ -4,7 +4,7 @@
 		<!-- PORTLET LOADING | Binded to TABLE Datasource -->
 
 		<ng-container ktPortletTitle>
-			<span translate="ECOMMERCE.CUSTOMERS.CUSTOMERS_LIST">Customers list</span>
+			<span translate="ECOMMERCE.CUSTOMERS.CUSTOMERS_LIST">Danh sách khách hàng</span>
 			<!-- For localisations we use @ngx-translate | See off. documentations => https://github.com/ngx-translate/core -->
 			<!-- Localization libraries (en/fr) are here => '../../../.././config/i18n/en.ts|fr.ts' -->
 		</ng-container>
@@ -12,7 +12,7 @@
 		<ng-container ktPortletTools>
 			<button (click)="addCustomer()" mat-raised-button matTooltip="Create new customer" color="primary"
 				type="button">
-				<span translate="ECOMMERCE.CUSTOMERS.NEW_CUSTOMER">New Customer</span>
+				<span translate="ECOMMERCE.CUSTOMERS.NEW_CUSTOMER">Tạo mới khách hàng</span>
 			</button>
 			<!-- Buttons (Material Angular) | See off.documenations 'https://material.angular.io/components/button/overview' -->
 			<!-- mat-raised-button | Rectangular contained button w/ elevation  -->
@@ -29,35 +29,34 @@
 					<div class="col-md-2">
 						<mat-form-field>
 							<mat-select [(value)]="filterStatus" (selectionChange)="loadCustomersList()">
-								<mat-option value="">All</mat-option>
-								<mat-option value="0">Suspended</mat-option>
-								<mat-option value="1">Active</mat-option>
-								<mat-option value="Pending">Pending</mat-option>
+								<mat-option value="">Tất cả</mat-option>
+								<mat-option value="1">Đang hoạt động</mat-option>
+								<mat-option value="0">Khoá</mat-option>
 							</mat-select>
 							<mat-hint align="start">
-								<strong>Filter</strong> by Status
+								<strong>Lọc theo trạng thái</strong> 
 							</mat-hint>
 						</mat-form-field>
 					</div>
 
-					<div class="col-md-2">
+					<!-- <div class="col-md-2">
 						<mat-form-field>
 							<mat-select [(value)]="filterType" (selectionChange)="loadCustomersList()">
-								<mat-option value="">All</mat-option>
-								<mat-option value="0">Business</mat-option>
-								<mat-option value="1">Individual</mat-option>
+								<mat-option value="">Tất cả</mat-option>
+								<mat-option value="0">Doanh Nghiệp</mat-option>
+								<mat-option value="1">Cá nhân</mat-option>
 							</mat-select>
 							<mat-hint align="start">
-								<strong>Filter</strong> by Type
+								<strong>Lọc theo loại tài khoản</strong>
 							</mat-hint>
 						</mat-form-field>
-					</div>
+					</div> -->
 
 					<div class="col-md-2 kt-margin-bottom-10-mobile">
 						<mat-form-field class="mat-form-field-fluid">
-							<input matInput placeholder="Search customer" #searchInput />
+							<input matInput placeholder="Nhập để tìm kiếm" #searchInput />
 							<mat-hint align="start">
-								<strong>Search</strong> in all fields
+								<strong>Tìm kiếm thông tin người dùng</strong>
 							</mat-hint>
 						</mat-form-field>
 					</div>
@@ -65,50 +64,6 @@
 				</div>
 			</div>
 			<!-- end::FILTERS -->
-
-			<!-- start::GROUP ACTIONS -->
-			<!-- Group actions list: 'Delete selected' | 'Fetch selected' | 'Update status for selected' -->
-			<!-- Group actions are shared for all LISTS | See '../../_shared' folder -->
-			<div class="row align-items-center collapse form-group-actions kt-margin-top-20 kt-margin-bottom-20"
-				[ngClass]="{'show' : selection.selected.length > 0}">
-				<!-- We show 'Group Actions' div if smth are selected -->
-				<div class="col-xl-12">
-					<div class="form-group form-group-inline">
-						<div class="form-label form-label-no-wrap">
-							<label class="font-bold font-danger">
-								<span translate="ECOMMERCE.COMMON.SELECTED_RECORDS_COUNT"></span>
-								{{ selection.selected.length }}
-							</label>
-							<!-- selectedCountsTitle => function from codeBehind (customer-list.component.ts file) -->
-							<!-- selectedCountsTitle => just returns title of selected items count -->
-							<!-- for example: Selected records count: 4 -->
-						</div>
-						<div>
-							<ng-template ngxPermissionsOnly="canDeleteECommerceData">
-								<button (click)="deleteCustomers()" mat-raised-button color="warn"
-									matTooltip="Delete selected customers" class="mat-button-mt-4">
-									<mat-icon>delete</mat-icon>
-									Delete All
-								</button>&nbsp;
-								<!-- Call 'delete-entity-dialog' from _shared folder -->
-							</ng-template>
-
-							<button (click)="fetchCustomers()" mat-raised-button matTooltip="Fetch selected customers"
-								class="mat-button-mt-4">
-								<mat-icon>clear_all</mat-icon>
-								Fetch Selected
-							</button>&nbsp;
-							<!-- Call 'fetch-entity-dialog' from _shared folder -->
-							<button (click)="updateStatusForCustomers()" mat-raised-button
-								matTooltip="Update status for selected customers" class="mat-button-mt-4">
-								<mat-icon>update</mat-icon>
-								Update status
-							</button><!-- Call 'update-stated-dialog' from _shared folder -->
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end::GROUP ACTIONS -->
 		</div>
 		<!-- end::FILTERS & GROUP ACTIONS -->
 
@@ -117,24 +72,6 @@
 		<div class="mat-table-wrapper">
 			<mat-table class="lmat-elevation-z8" #table [dataSource]="dataSource" matSort #sort1="matSort"
 				matSortActive="id" matSortDirection="asc" matSortDisableClear>
-				<!-- Checkbox Column -->
-
-				<!-- Table with selection -->
-				<!-- https://run.stackblitz.com/api/angular/v1?file=app%2Ftable-selection-example.ts -->
-				<ng-container matColumnDef="select">
-					<mat-header-cell *matHeaderCellDef class="mat-column-checkbox">
-						<mat-checkbox (change)="$event ? masterToggle() : null"
-							[checked]="selection.hasValue() && isAllSelected()"
-							[indeterminate]="selection.hasValue() && !isAllSelected()" [color]="'primary'">
-						</mat-checkbox>
-					</mat-header-cell>
-					<mat-cell *matCellDef="let row" class="mat-column-checkbox">
-						<mat-checkbox (click)="$event.stopPropagation()"
-							(change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
-							[color]="'primary'">
-						</mat-checkbox>
-					</mat-cell>
-				</ng-container>
 
 				<ng-container matColumnDef="id">
 					<!-- ATTRIBUTE mat-sort-header  for sorting | https://material.angular.io/components/sort/overview -->
@@ -142,14 +79,14 @@
 					<mat-cell *matCellDef="let customer">{{customer.id}}</mat-cell>
 				</ng-container>
 
-				<ng-container matColumnDef="firstName">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>Firstname</mat-header-cell>
-					<mat-cell *matCellDef="let customer">{{customer.firstName}}</mat-cell>
+				<ng-container matColumnDef="username">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>Tên tài khoản</mat-header-cell>
+					<mat-cell *matCellDef="let customer">{{customer.username}}</mat-cell>
 				</ng-container>
 
-				<ng-container matColumnDef="lastName">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>Lastname</mat-header-cell>
-					<mat-cell *matCellDef="let customer">{{customer.lastName}}</mat-cell>
+				<ng-container matColumnDef="fullname">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>Tên người dùng</mat-header-cell>
+					<mat-cell *matCellDef="let customer">{{customer.fullname}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="email">
@@ -159,30 +96,26 @@
 					</mat-cell>
 				</ng-container>
 
+				<ng-container matColumnDef="dateOfBirth">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>Ngày sinh</mat-header-cell>
+					<mat-cell *matCellDef="let customer">{{customer.dateOfBirth}}</mat-cell>
+				</ng-container>
+
 				<ng-container matColumnDef="gender">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>Gender</mat-header-cell>
+					<mat-header-cell *matHeaderCellDef mat-sort-header>Giới tính</mat-header-cell>
 					<mat-cell *matCellDef="let customer">{{customer.gender}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="status">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+					<mat-header-cell *matHeaderCellDef mat-sort-header>Trạng thái</mat-header-cell>
 					<mat-cell *matCellDef="let customer">
 						<span
 							class="label label-lg label-light-{{ getItemCssClassByStatus(customer.status) }} label-inline">{{  getItemStatusString(customer.status) }}</span>
 					</mat-cell>
 				</ng-container>
 
-				<ng-container matColumnDef="type">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
-					<mat-cell *matCellDef="let customer">
-						<span class="label label-dot label-{{ getItemCssClassByType(customer.type) }} mr-2"></span>&nbsp;
-						<span
-							class="font-bold font-{{ getItemCssClassByType(customer.type) }}">{{ getItemTypeString(customer.type) }}</span>
-					</mat-cell>
-				</ng-container>
-
 				<ng-container matColumnDef="actions">
-					<mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+					<mat-header-cell *matHeaderCellDef>Hành động</mat-header-cell>
 					<mat-cell *matCellDef="let customer">
 						<ng-template ngxPermissionsOnly="canEditECommerceData">
 							<button mat-icon-button color="primary" matTooltip="Edit customer"

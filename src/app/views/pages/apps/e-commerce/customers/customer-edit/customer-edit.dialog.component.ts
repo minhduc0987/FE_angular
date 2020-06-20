@@ -77,13 +77,13 @@ export class CustomerEditDialogComponent implements OnInit, OnDestroy {
 
 	createForm() {
 		this.customerForm = this.fb.group({
-			firstName: [this.customer.firstName, Validators.required],
-			lastName: [this.customer.lastName, Validators.required],
+			username: [this.customer.username, Validators.required],
+			phone: [this.customer.phone, Validators.required],
 			email: [this.customer.email, Validators.compose([Validators.required, Validators.email])],
-			dob: [this.typesUtilsService.getDateFromString(this.customer.dateOfBbirth), Validators.compose([Validators.nullValidator])],
-			userName: [this.customer.userName, Validators.compose([Validators.required])],
+			dateOfBbirth: [this.typesUtilsService.getDateFromString(this.customer.dateOfBbirth), Validators.compose([Validators.nullValidator])],
+			idCardNumber: [this.customer.idCardNumber, Validators.compose([Validators.required])],
 			gender: [this.customer.gender, Validators.compose([Validators.required])],
-			ipAddress: [this.customer.ipAddress, Validators.compose([Validators.required])],
+			status: [this.customer.status, Validators.compose([Validators.required])],
 			type: [this.customer.type.toString(), Validators.compose([Validators.required])]
 		});
 	}
@@ -93,8 +93,8 @@ export class CustomerEditDialogComponent implements OnInit, OnDestroy {
 	 */
 	getTitle(): string {
 		if (this.customer.id > 0) {
-			return `Edit customer '${this.customer.firstName} ${
-				this.customer.lastName
+			return `Edit customer '${this.customer.username} - ${
+				this.customer.fullname
 				}'`;
 		}
 
@@ -126,14 +126,14 @@ export class CustomerEditDialogComponent implements OnInit, OnDestroy {
 		} else {
 			_customer.dateOfBbirth = '';
 		}
-		_customer.firstName = controls.firstName.value;
-		_customer.lastName = controls.lastName.value;
-		_customer.email = controls.email.value;
-		_customer.userName = controls.userName.value;
-		_customer.gender = controls.gender.value;
-		_customer.ipAddress = controls.ipAddress.value;
-		_customer.type = +controls.type.value;
-		_customer.status = this.customer.status;
+		// _customer.fullname = controls.firstName.value;
+		// _customer.lastName = controls.lastName.value;
+		// _customer.email = controls.email.value;
+		// _customer.userName = controls.userName.value;
+		// _customer.gender = controls.gender.value;
+		// _customer.ipAddress = controls.ipAddress.value;
+		// _customer.type = +controls.type.value;
+		// _customer.status = this.customer.status;
 		return _customer;
 	}
 

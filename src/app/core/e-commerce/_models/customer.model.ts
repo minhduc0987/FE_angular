@@ -2,26 +2,29 @@ import { BaseModel } from '../../_base/crud';
 
 export class CustomerModel  extends BaseModel {
   id: number;
-  firstName: string;
-  lastName: string;
+  username: string;
+  fullname: string;
   email: string;
-  userName: string;
+  phone: string;
+  address: string;
+  idCardNumber: string;
+  dateOfBbirth: string;
   gender: string;
   status: number; // 0 = Active | 1 = Suspended | Pending = 2
-  dateOfBbirth: string;
-  dob: Date;
-  ipAddress: string;
   type: number; // 0 = Business | 1 = Individual
 
+
   clear() {
-    this.dob = new Date();
-    this.firstName = '';
-    this.lastName = '';
     this.email = '';
-    this.userName = '';
-    this.gender = 'Female';
-    this.ipAddress = '';
-    this.type = 1;
+    this.username = '';
+    this.fullname = '';
+    this.email = '';
+    this.phone = '';
+    this.address = '';
+    this.idCardNumber = '';
+    this.dateOfBbirth = '';
+    this.gender = '';
     this.status = 1;
+    this.type = 2;
   }
 }

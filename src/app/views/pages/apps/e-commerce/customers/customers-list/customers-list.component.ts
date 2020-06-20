@@ -38,7 +38,7 @@ import { CustomerEditDialogComponent } from '../customer-edit/customer-edit.dial
 export class CustomersListComponent implements OnInit, OnDestroy {
 	// Table fields
 	dataSource: CustomersDataSource;
-	displayedColumns = ['select', 'id', 'lastName', 'firstName', 'email', 'gender', 'status', 'type', 'actions'];
+	displayedColumns = ['id', 'username','fullname','dateOfBirth', 'email', 'gender', 'status', 'actions'];
 	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 	@ViewChild('sort1', {static: true}) sort: MatSort;
 	// Filter fields
@@ -207,6 +207,7 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 			}
 
 			const idsForDeletion: number[] = [];
+			// tslint:disable-next-line:prefer-for-of
 			for (let i = 0; i < this.selection.selected.length; i++) {
 				idsForDeletion.push(this.selection.selected[i].id);
 			}
@@ -223,7 +224,7 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 		const messages = [];
 		this.selection.selected.forEach(elem => {
 			messages.push({
-				text: `${elem.lastName}, ${elem.firstName}`,
+				text: `${elem.fullname}`,
 				id: elem.id.toString(),
 				status: elem.status
 			});
@@ -242,7 +243,7 @@ export class CustomersListComponent implements OnInit, OnDestroy {
 
 		this.selection.selected.forEach(elem => {
 			_messages.push({
-				text: `${elem.lastName}, ${elem.firstName}`,
+				text: `${elem.fullname}`,
 				id: elem.id.toString(),
 				status: elem.status,
 				statusTitle: this.getItemStatusString(elem.status),

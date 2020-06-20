@@ -81,7 +81,7 @@ export class LayoutConfig {
       },
       menu: {
         self: {
-          display: true,
+          display: false,
           layout: 'default', // tab/default,
           rootArrow: false,
           'icon-style': 'duotone', // duotone, line, bold, solid
@@ -103,7 +103,7 @@ export class LayoutConfig {
       },
     },
     subheader: {
-      display: true,
+      display: false,
       displayDesc: false,
       displayDaterangepicker: true,
       layout: 'subheader-v1', // 'subheader-v2'|'subheader-v3'
@@ -113,7 +113,7 @@ export class LayoutConfig {
       style: 'solid', // transparent/solid
     },
     content: {
-      width: 'fixed', // fluid/fixed
+      width: 'fluid', // fluid/fixed
     },
     brand: {
       self: {
@@ -154,23 +154,6 @@ export class LayoutConfig {
       fixed: false
     },
     extras: {
-      search: {
-        display: true,
-        layout: 'dropdown', // offcanvas, dropdown
-        offcanvas: {
-          direction: 'right'
-        }
-      },
-      notifications: {
-        display: true,
-        layout: 'dropdown', // offcanvas, dropdown
-        dropdown: {
-          style: 'dark' // light|dark
-        },
-        offcanvas: {
-          direction: 'right'
-        }
-      },
       user: {
         display: true,
         layout: 'offcanvas', // offcanvas, dropdown
@@ -182,34 +165,6 @@ export class LayoutConfig {
         }
       },
       languages: {
-        display: true
-      },
-      cart: {
-        display: true,
-        dropdown: {
-          style: 'dark'
-        }
-      },
-      'quick-actions': {
-        display: true,
-        layout: 'dropdown', // offcanvas, dropdown
-        dropdown: {
-          style: 'dark'
-        },
-        offcanvas: {
-          direction: 'right'
-        }
-      },
-      'quick-panel': {
-        display: true,
-        offcanvas: {
-          direction: 'right'
-        }
-      },
-      chat: {
-        display: false
-      },
-      toolbar: {
         display: true
       },
       scrolltop: {

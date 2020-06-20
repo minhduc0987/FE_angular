@@ -16,7 +16,7 @@ import { PartialsModule } from '../../../partials/partials.module';
 // Core
 import { FakeApiService } from '../../../../core/_base/layout';
 // Auth
-import { ModuleGuard } from '../../../../core/auth';
+// import { ModuleGuard } from '../../../../core/auth';
 // Core => Services
 import {
 	customersReducer,
@@ -170,7 +170,7 @@ const routes: Routes = [
 		EffectsModule.forFeature([ProductSpecificationEffects]),
 	],
 	providers: [
-		ModuleGuard,
+		// ModuleGuard,
 		InterceptService,
       	{
         	provide: HTTP_INTERCEPTORS,

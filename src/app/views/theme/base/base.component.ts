@@ -12,7 +12,7 @@ import { MenuConfig } from '../../../core/_config/menu.config';
 import { PageConfig } from '../../../core/_config/page.config';
 // User permissions
 import { NgxPermissionsService } from 'ngx-permissions';
-import { currentUserPermissions, Permission } from '../../../core/auth';
+import { Permission } from '../../../core/auth';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../core/reducers';
 
@@ -53,7 +53,7 @@ export class BaseComponent implements OnInit, OnDestroy {
     private htmlClassService: HtmlClassService,
     private store: Store<AppState>,
     private permissionsService: NgxPermissionsService) {
-    this.loadRolesWithPermissions();
+    // this.loadRolesWithPermissions();
 
     // register configs by demos
     this.layoutConfigService.loadConfigs(new LayoutConfig().configs);
@@ -109,16 +109,16 @@ export class BaseComponent implements OnInit, OnDestroy {
   /**
    * NGX Permissions, init roles
    */
-  loadRolesWithPermissions() {
-    this.currentUserPermissions$ = this.store.pipe(select(currentUserPermissions));
-    const subscription = this.currentUserPermissions$.subscribe(res => {
-      if (!res || res.length === 0) {
-        return;
-      }
+  // loadRolesWithPermissions() {
+  //   this.currentUserPermissions$ = this.store.pipe(select(currentUserPermissions));
+  //   const subscription = this.currentUserPermissions$.subscribe(res => {
+  //     if (!res || res.length === 0) {
+  //       return;
+  //     }
 
-      this.permissionsService.flushPermissions();
-      res.forEach((pm: Permission) => this.permissionsService.addPermission(pm.name));
-    });
-    this.unsubscribe.push(subscription);
-  }
+  //     this.permissionsService.flushPermissions();
+  //     res.forEach((pm: Permission) => this.permissionsService.addPermission(pm.name));
+  //   });
+  //   this.unsubscribe.push(subscription);
+  // }
 }

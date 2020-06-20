@@ -1,4 +1,3 @@
-import { AfterViewInit, AfterViewChecked } from '@angular/core';
 // Angular
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 // RXJS
 import { debounceTime, distinctUntilChanged, tap, skip, take, delay } from 'rxjs/operators';
-import { fromEvent, merge, Observable, of, Subscription } from 'rxjs';
+import { fromEvent, merge, of, Subscription, from } from 'rxjs';
 // LODASH
 import { each, find } from 'lodash';
 // NGRX
@@ -24,10 +23,13 @@ import {
 	UsersDataSource,
 	UserDeleted,
 	UsersPageRequested,
-	selectUserById,
-	selectAllRoles
+	selectAllRoles,
+	UserUpdated
 } from '../../../../../core/auth';
 import { SubheaderService } from '../../../../../core/_base/layout';
+import { MatDialog } from '@angular/material/dialog';
+import { UserEditComponent } from '../user-edit/user-edit.component';
+import { Update } from '@ngrx/entity';
 
 // Table with EDIT item in MODAL
 // ARTICLE for table with sort/filter/paginator
@@ -72,7 +74,8 @@ export class UsersListComponent implements OnInit, OnDestroy {
 		private router: Router,
 		private layoutUtilsService: LayoutUtilsService,
 		private subheaderService: SubheaderService,
-		private cdr: ChangeDetectorRef) {}
+		private cdr: ChangeDetectorRef,
+		private dialog: MatDialog) {}
 
 	/**
 	 * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
@@ -249,9 +252,27 @@ export class UsersListComponent implements OnInit, OnDestroy {
 	/**
 	 * Redirect to edit page
 	 *
-	 * @param id
+	 * @param _user : User
 	 */
-	editUser(id) {
-		this.router.navigate(['../users/edit', id], { relativeTo: this.activatedRoute });
+	editUser(_user : User) {
+		const dialogUser =  this.dialog.open(UserEditComponent, {
+			data : _user,
+			width: '1000px'
+		});
+		dialogUser.afterClosed().subscribe(res => {
+			if (!res) {
+				return;
+			}
+			const updatedUser: Update<User> = {
+				id: _user.id,
+				changes: _user
+			};
+
+			this.store.dispatch(new UserUpdated( { partialUser: updatedUser, user: _user }));
+			const message = `User successfully has been saved.`;
+			this.layoutUtilsService.showActionNotification(message, MessageType.Update, 5000, true, true);
+			// asdasd
+		});
+		// this.router.navigate(['../users/edit', id], { relativeTo: this.activatedRoute });
 	}
 }

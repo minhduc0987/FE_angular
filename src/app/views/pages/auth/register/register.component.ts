@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../core/reducers';
 // Auth
-import { AuthNoticeService, AuthService, Register, User } from '../../../../core/auth/';
+import { AuthNoticeService, AuthService, User } from '../../../../core/auth/';
 import { Subject } from 'rxjs';
 import { ConfirmPasswordValidator } from './confirm-password.validator';
 
@@ -143,23 +143,23 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		_user.fullname = controls.fullname.value;
 		_user.password = controls.password.value;
 		_user.roles = [];
-		this.auth.register(_user).pipe(
-			tap(user => {
-				if (user) {
-					this.store.dispatch(new Register({authToken: user.accessToken}));
-					// pass notice message to the login page
-					this.authNoticeService.setNotice(this.translate.instant('AUTH.REGISTER.SUCCESS'), 'success');
-					this.router.navigateByUrl('/auth/login');
-				} else {
-					this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
-				}
-			}),
-			takeUntil(this.unsubscribe),
-			finalize(() => {
-				this.loading = false;
-				this.cdr.markForCheck();
-			})
-		).subscribe();
+		// this.auth.register(_user).pipe(
+		// 	tap(user => {
+		// 		if (user) {
+		// 			this.store.dispatch(new Register({authToken: user.accessToken}));
+		// 			// pass notice message to the login page
+		// 			this.authNoticeService.setNotice(this.translate.instant('AUTH.REGISTER.SUCCESS'), 'success');
+		// 			this.router.navigateByUrl('/auth/login');
+		// 		} else {
+		// 			this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
+		// 		}
+		// 	}),
+		// 	takeUntil(this.unsubscribe),
+		// 	finalize(() => {
+		// 		this.loading = false;
+		// 		this.cdr.markForCheck();
+		// 	})
+		// ).subscribe();
 	}
 
 	/**

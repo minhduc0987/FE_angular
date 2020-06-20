@@ -105,17 +105,17 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
     }
 
     this.asideClasses = this.htmlClassService.getClasses('aside', true).toString();
-    this.asideLogo = this.getAsideLogo();    
+    this.asideLogo = this.getAsideLogo();
     setTimeout(() => {
       this.offcanvas = new KTOffcanvas(this.asideMenuOffcanvas.nativeElement, this.menuCanvasOptions);
     });
   }
 
   getAsideLogo() {
-    let result = 'logo-dark.png';
+    let result = 'icon-chuan.png';
     const brandSelfTheme = this.layoutConfigService.getConfig('brand.self.theme') || '';
     if (brandSelfTheme === 'light') {
-      result = 'logo-dark.png';
+      result = 'icon-chuan.png';
     }
     return `./assets/media/logos/${result}`;
   }

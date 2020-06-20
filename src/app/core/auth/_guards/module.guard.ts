@@ -8,7 +8,6 @@ import { tap, map } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 // Module reducers and selectors
 import { AppState} from '../../../core/reducers/';
-import { currentUserPermissions } from '../_selectors/auth.selectors';
 import { Permission } from '../_models/permission.model';
 import { find } from 'lodash';
 
@@ -26,7 +25,7 @@ export class ModuleGuard implements CanActivate {
 
     return this.store
       .pipe(
-        select(currentUserPermissions),
+        // select(),
         map((permissions: Permission[]) => {
           const perm = find(permissions, (elem: Permission) => {
             return elem.title.toLocaleLowerCase() === moduleName.toLocaleLowerCase();

@@ -96,13 +96,13 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   getLogo() {
-    let result = 'logo-dark.png';
+    let result = 'icon-chuan.png';
     const headerSelfTheme = this.layoutConfigService.getConfig('header.self.theme') || '';
     if (headerSelfTheme === 'light') {
-      result = 'logo-dark.png';
+      result = 'icon-chuan.png';
     } else {
       if (headerSelfTheme === 'dark') {
-        result = 'logo-dark.png';
+        result = 'icon-chuan.png';
       }
     }
     return `./assets/media/logos/${result}`;

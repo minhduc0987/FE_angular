@@ -10,7 +10,6 @@ export { UsersDataSource } from './_data-sources/users.datasource';
 export {
     Login,
     Logout,
-    Register,
     UserRequested,
     UserLoaded,
     AuthActionTypes,
@@ -66,10 +65,7 @@ export {
     isUserLoaded,
     currentAuthToken,
     currentUser,
-    currentUserRoleIds,
-    currentUserPermissionsIds,
-    currentUserPermissions,
-    checkHasUserPermission
+    currentUserRole,
 } from './_selectors/auth.selectors';
 export {
     selectPermissionById,
@@ -107,8 +103,6 @@ export { ModuleGuard } from './_guards/module.guard';
 export { User } from './_models/user.model';
 export { Permission } from './_models/permission.model';
 export { Role } from './_models/role.model';
-export { Address } from './_models/address.model';
-export { SocialNetworks } from './_models/social-networks.model';
 export { AuthNotice } from './auth-notice/auth-notice.interface';
 
 export { AuthDataContext } from './_server/auth.data-context';

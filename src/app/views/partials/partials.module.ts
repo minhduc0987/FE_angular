@@ -28,6 +28,7 @@ import {
   ScrollTopComponent,
   SplashScreenComponent,
   UserProfileComponent,
+  UserProfile4Component,
 } from './layout';
 // General
 import { NoticeComponent } from './content/general/notice/notice.component';
@@ -72,6 +73,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     SplashScreenComponent,
     LanguageSelectorComponent,
     UserProfileComponent,
+    UserProfile4Component
   ],
   exports: [
     PortletModule,
@@ -89,6 +91,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     SplashScreenComponent,
     LanguageSelectorComponent,
     UserProfileComponent,
+    UserProfile4Component
   ],
   imports: [
     CommonModule,

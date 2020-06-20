@@ -1,5 +1,5 @@
 // Angular
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // RxJS
@@ -15,14 +15,13 @@ import { LayoutUtilsService, MessageType } from '../../../../../core/_base/crud'
 import {
 	User,
 	UserUpdated,
-	Address,
-	SocialNetworks,
 	selectHasUsersInStore,
 	selectUserById,
 	UserOnServerCreated,
 	selectLastCreatedUserId,
 	selectUsersActionLoading
 } from '../../../../../core/auth';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
 	selector: 'kt-user-edit',
@@ -36,8 +35,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
 	selectedTab = 0;
 	loading$: Observable<boolean>;
 	rolesSubject = new BehaviorSubject<number[]>([]);
-	addressSubject = new BehaviorSubject<Address>(new Address());
-	soicialNetworksSubject = new BehaviorSubject<SocialNetworks>(new SocialNetworks());
 	userForm: FormGroup;
 	hasFormErrors = false;
 	// Private properties
@@ -60,7 +57,9 @@ export class UserEditComponent implements OnInit, OnDestroy {
 		           private subheaderService: SubheaderService,
 		           private layoutUtilsService: LayoutUtilsService,
 		           private store: Store<AppState>,
-		           private layoutConfigService: LayoutConfigService) { }
+				   private layoutConfigService: LayoutConfigService,
+				   @Inject(MAT_DIALOG_DATA) public data: any
+				   ) { }
 
 	/**
 	 * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
@@ -79,8 +78,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
 					if (res) {
 						this.user = res;
 						this.rolesSubject.next(this.user.roles);
-						this.addressSubject.next(this.user.address);
-						this.soicialNetworksSubject.next(this.user.socialNetworks);
 						this.oldUser = Object.assign({}, this.user);
 						this.initUser();
 					}
@@ -89,8 +86,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
 				this.user = new User();
 				this.user.clear();
 				this.rolesSubject.next(this.user.roles);
-				this.addressSubject.next(this.user.address);
-				this.soicialNetworksSubject.next(this.user.socialNetworks);
 				this.oldUser = Object.assign({}, this.user);
 				this.initUser();
 			}
@@ -213,10 +208,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 		const _user = new User();
 		_user.clear();
 		_user.roles = this.rolesSubject.value;
-		_user.address = this.addressSubject.value;
-		_user.socialNetworks = this.soicialNetworksSubject.value;
 		_user.accessToken = this.user.accessToken;
-		_user.refreshToken = this.user.refreshToken;
 		_user.pic = this.user.pic;
 		_user.id = this.user.id;
 		_user.username = controls.username.value;

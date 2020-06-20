@@ -47,14 +47,14 @@ export class HeaderMobileComponent implements OnInit {
   getLogoUrl() {
     const headerSelfTheme = this.layoutConfigService.getConfig('header.self.theme') || '';
     const brandSelfTheme = this.layoutConfigService.getConfig('brand.self.theme') || '';
-    let result = 'logo-dark.png';
+    let result = 'icon-chuan.png';
     if (!this.asideSelfDisplay) {
       if (headerSelfTheme === 'light') {
-        result = 'logo-dark.png';
+        result = 'icon-chuan.png';
       }
     } else {
       if (brandSelfTheme === 'light') {
-        result = 'logo-dark.png';
+        result = 'icon-chuan.png';
       }
     }
     return `./assets/media/logos/${result}`;

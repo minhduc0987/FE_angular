@@ -8,3 +8,4 @@ export { SplashScreenComponent } from './splash-screen/splash-screen.component';
 // Topbar components
 export { LanguageSelectorComponent } from './topbar/language-selector/language-selector.component';
 export { UserProfileComponent } from './topbar/user-profile/user-profile.component';
+export { UserProfile4Component } from './topbar/user-profile4/user-profile4.component';

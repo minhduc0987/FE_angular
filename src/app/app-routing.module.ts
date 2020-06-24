@@ -19,6 +19,10 @@ const routes: Routes = [
         loadChildren: () => import('./views/pages/dashboard/dashboard.module').then(m => m.DashboardModule),
       },
       {
+        path: 'user-detail',
+        loadChildren: () => import('./views/pages/user-management/user-management.module').then(m => m.UserManagementModule),
+      },
+      {
         path: 'builder',
         loadChildren: () => import('./views/theme/content/builder/builder.module').then(m => m.BuilderModule),
       },

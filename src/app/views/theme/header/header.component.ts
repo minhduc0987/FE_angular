@@ -26,10 +26,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   headerClasses = '';
   headerContainerClasses = '';
   headerMenuClasses = '';
-  headerLogo = '';
   headerAttributes = {};
-  headerMenuSelfDisplay = true;
-
   @ViewChild('ktHeader', {static: true}) ktHeader: ElementRef;
 
   /**
@@ -77,8 +74,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.headerClasses = this.htmlClassService.getClasses('header', true).toString();
     this.headerAttributes = this.htmlClassService.getAttributes('header');
-    this.headerLogo = this.getLogo();
-    this.headerMenuSelfDisplay = this.layoutConfigService.getConfig('header.menu.self.display');
     this.headerContainerClasses = this.htmlClassService.getClasses('header_container', true).toString();
     this.headerMenuClasses = this.htmlClassService.getClasses('header_menu', true).toString();
     // header width fluid
@@ -95,16 +90,4 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.layoutRefService.addElement('header', this.ktHeader.nativeElement);
   }
 
-  getLogo() {
-    let result = 'logo-light.png';
-    const headerSelfTheme = this.layoutConfigService.getConfig('header.self.theme') || '';
-    if (headerSelfTheme === 'light') {
-      result = 'logo-dark.png';
-    } else {
-      if (headerSelfTheme === 'dark') {
-        result = 'logo-light.png';
-      }
-    }
-    return `./assets/media/logos/${result}`;
-  }
 }

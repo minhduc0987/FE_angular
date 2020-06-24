@@ -35,7 +35,6 @@ export { LayoutConfigService } from './services/layout-config.service';
 export { LayoutRefService } from './services/layout-ref.service';
 export { MenuAsideService } from './services/menu-aside.service';
 export { MenuConfigService } from './services/menu-config.service';
-export { MenuHorizontalService } from './services/menu-horizontal.service';
 export { PageConfigService } from './services/page-config.service';
 export { SplashScreenService } from './services/splash-screen.service';
 export { SubheaderService } from './services/subheader.service';

@@ -44,7 +44,6 @@ import {
   LayoutRefService,
   MenuAsideService,
   MenuConfigService,
-  MenuHorizontalService,
   PageConfigService,
   SplashScreenService,
   SubheaderService
@@ -158,7 +157,6 @@ export function getHighlightLanguages() {
     },
     // template services
     SubheaderService,
-    MenuHorizontalService,
     MenuAsideService,
     HttpUtilsService,
     TypesUtilsService,

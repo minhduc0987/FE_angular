@@ -11,7 +11,6 @@ import { LayoutConfigService, ToggleOptions } from '../../../../core/_base/layou
 })
 export class HeaderMobileComponent implements OnInit {
   // Public properties
-  headerLogo = '';
   asideSelfDisplay = true;
   headerMenuSelfDisplay = true;
   headerMobileClasses = '';
@@ -39,24 +38,8 @@ export class HeaderMobileComponent implements OnInit {
    */
   ngOnInit() {
     this.headerMobileClasses = this.uiService.getClasses('header_mobile', true).toString();
-    this.headerLogo = this.getLogoUrl();
     this.asideSelfDisplay = this.layoutConfigService.getConfig('aside.self.display');
     this.headerMenuSelfDisplay = this.layoutConfigService.getConfig('header.menu.self.display');
   }
 
-  getLogoUrl() {
-    const headerSelfTheme = this.layoutConfigService.getConfig('header.self.theme') || '';
-    const brandSelfTheme = this.layoutConfigService.getConfig('brand.self.theme') || '';
-    let result = 'logo-light.png';
-    if (!this.asideSelfDisplay) {
-      if (headerSelfTheme === 'light') {
-        result = 'logo-dark.png';
-      }
-    } else {
-      if (brandSelfTheme === 'light') {
-        result = 'logo-dark.png';
-      }
-    }
-    return `./assets/media/logos/${result}`;
-  }
 }

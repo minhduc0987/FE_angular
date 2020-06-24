@@ -1,0 +1,13 @@
+.user-management {
+    width: 100%;
+    min-height: calc(100vh - 225px);
+    display: flex;
+
+    .aside-user {
+        width: 300px;
+    }
+
+    .content-user {
+        width: calc(100% - 300px);
+    }
+}

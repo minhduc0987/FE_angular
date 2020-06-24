@@ -4,7 +4,7 @@
     <!--begin::Header Logo-->
     <div class="header-logo">
       <a href="javascript:;" routerLink="/" >
-        <img alt="logo" [attr.src]="headerLogo" />
+        <img alt="logo" src="./assets/media/logos/icon-chuan.png" style="width: 40px;"/>
       </a>
     </div>
     <!--end::Header Logo-->
@@ -14,7 +14,7 @@
   <div ktMenu [options]="menuOptions" id="kt_header_menu" class="header-menu header-menu-mobile " [ngClass]="headerMenuClasses">
     <!--begin::Header Nav-->
     <ul class="menu-nav" [ngClass]="htmlClassService.getClasses('header_menu_nav', true)">
-			<ng-container *ngFor="let item of menuHorService.menuList$ | async">
+			<ng-container *ngFor="let item of menuList">
 				<ng-container *ngIf="item.title" [ngTemplateOutlet]="menuTemplate" [ngTemplateOutletContext]="{ item: item }"></ng-container>
 			</ng-container>
 		</ul>

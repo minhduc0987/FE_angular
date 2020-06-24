@@ -38,6 +38,7 @@ export class UserProfile4Component implements OnInit {
    */
   ngOnInit(): void {
     this.user$ = this.store.pipe(select(currentUser));
+    console.log(this.user$)
   }
 
   /**
@@ -45,5 +46,10 @@ export class UserProfile4Component implements OnInit {
    */
   logout() {
     this.store.dispatch(new Logout());
+  }
+
+  userDetail() {
+    // let id = this._user.id
+    return `user-detail/`
   }
 }

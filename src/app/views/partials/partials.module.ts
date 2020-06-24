@@ -23,11 +23,9 @@ import {
   ContextMenu2Component,
   ContextMenuComponent,
   LanguageSelectorComponent,
-  QuickUserPanelComponent,
   ScrollTopComponent,
   SplashScreenComponent,
   StickyToolbarComponent,
-  UserProfileComponent,
   UserProfile4Component
 } from './layout';
 // General
@@ -67,12 +65,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     AlertComponent,
     ContextMenu2Component,
     ContextMenuComponent,
-    QuickUserPanelComponent,
     ScrollTopComponent,
     SplashScreenComponent,
     StickyToolbarComponent,
     LanguageSelectorComponent,
-    UserProfileComponent,
     UserProfile4Component,
   ],
   exports: [
@@ -86,12 +82,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     AlertComponent,
     ContextMenu2Component,
     ContextMenuComponent,
-    QuickUserPanelComponent,
     ScrollTopComponent,
     SplashScreenComponent,
     StickyToolbarComponent,
     LanguageSelectorComponent,
-    UserProfileComponent,
     UserProfile4Component,
   ],
   imports: [

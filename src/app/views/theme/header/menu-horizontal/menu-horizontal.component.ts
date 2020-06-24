@@ -19,7 +19,6 @@ import * as objectPath from 'object-path';
 import {
   LayoutConfigService,
   MenuConfigService,
-  MenuHorizontalService,
   MenuOptions,
   OffcanvasOptions
 } from '../../../../core/_base/layout';
@@ -35,8 +34,6 @@ import { HtmlClassService } from '../../html-class.service';
 export class MenuHorizontalComponent implements OnInit, AfterViewInit {
   private offcanvas: any;
   @ViewChild('headerMenuOffcanvas', { static: true }) headerMenuOffcanvas: ElementRef;
-
-  @Input() headerLogo: string;
   @Input() headerMenuSelfDisplay: boolean;
   @Input() headerMenuClasses: string;
   // Public properties
@@ -68,13 +65,18 @@ export class MenuHorizontalComponent implements OnInit, AfterViewInit {
       state: 'mobile-toggle-active'
     }
   };
+  menuList = [
+    {title : 'Về chúng tôi', page: '/about'},
+    {title : 'Tin tức', page: '/tin-tuc'},
+    {title : 'Tuyển dụng', page: '/tuyen-dung'},
+    {title : 'Liên hệ', page: '/lien-he'},
+  ]
 
   /**
    * Component Conctructor
    *
    * @param el: ElementRef
    * @param htmlClassService: HtmlClassService
-   * @param menuHorService: MenuHorService
    * @param menuConfigService: MenuConfigService
    * @param layoutConfigService: LayouConfigService
    * @param router: Router
@@ -84,7 +86,6 @@ export class MenuHorizontalComponent implements OnInit, AfterViewInit {
   constructor(
     private el: ElementRef,
     public htmlClassService: HtmlClassService,
-    public menuHorService: MenuHorizontalService,
     private menuConfigService: MenuConfigService,
     private layoutConfigService: LayoutConfigService,
     private router: Router,

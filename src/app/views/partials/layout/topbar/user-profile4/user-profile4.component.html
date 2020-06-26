@@ -1,12 +1,10 @@
 <ng-container *ngIf="user$ | async as _user">
   <div class="topbar-item" data-placement="bottom" ngbTooltip="Thông tin khách hàng">
-    <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
-      <!-- <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-        {{ _user.fullname }}
-      </span> -->
+    <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2">
       <a href="javascript:;" routerLink="/user-detail" class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
         {{ _user.fullname }}
       </a>
     </div>
+    <a class="logout" (click)="logout()">Đăng xuất</a>
   </div>
 </ng-container>

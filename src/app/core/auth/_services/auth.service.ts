@@ -8,8 +8,9 @@ import { catchError, map } from 'rxjs/operators';
 import { QueryParamsModel, QueryResultsModel } from '../../_base/crud';
 import { environment } from '../../../../environments/environment';
 
-const API_USERS_URL = 'api/users';
-const API_PERMISSION_URL = 'api/permissions';
+const API_LOGIN_URL =  environment.urlBE + 'api/user/auth/login';
+const API_USERS_URL = environment.urlBE + 'api/users/';
+const API_PERMISSION_URL = '';
 const API_ROLES_URL = 'api/roles';
 
 @Injectable()
@@ -18,8 +19,16 @@ export class AuthService {
   }
 
   // Authentication/Authorization
-  login(email: string, password: string): Observable<User> {
-    return this.http.post<User>(API_USERS_URL, {email, password});
+  login(usernameOrEmail: string, password: string): Observable<User> {
+		return this.http.post<User>(API_LOGIN_URL, { usernameOrEmail, password });
+  }
+
+  getUser(id: string): Observable<User> {
+    const url = API_USERS_URL + id + "/accounts"
+    const userToken = localStorage.getItem(environment.authTokenKey);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
+    return this.http.get<User>(url, {headers: httpHeaders});
   }
 
   getUserByToken(): Observable<User> {
@@ -43,12 +52,6 @@ export class AuthService {
       );
   }
 
-  /*
-   * Submit forgot password request
-   *
-   * @param {string} email
-   * @returns {Observable<any>}
-   */
   public requestPassword(email: string): Observable<any> {
     return this.http.get(API_USERS_URL + '/forgot?=' + email)
       .pipe(catchError(this.handleError('forgot-password', []))

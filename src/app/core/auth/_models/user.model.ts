@@ -5,18 +5,17 @@ import { SocialNetworks } from './social-networks.model';
 export class User extends BaseModel {
   id: number;
   username: string;
-  password: string;
+  fullname: string;
+  phone: string;
+  dateOfBirth: string;
   email: string;
+  avatar: string;
+  address: Address;
+  roles: number[];
+  companyName: string;
   accessToken: string;
   refreshToken: string;
-  roles: number[];
-  pic: string;
-  fullname: string;
-  occupation: string;
-  companyName: string;
-  phone: string;
-  address: Address;
-  socialNetworks: SocialNetworks;
+  password: string;
 
   clear(): void {
     this.id = undefined;
@@ -27,13 +26,10 @@ export class User extends BaseModel {
     this.fullname = '';
     this.accessToken = 'access-token-' + Math.random();
     this.refreshToken = 'access-token-' + Math.random();
-    this.pic = './assets/media/users/default.jpg';
-    this.occupation = '';
+    this.avatar = './assets/media/users/default.jpg';
     this.companyName = '';
     this.phone = '';
     this.address = new Address();
     this.address.clear();
-    this.socialNetworks = new SocialNetworks();
-    this.socialNetworks.clear();
   }
 }

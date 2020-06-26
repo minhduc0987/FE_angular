@@ -38,7 +38,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 	// Table fields
 	dataSource: UsersDataSource;
 	displayedColumns = ['select', 'id', 'username', 'email', 'fullname', '_roles', 'actions'];
-  user: any[];
+  	user: any;
 
 	constructor() {}
 

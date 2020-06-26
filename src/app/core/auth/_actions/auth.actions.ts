@@ -6,7 +6,8 @@ export enum AuthActionTypes {
     Logout = '[Logout] Action',
     Register = '[Register] Action',
     UserRequested = '[Request User] Action',
-    UserLoaded = '[Load User] Auth API'
+    UserLoaded = '[Load User] Auth API',
+    UserRole = '[Load User Role] Auth API',
 }
 
 export class Login implements Action {
@@ -33,4 +34,9 @@ export class UserLoaded implements Action {
     constructor(public payload: { user: User }) { }
 }
 
-export type AuthActions = Login | Logout | Register | UserRequested | UserLoaded;
+export class UserRole implements Action {
+    readonly type = AuthActionTypes.UserRole;
+    constructor(public payload: { userRole: any[] }) { }
+}
+
+export type AuthActions = Login | Logout | Register | UserRequested | UserLoaded | UserRole;

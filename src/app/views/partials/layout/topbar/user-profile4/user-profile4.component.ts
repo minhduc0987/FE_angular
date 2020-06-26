@@ -11,6 +11,7 @@ import { currentUser, Logout, User } from '../../../../../core/auth';
 @Component({
   selector: 'kt-user-profile4',
   templateUrl: './user-profile4.component.html',
+  styleUrls: ['./user-profile4.component.scss']
 })
 export class UserProfile4Component implements OnInit {
   // Public properties

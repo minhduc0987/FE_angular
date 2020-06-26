@@ -6,6 +6,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { BaseComponent } from './views/theme/base/base.component';
 // Auth
 import { AuthGuard } from './core/auth';
+import { AboutComponent } from './views/pages/about/about.component';
+import { TinTucComponent } from './views/pages/tin-tuc/tin-tuc.component';
+import { ContactComponent } from './views/pages/contact/contact.component';
 
 const routes: Routes = [
   {path: 'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule)},
@@ -21,6 +24,18 @@ const routes: Routes = [
       {
         path: 'user-detail',
         loadChildren: () => import('./views/pages/user-management/user-management.module').then(m => m.UserManagementModule),
+      },
+      {
+        path: 'about',
+        component: AboutComponent
+      },
+      {
+        path: 'tin-tuc',
+        component: TinTucComponent
+      },
+      {
+        path: 'contact',
+        component: ContactComponent
       },
       {
         path: 'builder',

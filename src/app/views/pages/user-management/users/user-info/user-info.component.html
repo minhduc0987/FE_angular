@@ -5,20 +5,24 @@
 			<mat-card>
 				<mat-card-title>Hồ sơ</mat-card-title>
 				<mat-list>
-					<mat-list-item>
-						<div class="d-inline w-25">Tên</div><div class="d-inline">áldalsjdls</div>
+          <mat-list-item>
+						<div class="d-inline w-25">Tên truy cập</div><div class="d-inline">{{user?.username || 'Name'}}</div>
 					</mat-list-item>
 					<mat-divider></mat-divider>
 					<mat-list-item>
-						<div class="d-inline w-25">Ngày sinh</div><div class="d-inline">áldalsjdls</div>
+						<div class="d-inline w-25">Họ và tên</div><div class="d-inline">{{user?.fullname || 'Name'}}</div>
 					</mat-list-item>
 					<mat-divider></mat-divider>
 					<mat-list-item>
-						<div class="d-inline w-25">Giới tính</div><div class="d-inline">áldalsjdls</div>
+						<div class="d-inline w-25">Ngày sinh</div><div class="d-inline">{{user?.dateOfBirth || 'DOB'}}</div>
 					</mat-list-item>
 					<mat-divider></mat-divider>
 					<mat-list-item>
-						<div class="d-inline w-25">Ảnh</div><div class="d-inline">áldalsjdls</div>
+						<div class="d-inline w-25">Giới tính</div><div class="d-inline">{{user?.gender || 'gender'}}</div>
+					</mat-list-item>
+					<mat-divider></mat-divider>
+					<mat-list-item>
+						<div class="d-inline w-25">Ảnh</div><div class="d-inline">{{user?.avatar || 'avatar'}}</div>
 					</mat-list-item>
 					<mat-divider></mat-divider>
 				</mat-list>
@@ -28,18 +32,25 @@
 				<mat-card-title>Thông tin liên hệ</mat-card-title>
 				<mat-list>
 					<mat-list-item>
-						<div class="d-inline w-25">Email</div><div class="d-inline">áldalsjdls</div>
+						<div class="d-inline w-25">Số CMND/CCCD/Hộ chiếu</div><div class="d-inline">{{user?.cmnd || 'cmnd'}}</div>
+					</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+						<div class="d-inline w-25">Email</div><div class="d-inline">{{user?.email || 'email'}}</div>
 					</mat-list-item>
 					<mat-divider></mat-divider>
 					<mat-list-item>
-						<div class="d-inline w-25">Số điện thoại</div><div class="d-inline">áldalsjdls</div>
+						<div class="d-inline w-25">Số điện thoại</div><div class="d-inline">{{user?.phone || 'phone'}}</div>
 					</mat-list-item>
 					<mat-divider></mat-divider>
 					<mat-list-item>
-						<div class="d-inline w-25">Địa chỉ</div><div class="d-inline">áldalsjdls</div>
+						<div class="d-inline w-25">Địa chỉ</div><div class="d-inline">{{user?.address || 'address'}}</div>
 					</mat-list-item>
 					<mat-divider></mat-divider>
-				</mat-list>
+        </mat-list>
+        <div class="m-3 text-right">
+          <button mat-raised-button color="primary">Cập nhật thông tin</button>
+        </div>
 			</mat-card>
 		</div>
 	</mat-card>

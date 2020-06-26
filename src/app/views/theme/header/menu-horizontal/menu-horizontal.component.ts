@@ -68,8 +68,7 @@ export class MenuHorizontalComponent implements OnInit, AfterViewInit {
   menuList = [
     {title : 'Về chúng tôi', page: '/about'},
     {title : 'Tin tức', page: '/tin-tuc'},
-    {title : 'Tuyển dụng', page: '/tuyen-dung'},
-    {title : 'Liên hệ', page: '/lien-he'},
+    {title : 'Liên hệ', page: '/contact'},
   ]
 
   /**

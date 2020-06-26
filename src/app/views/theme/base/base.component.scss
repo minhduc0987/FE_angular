@@ -13,3 +13,7 @@ kt-base {
 		transition: opacity 1s ease-in-out;
 	}
 }
+.content {
+  padding-top: 25px !important;
+  min-height: calc(100vh - 130px);
+}

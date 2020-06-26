@@ -7,9 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { PartialsModule } from '../partials/partials.module';
 // Pages
 import { CoreModule } from '../../core/core.module';
-
+import { TinTucComponent } from './tin-tuc/tin-tuc.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
-  declarations: [],
+  declarations: [TinTucComponent, AboutComponent, ContactComponent],
   exports: [],
   imports: [
     CommonModule,
@@ -17,6 +20,7 @@ import { CoreModule } from '../../core/core.module';
     FormsModule,
     CoreModule,
     PartialsModule,
+    MatCardModule
   ],
   providers: []
 })

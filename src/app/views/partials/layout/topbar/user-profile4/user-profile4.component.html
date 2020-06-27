@@ -1,7 +1,7 @@
 <ng-container *ngIf="user$ | async as _user">
   <div class="topbar-item" data-placement="bottom" ngbTooltip="Thông tin khách hàng">
     <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2">
-      <a href="javascript:;" routerLink="/user-detail" class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+      <a href="javascript:;" routerLink="/user-detail" class="user-name text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
         {{ _user.fullname }}
       </a>
     </div>

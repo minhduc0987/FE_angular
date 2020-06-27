@@ -23,14 +23,6 @@ export class AuthService {
 		return this.http.post<User>(API_LOGIN_URL, { usernameOrEmail, password });
   }
 
-  getUser(id: string): Observable<User> {
-    const url = API_USERS_URL + id + "/accounts"
-    const userToken = localStorage.getItem(environment.authTokenKey);
-    let httpHeaders = new HttpHeaders();
-    httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
-    return this.http.get<User>(url, {headers: httpHeaders});
-  }
-
   getUserByToken(): Observable<User> {
     const userToken = localStorage.getItem(environment.authTokenKey);
     let httpHeaders = new HttpHeaders();

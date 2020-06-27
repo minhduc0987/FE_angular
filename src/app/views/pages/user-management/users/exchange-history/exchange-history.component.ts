@@ -1,4 +1,3 @@
-import { AfterViewInit, AfterViewChecked } from '@angular/core';
 // Angular
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,14 +19,11 @@ import { LayoutUtilsService, MessageType, QueryParamsModel } from '../../../../.
 // Models
 import {
   User,
-  Role,
   UsersDataSource,
-  UserDeleted,
   UsersPageRequested,
-  selectUserById,
-  selectAllRoles,
 } from '../../../../../core/auth';
 import { SubheaderService } from '../../../../../core/_base/layout';
+import { ListExchangeOnServer } from 'src/app/core/apps';
 
 // Table with EDIT item in MODAL
 // ARTICLE for table with sort/filter/paginator
@@ -53,8 +49,7 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   lastQuery: QueryParamsModel;
   // Selection
   selection = new SelectionModel<User>(true, []);
-  usersResult: User[] = [];
-  allRoles: Role[] = [];
+  usersResult: any[] = [];
 
   // Subscriptions
   private subscriptions: Subscription[] = [];
@@ -84,18 +79,8 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit() {
-    // load roles list
-    const rolesSubscription = this.store.pipe(select(selectAllRoles)).subscribe((res) => (this.allRoles = res));
-    this.subscriptions.push(rolesSubscription);
-
-    // If the user changes the sort order, reset back to the first page.
     const sortSubscription = this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     this.subscriptions.push(sortSubscription);
-
-    /* Data load will be triggered in two cases:
-		- when a pagination event occurs => this.paginator.page
-		- when a sort event occurs => this.sort.sortChange
-		**/
     const paginatorSubscriptions = merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         tap(() => {
@@ -104,8 +89,6 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
       )
       .subscribe();
     this.subscriptions.push(paginatorSubscriptions);
-
-    // Filtration, bind to searchInput
     const searchSubscription = fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
         // tslint:disable-next-line:max-line-length
@@ -118,9 +101,6 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
       )
       .subscribe();
     this.subscriptions.push(searchSubscription);
-
-    // Set title to page breadCrumbs
-    this.subheaderService.setTitle('User management');
 
     // Init DataSource
     this.dataSource = new UsersDataSource(this.store);
@@ -151,90 +131,13 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   loadUsersList() {
     this.selection.clear();
     const queryParams = new QueryParamsModel(
-      this.filterConfiguration(),
+      {id : '1'},
       this.sort.direction,
       this.sort.active,
       this.paginator.pageIndex,
       this.paginator.pageSize,
     );
-    this.store.dispatch(new UsersPageRequested({ page: queryParams }));
+    this.store.dispatch(new ListExchangeOnServer({ data: queryParams }));
     this.selection.clear();
-  }
-
-  /** FILTRATION */
-  filterConfiguration(): any {
-    const filter: any = {};
-    const searchText: string = this.searchInput.nativeElement.value;
-
-    filter.lastName = searchText;
-
-    filter.username = searchText;
-    filter.email = searchText;
-    filter.fillname = searchText;
-    return filter;
-  }
-
-  /** ACTIONS */
-  /**
-   * Delete user
-   *
-   * @param _item: User
-   */
-  deleteUser(_item: User) {
-    const _title = 'User Delete';
-    const _description = 'Are you sure to permanently delete this user?';
-    const _waitDesciption = 'User is deleting...';
-    const _deleteMessage = `User has been deleted`;
-
-    const dialogRef = this.layoutUtilsService.deleteElement(_title, _description, _waitDesciption);
-    dialogRef.afterClosed().subscribe((res) => {
-      if (!res) {
-        return;
-      }
-
-      this.store.dispatch(new UserDeleted({ id: _item.id }));
-      this.layoutUtilsService.showActionNotification(_deleteMessage, MessageType.Delete);
-    });
-  }
-
-  /**
-   * Fetch selected rows
-   */
-  fetchUsers() {
-    const messages = [];
-    this.selection.selected.forEach((elem) => {
-      messages.push({
-        text: `${elem.fullname}, ${elem.email}`,
-        id: elem.id.toString(),
-        status: elem.username,
-      });
-    });
-    this.layoutUtilsService.fetchElements(messages);
-  }
-
-  /* UI */
-  /**
-   * Returns user roles string
-   *
-   * @param user: User
-   */
-  getUserRolesStr(user: User): string {
-    const titles: string[] = [];
-    each(user.roles, (roleId: number) => {
-      const _role = find(this.allRoles, (role: Role) => role.id === roleId);
-      if (_role) {
-        titles.push(_role.title);
-      }
-    });
-    return titles.join(', ');
-  }
-
-  /**
-   * Redirect to edit page
-   *
-   * @param id
-   */
-  editUser(id) {
-    this.router.navigate(['../users/edit', id], { relativeTo: this.activatedRoute });
   }
 }

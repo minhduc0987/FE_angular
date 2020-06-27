@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   loading = false;
   isLoggedIn$: Observable<boolean>;
   errors: any = [];
-  userId: string;
 
   private unsubscribe: Subject<any>;
 
@@ -130,7 +129,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           if (login) {
             this.store.dispatch(new Login({ authToken: login.accessToken }));
             localStorage.setItem('login', JSON.stringify(login));
-            this.userId = this.getDecodedAccessToken(login.accessToken).sub;
+            localStorage.setItem('userId', this.getDecodedAccessToken(login.accessToken).sub);
             this.router.navigateByUrl(this.returnUrl); // Main page
           } else {
             this.authNoticeService.setNotice(this.translate.instant('VALIDATION.INVALID_LOGIN'), 'danger');
@@ -140,7 +139,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         finalize(() => {
           this.loading = false;
           this.cdr.markForCheck();
-          this.getInfoUser();
         }),
       )
       .subscribe();
@@ -168,14 +166,5 @@ export class LoginComponent implements OnInit, OnDestroy {
     } catch (Error) {
       return null;
     }
-  }
-
-  getInfoUser() {
-    console.log(this.userId)
-    this.auth
-      .getUser(this.userId)
-      .subscribe(user => {
-        localStorage.setItem('user', JSON.stringify(user));
-      });
   }
 }

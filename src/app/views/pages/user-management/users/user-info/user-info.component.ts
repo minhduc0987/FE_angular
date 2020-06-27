@@ -14,41 +14,34 @@ import { each, find } from 'lodash';
 // NGRX
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../../../../core/reducers';
-
-// Services
-import { LayoutUtilsService, MessageType, QueryParamsModel } from '../../../../../core/_base/crud';
 // Models
-import {
-	User,
-	Role,
-	UsersDataSource,
-	UserDeleted,
-	UsersPageRequested,
-	selectUserById,
-	selectAllRoles
-} from '../../../../../core/auth';
-import { SubheaderService } from '../../../../../core/_base/layout';
+import { UsersDataSource, User } from '../../../../../core/auth';
+import { UserProfileService } from '../../../../../../app/core/apps/_services/user-profile.service';
 
 @Component({
-	selector: 'kt-user-info',
-	templateUrl: './user-info.component.html',
-	changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'kt-user-info',
+  templateUrl: './user-info.component.html',
+  styleUrls: ['./user-info.component.scss'],
+  providers: [UserProfileService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
-	// Table fields
-	dataSource: UsersDataSource;
-	displayedColumns = ['select', 'id', 'username', 'email', 'fullname', '_roles', 'actions'];
-  	user: any;
+  // Table fields
+  dataSource: UsersDataSource;
+  displayedColumns = ['select', 'id', 'username', 'email', 'fullname', '_roles', 'actions'];
+  user: User;
 
-	constructor() {}
+  constructor(private userProfileService: UserProfileService) {}
 
-	ngOnInit() {
+  ngOnInit() {
+    this.userProfileService.getUserProfile().subscribe((user: User) => {
+	  this.user = user;
+	  console.log(this.user);
+    });
+  }
 
-	}
-
-	/**
-	 * On Destroy
-	 */
-	ngOnDestroy() {
-	}
+  /**
+   * On Destroy
+   */
+  ngOnDestroy() {}
 }

@@ -26,9 +26,9 @@ export class FakeApiService implements InMemoryDbService {
     // tslint:disable-next-line:class-name
     const db = {
       // auth module
-      users: AuthDataContext.users,
-      roles: AuthDataContext.roles,
-      permissions: AuthDataContext.permissions,
+      // users: AuthDataContext.users,
+      // roles: AuthDataContext.roles,
+      // permissions: AuthDataContext.permissions,
     };
     return db;
   }

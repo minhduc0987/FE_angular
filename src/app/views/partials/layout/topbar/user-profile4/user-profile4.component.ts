@@ -6,12 +6,14 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 // State
 import { AppState } from '../../../../../core/reducers';
-import { currentUser, Logout, User } from '../../../../../core/auth';
+import { Logout, User } from '../../../../../core/auth';
+import { UserProfileService } from '../../../../../core/apps/_services/user-profile.service';
 
 @Component({
   selector: 'kt-user-profile4',
   templateUrl: './user-profile4.component.html',
-  styleUrls: ['./user-profile4.component.scss']
+  styleUrls: ['./user-profile4.component.scss'],
+  providers: [UserProfileService]
 })
 export class UserProfile4Component implements OnInit {
   // Public properties
@@ -27,7 +29,9 @@ export class UserProfile4Component implements OnInit {
    *
    * @param store: Store<AppState>
    */
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>,
+    private userProfileService: UserProfileService
+    ) {
   }
 
   /**
@@ -38,8 +42,9 @@ export class UserProfile4Component implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    this.user$ = this.store.pipe(select(currentUser));
-    console.log(this.user$)
+    this.user$ = this.userProfileService.getUserProfile();
+    // this.user$ = this.store.pipe(select(currentUser));
+    // console.log(this.user$)
   }
 
   /**

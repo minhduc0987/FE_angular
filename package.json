@@ -45,6 +45,7 @@
     "@ngx-translate/core": "12.1.2",
     "@types/lodash": "4.14.150",
     "angular-in-memory-web-api": "0.10.0",
+    "angular2-multiselect-dropdown": "^4.6.3",
     "apexcharts": "3.19.0",
     "bootstrap": "4.4.1",
     "chart.js": "2.9.3",

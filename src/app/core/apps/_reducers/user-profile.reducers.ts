@@ -7,22 +7,20 @@ export interface UserProfileState {
 	userProfile: UserProfile;
 	_isUserProfileLoaded: boolean;
 	_isLoading: boolean;
-	_isUserUpdated: boolean;
 	_isError: any;
-	isPasswordChange: boolean;
-	passwordChangeFailed: any;
-	passwordChangeSuccess: any;
+	listAccounts: any;
+	_isHasListAccounts: boolean;
+	_isErrorGetListAccounts: any;
 }
 
 export const initialUserProfileState: UserProfileState = {
 	userProfile: undefined,
 	_isUserProfileLoaded: false,
 	_isLoading: false,
-	_isUserUpdated: false,
 	_isError: undefined,
-	isPasswordChange: false,
-	passwordChangeFailed: null,
-	passwordChangeSuccess: null,
+	listAccounts: undefined,
+	_isHasListAccounts: false,
+	_isErrorGetListAccounts: undefined
 };
 
 export function UserProfileReducer(state = initialUserProfileState, action: UserProfileActions): UserProfileState {
@@ -40,61 +38,28 @@ export function UserProfileReducer(state = initialUserProfileState, action: User
 				_isUserProfileLoaded: true,
 			};
 
-		case UserProfileActionTypes.UserProfileUpdateOnServer:
-			return {
-				...state,
-				// userProfile: undefined,
-				_isUserUpdated: false,
-				_isError: undefined,
-			};
-
-		case UserProfileActionTypes.UserProfileUpdated:
-			return {
-				...state,
-				// userProfile: action.payload.userProfile,
-				_isUserUpdated: true,
-				_isUserProfileLoaded: false,
-			};
-
 		case UserProfileActionTypes.UserProfileCatchError:
 			return {
 				...state,
 				_isError: action.payload.isError,
-				// userProfile: undefined
 			};
-		case UserProfileActionTypes.ChangePasswordOnServer: {
+		case UserProfileActionTypes.UserAccountRequested:
 			return {
 				...state,
-				isPasswordChange: false,
+				_isHasListAccounts: false,
+				listAccounts: undefined
 			};
-		}
-		case UserProfileActionTypes.ChangePasswordSucceed: {
+		case UserProfileActionTypes.UserAccountLoaded:
 			return {
 				...state,
-				isPasswordChange: true,
-				passwordChangeSuccess: action.payload.result,
+				listAccounts: action.payload.listAccounts,
+				_isHasListAccounts: true,
 			};
-		}
-		case UserProfileActionTypes.ChangePasswordFailed: {
+		case UserProfileActionTypes.UserAccountError:
 			return {
 				...state,
-				passwordChangeFailed: action.payload.result,
+				_isErrorGetListAccounts: action.payload.isError,
 			};
-		}
-		case UserProfileActionTypes.ResetChangePasswordResult: {
-			return {
-				...state,
-				passwordChangeFailed: null,
-				passwordChangeSuccess: false,
-			};
-		}
-		case UserProfileActionTypes.ResetUpdateProfileResult: {
-			return {
-				...state,
-				_isError: null,
-				_isUserUpdated: null,
-			};
-		}
 		default:
 			return state;
 	}

@@ -11,11 +11,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../core/reducers';
 // Auth
-import { AuthNoticeService, AuthService, Login, Role } from '../../../../core/auth';
-import { UserRole } from 'src/app/core/auth/_actions/auth.actions';
+import { AuthNoticeService, AuthService, Login } from '../../../../core/auth';
 // @ts-ignore
 import * as jwt_decode from 'jwt-decode';
-
 /**
  * ! Just example => Should be removed in development
  */
@@ -129,7 +127,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           if (login) {
             this.store.dispatch(new Login({ authToken: login.accessToken }));
             localStorage.setItem('login', JSON.stringify(login));
-            localStorage.setItem('userId', this.getDecodedAccessToken(login.accessToken).sub);
+            localStorage.setItem('userId', jwt_decode(login.accessToken).sub);
             this.router.navigateByUrl(this.returnUrl); // Main page
           } else {
             this.authNoticeService.setNotice(this.translate.instant('VALIDATION.INVALID_LOGIN'), 'danger');
@@ -158,13 +156,5 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     const result = control.hasError(validationType) && (control.dirty || control.touched);
     return result;
-  }
-
-  getDecodedAccessToken(token: string): any {
-    try {
-      return jwt_decode(token);
-    } catch (Error) {
-      return null;
-    }
   }
 }

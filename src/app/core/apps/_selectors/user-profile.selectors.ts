@@ -17,27 +17,23 @@ export const currentUserProfile = createSelector(
 	up => up.userProfile
 );
 
-export const isUserUpdated = createSelector(
-	selectUserProfileState,
-	up => up._isUserUpdated
-);
-
 export const isUserProfileError = createSelector(
 	selectUserProfileState,
 	up => up._isError
 );
 
-export const isChangePasswordSucceed = createSelector(
+export const isLoadedListAccounts = createSelector(
 	selectUserProfileState,
-	usersState => usersState.isPasswordChange
+	up => up._isHasListAccounts
 );
 
-export const passwordChangeSuccess = createSelector(
+export const listAccounts = createSelector(
 	selectUserProfileState,
-	usersState => usersState.passwordChangeSuccess
+	up => up.listAccounts
 );
 
-export const passwordChangeFailed = createSelector(
+export const isLoadErrorListAccount = createSelector(
 	selectUserProfileState,
-	usersState => usersState.passwordChangeFailed
+	up => up._isErrorGetListAccounts
 );
+

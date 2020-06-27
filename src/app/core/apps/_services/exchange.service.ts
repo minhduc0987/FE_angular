@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
 import { User } from '../../auth';
 import { QueryParamsModel } from '../../_base/crud';
 
-const API_USERS_URL = environment.urlBE + '/api/users/';
+const API_USERS_URL = environment.urlBE + 'api/users/';
 
 @Injectable({providedIn: 'root'})
 export class ExchangeService {
@@ -13,13 +13,12 @@ export class ExchangeService {
 	constructor(private http: HttpClient) {
 	}
 
-	getlistExchange(params: any): Observable<QueryParamsModel> {
+	getlistExchange(accountId: string): Observable<any> {
 		const userId = localStorage.getItem('userId');
-		const accountId = params.id;
-        const url = API_USERS_URL + userId + '/accounts/' + accountId + 'transactions';
+        const url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions';
 		const userToken = localStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
-		return this.http.get<QueryParamsModel>(url)
+		return this.http.get<any>(url, {headers: httpHeaders})
 	}
 }

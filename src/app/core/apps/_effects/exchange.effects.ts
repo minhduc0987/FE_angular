@@ -23,7 +23,7 @@ export class ExchangeEffects {
 			ofType<ExchangeAction>(ExchangeActionTypes.ListExchangeOnServer),
 			switchMap((payload) => this.exchangeService.getlistExchange(payload).pipe(
 				map(result => {
-					return new ListExchangeOnServer({ data: result });
+					// return new ListExchangeOnServer({ data: result });
 				}),
 				catchError(err => {
 					return of(new ExchangeOnError({ err }));

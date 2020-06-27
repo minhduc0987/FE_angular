@@ -9,6 +9,7 @@ import { filter, some, find, each } from 'lodash';
 import { User } from '../../auth';
 
 const API_USERS_INFO_URL = environment.urlBE + 'api/users/current';
+const API_USERS_URL = environment.urlBE + 'api/users';
 
 @Injectable({providedIn: 'root'})
 export class UserProfileService {
@@ -21,5 +22,13 @@ export class UserProfileService {
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<User>(API_USERS_INFO_URL, {headers : httpHeaders})
+	}
+
+	getListAccount(userId): Observable<any> {
+		const url = API_USERS_URL + '/' + userId + '/accounts';
+		const userToken = localStorage.getItem(environment.authTokenKey);
+		let httpHeaders = new HttpHeaders();
+		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
+		return this.http.get<User>(url, {headers : httpHeaders})
 	}
 }

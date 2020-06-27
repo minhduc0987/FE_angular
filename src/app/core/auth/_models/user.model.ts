@@ -7,7 +7,7 @@ export class User extends BaseModel {
   username: string;
   fullname: string;
   phone: string;
-  dateOfBirth: string;
+  birthday: string;
   email: string;
   avatar: string;
   address: Address;
@@ -16,6 +16,9 @@ export class User extends BaseModel {
   accessToken: string;
   refreshToken: string;
   password: string;
+  gender: string;
+  image: string;
+  idCardNumber: string;
 
   clear(): void {
     this.id = undefined;
@@ -31,5 +34,8 @@ export class User extends BaseModel {
     this.phone = '';
     this.address = new Address();
     this.address.clear();
+    this.gender = '';
+    this.image = '';
+    this.idCardNumber = '';
   }
 }

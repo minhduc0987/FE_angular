@@ -23,7 +23,7 @@ import {
   UsersPageRequested,
 } from '../../../../../core/auth';
 import { SubheaderService } from '../../../../../core/_base/layout';
-import { ListExchangeOnServer, UserProfileService, UserAccountRequested, listAccounts, ExchangeService } from 'src/app/core/apps';
+import { ListExchangeOnServer, UserProfileService, UserAccountRequested, listAccounts } from 'src/app/core/apps';
 
 // Table with EDIT item in MODAL
 // ARTICLE for table with sort/filter/paginator
@@ -33,12 +33,12 @@ import { ListExchangeOnServer, UserProfileService, UserAccountRequested, listAcc
 // https://v5.material.angular.io/components/table/overview#sorting
 // https://www.youtube.com/watch?v=NSt9CI3BXv4
 @Component({
-  selector: 'kt-exchange-history',
-  templateUrl: './exchange-history.component.html',
-  styleUrls: ['./exchange-history.component.scss'],
+  selector: 'kt-account-user',
+  templateUrl: './account-user.component.html',
+  styleUrls: ['./account-user.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExchangeHistoryComponent implements OnInit, OnDestroy {
+export class AccountUserComponent implements OnInit, OnDestroy {
   // Table fields
   dataSource: UsersDataSource;
   displayedColumns = ['id', 'accountNumber', 'amount', 'card'];
@@ -50,7 +50,6 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   // Selection
   selection = new SelectionModel<any>(true, []);
   accountId: any
-  data: any = [];
   // Subscriptions
   private subscriptions: Subscription[] = [];
 
@@ -69,8 +68,7 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
     private layoutUtilsService: LayoutUtilsService,
     private subheaderService: SubheaderService,
     private cdr: ChangeDetectorRef,
-    private userService: UserProfileService,
-    private exchangeService: ExchangeService,
+    private userService: UserProfileService
   ) {}
   ngOnInit() {
     this.loadListAccount()
@@ -83,11 +81,8 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   }
   
   loadListAccount() {
-    const params = {
-      accountId: '1'
-    }
-    this.exchangeService.getlistExchange('1').subscribe(val => {
-      this.data = val;
+    this.userService.getListAccount('1').subscribe(val => {
+      this.dataSource = val;
       console.log(this.dataSource)
     })
   }

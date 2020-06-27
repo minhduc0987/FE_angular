@@ -53,6 +53,8 @@ import { ExchangeInComponent } from './users/exchange-in/exchange-in.component';
 import { ExchangeOutComponent } from './users/exchange-out/exchange-out.component';
 import { ExchangeHistoryComponent } from './users/exchange-history/exchange-history.component';
 import { FastExchangeComponent } from './users/fast-exchange/fast-exchange.component';
+import { AccountUserComponent } from './users/account-user/account-user.component';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 const routes: Routes = [
 	{
@@ -67,6 +69,10 @@ const routes: Routes = [
 			{
 				path: 'thong-tin',
 				component: UserInfoComponent
+			},
+			{
+				path: 'thong-tin-account',
+				component: AccountUserComponent
 			},
 			{
 				path: 'giao-dich-noi-bo',
@@ -123,7 +129,8 @@ const routes: Routes = [
 		MatGridListModule,
 		MatListModule,
 		MatDividerModule,
-		MatStepperModule
+		MatStepperModule,
+		AngularMultiSelectModule
 	],
 	providers: [
 		InterceptService,
@@ -157,6 +164,7 @@ const routes: Routes = [
 		ExchangeOutComponent,
 		ExchangeHistoryComponent,
 		FastExchangeComponent,
+		AccountUserComponent,
 	]
 })
 export class UserManagementModule {}

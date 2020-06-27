@@ -11,12 +11,9 @@ import {
 	UserProfileLoaded,
 	UserProfileActionTypes,
 	UserProfileRequested,
-	UserProfileUpdateOnServer,
-	UserProfileUpdated,
 	UserProfileCatchError,
-	ChangePasswordOnServer,
-	ChangePasswordSucceed,
-	ChangePasswordFailed
+	UserAccountLoaded,
+	UserAccountError
 } from '../_actions/user-profile.actions';
 
 import { UserProfileService } from '../_services/user-profile.service';
@@ -41,6 +38,22 @@ export class UserProfileEffects {
 				catchError(err => {
 					this.store.dispatch(new Logout());
 					return of(new UserProfileCatchError({ isError: err }));
+				})
+			))
+		);
+
+	@Effect()
+	loadAccountUser$ = this.actions$
+		.pipe(
+			ofType<UserProfileRequested>(UserProfileActionTypes.UserAccountRequested),
+			switchMap((userId) => this.userProfileService.getListAccount(userId).pipe(
+				map(result => {
+					debugger
+					return new UserAccountLoaded({ listAccounts: result });
+				}),
+				catchError(err => {
+					this.store.dispatch(new Logout());
+					return of(new UserAccountError({ isError: err }));
 				})
 			))
 		);

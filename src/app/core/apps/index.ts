@@ -9,15 +9,10 @@ export {
 export {
 	UserProfileRequested,
 	UserProfileLoaded,
-	UserProfileUpdateOnServer,
-	UserProfileUpdated,
-	UsersProfileActionToggleLoading,
-	ChangePasswordFailed,
-	ChangePasswordOnServer,
-	ChangePasswordSucceed,
 	UserProfileCatchError,
-	ResetChangePasswordResult,
-	ResetUpdateProfileResult
+	UserAccountError,
+	UserAccountLoaded,
+	UserAccountRequested
 } from './_actions/user-profile.actions';
 
 export {
@@ -37,11 +32,10 @@ export { exchangeReducer } from './_reducers/exchange.reducers';
 export {
 	isUserProfileLoaded,
 	currentUserProfile,
-	isUserUpdated,
 	isUserProfileError,
-	isChangePasswordSucceed,
-	passwordChangeSuccess,
-	passwordChangeFailed
+	isLoadErrorListAccount,
+	isLoadedListAccounts,
+	listAccounts
 } from './_selectors/user-profile.selectors';
 
 export {

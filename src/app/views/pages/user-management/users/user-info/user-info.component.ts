@@ -36,7 +36,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userProfileService.getUserProfile().subscribe((user: User) => {
 	  this.user = user;
-	  console.log(this.user);
     });
   }
 

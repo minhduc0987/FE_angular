@@ -1,0 +1,15 @@
+.form-exchange {
+    width: 100%;
+    display: flex;
+
+    .left-exchange {
+        width: calc(100% - 400px);
+    }
+
+    .right-exchange {
+        width: 400px;
+    }
+}
+.wi-90 {
+    width: 90px;
+}

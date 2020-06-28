@@ -35,7 +35,6 @@ import { ListExchangeOnServer, UserProfileService, UserAccountRequested, listAcc
 })
 export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   // Table fields
-  dataSource: any;
   displayedColumns = ['id', 'amount', 'type', 'amountAfter', 'date'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild('sort1', { static: true }) sort: MatSort;
@@ -45,7 +44,7 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   // Selection
   selection = new SelectionModel<any>(true, []);
   accountId: any
-  data: Observable<any>;
+  dataSource$: Observable<any>;
   // Subscriptions
   private subscriptions: Subscription[] = [];
 
@@ -58,20 +57,16 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
    * @param subheaderService: SubheaderService
    */
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private store: Store<AppState>,
-    private router: Router,
-    private layoutUtilsService: LayoutUtilsService,
-    private subheaderService: SubheaderService,
-    private cdr: ChangeDetectorRef,
-    private userService: UserProfileService,
     private exchangeService: ExchangeService,
   ) {}
   ngOnInit() {
   }
 
   ngOnAfterInit() {
-    this.data = this.exchangeService.getlistExchange('1');
+    this.dataSource$ = this.exchangeService.getlistExchange('1');
+    this.dataSource$.subscribe(val => {
+      console.log(val)
+    })
   }
 
   ngOnDestroy() {
@@ -82,12 +77,12 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
     const params = {
       accountId: '1'
     }
-    
+
   }
   getType(amount) {
     if (Number(amount) > 0) {
-      return "cộng tiền"
+      return 'cộng tiền'
     }
-    return "trừ tiền"
+    return 'trừ tiền'
   }
 }

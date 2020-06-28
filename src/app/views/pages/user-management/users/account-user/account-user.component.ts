@@ -69,7 +69,6 @@ export class AccountUserComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit() {
     this.loadListAccount()
-    console.log(localStorage.getItem('user'))
   }
   ngOnDestroy() {
     this.subscriptions.forEach((el) => el.unsubscribe());

@@ -4,44 +4,78 @@
       <h1 class="d-flex align-items-center justify-content-center">Chuyển khoản trong ngân hàng</h1>
       <div class="content">
         <mat-card>
-            <form class="form" [formGroup]="exchangeInForm" autocomplete="off" novalidate="novalidate" id="kt_login_form">
-                <mat-horizontal-stepper linear #stepper>
-                    <mat-step [stepControl]="firstFormGroup" errorMessage="Nhập thông tin người nhận">
-                      <form [formGroup]="firstFormGroup">
-                        <ng-template matStepLabel>Nhập thông tin người nhận</ng-template>
-                        <mat-form-field>
-                          <mat-label>Nhập thông tin người nhận</mat-label>
-                          <input matInput placeholder="Nhập thông tin người nhận" formControlName="idBank" required>
-                        </mat-form-field>
-                        <div>
-                          <button mat-button matStepperNext>Tiếp tục</button>
-                        </div>
-                      </form>
-                    </mat-step>
-                    <mat-step [stepControl]="secondFormGroup" errorMessage="Nhập mã pin để tiếp tục">
-                      <form [formGroup]="secondFormGroup">
-                        <ng-template matStepLabel>Nhập mã pin</ng-template>
-                        <mat-form-field>
-                          <mat-label>Nhập mã pin</mat-label>
-                          <input matInput placeholder="Nhập mã pin" formControlName="password"
-                                 required>
-                        </mat-form-field>
-                        <div>
-                          <button mat-button matStepperPrevious>Quay lại</button>
-                          <button mat-button matStepperNext>Tiếp tục</button>
-                        </div>
-                      </form>
-                    </mat-step>
-                    <mat-step>
-                      <ng-template matStepLabel>Xác nhận chuyển tiền</ng-template>
-                      <p>Bạn chắc chắn muốn chuyển tiền?</p>
+          <mat-horizontal-stepper linear #stepper>
+            <mat-step [stepControl]="formId">
+              <form [formGroup]="formId">
+                <div class="form-exchange">
+                  <div class="left-exchange">
+                    <ng-template matStepLabel>Nhập thông tin giao dịch</ng-template>
+                    <mat-form-field>
+                      <mat-label>Nhập số tài khoản người nhận</mat-label>
+                      <input matInput placeholder="Nhập số tài khoản gồm 12 chữ số" formControlName="idBank" required />
+                      <mat-error *ngIf="isControlHasError('idBank', 'required')">
+                        <strong>{{ 'VALIDATION.INVALID' | translate }}</strong>
+                      </mat-error>
+                    </mat-form-field>
+                    <div class="accouunt-info" *ngIf="userExchange$ | async as _userExchange">
                       <div>
-                          <button mat-button (click)="stepper.reset()">Huỷ bỏ</button>
-                        <button mat-button matStepperPrevious>Đồng ý</button>
+                        <div class="wi-90 d-inline-block">Tên người nhận: </div><div class="d-inline font-weight-bold text-uppercase">{{_userExchange.fullname}}</div>
                       </div>
-                    </mat-step>
-                  </mat-horizontal-stepper>
+                    </div>
+                  </div>
+                  <div class="right-exchange">
+                    <mat-form-field>
+                      <mat-label>Chọn tài khoản giao dịch</mat-label>
+                      <mat-select [(value)]="selected">
+                        <mat-option>None</mat-option>
+                        <mat-option value="option1">Option 1</mat-option>
+                        <mat-option value="option2">Option 2</mat-option>
+                        <mat-option value="option3">Option 3</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div class="accouunt-info" *ngIf="account$ | async as _account">
+                      <div>
+                        <div class="wi-90 d-inline-block">Tên chủ thẻ: </div><div class="d-inline font-weight-bold text-uppercase">{{_account.fullname}}</div>
+                      </div>
+                      <div>
+                        <div class="wi-90 d-inline-block">Số tài khoản:</div><div class="d-inline font-weight-bold text-uppercase">{{_account.fullname}}</div>
+                      </div>
+                      <div>
+                        <div class="wi-90 d-inline-block">Số thẻ:</div><div class="d-inline font-weight-bold text-uppercase">{{_account.fullname}}</div>
+                      </div>
+                      <div>
+                        <div class="wi-90 d-inline-block">Số dư:</div><div class="d-inline font-weight-bold text-uppercase">{{_account.fullname}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button mat-button matStepperNext>Tiếp tục</button>
+                </div>
               </form>
+            </mat-step>
+            <mat-step [stepControl]="formPass">
+              <form [formGroup]="formPass">
+                <ng-template matStepLabel>Nhập mã pin</ng-template>
+                <mat-form-field>
+                  <mat-label>Nhập mã pin</mat-label>
+                  <input matInput placeholder="Nhập mã pin" formControlName="password" required />
+                </mat-form-field>
+                <div>
+                  <button mat-button matStepperPrevious>Quay lại</button>
+                  <button mat-button matStepperNext>Tiếp tục</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>Xác nhận chuyển tiền</ng-template>
+              <p>Bạn chắc chắn muốn chuyển tiền?</p>
+              <div>
+                <button mat-button (click)="stepper.reset()">Huỷ bỏ</button>
+                <button mat-button matStepperPrevious>Đồng ý</button>
+              </div>
+            </mat-step>
+          </mat-horizontal-stepper>
         </mat-card>
       </div>
     </mat-card>

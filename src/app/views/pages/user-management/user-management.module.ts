@@ -71,15 +71,15 @@ const routes: Routes = [
 				component: AccountUserComponent
 			},
 			{
-				path: 'giao-dich-noi-bo',
+				path: 'exchange-account',
 				component: ExchangeInComponent
 			},
 			{
-				path: 'giao-dich-khac-ngan-hang',
+				path: 'exchange-card',
 				component: ExchangeOutComponent
 			},
 			{
-				path: 'giao-dich-nhanh',
+				path: 'exchange-out',
 				component: FastExchangeComponent
 			},
 			{

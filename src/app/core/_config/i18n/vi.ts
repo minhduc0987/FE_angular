@@ -33,9 +33,8 @@ export const locale = {
       },
     },
     VALIDATION: {
-      INVALID: '{{name}} không hợp lệ',
-      REQUIRED: '{{name}} bắt buộc',
-      MIN_LENGTH: '{{name}} có tối thiểu {{min}} kí tự',
+      INVALID: 'Trường không hợp lệ',
+      REQUIRED: 'Trường bắt buộc',
       AGREEMENT_REQUIRED: 'Chấp nhận các điều khoản và điều kiện là bắt buộc',
       NOT_FOUND: 'Không tìm thấy',
       INVALID_LOGIN: 'Thông tin đăng nhập không chính xác',

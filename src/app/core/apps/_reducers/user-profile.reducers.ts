@@ -4,6 +4,7 @@ import { UserProfileActions, UserProfileActionTypes } from '../_actions/user-pro
 import { UserProfile } from '../_models/user-profile.model';
 
 export interface UserProfileState {
+	[x: string]: any;
 	userProfile: UserProfile;
 	_isUserProfileLoaded: boolean;
 	_isLoading: boolean;

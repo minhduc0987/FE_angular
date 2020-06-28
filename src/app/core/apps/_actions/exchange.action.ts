@@ -9,7 +9,7 @@ export enum ExchangeActionTypes {
 
 export class ListExchangeOnServer implements Action {
 	readonly type = ExchangeActionTypes.ListExchangeOnServer;
-	constructor(public payload: { accountId: string }) { }
+	constructor(public payload: { accountId: any }) { }
 }
 
 export class ExchangeOnError implements Action {

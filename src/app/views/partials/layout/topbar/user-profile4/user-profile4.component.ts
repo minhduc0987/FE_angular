@@ -8,6 +8,8 @@ import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../../../core/reducers';
 import { Logout, User } from '../../../../../core/auth';
 import { UserProfileService } from '../../../../../core/apps/_services/user-profile.service';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'kt-user-profile4',
@@ -23,6 +25,7 @@ export class UserProfile4Component implements OnInit {
   @Input() greeting = true;
   @Input() badge: boolean;
   @Input() icon: boolean;
+  isHasLogin: boolean;
 
   /**
    * Component constructor
@@ -30,7 +33,8 @@ export class UserProfile4Component implements OnInit {
    * @param store: Store<AppState>
    */
   constructor(private store: Store<AppState>,
-    private userProfileService: UserProfileService
+    private userProfileService: UserProfileService,
+    private router: Router
     ) {
   }
 
@@ -41,10 +45,16 @@ export class UserProfile4Component implements OnInit {
   /**
    * On init
    */
-  ngOnInit(): void {
-    this.user$ = this.userProfileService.getUserProfile();
-    // this.user$ = this.store.pipe(select(currentUser));
-    // console.log(this.user$)
+  async ngOnInit(): Promise<void> {
+    this.user$ = await this.userProfileService.getUserProfile();
+    this.user$.subscribe(user => {
+      localStorage.setItem('user', JSON.stringify(user));
+    });
+    if (localStorage.getItem(environment.authTokenKey)) {
+      this.isHasLogin = true;
+    } else {
+      this.isHasLogin = false;
+    }
   }
 
   /**
@@ -54,8 +64,7 @@ export class UserProfile4Component implements OnInit {
     this.store.dispatch(new Logout());
   }
 
-  userDetail() {
-    // let id = this._user.id
-    return `user-detail/`
+  login() {
+    this.router.navigateByUrl('/auth/login');
   }
 }

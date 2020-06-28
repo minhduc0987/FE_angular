@@ -1,4 +1,3 @@
-import { from } from 'rxjs';
 // Services
 export {
 	UserProfileService,

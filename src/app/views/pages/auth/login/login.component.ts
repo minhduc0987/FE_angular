@@ -72,9 +72,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.initLoginForm();
 
     // redirect back to the returnUrl before login
-    this.route.queryParams.subscribe((params) => {
-      this.returnUrl = params.returnUrl || '/';
-    });
+    // this.route.queryParams.subscribe((params) => {
+    //   this.returnUrl = params.returnUrl || '/';
+    // });
+    this.returnUrl = '/user-detail/thong-tin';
   }
 
   /**

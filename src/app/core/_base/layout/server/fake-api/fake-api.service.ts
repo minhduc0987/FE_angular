@@ -5,7 +5,6 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 // RxJS
 import { Observable } from 'rxjs';
 // Auth
-import { AuthDataContext } from '../../../../auth';
 // ECommerce
 // import { ECommerceDataContext } from '../../../../e-commerce';
 // Models

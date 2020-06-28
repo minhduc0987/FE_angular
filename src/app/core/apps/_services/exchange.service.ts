@@ -13,7 +13,7 @@ export class ExchangeService {
 	constructor(private http: HttpClient) {
 	}
 
-	getlistExchange(accountId: string): Observable<any> {
+	getlistExchange(accountId: any): Observable<any> {
 		const userId = localStorage.getItem('userId');
         const url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions';
 		const userToken = localStorage.getItem(environment.authTokenKey);

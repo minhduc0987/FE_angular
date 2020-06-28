@@ -1,10 +1,17 @@
 <ng-container *ngIf="user$ | async as _user">
-  <div class="topbar-item" data-placement="bottom" ngbTooltip="Thông tin khách hàng">
-    <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2">
+  <div class="topbar-item" data-placement="bottom">
+    <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2" ngbTooltip="Thông tin khách hàng">
       <a href="javascript:;" routerLink="/user-detail" class="user-name text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
         {{ _user.fullname }}
       </a>
     </div>
-    <a class="logout" (click)="logout()">Đăng xuất</a>
+    <a class="logout font-size-base d-none d-md-inline mr-3" (click)="logout()">Đăng xuất</a>
+  </div>
+</ng-container>
+<ng-container *ngIf="!isHasLogin">
+  <div class="topbar-item" data-placement="bottom" ngbTooltip="Đăng nhập">
+    <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2">
+      <a class="logout font-size-base d-none d-md-inline mr-3" (click)="login()">Đăng nhập</a>
+    </div>
   </div>
 </ng-container>

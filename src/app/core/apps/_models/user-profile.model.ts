@@ -1,5 +1,3 @@
-import { Role } from '../../auth';
-
 export class UserProfile {
 	about: string;
 	addressLine: string;
@@ -13,7 +11,6 @@ export class UserProfile {
 	phone: string;
 	pic: string;
 	position: string;
-	referenceLinks: ReferenceLink[];
 	representative: string;
 	status: string;
 	userId: number;
@@ -26,7 +23,7 @@ export class UserProfile {
 	provinceName: string;
 	zipCode: string;
 	username: string;
-	roles: Role[];
+	roles: any[];
 	lastLogin: string;
 
 	clear(): void {
@@ -42,7 +39,6 @@ export class UserProfile {
 		this.phone = '';
 		this.pic = '';
 		this.position = '';
-		this.referenceLinks = undefined;
 		this.representative = '';
 		this.status = '';
 		this.userId = undefined;
@@ -50,14 +46,5 @@ export class UserProfile {
 		this.wardId = undefined;
 		this.zipCode = '';
 		this.username = '';
-	}
-}
-export class ReferenceLink {
-	link: string;
-	type: string;
-
-	clear() {
-		this.link = '';
-		this.type = '';
 	}
 }

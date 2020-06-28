@@ -1,6 +1,4 @@
 import { BaseModel } from '../../_base/crud';
-import { Address } from './address.model';
-import { SocialNetworks } from './social-networks.model';
 
 export class User extends BaseModel {
   id: number;
@@ -10,8 +8,7 @@ export class User extends BaseModel {
   birthday: string;
   email: string;
   avatar: string;
-  address: Address;
-  roles: number[];
+  roles: any[];
   companyName: string;
   accessToken: string;
   refreshToken: string;
@@ -32,8 +29,6 @@ export class User extends BaseModel {
     this.avatar = './assets/media/users/default.jpg';
     this.companyName = '';
     this.phone = '';
-    this.address = new Address();
-    this.address.clear();
     this.gender = '';
     this.image = '';
     this.idCardNumber = '';

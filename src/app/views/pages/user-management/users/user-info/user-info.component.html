@@ -1,57 +1,66 @@
-<div class="container">
-	<mat-card>
-		<h1 class="d-flex align-items-center justify-content-center">Thông tin khách hàng</h1>
-		<div class="content">
-			<mat-card>
-				<mat-card-title>Hồ sơ</mat-card-title>
-				<mat-list>
+<div class="container" *ngIf="user$ | async as _user">
+  <mat-card>
+    <h1 class="d-flex align-items-center justify-content-center">Thông tin khách hàng</h1>
+    <div class="content">
+      <mat-card>
+        <mat-card-title>Hồ sơ</mat-card-title>
+        <mat-list>
           <mat-list-item>
-						<div class="d-inline w-25 min-200">Tên truy cập</div><div class="d-inline">{{user.username}}</div>
-					</mat-list-item>
-					<mat-divider></mat-divider>
-					<mat-list-item>
-						<div class="d-inline w-25 min-200">Họ và tên</div><div class="d-inline">{{user.fullname}}</div>
-					</mat-list-item>
-					<mat-divider></mat-divider>
-					<mat-list-item>
-						<div class="d-inline w-25 min-200">Ngày sinh</div><div class="d-inline">{{user.birthday}}</div>
-					</mat-list-item>
-					<mat-divider></mat-divider>
-					<mat-list-item>
-						<div class="d-inline w-25 min-200">Giới tính</div><div class="d-inline">{{user.gender}}</div>
-					</mat-list-item>
-					<mat-divider></mat-divider>
-					<mat-list-item>
-						<div class="d-inline w-25 min-200">Ảnh</div><div class="d-inline">{{user.image}}</div>
-					</mat-list-item>
-					<mat-divider></mat-divider>
-				</mat-list>
-			</mat-card>
-			<br>
-			<mat-card>
-				<mat-card-title>Thông tin liên hệ</mat-card-title>
-				<mat-list>
-					<mat-list-item>
-						<div class="d-inline w-25 min-200">Số CMND/CCCD/Hộ chiếu</div><div class="d-inline">{{user.idCardNumber}}</div>
-					</mat-list-item>
+            <div class="d-inline w-25 min-200">Tên truy cập</div>
+            <div class="d-inline">{{ _user.username }}</div>
+          </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>
-						<div class="d-inline w-25 min-200">Email</div><div class="d-inline">{{user.email}}</div>
-					</mat-list-item>
-					<mat-divider></mat-divider>
-					<mat-list-item>
-						<div class="d-inline w-25 min-200">Số điện thoại</div><div class="d-inline">{{user.phone}}</div>
-					</mat-list-item>
-					<mat-divider></mat-divider>
-					<mat-list-item>
-						<div class="d-inline w-25 min-200">Địa chỉ</div><div class="d-inline">{{user.address}}</div>
-					</mat-list-item>
-					<mat-divider></mat-divider>
+            <div class="d-inline w-25 min-200">Họ và tên</div>
+            <div class="d-inline">{{ _user.fullname }}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="d-inline w-25 min-200">Ngày sinh</div>
+            <div class="d-inline">{{ _user.birthday }}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="d-inline w-25 min-200">Giới tính</div>
+            <div class="d-inline">{{ _user.gender }}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="d-inline w-25 min-200">Ảnh</div>
+            <div class="d-inline">{{ _user.image }}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </mat-card>
+      <br />
+      <mat-card>
+        <mat-card-title>Thông tin liên hệ</mat-card-title>
+        <mat-list>
+          <mat-list-item>
+            <div class="d-inline w-25 min-200">Số CMND/CCCD/Hộ chiếu</div>
+            <div class="d-inline">{{ _user.idCardNumber }}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="d-inline w-25 min-200">Email</div>
+            <div class="d-inline">{{ _user.email }}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="d-inline w-25 min-200">Số điện thoại</div>
+            <div class="d-inline">{{ _user.phone }}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="d-inline w-25 min-200">Địa chỉ</div>
+            <div class="d-inline">{{ _user.address }}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
         </mat-list>
         <div class="m-3 text-right">
           <button mat-raised-button color="primary">Cập nhật thông tin</button>
         </div>
-			</mat-card>
-		</div>
-	</mat-card>
+      </mat-card>
+    </div>
+  </mat-card>
 </div>

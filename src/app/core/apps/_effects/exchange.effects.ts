@@ -21,7 +21,7 @@ export class ExchangeEffects {
 	loadListExchange$ = this.actions$
 		.pipe(
 			ofType<ExchangeAction>(ExchangeActionTypes.ListExchangeOnServer),
-			switchMap((payload) => this.exchangeService.getlistExchange(payload).pipe(
+			switchMap((accountId) => this.exchangeService.getlistExchange(accountId).pipe(
 				map(result => {
 					// return new ListExchangeOnServer({ data: result });
 				}),

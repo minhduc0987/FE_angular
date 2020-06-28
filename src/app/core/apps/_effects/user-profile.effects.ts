@@ -48,7 +48,6 @@ export class UserProfileEffects {
 			ofType<UserProfileRequested>(UserProfileActionTypes.UserAccountRequested),
 			switchMap((userId) => this.userProfileService.getListAccount(userId).pipe(
 				map(result => {
-					debugger
 					return new UserAccountLoaded({ listAccounts: result });
 				}),
 				catchError(err => {

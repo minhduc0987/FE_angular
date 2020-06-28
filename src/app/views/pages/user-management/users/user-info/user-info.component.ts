@@ -1,22 +1,9 @@
-import { AfterViewInit, AfterViewChecked } from '@angular/core';
 // Angular
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-// Material
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-// RXJS
-import { debounceTime, distinctUntilChanged, tap, skip, take, delay } from 'rxjs/operators';
-import { fromEvent, merge, Observable, of, Subscription } from 'rxjs';
-// LODASH
-import { each, find } from 'lodash';
-// NGRX
-import { Store, select } from '@ngrx/store';
-import { AppState } from '../../../../../core/reducers';
 // Models
-import { UsersDataSource, User } from '../../../../../core/auth';
 import { UserProfileService } from '../../../../../../app/core/apps/_services/user-profile.service';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/core/auth';
 
 @Component({
   selector: 'kt-user-info',
@@ -27,18 +14,15 @@ import { UserProfileService } from '../../../../../../app/core/apps/_services/us
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
   // Table fields
-  dataSource: UsersDataSource;
+  dataSource: any;
   displayedColumns = ['select', 'id', 'username', 'email', 'fullname', '_roles', 'actions'];
-  user: User;
+  user$: Observable<User>;
 
   constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit() {
-    this.userProfileService.getUserProfile().subscribe((user: User) => {
-	  this.user = user;
-    });
+    this.user$ = this.userProfileService.getUserProfile();
   }
-
   /**
    * On Destroy
    */

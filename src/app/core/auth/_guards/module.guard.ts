@@ -8,7 +8,6 @@ import { tap, map } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 // Module reducers and selectors
 import { AppState} from '../../../core/reducers/';
-import { currentUserPermissions } from '../_selectors/auth.selectors';
 import { Permission } from '../_models/permission.model';
 import { find } from 'lodash';
 
@@ -23,21 +22,6 @@ export class ModuleGuard implements CanActivate {
     if (!moduleName) {
       return of(false);
     }
-
-    return this.store
-      .pipe(
-        select(currentUserPermissions),
-        map((permissions: Permission[]) => {
-          const perm = find(permissions, (elem: Permission) => {
-            return elem.title.toLocaleLowerCase() === moduleName.toLocaleLowerCase();
-          });
-          return perm ? true : false;
-        }),
-        tap(hasAccess => {
-          if (!hasAccess) {
-            this.router.navigateByUrl('/error/403');
-          }
-        })
-      );
+    return of(true)
   }
 }

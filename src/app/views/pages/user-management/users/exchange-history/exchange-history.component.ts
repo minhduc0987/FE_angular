@@ -17,11 +17,6 @@ import { AppState } from '../../../../../core/reducers';
 // Services
 import { LayoutUtilsService, MessageType, QueryParamsModel } from '../../../../../core/_base/crud';
 // Models
-import {
-  User,
-  UsersDataSource,
-  UsersPageRequested,
-} from '../../../../../core/auth';
 import { SubheaderService } from '../../../../../core/_base/layout';
 import { ListExchangeOnServer, UserProfileService, UserAccountRequested, listAccounts, ExchangeService } from 'src/app/core/apps';
 
@@ -40,8 +35,8 @@ import { ListExchangeOnServer, UserProfileService, UserAccountRequested, listAcc
 })
 export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   // Table fields
-  dataSource: UsersDataSource;
-  displayedColumns = ['id', 'accountNumber', 'amount', 'card'];
+  dataSource: any;
+  displayedColumns = ['id', 'amount', 'type', 'amountAfter', 'date'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild('sort1', { static: true }) sort: MatSort;
   // Filter fields
@@ -50,7 +45,7 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   // Selection
   selection = new SelectionModel<any>(true, []);
   accountId: any
-  data: any = [];
+  data: Observable<any>;
   // Subscriptions
   private subscriptions: Subscription[] = [];
 
@@ -73,22 +68,26 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
     private exchangeService: ExchangeService,
   ) {}
   ngOnInit() {
-    this.loadListAccount()
   }
-  
+
+  ngOnAfterInit() {
+    this.data = this.exchangeService.getlistExchange('1');
+  }
+
   ngOnDestroy() {
     this.subscriptions.forEach((el) => el.unsubscribe());
   }
-  loadUsersList() {
-  }
-  
-  loadListAccount() {
+
+  async loadListAccount() {
     const params = {
       accountId: '1'
     }
-    this.exchangeService.getlistExchange('1').subscribe(val => {
-      this.data = val;
-      console.log(this.dataSource)
-    })
+    
+  }
+  getType(amount) {
+    if (Number(amount) > 0) {
+      return "cộng tiền"
+    }
+    return "trừ tiền"
   }
 }

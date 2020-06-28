@@ -19,10 +19,6 @@ import { UserManagementComponent } from './user-management.component';
 import { UserInfoComponent } from './users/user-info/user-info.component';
 
 // Material
-import {
-	usersReducer,
-	UserEffects
-} from '../../../core/auth';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
@@ -100,8 +96,6 @@ const routes: Routes = [
 		HttpClientModule,
 		PartialsModule,
 		RouterModule.forChild(routes),
-		StoreModule.forFeature('users', usersReducer),
-        EffectsModule.forFeature([UserEffects]),
 		FormsModule,
 		ReactiveFormsModule,
 		TranslateModule.forChild(),

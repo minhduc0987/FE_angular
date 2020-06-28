@@ -4,10 +4,10 @@
     display: flex;
 
     .aside-user {
-        width: 300px;
+        width: 200px;
     }
 
     .content-user {
-        width: calc(100% - 300px);
+        width: calc(100% - 200px);
     }
 }

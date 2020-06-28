@@ -18,9 +18,6 @@ import { AppState } from '../../../../../core/reducers';
 import { LayoutUtilsService, MessageType, QueryParamsModel } from '../../../../../core/_base/crud';
 // Models
 import {
-  User,
-  UsersDataSource,
-  UsersPageRequested,
 } from '../../../../../core/auth';
 import { SubheaderService } from '../../../../../core/_base/layout';
 import { ListExchangeOnServer, UserProfileService, UserAccountRequested, listAccounts } from 'src/app/core/apps';
@@ -40,8 +37,8 @@ import { ListExchangeOnServer, UserProfileService, UserAccountRequested, listAcc
 })
 export class AccountUserComponent implements OnInit, OnDestroy {
   // Table fields
-  dataSource: UsersDataSource;
-  displayedColumns = ['id', 'accountNumber', 'amount', 'card'];
+  dataSource$: Observable<any>;
+  displayedColumns = ['id', 'accountNumber', 'card', 'amount', 'member'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild('sort1', { static: true }) sort: MatSort;
   // Filter fields
@@ -72,18 +69,29 @@ export class AccountUserComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit() {
     this.loadListAccount()
+    console.log(localStorage.getItem('user'))
   }
-  
   ngOnDestroy() {
     this.subscriptions.forEach((el) => el.unsubscribe());
   }
   loadUsersList() {
   }
-  
   loadListAccount() {
-    this.userService.getListAccount('1').subscribe(val => {
-      this.dataSource = val;
-      console.log(this.dataSource)
-    })
+    this.dataSource$ = this.userService.getListAccount('1');
+  }
+  getAmount(amount) {
+    return amount + ' VNĐ' ;
+  }
+  getMember() {
+    const u = JSON.parse(localStorage.getItem('user'));
+    return u.membership.name;
+  }
+  getClass() {
+    switch(this.getMember()) {
+      case 'GOLD' :
+        return 'gold';
+      default :
+        return 'gold';
+    }
   }
 }

@@ -17,10 +17,15 @@
                         <strong>{{ 'VALIDATION.INVALID' | translate }}</strong>
                       </mat-error>
                     </mat-form-field>
-                    <div class="accouunt-info" *ngIf="userExchange$ | async as _userExchange">
+                    <div class="accouunt-info">
+                      <!-- <div class="accouunt-info" *ngIf="userExchange$ | async as _userExchange"> -->
                       <div>
-                        <div class="wi-90 d-inline-block">Tên người nhận: </div><div class="d-inline font-weight-bold text-uppercase">{{_userExchange.fullname}}</div>
+                        <div class="wi-120 d-inline-block">Tên người nhận: </div>
+                        <div class="d-inline font-weight-bold text-uppercase">fullname</div>
                       </div>
+                    </div>
+                    <div class="exchange">
+                      <input matInput placeholder="Nhập số tiền cần chuyển" type="text" formControlName="money" required>
                     </div>
                   </div>
                   <div class="right-exchange">
@@ -50,7 +55,7 @@
                   </div>
                 </div>
                 <div>
-                  <button mat-button matStepperNext>Tiếp tục</button>
+                  <button mat-raised-button matStepperNext color="primary">Tiếp tục</button>
                 </div>
               </form>
             </mat-step>
@@ -63,7 +68,7 @@
                 </mat-form-field>
                 <div>
                   <button mat-button matStepperPrevious>Quay lại</button>
-                  <button mat-button matStepperNext>Tiếp tục</button>
+                  <button mat-raised-button matStepperNext>Tiếp tục</button>
                 </div>
               </form>
             </mat-step>
@@ -72,7 +77,7 @@
               <p>Bạn chắc chắn muốn chuyển tiền?</p>
               <div>
                 <button mat-button (click)="stepper.reset()">Huỷ bỏ</button>
-                <button mat-button matStepperPrevious>Đồng ý</button>
+                <button mat-raised-button matStepperPrevious>Đồng ý</button>
               </div>
             </mat-step>
           </mat-horizontal-stepper>

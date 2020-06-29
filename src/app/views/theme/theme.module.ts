@@ -11,8 +11,6 @@ import { TranslateModule } from '@ngx-translate/core';
 // Loading bar
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 // NGRX
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 // Ngx DatePicker
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 // Perfect Scrollbar

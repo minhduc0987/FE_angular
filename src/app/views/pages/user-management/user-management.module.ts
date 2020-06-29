@@ -5,8 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // NGRX
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 // Translate
 import { TranslateModule } from '@ngx-translate/core';
 import { PartialsModule } from '../../partials/partials.module';
@@ -50,7 +48,6 @@ import { ExchangeOutComponent } from './users/exchange-out/exchange-out.componen
 import { ExchangeHistoryComponent } from './users/exchange-history/exchange-history.component';
 import { FastExchangeComponent } from './users/fast-exchange/fast-exchange.component';
 import { AccountUserComponent } from './users/account-user/account-user.component';
-import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 const routes: Routes = [
 	{
@@ -124,7 +121,6 @@ const routes: Routes = [
 		MatListModule,
 		MatDividerModule,
 		MatStepperModule,
-		AngularMultiSelectModule
 	],
 	providers: [
 		InterceptService,

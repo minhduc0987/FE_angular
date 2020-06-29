@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ExchangeService } from 'src/app/core/apps';
 
 @Component({
@@ -8,7 +8,7 @@ import { ExchangeService } from 'src/app/core/apps';
   templateUrl: './exchange-in.component.html',
   styleUrls: ['./exchange-in.component.scss'],
   providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
   }]
 })
 export class ExchangeInComponent implements OnInit {
@@ -27,19 +27,19 @@ export class ExchangeInComponent implements OnInit {
 
   ngOnInit(): void {
     this.formId = this._formBuilder.group({
-      idBank: ['444411111001', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]]
+      idBank: ['444411111001', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]],
+      money: ['', [Validators.required, Validators.minLength(5)]]
     });
     this.formPass = this._formBuilder.group({
       password: ['', Validators.required]
     });
-    this.formId.get('idBank').valueChanges
-        .subscribe((newValue: string) => {
-          if (Number(newValue)) {
-            if(newValue.length === 12) {
-              this.getUserExchange(newValue);
-            }
-          }
-        });
+    this.formId.get('idBank').valueChanges.subscribe((newValue: string) => {
+      if (Number(newValue)) {
+        if (newValue.length === 12) {
+          this.getUserExchange(newValue);
+        }
+      }
+    });
   }
 
   submit() {
@@ -49,7 +49,7 @@ export class ExchangeInComponent implements OnInit {
   getUserExchange(id: string) {
     const params = {
       term: id,
-      type:'ACCOUNTNUMBER'
+      type: 'ACCOUNTNUMBER'
     }
     this.userExchange$ = this.exchangeService.getUserExchange(params);
   }
@@ -57,7 +57,7 @@ export class ExchangeInComponent implements OnInit {
   getAccount(id: string) {
     const params = {
       term: id,
-      type:'ACCOUNTNUMBER'
+      type: 'ACCOUNTNUMBER'
     }
     this.userExchange$ = this.exchangeService.getUserExchange(params);
   }

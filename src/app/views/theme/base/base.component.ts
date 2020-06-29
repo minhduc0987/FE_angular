@@ -1,7 +1,7 @@
 // Angular
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 // RxJS
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 // Object-Path
 import * as objectPath from 'object-path';
 // Layout
@@ -12,8 +12,6 @@ import { MenuConfig } from '../../../core/_config/menu.config';
 import { PageConfig } from '../../../core/_config/page.config';
 // User permissions
 import { NgxPermissionsService } from 'ngx-permissions';
-import { select, Store } from '@ngrx/store';
-import { AppState } from '../../../core/reducers';
 
 @Component({
   selector: 'kt-base',
@@ -48,7 +46,6 @@ export class BaseComponent implements OnInit, OnDestroy {
     private menuConfigService: MenuConfigService,
     private pageConfigService: PageConfigService,
     private htmlClassService: HtmlClassService,
-    private store: Store<AppState>,
     private permissionsService: NgxPermissionsService) {
     // register configs by demos
     this.layoutConfigService.loadConfigs(new LayoutConfig().configs);

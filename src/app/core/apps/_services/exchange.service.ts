@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { User } from '../../auth';
-import { QueryParamsModel } from '../../_base/crud';
 
 const API_USERS_URL = environment.urlBE + 'api/users/';
 
@@ -27,6 +25,11 @@ export class ExchangeService {
 		const userToken = localStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
-		return this.http.post<any>(url, {headers: httpHeaders}, params)
+		return this.http.post<any>(url, params)
+	}
+
+	exchange(params, id) {
+		const url = `http://localhost:8080/api/users/1/accounts/`+ id +`/tranferInternal/accountNumber`;
+		return this.http.post<any>(url, params)
 	}
 }

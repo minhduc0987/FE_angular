@@ -22,7 +22,7 @@
 @import "./assets/sass/themes/layout/header/menu/light.scss";
 @import "./assets/sass/themes/layout/brand/dark.scss";
 @import "./assets/sass/themes/layout/aside/dark.scss";
-
+@import "~@ng-select/ng-select/themes/default.theme.css";
 // Header themes
 // .header-base-light {
 //     @import "./assets/sass/themes/layout/header/base/light.scss";
@@ -48,6 +48,8 @@
 .brand-light {
   @import "./assets/sass/themes/layout/brand/light.scss";
 }
+
+
 
 // Aside themes
 // .aside-dark {
@@ -87,4 +89,34 @@
 
 .mat-dialog-container {
   padding: 0 !important;
+}
+
+.ng-select .ng-select-container {
+  min-height: unset !important;
+  height: 36px;
+  border: 1px solid rgba(0,0,0,0.42);
+  border-radius: 4px;
+  font-size: 14px;
+
+  .ng-value-container {
+    border-top: none;
+    padding: 7px 15px;
+  }
+}
+.ng-select .ng-select-container:after {
+  border-bottom: none;
+}
+.ng-option-label {
+  font-size: 14px;
+}
+*{
+  font-size: 14px;
+}
+.input {
+  min-height: unset !important;
+  height: 36px;
+  border: 1px solid rgba(0,0,0,0.42);
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 11px 15px;
 }

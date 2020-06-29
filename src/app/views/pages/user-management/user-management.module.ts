@@ -48,6 +48,8 @@ import { ExchangeOutComponent } from './users/exchange-out/exchange-out.componen
 import { ExchangeHistoryComponent } from './users/exchange-history/exchange-history.component';
 import { FastExchangeComponent } from './users/fast-exchange/fast-exchange.component';
 import { AccountUserComponent } from './users/account-user/account-user.component';
+import {} from '@angular/material/icon';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const routes: Routes = [
 	{
@@ -121,6 +123,7 @@ const routes: Routes = [
 		MatListModule,
 		MatDividerModule,
 		MatStepperModule,
+		NgSelectModule
 	],
 	providers: [
 		InterceptService,

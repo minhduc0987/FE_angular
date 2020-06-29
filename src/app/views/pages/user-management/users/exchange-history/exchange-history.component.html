@@ -8,37 +8,32 @@
 		<div class="mat-table__wrapper">
 			<mat-table class="lmat-elevation-z8"
 				#table
-				[dataSource]="dataSource"
-				matSort
-				#sort1="matSort"
-				matSortActive="id"
-				matSortDirection="asc"
-				matSortDisableClear
-				*ngIf="dataSource$ | async as dataSource">
+				[dataSource]="account.transactions"
+				*ngIf="dataSource$ | async as account">
 
 				<ng-container matColumnDef="id">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>STT</mat-header-cell>
+					<mat-header-cell *matHeaderCellDef>STT</mat-header-cell>
 					<mat-cell *matCellDef="let account">{{account.id}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="amount">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>số tiền giao dịch</mat-header-cell>
+					<mat-header-cell *matHeaderCellDef>số tiền giao dịch</mat-header-cell>
 					<mat-cell *matCellDef="let account">{{account.amount}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="type">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>loại giao dịch</mat-header-cell>
+					<mat-header-cell *matHeaderCellDef>loại giao dịch</mat-header-cell>
 					<mat-cell *matCellDef="let account">{{getType(account.amount)}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="amountAfter">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>số dư sau giao dịch</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.card.amountAfterTransaction}}</mat-cell>
+					<mat-header-cell *matHeaderCellDef>số dư sau giao dịch</mat-header-cell>
+					<mat-cell *matCellDef="let account">{{account.amountAfterTransaction}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="date">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>ngày giao dịch</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.card.createdAt}}</mat-cell>
+					<mat-header-cell *matHeaderCellDef>ngày giao dịch</mat-header-cell>
+					<mat-cell *matCellDef="let account">{{account.createdAt}}</mat-cell>
 				</ng-container>
 
 				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -47,7 +42,7 @@
 			</mat-table>
 		</div>
 		<div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
-			<mat-paginator [pageSize]="10" [pageSizeOptions]="[10]" [length]="dataSource.length" [showFirstLastButtons]="true"></mat-paginator>
+			<mat-paginator [pageSize]="10" [pageSizeOptions]="[10]" [length]="dataSource.totalTransaction" [showFirstLastButtons]="true"></mat-paginator>
 		</div>
 	</kt-portlet-body>
 </kt-portlet>

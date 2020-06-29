@@ -15,7 +15,10 @@ export class ExchangeOutComponent implements OnInit {
   loading = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-
+  items = [
+    {id: "1", label: 'Chuyển tiền qua số tài khoản'},
+    {id: "2", label: 'Chuyển tiền qua số thẻ'}
+  ]
 
   constructor(
     private _formBuilder: FormBuilder

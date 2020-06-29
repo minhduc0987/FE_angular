@@ -20,3 +20,44 @@
 .accouunt-info {
   min-height: 60px;
 }
+.exchange-in {
+  position: relative;
+}
+.notice {
+  position: absolute;
+  width: 350px;
+  height: 150px;
+  left: calc(50% - 150px);
+  top: calc(20% - 50px);
+  z-index: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #ffffff;
+
+  .title {
+    padding: 1rem;
+    position: relative;
+    background-color: #ccc;
+
+    .close-button {
+      position: absolute;
+      z-index: 1;
+      right: 10px;
+      top: 10px;
+      content: '';
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+  }
+  .content-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    min-height: unset;
+  }
+}
+.exchange {
+  padding: 10px 0;
+}

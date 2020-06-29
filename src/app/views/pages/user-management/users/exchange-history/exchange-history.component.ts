@@ -1,24 +1,15 @@
 // Angular
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 // Material
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 // RXJS
-import { debounceTime, distinctUntilChanged, tap, skip, take, delay } from 'rxjs/operators';
-import { fromEvent, merge, Observable, of, Subscription } from 'rxjs';
-// LODASH
-import { each, find } from 'lodash';
-// NGRX
-import { Store, select } from '@ngrx/store';
-import { AppState } from '../../../../../core/reducers';
-
+import { Observable, Subscription } from 'rxjs';
 // Services
-import { LayoutUtilsService, MessageType, QueryParamsModel } from '../../../../../core/_base/crud';
+import { QueryParamsModel } from '../../../../../core/_base/crud';
 // Models
-import { SubheaderService } from '../../../../../core/_base/layout';
-import { ListExchangeOnServer, UserProfileService, UserAccountRequested, listAccounts, ExchangeService } from 'src/app/core/apps';
+import { ExchangeService } from 'src/app/core/apps';
 
 // Table with EDIT item in MODAL
 // ARTICLE for table with sort/filter/paginator
@@ -59,10 +50,8 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   constructor(
     private exchangeService: ExchangeService,
   ) {}
-  ngOnInit() {
-  }
 
-  ngOnAfterInit() {
+  ngOnInit() {
     this.dataSource$ = this.exchangeService.getlistExchange('1');
     this.dataSource$.subscribe(val => {
       console.log(val)
@@ -74,9 +63,6 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   }
 
   async loadListAccount() {
-    const params = {
-      accountId: '1'
-    }
 
   }
   getType(amount) {

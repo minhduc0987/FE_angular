@@ -17,39 +17,39 @@
                         <strong>{{ 'VALIDATION.INVALID' | translate }}</strong>
                       </mat-error>
                     </mat-form-field>
-                    <div class="accouunt-info">
-                      <!-- <div class="accouunt-info" *ngIf="userExchange$ | async as _userExchange"> -->
+                    <div class="accouunt-info" *ngIf="userExchange$ | async as user">
                       <div>
                         <div class="wi-120 d-inline-block">Tên người nhận: </div>
-                        <div class="d-inline font-weight-bold text-uppercase">fullname</div>
+                        <div class="d-inline font-weight-bold text-uppercase">{{user.fullname}}</div>
                       </div>
                     </div>
                     <div class="exchange">
                       <input matInput placeholder="Nhập số tiền cần chuyển" type="text" formControlName="money" required>
                     </div>
+                    <div class="exchange">
+                      <input matInput placeholder="Nhập nội dung chuyển tiền" type="text" formControlName="note" required>
+                    </div>
                   </div>
-                  <div class="right-exchange">
+                  <div class="right-exchange"  *ngIf="account$ | async as _account">
                     <mat-form-field>
                       <mat-label>Chọn tài khoản giao dịch</mat-label>
-                      <mat-select [(value)]="selected">
-                        <mat-option>None</mat-option>
-                        <mat-option value="option1">Option 1</mat-option>
-                        <mat-option value="option2">Option 2</mat-option>
-                        <mat-option value="option3">Option 3</mat-option>
+                      <mat-select [(value)]="selected" (selectionChange)="selectionChange($event.value)">
+                        <mat-option *ngFor="let id of _account" [value]="id">
+                          {{id.accountNumber}}
+                        </mat-option>
                       </mat-select>
                     </mat-form-field>
-                    <div class="accouunt-info" *ngIf="account$ | async as _account">
+                    <div class="accouunt-info" *ngIf="account">
                       <div>
-                        <div class="wi-90 d-inline-block">Tên chủ thẻ: </div><div class="d-inline font-weight-bold text-uppercase">{{_account.fullname}}</div>
                       </div>
                       <div>
-                        <div class="wi-90 d-inline-block">Số tài khoản:</div><div class="d-inline font-weight-bold text-uppercase">{{_account.fullname}}</div>
+                        <div class="wi-90 d-inline-block">Số tài khoản:</div><div class="d-inline font-weight-bold text-uppercase">{{account.accountNumber}}</div>
                       </div>
                       <div>
-                        <div class="wi-90 d-inline-block">Số thẻ:</div><div class="d-inline font-weight-bold text-uppercase">{{_account.fullname}}</div>
+                        <div class="wi-90 d-inline-block">Số thẻ:</div><div class="d-inline font-weight-bold text-uppercase">{{account.card.cardNumber}}</div>
                       </div>
                       <div>
-                        <div class="wi-90 d-inline-block">Số dư:</div><div class="d-inline font-weight-bold text-uppercase">{{_account.fullname}}</div>
+                        <div class="wi-90 d-inline-block">Số dư:</div><div class="d-inline font-weight-bold text-uppercase">{{account.amount}}</div>
                       </div>
                     </div>
                   </div>
@@ -77,12 +77,21 @@
               <p>Bạn chắc chắn muốn chuyển tiền?</p>
               <div>
                 <button mat-button (click)="stepper.reset()">Huỷ bỏ</button>
-                <button mat-raised-button matStepperPrevious>Đồng ý</button>
+                <button mat-raised-button (click)="submit()">Đồng ý</button>
               </div>
             </mat-step>
           </mat-horizontal-stepper>
         </mat-card>
       </div>
     </mat-card>
+  </div>
+  <div class="notice" *ngIf="isSuccess">
+    <div class="text-center title">
+      <h4>Kết thúc giao dịch</h4>
+      <mat-icon (click)="closeDialog()" class="close-button">close</mat-icon>
+    </div>
+    <div class="text-center content-notice">
+      Giao dịch thành công.
+    </div>
   </div>
 </div>

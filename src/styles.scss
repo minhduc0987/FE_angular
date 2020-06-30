@@ -120,3 +120,6 @@
   font-size: 14px;
   padding: 11px 15px;
 }
+.ng-invalid.ng-touched {
+  border-color: #f64e60 !important;
+}

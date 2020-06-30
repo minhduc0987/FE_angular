@@ -33,7 +33,86 @@
 .select {
     display: inline-block;
     width: calc(100% - 200px);
+    max-width: 400px;
 }
 .w-200 {
     width: 200px;
+}
+
+.button-next {
+    margin-top: 25px;
+    padding: 1rem;
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .next {
+        background-color: #82BC00;
+        height: 32px;
+        min-width: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #fff;
+        font-size: 14px;
+    }
+}
+.popup {
+    position: absolute;
+    z-index: 11;
+    width: 450px;
+    height: 180px;
+    left: calc(50% - 220px);
+    top: calc(40% - 75px);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    .title-popup {
+        height: 32px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+        background-color: #82BC00;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .select {
+        margin: 25px auto;
+        display: flex;
+    }
+
+    .box-button {
+        width: 100%;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .button-popup {
+            min-width: 90px;
+            height: 32px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        .next {
+            background-color: #82BC00;
+            color: #fff;
+            font-size: 14px;
+        }
+    }
 }

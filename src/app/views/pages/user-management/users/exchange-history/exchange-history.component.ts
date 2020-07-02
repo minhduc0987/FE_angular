@@ -28,34 +28,19 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   // Table fields
   displayedColumns = ['id', 'amount', 'type', 'amountAfter', 'date'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild('sort1', { static: true }) sort: MatSort;
-  // Filter fields
-  @ViewChild('searchInput', { static: true }) searchInput: ElementRef;
-  lastQuery: QueryParamsModel;
-  // Selection
-  selection = new SelectionModel<any>(true, []);
   accountId: any
   account$: Observable<any>;
   dataSource$: Observable<any>;
-  // Subscriptions
+  stk;
+  id;
   private subscriptions: Subscription[] = [];
-
-  /**
-   *
-   * @param activatedRoute: ActivatedRoute
-   * @param store: Store<AppState>
-   * @param router: Router
-   * @param layoutUtilsService: LayoutUtilsService
-   * @param subheaderService: SubheaderService
-   */
   constructor(
     private exchangeService: ExchangeService,
     private userService: UserProfileService,
   ) {}
 
   ngOnInit() {
-    this.dataSource$ = this.exchangeService.getlistExchange('1');
-    this.getAccount()
+    this.getAccount();
   }
 
   ngOnDestroy() {
@@ -75,5 +60,15 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   getAccount() {
     const userId = localStorage.getItem('userId')
     this.account$ = this.userService.getListAccount(userId);
+  }
+
+  change(event) {
+    this.id = event.id
+    this.dataSource$ = this.exchangeService.getlistExchange(event.id);
+  }
+  pageEvent(event) {
+    const page = event.pageIndex + 1;
+    this.dataSource$ = this.exchangeService.getlistExchange(this.id, page);
+    console.log(this.paginator)
   }
 }

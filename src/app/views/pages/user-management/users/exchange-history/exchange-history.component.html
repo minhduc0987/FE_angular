@@ -1,8 +1,13 @@
 <kt-portlet>
 	<kt-portlet-header [title]="'Danh sách giao dịch'" [class]="'card-head-lg'">
 		<ng-container ktPortletTools>
+		</ng-container>
+	</kt-portlet-header>
+
+	<kt-portlet-body>
+		<div>
 			<div *ngIf="account$ | async as _account">
-				<div class="label-left">Chọn số tài khoản</div>
+				<div class="label-left">Chọn tài khoản để xem lịch sủ giao dịch</div>
 					<ng-select
 					[items]="_account"
 					placeholder="Chọn tài khoản gửi tiền"
@@ -11,14 +16,11 @@
 					bindLabel="accountNumber"
 					bindValue="id"
 					[searchable]="false"
-					(change)="changeI1($event)"
+					(change)="change($event)"
 					>
 					</ng-select>
 			</div>
-		</ng-container>
-	</kt-portlet-header>
-
-	<kt-portlet-body>
+		</div>
 		<div class="mat-table__wrapper">
 			<mat-table class="lmat-elevation-z8"
 				#table
@@ -27,7 +29,7 @@
 
 				<ng-container matColumnDef="id">
 					<mat-header-cell *matHeaderCellDef>STT</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.id}}</mat-cell>
+					<mat-cell *matCellDef="let account; let i = index;">{{i + 1}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="amount">
@@ -56,7 +58,7 @@
 			</mat-table>
 		</div>
 		<div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
-			<mat-paginator [pageSize]="10" [pageSizeOptions]="[10]" [length]="dataSource.totalTransaction" [showFirstLastButtons]="true"></mat-paginator>
+			<mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" (page)="pageEvent($event)" [length]="dataSource.totalTransaction" [showFirstLastButtons]="true"></mat-paginator>
 		</div>
 	</kt-portlet-body>
 </kt-portlet>

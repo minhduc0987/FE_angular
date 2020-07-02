@@ -38,6 +38,7 @@ export class ExchangeOutComponent implements OnInit {
   show2 = false;
   isSuccess = false;
   id;
+  idGd;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -81,23 +82,32 @@ export class ExchangeOutComponent implements OnInit {
         return
       }
     })
-    this.exchangeService.exchange(params, this.id).subscribe(
-        (response: any) => {
-          console.log(response)
-      },
-      (error: any) => {
-        debugger
-        if (error.status === 200) {
-          this.show = false;
+    this.show = false;
           this.show2 = true;
+    this.exchangeService.exchange(params, this.id).subscribe(
+      (res) => {this.idGd = res;},
+      (err) => {
+        if(err) {
+          console.log(err)
+          this.idGd = err;
         }
-      })
+      }
+    );
   }
 
   submit2() {
     this.show = false;
     this.show2 = false;
-    this.isSuccess = true;
+    const params = {
+        transactionQueueId: this.idGd,
+        otpCode: this.formPass2.get('password2').value
+    }
+    this.exchangeService.exchangeOTP(params).subscribe(
+      ()=> {
+        this.isSuccess = true;
+        this.router.navigateByUrl('/lich-su-giao-dich');
+      }
+    )
   }
 
   getAccount() {

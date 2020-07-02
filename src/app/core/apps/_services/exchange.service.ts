@@ -11,9 +11,14 @@ export class ExchangeService {
 	constructor(private http: HttpClient) {
 	}
 
-	getlistExchange(accountId: any): Observable<any> {
+	getlistExchange(accountId: any, page?: any): Observable<any> {
 		const userId = localStorage.getItem('userId');
-        const url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions';
+		let url;
+		if (page) {
+			url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions?page=' + page;
+		} else {
+			url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions';
+		}
 		const userToken = localStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
@@ -31,6 +36,11 @@ export class ExchangeService {
 	exchange(params, id) {
 		const userId = localStorage.getItem('userId');
 		const url = API_USERS_URL + userId + `/accounts/`+ id +`/tranferInternal/accountNumber`;
+		return this.http.post<any>(url, params)
+	}
+
+	exchangeOTP(params) {
+		const url = `http://localhost:8080/api/tranfer/confirm`;
 		return this.http.post<any>(url, params)
 	}
 }

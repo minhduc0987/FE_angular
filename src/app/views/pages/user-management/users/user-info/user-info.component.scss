@@ -1,3 +1,14 @@
 .min-200 {
     min-width: 200px;
 }
+.fix-height {
+    height: unset !important;
+    min-height: 48px;
+    max-height: 100px;
+
+    div, img {
+        height: unset !important;
+        min-height: 48px;
+        max-height: 100px;
+    }
+}

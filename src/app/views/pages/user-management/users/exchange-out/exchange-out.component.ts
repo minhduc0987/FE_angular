@@ -19,6 +19,7 @@ export class ExchangeOutComponent implements OnInit {
   loading = false;
   formId: FormGroup;
   formPass: FormGroup;
+  formPass2: FormGroup;
   items = [
     {id: '1', label: 'Chuyển tiền qua số tài khoản'},
     {id: '2', label: 'Chuyển tiền qua số thẻ'}
@@ -34,7 +35,9 @@ export class ExchangeOutComponent implements OnInit {
   inputStk;
   name;
   show = false;
+  show2 = false;
   isSuccess = false;
+  id;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -53,6 +56,9 @@ export class ExchangeOutComponent implements OnInit {
     this.formPass = this._formBuilder.group({
       password: ['', Validators.required]
     });
+    this.formPass2 = this._formBuilder.group({
+      password2: ['', Validators.required]
+    });
     this.formId.get('idBank').valueChanges.subscribe(val=>{
       this.name = '';
       if(val && Number(val) &&val.length === 12) {
@@ -70,12 +76,28 @@ export class ExchangeOutComponent implements OnInit {
       pin: this.formPass.get('password').value,
       description: this.formId.get('note').value
     }
-    const userId = localStorage.getItem('userId')
-    this.exchangeService.exchange(params, userId).subscribe(() => {
-      this.show = false;
-      this.isSuccess = true;
-      console.log(this.isSuccess)
-    });
+    this.account.forEach(val => {
+      if (val.accountNumber === this.stk) {
+        return
+      }
+    })
+    this.exchangeService.exchange(params, this.id).subscribe(
+        (response: any) => {
+          console.log(response)
+      },
+      (error: any) => {
+        debugger
+        if (error.status === 200) {
+          this.show = false;
+          this.show2 = true;
+        }
+      })
+  }
+
+  submit2() {
+    this.show = false;
+    this.show2 = false;
+    this.isSuccess = true;
   }
 
   getAccount() {
@@ -101,10 +123,14 @@ export class ExchangeOutComponent implements OnInit {
 
   changeI1(e){
     this.soDu = e.amount;
+    this.id = e.id;
+    console.log(this.id)
   };
 
   changeI2(e){
     this.soDu = e.amount;
+    this.id = e.id;
+    console.log(this.id)
   };
 
   getNguoiNhan(id: string) {
@@ -134,12 +160,32 @@ export class ExchangeOutComponent implements OnInit {
 				controls[controlName].markAsTouched()
 			);
 			return;
-		}
+    }
+    if (!this.name) {
+      return
+    }
     this.show = true;
+  }
+
+  next2() {
+		const controls = this.formId.controls;
+		/** check form */
+		if (this.formPass.invalid) {
+			Object.keys(controls).forEach(controlName =>
+				controls[controlName].markAsTouched()
+			);
+			return;
+    }
+    if (!this.name) {
+      return
+    }
+    this.show = false;
+    this.show2 = true;
   }
 
   cancel() {
     this.show = false;
+    this.show2 = false;
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {

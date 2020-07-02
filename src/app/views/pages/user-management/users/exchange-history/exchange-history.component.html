@@ -1,6 +1,20 @@
 <kt-portlet>
 	<kt-portlet-header [title]="'Danh sách giao dịch'" [class]="'card-head-lg'">
 		<ng-container ktPortletTools>
+			<div *ngIf="account$ | async as _account">
+				<div class="label-left">Chọn số tài khoản</div>
+					<ng-select
+					[items]="_account"
+					placeholder="Chọn tài khoản gửi tiền"
+					[ngModel]="stk"
+					class="select"
+					bindLabel="accountNumber"
+					bindValue="id"
+					[searchable]="false"
+					(change)="changeI1($event)"
+					>
+					</ng-select>
+			</div>
 		</ng-container>
 	</kt-portlet-header>
 

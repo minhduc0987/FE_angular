@@ -29,7 +29,8 @@ export class ExchangeService {
 	}
 
 	exchange(params, id) {
-		const url = `http://localhost:8080/api/users/1/accounts/`+ id +`/tranferInternal/accountNumber`;
+		const userId = localStorage.getItem('userId');
+		const url = API_USERS_URL + userId + `/accounts/`+ id +`/tranferInternal/accountNumber`;
 		return this.http.post<any>(url, params)
 	}
 }

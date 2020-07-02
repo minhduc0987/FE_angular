@@ -9,7 +9,7 @@ import { Observable, Subscription } from 'rxjs';
 // Services
 import { QueryParamsModel } from '../../../../../core/_base/crud';
 // Models
-import { ExchangeService } from 'src/app/core/apps';
+import { ExchangeService, UserProfileService } from 'src/app/core/apps';
 
 // Table with EDIT item in MODAL
 // ARTICLE for table with sort/filter/paginator
@@ -35,6 +35,7 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   // Selection
   selection = new SelectionModel<any>(true, []);
   accountId: any
+  account$: Observable<any>;
   dataSource$: Observable<any>;
   // Subscriptions
   private subscriptions: Subscription[] = [];
@@ -49,13 +50,12 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
    */
   constructor(
     private exchangeService: ExchangeService,
+    private userService: UserProfileService,
   ) {}
 
   ngOnInit() {
     this.dataSource$ = this.exchangeService.getlistExchange('1');
-    this.dataSource$.subscribe(val => {
-      console.log(val)
-    })
+    this.getAccount()
   }
 
   ngOnDestroy() {
@@ -70,5 +70,10 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
       return 'cộng tiền'
     }
     return 'trừ tiền'
+  }
+
+  getAccount() {
+    const userId = localStorage.getItem('userId')
+    this.account$ = this.userService.getListAccount(userId);
   }
 }

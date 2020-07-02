@@ -10,9 +10,8 @@ export class AsideUserComponent implements OnInit {
   menuUsers: any[] = [
     {id: 1, name: 'Thông tin cá nhân', url: 'thong-tin'},
     {id: 1, name: 'Thông tin các tài khoản', url: 'thong-tin-account'},
-    {id: 2, name: 'Chuyển khoản qua số tài khoản', url: 'exchange-account'},
-    {id: 2, name: 'Chuyển khoản qua số thẻ', url: 'exchange-card'},
-    {id: 2, name: 'Chuyển khoản khác ngân hàng', url: 'exchange-out'},
+    {id: 2, name: 'Chuyển khoản với mật khẩu', url: 'exchange-account'},
+    {id: 2, name: 'Chuyển khoản với mã OTP', url: 'exchange-card'},
     {id: 3, name: 'Lịch sử giao dịch', url: 'lich-su-giao-dich'},
   ]
   constructor() { }

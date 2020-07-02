@@ -69,8 +69,8 @@ const routes: Routes = [
 				path: 'thong-tin-account',
 				component: AccountUserComponent
 			},
-			{
-				path: 'exchange-account',
+				{
+					path: 'exchange-account',
 				component: ExchangeInComponent
 			},
 			{

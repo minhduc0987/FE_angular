@@ -1,54 +1,118 @@
-<div class="exchange-in">
-    <div class="container">
-      <mat-card>
-        <h1 class="d-flex align-items-center justify-content-center">Chuyển khoản nhanh liên ngân hàng</h1>
-        <div class="content">
-          <mat-card>
-              <form class="form" [formGroup]="exchangeInForm" autocomplete="off" novalidate="novalidate" id="kt_login_form">
-                  <mat-horizontal-stepper linear #stepper>
-                      <mat-step [stepControl]="firstFormGroup" errorMessage="Nhập thông tin người nhận">
-                        <form [formGroup]="firstFormGroup">
-                          <ng-template matStepLabel>Nhập thông tin người nhận</ng-template>
-                          <mat-form-field>
-                            <mat-label>Chọn ngân hàng</mat-label>
-                            <input matInput placeholder="Nhập thông tin người nhận" formControlName="idBank" required>
-                          </mat-form-field>
-                          <mat-form-field>
-                            <mat-label>Nhập thông tin người nhận</mat-label>
-                            <input matInput placeholder="Nhập thông tin người nhận" formControlName="idBank" required>
-                          </mat-form-field>
-                          <div>
-                            <button mat-button matStepperNext>Tiếp tục</button>
-                          </div>
-                        </form>
-                      </mat-step>
-                      <mat-step [stepControl]="secondFormGroup" errorMessage="Nhập mã pin để tiếp tục">
-                        <form [formGroup]="secondFormGroup">
-                          <ng-template matStepLabel>Nhập mã pin</ng-template>
-                          <mat-form-field>
-                            <mat-label>Nhập mã pin</mat-label>
-                            <input matInput placeholder="Nhập mã pin" formControlName="password"
-                                   required>
-                          </mat-form-field>
-                          <div>
-                            <button mat-button matStepperPrevious>Quay lại</button>
-                            <button mat-button matStepperNext>Tiếp tục</button>
-                          </div>
-                        </form>
-                      </mat-step>
-                      <mat-step>
-                        <ng-template matStepLabel>Xác nhận chuyển tiền</ng-template>
-                        <p>Bạn chắc chắn muốn chuyển tiền?</p>
-                        <div>
-                            <button mat-button (click)="stepper.reset()">Huỷ bỏ</button>
-                          <button mat-button matStepperPrevious>Đồng ý</button>
-                        </div>
-                      </mat-step>
-                    </mat-horizontal-stepper>
-                </form>
-          </mat-card>
+<div class="exchange">
+
+  <h1 class="title d-flex align-items-center justify-content-center">Chuyển khoản trong ngân hàng</h1>
+  <div class="title-content">Tài khoản nguồn</div>
+  <div>
+    <mat-card>
+      <div>
+        <div class="label-left">Số tài khoản</div>
+        <ng-select
+          [items]="items"
+          placeholder="Chọn Phương thức chuyển tiền"
+          [(ngModel)]="selectPT"
+          class="select"
+          bindLabel="label"
+          bindValue="id"
+          [searchable]="false"
+          (change)="changePhuongThuc()"
+        >
+        </ng-select>
+      </div>
+      <div *ngIf="account$ | async as _account">
+        <div [hidden]="phuongThuc">
+          <div class="label-left">Chọn số tài khoản gửi tiền</div>
+          <ng-select
+            [items]="account"
+            placeholder="Chọn tài khoản gửi tiền"
+            [ngModel]="stk"
+            class="select"
+            bindLabel="stk"
+            bindValue="id"
+            [searchable]="false"
+            (change)="changeI1($event)"
+          >
+          </ng-select>
         </div>
-      </mat-card>
+        <div [hidden]="!phuongThuc">
+          <div class="label-left">Chọn số thẻ gửi tiền</div>
+          <ng-select
+            [items]="account"
+            placeholder="Chọn tài khoản gửi tiền"
+            [ngModel]="st"
+            class="select"
+            bindLabel="st"
+            bindValue="id"
+            [searchable]="false"
+            (change)="changeI2($event)"
+          >
+          </ng-select>
+        </div>
+      </div>
+      <div>
+        <div class="label-left">Số dư:</div>
+        <div class="text-center w-200 d-inline-block">{{ soDu }} VNĐ</div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="title-content">Thông tin giao dịch</div>
+  <mat-card>
+    <form [formGroup]="formId">
+    <div>
+      <div class="label-left">Nhập tài khoản nhận tiền</div>
+      <input type="text" class="input select" formControlName="idBank" required/>
+      <mat-error *ngIf="isControlHasError('idBank', 'required')">
+        <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+      </mat-error>
+    </div>
+    <div>
+      <div class="label-left">Tên người nhận</div>
+      <div class="select" *ngIf="userExchange$ | async as _ussr">{{ name }}</div>
+    </div>
+    <div>
+      <div class="label-left">Nhập số tiền cần chuyển</div>
+      <input type="text" class="input select" formControlName="money" required/>
+      <mat-error *ngIf="isControlHasError('money', 'required')">
+        <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+      </mat-error>
+    </div>
+    <div>
+      <div class="label-left">Nhập nội dung chuyển tiền</div>
+      <input type="text" class="input select" formControlName="note" required/>
+      <mat-error *ngIf="isControlHasError('note', 'required')">
+        <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+      </mat-error>
+    </div>
+  </form>
+  </mat-card>
+  <div class="button-next"><div (click)="next()" class="next">Tiếp tục</div></div>
+  <div class="popup" *ngIf="show">
+    <div class="title-popup">Nhập mật khẩu để Lấy mã OTP</div>
+    <form [formGroup]="formPass">
+    <input type="text" class="input select" formControlName="password" required/>
+    <mat-error *ngIf="isControlHasError2('password', 'required')">
+      <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+    </mat-error>
+  </form>
+    <div class="box-button">
+      <div class="button-popup" (click)="cancel()">Huỷ bỏ</div>
+      <div class="button-popup next" (click)="submit()">Tiếp tục</div>
     </div>
   </div>
-  
+  <div class="popup" *ngIf="show2">
+    <div class="title-popup">Nhập mã OTP để chuyển tiền</div>
+    <form [formGroup]="formPass2">
+    <input type="text" class="input select" formControlName="password2" required/>
+    <mat-error *ngIf="isControlHasError2('password', 'required')">
+      <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+    </mat-error>
+  </form>
+    <div class="box-button">
+      <div class="button-popup" (click)="cancel()">Huỷ bỏ</div>
+      <div class="button-popup next" (click)="submit2()">Tiếp tục</div>
+    </div>
+  </div>
+  <div class="popup" *ngIf="isSuccess">
+    <div class="title-popup">Kết thúc giao dịch</div>
+    <div>Giao dịch thành công</div>
+  </div>
+</div>

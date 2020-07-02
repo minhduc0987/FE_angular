@@ -66,19 +66,19 @@ const routes: Routes = [
 				component: UserInfoComponent
 			},
 			{
-				path: 'thong-tin-account',
+				path: 'accounts',
 				component: AccountUserComponent
 			},
 				{
-					path: 'exchange-account',
+					path: 'exchange-pin',
 				component: ExchangeInComponent
 			},
 			{
-				path: 'exchange-card',
+				path: 'exchange-otp',
 				component: ExchangeOutComponent
 			},
 			{
-				path: 'exchange-out',
+				path: 'vay-tien',
 				component: FastExchangeComponent
 			},
 			{

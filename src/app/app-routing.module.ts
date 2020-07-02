@@ -22,7 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'user-detail',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () => import('./views/pages/user-management/user-management.module').then(m => m.UserManagementModule),
       },
       {

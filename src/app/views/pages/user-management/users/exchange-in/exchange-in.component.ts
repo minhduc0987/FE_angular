@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { async } from '@angular/core/testing';
 import { Observable } from 'rxjs';
+import { AuthNoticeService } from 'src/app/core/auth';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-exchange-in',
@@ -35,13 +37,16 @@ export class ExchangeInComponent implements OnInit {
   name;
   show = false;
   isSuccess = false;
+  id;
 
   constructor(
     private _formBuilder: FormBuilder,
     private exchangeService: ExchangeService,
     private userService: UserProfileService,
     private router: Router,
-    private config: NgSelectConfig
+    private config: NgSelectConfig,
+    private authNoticeService: AuthNoticeService,
+    private translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -70,8 +75,7 @@ export class ExchangeInComponent implements OnInit {
       pin: this.formPass.get('password').value,
       description: this.formId.get('note').value
     }
-    const userId = localStorage.getItem('userId')
-    this.exchangeService.exchange(params, userId).subscribe(() => {
+    this.exchangeService.exchange(params, this.id).subscribe(() => {
       this.show = false;
       this.isSuccess = true;
       console.log(this.isSuccess)
@@ -101,10 +105,12 @@ export class ExchangeInComponent implements OnInit {
 
   changeI1(e){
     this.soDu = e.amount;
+    this.id = e.id;
   };
 
   changeI2(e){
     this.soDu = e.amount;
+    this.id = e.id;
   };
 
   getNguoiNhan(id: string) {
@@ -132,10 +138,12 @@ export class ExchangeInComponent implements OnInit {
 		if (this.formId.invalid) {
 			Object.keys(controls).forEach(controlName =>
 				controls[controlName].markAsTouched()
-			);
+      );
+      this.authNoticeService.setNotice(this.translate.instant('VALIDATION.INVALID_LOGIN'), 'danger');
 			return;
     }
     if (!this.name) {
+      this.authNoticeService.setNotice(this.translate.instant('VALIDATION.INVALID_LOGIN'), 'danger');
       return
     }
     this.show = true;

@@ -43,10 +43,10 @@ export class LayoutUtilsService {
   showActionNotification(
     message: string,
     type: MessageType = MessageType.Create,
-    duration: number = 10000,
+    duration: number = 4000,
     showCloseButton: boolean = true,
     showUndoButton: boolean = true,
-    undoButtonDuration: number = 3000,
+    undoButtonDuration: number = 0,
     verticalPosition: 'top' | 'bottom' = 'bottom'
   ) {
     const data = {

@@ -32,7 +32,7 @@
 					// Row cell base
 					vertical-align: middle;
 					padding: get($datatable-config, cell-padding-y) get($datatable-config, cell-padding-x);
-					font-size: 1rem;
+					font-size: 1.1rem;
 
 					&:first-child {
 						padding-left: 0
@@ -696,7 +696,7 @@
 					//border-radius: 3px !important;
 					height: get($datatable-config, page-size);
 					padding: 0.45rem 1rem;
-					font-size: 1rem;
+					font-size: 1.1rem;
 					font-weight: 500;
 					border: 0 !important;
 					color: get($datatable-config, page-info-color);

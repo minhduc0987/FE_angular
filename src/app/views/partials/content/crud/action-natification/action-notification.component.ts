@@ -8,6 +8,7 @@ import { of } from 'rxjs';
 @Component({
 	selector: 'kt-action-natification',
 	templateUrl: './action-notification.component.html',
+	styleUrls: ['./action-notification.component.scss'],
 	changeDetection: ChangeDetectionStrategy.Default
 
 })

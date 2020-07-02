@@ -2,21 +2,21 @@
 export const locale = {
   lang: 'vi',
   data: {
+    ERROR: 'Có lỗi vui lòng thao tác lại',
     MENU: {
       DASHBOARD: 'Trang chủ',
-      DESK_MANAGER: 'Quản lý bàn',
-      MENU_MANAGER: 'Quản lý thực đơn',
-      EVENT_MANAGER: 'Quản lý sự kiện',
-      USER_MANAGEMENT: 'Quản lý nhân sự',
     },
     AUTH: {
       WELLCOME: 'Xin chào',
-      HAVE_ACCOUNT: 'Bạn chưa có tài khoản',
+      HAVE_ACCOUNT: 'Bạn chưa có tài khoản?',
       LOGIN: 'Nhập tài khoản và mật khẩu',
+      FORGOT: 'COMMON.BTN.NEXT',
       INPUT: {
         EMAIL: 'Email',
         USERNAME: 'Tài khoản',
-        PASSWORD: 'Mật khẩu'
+        PASSWORD: 'Mật khẩu',
+        PHONE: 'Số điện thoại',
+        ADDRESS: 'Địa chỉ'
       },
       INPUT_EMAIL: 'Nhập email của bạn để tạo mật khẩu mới',
     },
@@ -30,6 +30,9 @@ export const locale = {
         CREATE: 'Tạo mới',
         SEND: 'Gửi',
         BACK: 'Quay lại',
+        NEXT: 'Tiếp tục',
+        CANCEL: 'Huỷ bỏ',
+        BTN: 'Cập nhật thông tin'
       },
     },
     VALIDATION: {
@@ -42,6 +45,50 @@ export const locale = {
       MIN_LENGTH_FIELD: 'Độ dài tối thiểu:',
       MAX_LENGTH_FIELD: 'Độ dài tối đa:',
       INVALID_FIELD: 'Trường không hợp lệ',
-    }
+      STK: 'Vui lòng chọn số tài khoản',
+      NGUOI_NHAN: 'Nhập thông tin người nhận',
+      NGUOI_NHAN1: 'Không tìm thấy người nhận trên hệ thống',
+      MONEY_NONE: 'Số tiền chuyển không được bỏ trống',
+      MONEY_NO: 'Vui lòng chỉ nhập số',
+      MONEY_MIN: 'Số tiền chuyển không được nhỏ hơn 50,000 đồng',
+      MONEY_MAX: 'Số dư trong tài khoản của bạn không đủ',
+      NOTE: 'Vui lòng nhập nội dung chuyển tiền',
+      PASSWORD: 'Vui lòng nhập password',
+      PASSWORD_NO: 'Password sai định dạng, vui lòng nhập lại',
+      OTP: 'Vui lòng nhập mã OTP',
+    },
+    EXCHANGE: {
+      SUCCESS: 'Giao dịch thành công',
+      IN: 'Chuyển khoản trong ngân hàng',
+      TT: 'Thông tin giao dịch',
+      NHAN: 'Tài khoản nhận tiền',
+      NAME_NHAN: 'Tên người nhận',
+      MONEY: 'Số tiền chuyển',
+      NOTE: 'Nội dung chuyển tiền',
+      EXCHANGE: 'Chuyển khoản',
+      VAY: 'Vay tiền',
+      HISTORY: 'Lịch sử giao dịch'
+
+    },
+    STK: 'Số tài khoản',
+    ST: 'Số thẻ',
+    SD: 'Số dư',
+    HT: 'Hạng thẻ',
+    TTTK: 'Thông tin tài khoản',
+    NGUON: 'Tài khoản nguồn',
+    CHOISE_STK: 'Chọn số tài khoản gửi tiền',
+    IN_PASSWORD: 'Nhập mật khẩu',
+    IN_OTP: 'Nhập mã OTP',
+    TP: 'Phương thức khuyển khoản',
+    USER_INFO: 'Thông tin khách hàng',
+    HS: 'Hồ sơ',
+    NAME: 'Họ và tên',
+    DOB: 'Ngày sinh',
+    GENDER: 'Giới tính',
+    IMAGE: 'Ảnh',
+    INFO_USER: 'Thông tin liên hệ',
+    CMND: 'Số CMND/CCCD/Hộ chiếu',
+    INFO: 'Thông tin cá nhân',
+    INFOS: 'Thông tin các tài khoản',
   }
 };

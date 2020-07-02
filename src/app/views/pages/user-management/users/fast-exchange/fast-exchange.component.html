@@ -1,118 +1,93 @@
 <div class="exchange">
-
-  <h1 class="title d-flex align-items-center justify-content-center">Chuyển khoản trong ngân hàng</h1>
-  <div class="title-content">Tài khoản nguồn</div>
-  <div>
-    <mat-card>
-      <div>
-        <div class="label-left">Số tài khoản</div>
-        <ng-select
-          [items]="items"
-          placeholder="Chọn Phương thức chuyển tiền"
-          [(ngModel)]="selectPT"
-          class="select"
-          bindLabel="label"
-          bindValue="id"
-          [searchable]="false"
-          (change)="changePhuongThuc()"
-        >
-        </ng-select>
-      </div>
-      <div *ngIf="account$ | async as _account">
-        <div [hidden]="phuongThuc">
-          <div class="label-left">Chọn số tài khoản gửi tiền</div>
-          <ng-select
-            [items]="account"
-            placeholder="Chọn tài khoản gửi tiền"
-            [ngModel]="stk"
-            class="select"
-            bindLabel="stk"
-            bindValue="id"
-            [searchable]="false"
-            (change)="changeI1($event)"
-          >
-          </ng-select>
-        </div>
-        <div [hidden]="!phuongThuc">
-          <div class="label-left">Chọn số thẻ gửi tiền</div>
-          <ng-select
-            [items]="account"
-            placeholder="Chọn tài khoản gửi tiền"
-            [ngModel]="st"
-            class="select"
-            bindLabel="st"
-            bindValue="id"
-            [searchable]="false"
-            (change)="changeI2($event)"
-          >
-          </ng-select>
-        </div>
-      </div>
-      <div>
-        <div class="label-left">Số dư:</div>
-        <div class="text-center w-200 d-inline-block">{{ soDu }} VNĐ</div>
-      </div>
-    </mat-card>
-  </div>
-  <div class="title-content">Thông tin giao dịch</div>
+  <h1 class="title d-flex align-items-center justify-content-center">ĐĂNG KÍ VAY TIỀN FPT BANK</h1>
+  <div class="title-content">Thông tin vay tiền</div>
   <mat-card>
     <form [formGroup]="formId">
-    <div>
-      <div class="label-left">Nhập tài khoản nhận tiền</div>
-      <input type="text" class="input select" formControlName="idBank" required/>
-      <mat-error *ngIf="isControlHasError('idBank', 'required')">
-        <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
-      </mat-error>
-    </div>
-    <div>
-      <div class="label-left">Tên người nhận</div>
-      <div class="select" *ngIf="userExchange$ | async as _ussr">{{ name }}</div>
-    </div>
-    <div>
-      <div class="label-left">Nhập số tiền cần chuyển</div>
-      <input type="text" class="input select" formControlName="money" required/>
-      <mat-error *ngIf="isControlHasError('money', 'required')">
-        <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
-      </mat-error>
-    </div>
-    <div>
-      <div class="label-left">Nhập nội dung chuyển tiền</div>
-      <input type="text" class="input select" formControlName="note" required/>
-      <mat-error *ngIf="isControlHasError('note', 'required')">
-        <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
-      </mat-error>
-    </div>
-  </form>
+      <div>
+        <div class="label-left">Họ và tên</div>
+        <input type="text" class="input select" formControlName="idBank" required />
+        <mat-error *ngIf="isControlHasError('idBank', 'required')">
+          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+        </mat-error>
+      </div>
+      <div>
+        <div class="label-left">Số điện thoại</div>
+        <input type="text" class="input select" formControlName="money" required />
+        <mat-error *ngIf="isControlHasError('money', 'required')">
+          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+        </mat-error>
+      </div>
+      <div>
+        <div class="label-left">Nhập địa chỉ hiện tại</div>
+        <input type="text" class="input select" formControlName="note" required />
+        <mat-error *ngIf="isControlHasError('note', 'required')">
+          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+        </mat-error>
+      </div>
+      <div>
+        <div class="label-left">Địa chỉ thường trú</div>
+        <input type="text" class="input select" formControlName="money" required />
+        <mat-error *ngIf="isControlHasError('money', 'required')">
+          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+        </mat-error>
+      </div>
+      <div>
+        <div class="label-left">Số CMND/Hộ chiếu</div>
+        <input type="text" class="input select" formControlName="idBank" required />
+        <mat-error *ngIf="isControlHasError('idBank', 'required')">
+          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+        </mat-error>
+      </div>
+      <div>
+        <div class="label-left">Công việc hiện tại</div>
+        <input type="text" class="input select" formControlName="money" required />
+        <mat-error *ngIf="isControlHasError('money', 'required')">
+          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+        </mat-error>
+      </div>
+      <div>
+        <div class="label-left">Thu nhập bình quân</div>
+        <input type="text" class="input select" formControlName="idBank" required />
+        <mat-error *ngIf="isControlHasError('idBank', 'required')">
+          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+        </mat-error>
+      </div>
+      <div>
+        <div class="label-left">Số tiền cần vay</div>
+        <input type="text" class="input select" formControlName="note" required />
+        <mat-error *ngIf="isControlHasError('note', 'required')">
+          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+        </mat-error>
+      </div>
+      <div>
+        <div class="label-left">Thời gian vay</div>
+        <input type="text" class="input select" formControlName="note" required />
+        <mat-error *ngIf="isControlHasError('note', 'required')">
+          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+        </mat-error>
+      </div>
+      <div>
+        <div class="label-left">Lãi suất</div>
+        <input type="text" class="input select" formControlName="note" required />
+        <mat-error *ngIf="isControlHasError('note', 'required')">
+          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+        </mat-error>
+      </div>
+      <div>
+        <div class="label-left">Dự tính mỗi tháng trả</div>
+        <input type="text" class="input select" formControlName="note" required />
+        <mat-error *ngIf="isControlHasError('note', 'required')">
+          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+        </mat-error>
+      </div>
+      <div>
+        <div class="label-left">Giấy tờ xác minh</div>
+        <input type="text" class="input select" formControlName="note" required />
+        <mat-error *ngIf="isControlHasError('note', 'required')">
+          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
+        </mat-error>
+      </div>
+    </form>
   </mat-card>
   <div class="button-next"><div (click)="next()" class="next">Tiếp tục</div></div>
-  <div class="popup" *ngIf="show">
-    <div class="title-popup">Nhập mật khẩu để Lấy mã OTP</div>
-    <form [formGroup]="formPass">
-    <input type="text" class="input select" formControlName="password" required/>
-    <mat-error *ngIf="isControlHasError2('password', 'required')">
-      <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
-    </mat-error>
-  </form>
-    <div class="box-button">
-      <div class="button-popup" (click)="cancel()">Huỷ bỏ</div>
-      <div class="button-popup next" (click)="submit()">Tiếp tục</div>
-    </div>
-  </div>
-  <div class="popup" *ngIf="show2">
-    <div class="title-popup">Nhập mã OTP để chuyển tiền</div>
-    <form [formGroup]="formPass2">
-    <input type="text" class="input select" formControlName="password2" required/>
-    <mat-error *ngIf="isControlHasError2('password', 'required')">
-      <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
-    </mat-error>
-  </form>
-    <div class="box-button">
-      <div class="button-popup" (click)="cancel()">Huỷ bỏ</div>
-      <div class="button-popup next" (click)="submit2()">Tiếp tục</div>
-    </div>
-  </div>
-  <div class="popup" *ngIf="isSuccess">
-    <div class="title-popup">Kết thúc giao dịch</div>
-    <div>Giao dịch thành công</div>
-  </div>
 </div>

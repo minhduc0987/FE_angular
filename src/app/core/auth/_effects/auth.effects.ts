@@ -32,7 +32,7 @@ export class AuthEffects {
       localStorage.removeItem(environment.authTokenKey);
       localStorage.removeItem('login');
       localStorage.removeItem('userId');
-      this.router.navigate(['/auth/login'], {queryParams: {returnUrl: this.returnUrl}});
+      this.router.navigate(['/auth/login']);
       document.location.reload();
     })
   );

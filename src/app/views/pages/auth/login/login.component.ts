@@ -14,6 +14,7 @@ import { AppState } from '../../../../core/reducers';
 import { AuthNoticeService, AuthService, Login } from '../../../../core/auth';
 // @ts-ignore
 import * as jwt_decode from 'jwt-decode';
+import { environment } from 'src/environments/environment';
 /**
  * ! Just example => Should be removed in development
  */
@@ -31,8 +32,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   errors: any = [];
 
   private unsubscribe: Subject<any>;
-
-  private returnUrl: any;
 
   // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
 
@@ -70,12 +69,9 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.initLoginForm();
-
-    // redirect back to the returnUrl before login
-    // this.route.queryParams.subscribe((params) => {
-    //   this.returnUrl = params.returnUrl || '/';
-    // });
-    this.returnUrl = '/user-detail/thong-tin';
+    if (localStorage.getItem(environment.authTokenKey)) {
+      this.router.navigateByUrl('/user-detail/thong-tin')
+    }
   }
 
   /**
@@ -129,7 +125,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Login({ authToken: login.accessToken }));
             localStorage.setItem('login', JSON.stringify(login));
             localStorage.setItem('userId', jwt_decode(login.accessToken).sub);
-            this.router.navigateByUrl(this.returnUrl); // Main page
+            this.router.navigateByUrl('/user-detail/thong-tin');
           } else {
             this.authNoticeService.setNotice(this.translate.instant('VALIDATION.INVALID_LOGIN'), 'danger');
           }
@@ -140,7 +136,8 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.cdr.markForCheck();
         }),
       )
-      .subscribe();
+      .subscribe(()=>{},
+      (err)=>{ this.authNoticeService.setNotice(this.translate.instant(err.error.message))});
   }
 
   /**

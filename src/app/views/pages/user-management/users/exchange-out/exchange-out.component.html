@@ -1,30 +1,31 @@
 <div class="exchange">
-  
-    <h1 class="title d-flex align-items-center justify-content-center">Chuyển khoản trong ngân hàng</h1>
-    <div class="title-content">Tài khoản nguồn</div>
-    <div>
-      <mat-card>
+  <h1 class="title d-flex align-items-center justify-content-center">{{ 'EXCHANGE.IN' | translate }}</h1>
+  <div class="title-content">{{ 'NGUON' | translate }}</div>
+  <div>
+    <mat-card>
+      <form [formGroup]="form1">
         <div>
-          <div class="label-left">Số tài khoản</div>
+          <div class="label-left">{{ 'TP' | translate }}</div>
           <ng-select
             [items]="items"
-            placeholder="Chọn Phương thức chuyển tiền"
-            [(ngModel)]="selectPT"
+            [clearable]="false"
+            placeholder="{{ 'TP' | translate }}"
+            formControlName="selectPT"
             class="select"
             bindLabel="label"
             bindValue="id"
             [searchable]="false"
-            (change)="changePhuongThuc()"
           >
           </ng-select>
         </div>
         <div *ngIf="account$ | async as _account">
-          <div [hidden]="phuongThuc">
-            <div class="label-left">Chọn số tài khoản gửi tiền</div>
+          <div>
+            <div class="label-left">{{ 'CHOISE_STK' | translate }}</div>
             <ng-select
               [items]="account"
-              placeholder="Chọn tài khoản gửi tiền"
-              [ngModel]="stk"
+              [clearable]="false"
+              placeholder="{{ 'CHOISE_STK' | translate }}"
+              formControlName="stk"
               class="select"
               bindLabel="stk"
               bindValue="id"
@@ -33,86 +34,56 @@
             >
             </ng-select>
           </div>
-          <div [hidden]="!phuongThuc">
-            <div class="label-left">Chọn số thẻ gửi tiền</div>
-            <ng-select
-              [items]="account"
-              placeholder="Chọn tài khoản gửi tiền"
-              [ngModel]="st"
-              class="select"
-              bindLabel="st"
-              bindValue="id"
-              [searchable]="false"
-              (change)="changeI2($event)"
-            >
-            </ng-select>
-          </div>
         </div>
         <div>
-          <div class="label-left">Số dư:</div>
-          <div class="text-center w-200 d-inline-block">{{ soDu }} VNĐ</div>
+          <div class="label-left">{{ 'SD' | translate }}</div>
+          <div class="text-center w-200 d-inline-block">{{ formatNumber(soDu) }} VNĐ</div>
         </div>
-      </mat-card>
-    </div>
-    <div class="title-content">Thông tin giao dịch</div>
-    <mat-card>
-      <form [formGroup]="formId">
+      </form>
+    </mat-card>
+  </div>
+  <div class="title-content">{{ 'EXCHANGE.TT' | translate }}</div>
+  <mat-card>
+    <form [formGroup]="formId">
       <div>
-        <div class="label-left">Nhập tài khoản nhận tiền</div>
-        <input type="text" class="input select" formControlName="idBank" required/>
-        <mat-error *ngIf="isControlHasError('idBank', 'required')">
-          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
-        </mat-error>
+        <div class="label-left">{{ 'EXCHANGE.NHAN' | translate }}</div>
+        <input type="text" class="input select" formControlName="idBank" required placeholder="{{ 'EXCHANGE.NHAN' | translate }}"/>
       </div>
       <div>
-        <div class="label-left">Tên người nhận</div>
+        <div class="label-left">{{ 'EXCHANGE.NAME_NHAN' | translate }}</div>
         <div class="select" *ngIf="userExchange$ | async as _ussr">{{ name }}</div>
       </div>
       <div>
-        <div class="label-left">Nhập số tiền cần chuyển</div>
-        <input type="text" class="input select" formControlName="money" required/>
-        <mat-error *ngIf="isControlHasError('money', 'required')">
-          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
-        </mat-error>
+        <div class="label-left">{{ 'EXCHANGE.MONEY' | translate }}</div>
+        <input type="text" class="input select" formControlName="money" required placeholder="{{ 'EXCHANGE.MONEY' | translate }}"/>
       </div>
       <div>
-        <div class="label-left">Nhập nội dung chuyển tiền</div>
-        <input type="text" class="input select" formControlName="note" required/>
-        <mat-error *ngIf="isControlHasError('note', 'required')">
-          <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
-        </mat-error>
+        <div class="label-left">{{ 'EXCHANGE.NOTE' | translate }}</div>
+        <input type="text" class="input select" formControlName="note" required placeholder="{{ 'EXCHANGE.NOTE' | translate }}"/>
       </div>
     </form>
-    </mat-card>
-    <div class="button-next"><div (click)="next()" class="next">Tiếp tục</div></div>
-    <div class="popup" *ngIf="show">
-      <div class="title-popup">Nhập mật khẩu để Lấy mã OTP</div>
-      <form [formGroup]="formPass">
-      <input type="text" class="input select" formControlName="password" required/>
-      <mat-error *ngIf="isControlHasError2('password', 'required')">
-        <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
-      </mat-error>
+  </mat-card>
+  <div class="button-next">
+    <div (click)="next()" class="next">{{ 'COMMON.BTN.NEXT' | translate }}</div>
+  </div>
+  <div class="popup" *ngIf="show">
+    <div class="title-popup">{{ 'IN_PASSWORD' | translate }}</div>
+    <form [formGroup]="formPass">
+      <input type="password" class="input select" formControlName="password" required />
     </form>
-      <div class="box-button">
-        <div class="button-popup" (click)="cancel()">Huỷ bỏ</div>
-        <div class="button-popup next" (click)="submit()">Tiếp tục</div>
-      </div>
+    <div class="box-button">
+      <div class="button-popup" (click)="cancel()">{{ 'COMMON.BTN.CANCEL' | translate }}</div>
+      <div class="button-popup next" (click)="submit()">{{ 'COMMON.BTN.NEXT' | translate }}</div>
     </div>
-    <div class="popup" *ngIf="show2">
-      <div class="title-popup">Nhập mã OTP để chuyển tiền</div>
-      <form [formGroup]="formPass2">
-      <input type="text" class="input select" formControlName="password2" required/>
-      <mat-error *ngIf="isControlHasError2('password', 'required')">
-        <strong class="ml-3">{{ 'VALIDATION.INVALID' | translate }}</strong>
-      </mat-error>
+  </div>
+  <div class="popup" *ngIf="show2">
+    <div class="title-popup">{{ 'IN_OTP' | translate }}</div>
+    <form [formGroup]="formPass2">
+      <input type="password" class="input select" formControlName="password2" required />
     </form>
-      <div class="box-button">
-        <div class="button-popup" (click)="cancel()">Huỷ bỏ</div>
-        <div class="button-popup next" (click)="submit2()">Tiếp tục</div>
-      </div>
+    <div class="box-button">
+      <div class="button-popup" (click)="cancel()">{{ 'COMMON.BTN.CANCEL' | translate }}</div>
+      <div class="button-popup next" (click)="submit2()">{{ 'COMMON.BTN.CANCEL' | translate }}</div>
     </div>
-    <div class="popup" *ngIf="isSuccess">
-      <div class="title-popup">Kết thúc giao dịch</div>
-      <div>Giao dịch thành công</div>
-    </div>
+  </div>
 </div>

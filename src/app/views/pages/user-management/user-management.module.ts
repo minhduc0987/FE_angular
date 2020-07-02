@@ -50,6 +50,7 @@ import { FastExchangeComponent } from './users/fast-exchange/fast-exchange.compo
 import { AccountUserComponent } from './users/account-user/account-user.component';
 import {} from '@angular/material/icon';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { UpdateComponent } from './users/update/update.component';
 
 const routes: Routes = [
 	{
@@ -84,6 +85,10 @@ const routes: Routes = [
 			{
 				path: 'lich-su-giao-dich',
 				component: ExchangeHistoryComponent
+			},
+			{
+				path: 'update',
+				component: UpdateComponent
 			}
 		]
 	}
@@ -158,6 +163,7 @@ const routes: Routes = [
 		ExchangeHistoryComponent,
 		FastExchangeComponent,
 		AccountUserComponent,
+		UpdateComponent,
 	]
 })
 export class UserManagementModule {}

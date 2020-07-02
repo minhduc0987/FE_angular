@@ -1,0 +1,69 @@
+<div class="container" *ngIf="user$ | async as _user">
+    <mat-card>
+      <h1 class="d-flex align-items-center justify-content-center">{{'USER_INFO' | translate}}</h1>
+      <div class="content">
+        <mat-card>
+          <mat-card-title>{{'HS' | translate}}</mat-card-title>
+          <mat-list>
+            <mat-list-item>
+              <div class="d-inline w-25 min-200">{{'AUTH.INPUT.USERNAME' | translate}}</div>
+              <div class="d-inline">{{ _user.username }}</div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <div class="d-inline w-25 min-200">{{'NAME' | translate}}</div>
+              <div class="d-inline">{{ _user.fullname }}</div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <div class="d-inline w-25 min-200">{{'DOB' | translate}}</div>
+              <div class="d-inline">{{ _user.birthday }}</div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <div class="d-inline w-25 min-200">{{'GENDER' | translate}}</div>
+              <div class="d-inline">{{ _user.gender }}</div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="fix-height">
+              <div class="d-inline w-25 min-200">{{'IMAGE' | translate}}</div>
+              <div class="d-inline">
+                <img [src]="_user.image" alt="" class="h-100">
+              </div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+        </mat-card>
+        <br />
+        <mat-card>
+          <mat-card-title>{{'INFO_USER' | translate}}</mat-card-title>
+          <mat-list>
+            <mat-list-item>
+              <div class="d-inline w-25 min-200">{{'CMND' | translate}}</div>
+              <div class="d-inline">{{ _user.idCardNumber }}</div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <div class="d-inline w-25 min-200">{{'AUTH.INPUT.EMAIL' | translate}}</div>
+              <div class="d-inline">{{ _user.email }}</div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <div class="d-inline w-25 min-200">{{'AUTH.INPUT.PHONE' | translate}}</div>
+              <div class="d-inline">{{ _user.phone }}</div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <div class="d-inline w-25 min-200">{{'AUTH.INPUT.ADDRESS' | translate}}</div>
+              <div class="d-inline">{{ _user.address }}</div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+          <div class="m-3 text-right">
+            <button mat-raised-button color="primary">{{'COMMON.BTN.NEXT' | translate}}</button>
+          </div>
+        </mat-card>
+      </div>
+    </mat-card>
+  </div>
+  

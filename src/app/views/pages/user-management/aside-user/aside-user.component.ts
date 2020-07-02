@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-aside-user',
@@ -8,16 +9,18 @@ import { Component, OnInit } from '@angular/core';
 export class AsideUserComponent implements OnInit {
 
   menuUsers: any[] = [
-    {id: 1, name: 'Thông tin cá nhân', url: 'thong-tin'},
-    {id: 1, name: 'Thông tin các tài khoản', url: 'accounts'},
-    {id: 2, name: 'Chuyển khoản với mật khẩu', url: 'exchange-pin'},
-    {id: 2, name: 'Chuyển khoản với mã OTP', url: 'exchange-otp'},
-    {id: 2, name: 'Vay tiền', url: 'vay-tien'},
-    {id: 3, name: 'Lịch sử giao dịch', url: 'lich-su-giao-dich'},
   ]
-  constructor() { }
+  constructor(private translate: TranslateService,) { }
 
   ngOnInit(): void {
+    this.menuUsers = [
+      {id: 1, name: this.translate.instant('INFO'), url: 'thong-tin'},
+      {id: 1, name: this.translate.instant('INFOS'), url: 'accounts'},
+      // {id: 2, name: 'Chuyển khoản với mật khẩu', url: 'exchange-pin'},
+      {id: 2, name: this.translate.instant('EXCHANGE.EXCHANGE'), url: 'exchange-otp'},
+      {id: 2, name: this.translate.instant('EXCHANGE.VAY'), url: 'vay-tien'},
+      {id: 3, name: this.translate.instant('EXCHANGE.HISTORY'), url: 'lich-su-giao-dich'},
+    ]
   }
 
 }

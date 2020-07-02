@@ -4,6 +4,7 @@ import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDe
 import { UserProfileService } from '../../../../../../app/core/apps/_services/user-profile.service';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/core/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'kt-user-info',
@@ -18,7 +19,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   displayedColumns = ['select', 'id', 'username', 'email', 'fullname', '_roles', 'actions'];
   user$: Observable<User>;
 
-  constructor(private userProfileService: UserProfileService) {}
+  constructor(private userProfileService: UserProfileService,private router: Router,) {}
 
   ngOnInit() {
     this.user$ = this.userProfileService.getUserProfile();
@@ -27,4 +28,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
    * On Destroy
    */
   ngOnDestroy() {}
+
+  update() {
+    this.router.navigateByUrl('/user-detail/update');
+  }
 }

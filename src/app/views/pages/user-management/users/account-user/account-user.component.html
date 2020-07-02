@@ -1,5 +1,5 @@
 <kt-portlet >
-	<kt-portlet-header [title]="'Thông tin các tài khoản'" [class]="'card-head-lg'">
+	<kt-portlet-header title="{{ 'TTTK' | translate }}" [class]="'card-head-lg'">
 		<ng-container ktPortletTools>
 		</ng-container>
 	</kt-portlet-header>
@@ -17,27 +17,27 @@
 				*ngIf="dataSource$ | async as dataSource">
 
 				<ng-container matColumnDef="id">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>STT</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.id}}</mat-cell>
+					<mat-header-cell *matHeaderCellDef >STT</mat-header-cell>
+					<mat-cell *matCellDef="let account; let i = index;">{{ i + 1 }}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="accountNumber">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>Số tài khoản</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.accountNumber}}</mat-cell>
+					<mat-header-cell *matHeaderCellDef >{{ 'STK' | translate }}</mat-header-cell>
+					<mat-cell *matCellDef="let account">{{formatNumber2(account.accountNumber)}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="card">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>số thẻ</mat-header-cell>
-					<mat-cell *matCellDef="let account" class="{{getClass()}}">{{account.card.cardNumber}}</mat-cell>
+					<mat-header-cell *matHeaderCellDef >{{ 'ST' | translate }}</mat-header-cell>
+					<mat-cell *matCellDef="let account">{{formatNumber2(account.card.cardNumber)}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="amount">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>số dư</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{getAmount(account.amount)}}</mat-cell>
+					<mat-header-cell *matHeaderCellDef >{{ 'SD' | translate }}</mat-header-cell>
+					<mat-cell *matCellDef="let account">{{formatNumber(getAmount(account.amount))}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="member">
-					<mat-header-cell *matHeaderCellDef mat-sort-header>Hạng thẻ</mat-header-cell>
+					<mat-header-cell *matHeaderCellDef >{{ 'HT' | translate }}</mat-header-cell>
 					<mat-cell *matCellDef="let account" class="{{getClass()}}">{{getMember()}}</mat-cell>
 				</ng-container>
 
@@ -45,9 +45,6 @@
 
 				<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 			</mat-table>
-		</div>
-		<div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
-			<mat-paginator [pageSize]="10" [pageSizeOptions]="[10]" [length]="dataSource.length" [showFirstLastButtons]="true"></mat-paginator>
 		</div>
 	</kt-portlet-body>
 </kt-portlet>

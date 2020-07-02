@@ -10,12 +10,13 @@ import { Logout, User } from '../../../../../core/auth';
 import { UserProfileService } from '../../../../../core/apps/_services/user-profile.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-user-profile4',
   templateUrl: './user-profile4.component.html',
   styleUrls: ['./user-profile4.component.scss'],
-  providers: [UserProfileService]
+  providers: [UserProfileService],
 })
 export class UserProfile4Component implements OnInit {
   // Public properties
@@ -34,9 +35,9 @@ export class UserProfile4Component implements OnInit {
    */
   constructor(private store: Store<AppState>,
     private userProfileService: UserProfileService,
-    private router: Router
-    ) {
-  }
+    private router: Router,
+    private translate: TranslateService,
+    ) {}
 
   /**
    * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
@@ -47,7 +48,7 @@ export class UserProfile4Component implements OnInit {
    */
   async ngOnInit(): Promise<void> {
     this.user$ = await this.userProfileService.getUserProfile();
-    this.user$.subscribe(user => {
+    this.user$.subscribe((user) => {
       localStorage.setItem('user', JSON.stringify(user));
     });
     if (localStorage.getItem(environment.authTokenKey)) {
@@ -61,7 +62,11 @@ export class UserProfile4Component implements OnInit {
    * Log out
    */
   logout() {
-    this.store.dispatch(new Logout());
+    // this.store.dispatch(new Logout());
+    localStorage.removeItem(environment.authTokenKey);
+    localStorage.removeItem('login');
+    localStorage.removeItem('userId');
+    this.router.navigate(['/auth/login']);
   }
 
   login() {

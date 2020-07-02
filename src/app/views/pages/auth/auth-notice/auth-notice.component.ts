@@ -11,6 +11,7 @@ import { AuthNotice, AuthNoticeService } from '../../../../core/auth/';
 })
 export class AuthNoticeComponent implements OnInit, OnDestroy {
 	@Output() type: any;
+	// tslint:disable-next-line:no-output-native
 	@Output() message: any = '';
 
 	// Private properties

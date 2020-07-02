@@ -10,6 +10,7 @@ export class AlertComponent implements OnInit {
 	@Input() type: 'primary | accent | warn';
 	@Input() duration = 0;
 	@Input() showCloseButton = true;
+	// tslint:disable-next-line:no-output-native
 	@Output() close = new EventEmitter<boolean>();
 	alertShowing = true;
 

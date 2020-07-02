@@ -76,7 +76,8 @@ export class AccountUserComponent implements OnInit, OnDestroy {
   loadUsersList() {
   }
   loadListAccount() {
-    this.dataSource$ = this.userService.getListAccount('1');
+    const userId = localStorage.getItem('userId')
+    this.dataSource$ = this.userService.getListAccount(userId);
   }
   getAmount(amount) {
     return amount + ' VNĐ' ;
@@ -92,5 +93,15 @@ export class AccountUserComponent implements OnInit, OnDestroy {
       default :
         return 'gold';
     }
+  }
+  formatNumber(n: any) {
+		if (n !== null) {
+			return n.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		}
+  }
+  formatNumber2(n: any) {
+		if (n !== null) {
+			return n.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+		}
   }
 }

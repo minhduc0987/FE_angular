@@ -162,11 +162,23 @@ export class ExchangeOutComponent implements OnInit {
         this.account.push({
           id: element.id,
           amount: element.amount,
-          stk: element.accountNumber,
+          stk: element.accountNumber + ' - Số dư ' + this.formatNumber(element.amount) + ' VNĐ',
           st: element.card.cardNumber,
         });
       });
     });
+  }
+
+  onKeyMoney() {
+    this.formId.patchValue({
+      money: this.formatNumber(this.formId.get('money').value)
+    })
+  }
+
+  onKeyBank() {
+    this.formId.patchValue({
+      idBank: this.formatNumber(this.formId.get('idBank').value)
+    })
   }
 
   changeI1(e) {

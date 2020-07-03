@@ -47,7 +47,7 @@
     <form [formGroup]="formId">
       <div>
         <div class="label-left">{{ 'EXCHANGE.NHAN' | translate }}</div>
-        <input type="text" class="input select" formControlName="idBank" required placeholder="{{ 'EXCHANGE.NHAN' | translate }}"/>
+        <input type="text" class="input select" formControlName="idBank" (keyup)="onKeyBank()" required placeholder="{{ 'EXCHANGE.NHAN' | translate }}"/>
       </div>
       <div>
         <div class="label-left">{{ 'EXCHANGE.NAME_NHAN' | translate }}</div>
@@ -55,7 +55,7 @@
       </div>
       <div>
         <div class="label-left">{{ 'EXCHANGE.MONEY' | translate }}</div>
-        <input type="text" class="input select" formControlName="money" required placeholder="{{ 'EXCHANGE.MONEY' | translate }}"/>
+        <input type="text" class="input select" formControlName="money" (keyup)="onKeyMoney()" required placeholder="{{ 'EXCHANGE.MONEY' | translate }}"/>
       </div>
       <div>
         <div class="label-left">{{ 'EXCHANGE.NOTE' | translate }}</div>

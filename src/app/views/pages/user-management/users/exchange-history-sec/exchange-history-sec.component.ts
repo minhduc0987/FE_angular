@@ -21,12 +21,12 @@ import { TranslateService } from '@ngx-translate/core';
 // https://v5.material.angular.io/components/table/overview#sorting
 // https://www.youtube.com/watch?v=NSt9CI3BXv4
 @Component({
-  selector: 'kt-exchange-history',
-  templateUrl: './exchange-history.component.html',
-  styleUrls: ['./exchange-history.component.scss'],
+  selector: 'kt-exchange-history-sec',
+  templateUrl: './exchange-history-sec.component.html',
+  styleUrls: ['./exchange-history-sec.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExchangeHistoryComponent implements OnInit, OnDestroy {
+export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
   // Table fields
   displayedColumns = ['id', 'amount', 'type', 'amountAfter', 'date'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

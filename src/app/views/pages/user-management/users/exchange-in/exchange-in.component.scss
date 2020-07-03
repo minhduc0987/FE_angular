@@ -21,22 +21,22 @@
   justify-content: flex-start;
 }
 .exchange {
-  background: #F3F4F4;
+  background: #f3f4f4;
   padding: 1rem;
 }
 .label-left {
-  width: 200px;
+  width: 300px;
   display: inline-block;
   padding: 15px;
   text-align: right;
 }
 .select {
   display: inline-block;
-  width: calc(100% - 200px);
+  width: calc(100% - 400px);
   max-width: 400px;
 }
 .w-200 {
-  width: 200px;
+  width: 300px;
 }
 
 .button-next {
@@ -49,15 +49,15 @@
   justify-content: flex-end;
 
   .next {
-      background-color: #ed1c24;
-      height: 32px;
-      min-width: 90px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: #fff;
-      font-size: 16px;
+    background-color: #ed1c24;
+    height: 32px;
+    min-width: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
   }
 }
 .popup {
@@ -72,47 +72,55 @@
   border-radius: 4px;
 
   .title-popup {
-      height: 32px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-      background-color: #ed1c24;
-      font-size: 16px;
-      font-weight: bold;
-      color: #fff;
+    height: 32px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    background-color: #ed1c24;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
   }
 
   .select {
-      margin: 25px auto;
-      display: flex;
+    margin: 25px auto;
+    display: flex;
+    min-width: 100px;
   }
 
   .box-button {
-      width: 100%;
-      padding: 1rem;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .button-popup {
+      min-width: 90px;
+      height: 32px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #000;
       display: flex;
       align-items: center;
       justify-content: center;
-
-      .button-popup {
-          min-width: 90px;
-          height: 32px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          color: #000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 10px;
-          cursor: pointer;
-      }
-      .next {
-          background-color: #ed1c24;
-          color: #fff;
-          font-size: 16px;
-      }
+      margin: 0 10px;
+      cursor: pointer;
+    }
+    .next {
+      background-color: #ed1c24;
+      color: #fff;
+      font-size: 16px;
+    }
+  }
+}
+::ng-deep {
+    .ng-select.ng-touched.ng-invalid {
+    .ng-select-container {
+      border-color: #f64e60 !important;
+    }
   }
 }

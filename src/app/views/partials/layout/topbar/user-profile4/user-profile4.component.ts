@@ -33,11 +33,12 @@ export class UserProfile4Component implements OnInit {
    *
    * @param store: Store<AppState>
    */
-  constructor(private store: Store<AppState>,
+  constructor(
+    private store: Store<AppState>,
     private userProfileService: UserProfileService,
     private router: Router,
     private translate: TranslateService,
-    ) {}
+  ) {}
 
   /**
    * @ Lifecycle sequences => https://angular.io/guide/lifecycle-hooks
@@ -48,9 +49,19 @@ export class UserProfile4Component implements OnInit {
    */
   async ngOnInit(): Promise<void> {
     this.user$ = await this.userProfileService.getUserProfile();
-    this.user$.subscribe((user) => {
-      localStorage.setItem('user', JSON.stringify(user));
-    });
+    this.user$.subscribe(
+      (user) => {
+        localStorage.setItem('user', JSON.stringify(user));
+      },
+      (err) => {
+        localStorage.removeItem(environment.authTokenKey);
+        localStorage.removeItem('login');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('user');
+        this.router.navigate(['/auth/login']);
+        // document.location.reload();
+      },
+    );
     if (localStorage.getItem(environment.authTokenKey)) {
       this.isHasLogin = true;
     } else {

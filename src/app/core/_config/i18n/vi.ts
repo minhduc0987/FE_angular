@@ -67,8 +67,14 @@ export const locale = {
       NOTE: 'Nội dung chuyển tiền',
       EXCHANGE: 'Chuyển khoản',
       VAY: 'Vay tiền',
-      HISTORY: 'Lịch sử giao dịch'
-
+      HISTORY: 'Lịch sử giao dịch',
+      MONEYX: 'Số tiền giao dịch',
+      TYPE: 'Loại giao dịch',
+      SD_MONEY: 'Số dư sau giao dịch',
+      DATE: 'Ngày giao dịch',
+      KEY: 'Mã giao dịch',
+      SEC: 'Tạo séc',
+      SEC_HISTORY: 'Lịch sử séc'
     },
     STK: 'Số tài khoản',
     ST: 'Số thẻ',
@@ -90,5 +96,6 @@ export const locale = {
     CMND: 'Số CMND/CCCD/Hộ chiếu',
     INFO: 'Thông tin cá nhân',
     INFOS: 'Thông tin các tài khoản',
+    CHOISE_HISTORY: 'Chọn tài khoản để xem lịch sử giao dịch'
   }
 };

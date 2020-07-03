@@ -43,4 +43,14 @@ export class ExchangeService {
 		const url = `http://localhost:8080/api/tranfer/confirm`;
 		return this.http.post<any>(url, params)
 	}
+
+	getlistCheque(accountId: any): Observable<any> {
+		const userId = localStorage.getItem('userId');
+		let url;
+			url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions';
+		const userToken = localStorage.getItem(environment.authTokenKey);
+		let httpHeaders = new HttpHeaders();
+		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
+		return this.http.get<any>(url, {headers: httpHeaders})
+	}
 }

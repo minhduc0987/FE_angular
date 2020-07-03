@@ -16,10 +16,11 @@ export class AsideUserComponent implements OnInit {
     this.menuUsers = [
       {id: 1, name: this.translate.instant('INFO'), url: 'thong-tin'},
       {id: 1, name: this.translate.instant('INFOS'), url: 'accounts'},
-      // {id: 2, name: 'Chuyển khoản với mật khẩu', url: 'exchange-pin'},
+      {id: 2, name: this.translate.instant('EXCHANGE.SEC'), url: 'exchange-sec'},
+      {id: 2, name: this.translate.instant('EXCHANGE.SEC_HISTORY'), url: 'exchange-sec-history'},
       {id: 2, name: this.translate.instant('EXCHANGE.EXCHANGE'), url: 'exchange-otp'},
-      {id: 2, name: this.translate.instant('EXCHANGE.VAY'), url: 'vay-tien'},
       {id: 3, name: this.translate.instant('EXCHANGE.HISTORY'), url: 'lich-su-giao-dich'},
+      {id: 2, name: this.translate.instant('EXCHANGE.VAY'), url: 'vay-tien'},
     ]
   }
 

@@ -114,7 +114,7 @@ export class FastExchangeComponent implements OnInit {
         this.account.push({
           id: element.id,
           amount: element.amount,
-          stk: element.accountNumber,
+          stk: element.accountNumber + this.formatNumber(element.amount),
           st: element.card.cardNumber,
         });
       });
@@ -192,23 +192,11 @@ export class FastExchangeComponent implements OnInit {
     this.show2 = false;
   }
 
-  isControlHasError(controlName: string, validationType: string): boolean {
-    const control = this.formId.controls[controlName];
-    if (!control) {
-      return false;
+  formatNumber(n: any) {
+    if (n !== null) {
+      return n
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
-
-    const result = control.hasError(validationType) && (control.dirty || control.touched);
-    return result;
-  }
-
-  isControlHasError2(controlName: string, validationType: string): boolean {
-    const control = this.formPass.controls[controlName];
-    if (!control) {
-      return false;
-    }
-
-    const result = control.hasError(validationType) && (control.dirty || control.touched);
-    return result;
   }
 }

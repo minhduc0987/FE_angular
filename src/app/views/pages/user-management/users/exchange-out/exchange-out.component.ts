@@ -61,9 +61,9 @@ export class ExchangeOutComponent implements OnInit {
       stk: [null, Validators.required],
     });
     this.formId = this._formBuilder.group({
-      idBank: ['44441111100', Validators.required],
-      money: ['50000', Validators.required],
-      note: ['ck', Validators.required],
+      idBank: ['', Validators.required],
+      money: ['', Validators.required],
+      note: ['', Validators.required],
     });
     this.formPass = this._formBuilder.group({
       password: ['', Validators.required],
@@ -193,6 +193,14 @@ export class ExchangeOutComponent implements OnInit {
   }
 
   next() {
+    const controls = this.formId.controls;
+    const controls1 = this.form1.controls;
+    if (this.form1.invalid) {
+      Object.keys(controls).forEach((controlName) => controls[controlName].markAsTouched());
+    }
+    if (this.formId.invalid) {
+      Object.keys(controls1).forEach((controlName) => controls1[controlName].markAsTouched());
+    }
     if (!this.form1.get('stk').value) {
       const message = this.translate.instant('VALIDATION.STK');
       this.layoutUtilsService.showActionNotification(message);
@@ -235,11 +243,6 @@ export class ExchangeOutComponent implements OnInit {
     if (!this.formId.get('note').value) {
       const message = this.translate.instant('VALIDATION.NOTE');
       this.layoutUtilsService.showActionNotification(message);
-      return;
-    }
-    const controls = this.formId.controls;
-    if (this.formId.invalid) {
-      Object.keys(controls).forEach((controlName) => controls[controlName].markAsTouched());
       return;
     }
     this.show = true;

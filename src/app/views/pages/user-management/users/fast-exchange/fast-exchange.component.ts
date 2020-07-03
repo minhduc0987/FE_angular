@@ -92,7 +92,6 @@ export class FastExchangeComponent implements OnInit {
         console.log(response);
       },
       (error: any) => {
-        debugger;
         if (error.status === 200) {
           this.show = false;
           this.show2 = true;
@@ -155,8 +154,9 @@ export class FastExchangeComponent implements OnInit {
     this.userExchange$.subscribe((val) => {
       this.name = val.fullname;
     }),
+      // tslint:disable-next-line:no-unused-expression
       (_err: any) => {
-        this.authNoticeService.setNotice(this.translate.instant('VALIDATION.INVALID_LOGIN'), 'danger');
+        this.authNoticeService.setNotice(this.translate.instant('VALIDATION.ERROR'), 'danger');
       };
   }
 

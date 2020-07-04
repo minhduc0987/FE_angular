@@ -76,14 +76,14 @@ export class AccountUserComponent implements OnInit, OnDestroy {
   loadUsersList() {
   }
   loadListAccount() {
-    const userId = localStorage.getItem('userId')
+    const userId = sessionStorage.getItem('userId')
     this.dataSource$ = this.userService.getListAccount(userId);
   }
   getAmount(amount) {
     return amount + ' VNĐ' ;
   }
   getMember() {
-    const u = JSON.parse(localStorage.getItem('user'));
+    const u = JSON.parse(sessionStorage.getItem('user'));
     return u.membership.name;
   }
   getClass() {

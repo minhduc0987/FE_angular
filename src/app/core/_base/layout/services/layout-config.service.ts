@@ -29,7 +29,7 @@ export class LayoutConfigService {
    */
   saveConfig(layoutConfig: LayoutConfigModel): void {
     if (layoutConfig) {
-      localStorage.setItem('layoutConfig', JSON.stringify(layoutConfig));
+      sessionStorage.setItem('layoutConfig', JSON.stringify(layoutConfig));
     }
   }
 
@@ -37,7 +37,7 @@ export class LayoutConfigService {
    * Get layout config from local storage
    */
   getSavedConfig(): LayoutConfigModel {
-    const config = localStorage.getItem('layoutConfig');
+    const config = sessionStorage.getItem('layoutConfig');
     try {
       return JSON.parse(config);
     } catch (e) {
@@ -48,7 +48,7 @@ export class LayoutConfigService {
    * Remove saved layout config and revert back to default
    */
   resetConfig(): void {
-    localStorage.removeItem('layoutConfig');
+    sessionStorage.removeItem('layoutConfig');
   }
 
   /**

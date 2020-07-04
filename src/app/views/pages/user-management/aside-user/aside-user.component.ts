@@ -20,7 +20,7 @@ export class AsideUserComponent implements OnInit {
       {id: 2, name: this.translate.instant('EXCHANGE.SEC_HISTORY'), url: 'exchange-sec-history'},
       {id: 2, name: this.translate.instant('EXCHANGE.EXCHANGE'), url: 'exchange-otp'},
       {id: 3, name: this.translate.instant('EXCHANGE.HISTORY'), url: 'lich-su-giao-dich'},
-      {id: 2, name: this.translate.instant('EXCHANGE.VAY'), url: 'vay-tien'},
+      // {id: 2, name: this.translate.instant('EXCHANGE.VAY'), url: 'vay-tien'},
     ]
   }
 

@@ -1,5 +1,5 @@
 // Angular
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 // RxJS
 import { Observable } from 'rxjs';
 // NGRX
@@ -17,6 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './user-profile4.component.html',
   styleUrls: ['./user-profile4.component.scss'],
   providers: [UserProfileService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserProfile4Component implements OnInit {
   // Public properties
@@ -38,6 +39,7 @@ export class UserProfile4Component implements OnInit {
     private userProfileService: UserProfileService,
     private router: Router,
     private translate: TranslateService,
+    private ref: ChangeDetectorRef,
   ) {}
 
   /**
@@ -51,18 +53,19 @@ export class UserProfile4Component implements OnInit {
     this.user$ = await this.userProfileService.getUserProfile();
     this.user$.subscribe(
       (user) => {
-        localStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('user', JSON.stringify(user));
+        this.ref.markForCheck();
       },
       (err) => {
-        localStorage.removeItem(environment.authTokenKey);
-        localStorage.removeItem('login');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('user');
+        sessionStorage.removeItem(environment.authTokenKey);
+        sessionStorage.removeItem('login');
+        sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('user');
         this.router.navigate(['/auth/login']);
         // document.location.reload();
-      },
+      }
     );
-    if (localStorage.getItem(environment.authTokenKey)) {
+    if (sessionStorage.getItem(environment.authTokenKey)) {
       this.isHasLogin = true;
     } else {
       this.isHasLogin = false;
@@ -74,9 +77,9 @@ export class UserProfile4Component implements OnInit {
    */
   logout() {
     // this.store.dispatch(new Logout());
-    localStorage.removeItem(environment.authTokenKey);
-    localStorage.removeItem('login');
-    localStorage.removeItem('userId');
+    sessionStorage.removeItem(environment.authTokenKey);
+    sessionStorage.removeItem('login');
+    sessionStorage.removeItem('userId');
     this.router.navigate(['/auth/login']);
   }
 

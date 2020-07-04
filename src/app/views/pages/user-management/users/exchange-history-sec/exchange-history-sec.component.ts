@@ -62,7 +62,7 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
   }
 
   getAccount() {
-    const userId = localStorage.getItem('userId')
+    const userId = sessionStorage.getItem('userId')
     this.account$ = this.userService.getListAccount(userId);
   }
 

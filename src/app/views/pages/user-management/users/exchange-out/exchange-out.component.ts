@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ExchangeService, UserProfileService } from 'src/app/core/apps';
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthNoticeService } from 'src/app/core/auth';
 import { LayoutUtilsService } from 'src/app/core/_base/crud';
+import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'kt-exchange-out',
@@ -20,6 +21,7 @@ import { LayoutUtilsService } from 'src/app/core/_base/crud';
       useValue: { showError: true },
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExchangeOutComponent implements OnInit {
   loading = false;
@@ -49,6 +51,7 @@ export class ExchangeOutComponent implements OnInit {
     private exchangeService: ExchangeService,
     private userService: UserProfileService,
     private router: Router,
+    private ref: ChangeDetectorRef,
     private config: NgSelectConfig,
     private authNoticeService: AuthNoticeService,
     private translate: TranslateService,
@@ -112,10 +115,6 @@ export class ExchangeOutComponent implements OnInit {
           if (res.message && res.message === 'Tranfer successfully') {
             this.show = false;
             this.show2 = false;
-            setTimeout(() => {
-              this.show = false;
-              this.show2 = false;
-            }, 100);
             const message = this.translate.instant('EXCHANGE.SUCCESS');
             this.layoutUtilsService.showActionNotification(message);
             setTimeout(() => {
@@ -124,12 +123,9 @@ export class ExchangeOutComponent implements OnInit {
           } else {
             this.show = false;
             this.show2 = true;
-            setTimeout(() => {
-              this.show = false;
-              this.show2 = true;
-            }, 100);
             this.idGd = res.message;
           }
+          this.ref.markForCheck()
         },
         (err) => {
           const message = this.translate.instant('ERROR');
@@ -153,6 +149,7 @@ export class ExchangeOutComponent implements OnInit {
           setTimeout(() => {
             this.router.navigateByUrl('/user-detail/lich-su-giao-dich');
           }, 3000);
+          this.ref.markForCheck()
         },
         (_err: any) => {
           const message = this.translate.instant('ERROR');
@@ -163,7 +160,7 @@ export class ExchangeOutComponent implements OnInit {
   }
 
   getAccount() {
-    const userId = localStorage.getItem('userId');
+    const userId = sessionStorage.getItem('userId');
     this.account$ = this.userService.getListAccountExchange(userId);
     this.account$.subscribe((val) => {
       val.forEach((element) => {

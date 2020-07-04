@@ -38,7 +38,9 @@ export class DashboardComponent implements OnInit {
     };
     this.user$ = this.userProfileService.getUser(params)
     this.user$.subscribe(
-      (res)=>{},
+      (res)=>{
+        sessionStorage.setItem('userSearch', JSON.stringify(res));
+      },
       (err)=>{console.log(err)},
       );
   }

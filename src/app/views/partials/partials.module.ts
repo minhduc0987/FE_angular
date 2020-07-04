@@ -18,6 +18,7 @@ import {
   DeleteEntityDialogComponent,
   FetchEntityDialogComponent,
   UpdateStatusDialogComponent,
+  FormTstcDialogComponent,
 } from './content/crud';
 // Layout partials
 import {
@@ -71,6 +72,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     StickyToolbarComponent,
     LanguageSelectorComponent,
     UserProfile4Component,
+    FormTstcDialogComponent
   ],
   exports: [
     PortletModule,
@@ -88,6 +90,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     StickyToolbarComponent,
     LanguageSelectorComponent,
     UserProfile4Component,
+    FormTstcDialogComponent
   ],
   imports: [
     CommonModule,

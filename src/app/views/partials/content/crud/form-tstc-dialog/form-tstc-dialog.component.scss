@@ -1,0 +1,10 @@
+.box-image {
+    width: 100%;
+    display: flex;
+
+    .image {
+        width: 150px;
+        display: block;
+        margin: 10px;
+    }
+}

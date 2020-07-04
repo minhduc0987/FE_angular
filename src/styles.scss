@@ -123,3 +123,22 @@
 .ng-invalid.ng-touched {
   border-color: #f64e60 !important;
 }
+.input-vnd {
+  width: calc(100% - 50px);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.vnd {
+  width: 50px;
+  display: inline-block;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.42);
+  min-height: unset !important;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 4px;
+  font-size: 16px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
+}

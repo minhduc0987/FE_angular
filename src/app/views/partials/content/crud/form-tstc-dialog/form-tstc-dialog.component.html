@@ -1,0 +1,73 @@
+<div class="card card-custom" [ngClass]="{ 'card-body-progress card-body-progress-overlay': viewLoading }">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Tạo tài sản thế chấp</h3>
+    </div>
+  </div>
+  <div class="form">
+    <div class="card-body">
+      <div class="card-body-progress">
+        <mat-spinner [diameter]="20"></mat-spinner>
+      </div>
+      <form [formGroup]="formId">
+        <div class="form-group row">
+          <div class="col-6">
+            <div class="mb-3">
+              <div>
+                Tên tài sản
+              </div>
+              <div>
+                <input type="text" class="input select w-100" formControlName="name" />
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <div>
+                Số tiền định giá
+              </div>
+              <div class="select">
+                <div class="d-flex">
+                  <input type="text" class="input input-vnd" formControlName="amount" (keyup)="onKeyMoney()" required />
+                  <div class="vnd">VNĐ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="mb-3">
+              <div>
+                Chi tiết tài sản
+              </div>
+              <div>
+                <input type="text" class="input select w-100" formControlName="description" />
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="mb-3">
+              <input #fileInput hidden type="file" accept="image/*" (change)="onSelectedFile($event)" formControlName="image"/>
+              Hình ảnh cụ thể <button mat-raised-button color="primary" (click)="fileInput.click()">Chọn ảnh</button>
+            </div>
+          </div>
+          <div class="col-12">
+			  <div class="box-image">
+				  <ng-container *ngFor="let image of listImages">
+					  <img [src]="image" class="image" />
+					</ng-container>
+				</div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex justify-content-between">
+        <div class="mr-2"></div>
+        <div>
+          <button mat-button (click)="onNoClick()">Cancel</button>&nbsp;
+          <button mat-button (click)="onYesClick()" color="primary" cdkFocusInitial [disabled]="viewLoading">Tiếp tục</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

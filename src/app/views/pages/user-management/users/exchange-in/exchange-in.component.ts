@@ -155,7 +155,7 @@ export class ExchangeInComponent implements OnInit {
   }
 
   getAccount() {
-    const userId = localStorage.getItem('userId');
+    const userId = sessionStorage.getItem('userId');
     this.account$ = this.userService.getListAccount(userId);
     this.account$.subscribe((val) => {
       val.forEach((element) => {

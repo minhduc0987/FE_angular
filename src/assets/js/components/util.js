@@ -1488,7 +1488,7 @@ var KTUtil = function() {
 
                 // Remember scroll position in cookie
                 var uid = KTUtil.attr(element, 'id');
-                // Consider using Localstorage
+                // Consider using sessionStorage
                 //if (options.rememberPosition === true && Cookies && uid) {
                 //    if (KTCookie.getCookie(uid)) {
                 //        var pos = parseInt(KTCookie.getCookie(uid));

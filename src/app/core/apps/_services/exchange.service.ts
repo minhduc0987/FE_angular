@@ -12,14 +12,14 @@ export class ExchangeService {
 	}
 
 	getlistExchange(accountId: any, page?: any): Observable<any> {
-		const userId = localStorage.getItem('userId');
+		const userId = sessionStorage.getItem('userId');
 		let url;
 		if (page) {
 			url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions?page=' + page;
 		} else {
 			url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions';
 		}
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = sessionStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<any>(url, {headers: httpHeaders})
@@ -27,14 +27,14 @@ export class ExchangeService {
 
 	getUserExchange(params: any): Observable<any> {
         const url = API_USERS_URL + 'find';
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = sessionStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.post<any>(url, params)
 	}
 
 	exchange(params, id) {
-		const userId = localStorage.getItem('userId');
+		const userId = sessionStorage.getItem('userId');
 		const url = API_USERS_URL + userId + `/accounts/`+ id +`/tranferInternal/accountNumber`;
 		return this.http.post<any>(url, params)
 	}
@@ -45,10 +45,10 @@ export class ExchangeService {
 	}
 
 	getlistCheque(accountId: any): Observable<any> {
-		const userId = localStorage.getItem('userId');
+		const userId = sessionStorage.getItem('userId');
 		let url;
 			url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions';
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = sessionStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<any>(url, {headers: httpHeaders})
@@ -63,5 +63,25 @@ export class ExchangeService {
 		formData.append('api_key', '943929211546985');
 		const uri = `https://api.cloudinary.com/v1_1/dsww0ejaj/image/upload`
 		return this.http.post(uri, formData);
+	  }
+
+	getLoan(): Observable<any> {
+		const uri = environment.urlBE + `api/loanInterestRates`
+		return this.http.get(uri);
+	  }
+
+	createLoan(params, userId): Observable<any> {
+		const uri = environment.urlBE + `api/admin/users/`+ userId +`/loanprofiles`
+		return this.http.post(uri, params);
+	  }
+
+	  getUserIn(userId): Observable<any> {
+		const uri = environment.urlBE + `api/admin/users/`+ userId +`/useableAccounts`
+		return this.http.get(uri);
+	  }
+
+	  addTstc(params,userId, id): Observable<any> {
+		const uri = environment.urlBE + `api/admin/users/`+ userId +`/loanprofiles/`+ id +`/assets`
+		return this.http.post(uri, params);
 	  }
 } 

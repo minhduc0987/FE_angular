@@ -51,18 +51,18 @@ export class UserProfile4Component implements OnInit {
     this.user$ = this.userProfileService.getUserProfile();
     this.user$.subscribe(
       (user) => {
-        localStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('user', JSON.stringify(user));
       },
       (err) => {
-        localStorage.removeItem(environment.authTokenKey);
-        localStorage.removeItem('login');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('user');
+        sessionStorage.removeItem(environment.authTokenKey);
+        sessionStorage.removeItem('login');
+        sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('user');
         this.router.navigate(['/auth/login']);
         // document.location.reload();
       },
     );
-    if (localStorage.getItem(environment.authTokenKey)) {
+    if (sessionStorage.getItem(environment.authTokenKey)) {
       this.isHasLogin = true;
     } else {
       this.isHasLogin = false;
@@ -74,9 +74,9 @@ export class UserProfile4Component implements OnInit {
    */
   logout() {
     // this.store.dispatch(new Logout());
-    localStorage.removeItem(environment.authTokenKey);
-    localStorage.removeItem('login');
-    localStorage.removeItem('userId');
+    sessionStorage.removeItem(environment.authTokenKey);
+    sessionStorage.removeItem('login');
+    sessionStorage.removeItem('userId');
     this.router.navigate(['/auth/login']);
   }
 

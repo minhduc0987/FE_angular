@@ -3,6 +3,7 @@ export const locale = {
   lang: 'vi',
   data: {
     ERROR: 'Có lỗi vui lòng thao tác lại',
+    SUCCESS: 'Xử lý thành công',
     MENU: {
       DASHBOARD: 'Trang chủ',
     },
@@ -61,6 +62,9 @@ export const locale = {
       PASSWORD: 'Vui lòng nhập password',
       PASSWORD_NO: 'Password sai định dạng, vui lòng nhập lại',
       OTP: 'Vui lòng nhập mã OTP',
+      LOAN_MONEY: 'Số tiền vay không được bỏ trống',
+      LOAN_MONEY_CONTENT: 'Mục đích vay không được bỏ trống',
+      LOAN_TK: 'Tài khoản nhận không được bỏ trống',
     },
     EXCHANGE: {
       SUCCESS: 'Giao dịch thành công',

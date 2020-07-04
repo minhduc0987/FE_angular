@@ -40,7 +40,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { InterceptService, HttpUtilsService, TypesUtilsService, LayoutUtilsService } from 'src/app/core/_base/crud';
-import { ActionNotificationComponent } from '../partials/content/crud';
+import { ActionNotificationComponent, FormTstcDialogComponent } from '../partials/content/crud';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -102,7 +102,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TypesUtilsService,
     LayoutUtilsService,
   ],
-  entryComponents: [],
+  entryComponents: [FormTstcDialogComponent, ActionNotificationComponent],
 })
 export class PagesModule {
 }

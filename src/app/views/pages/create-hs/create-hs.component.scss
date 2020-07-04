@@ -27,7 +27,7 @@
     justify-content: flex-start;
   }
   .label-left {
-    width: 200px;
+    width: 400px;
     display: inline-block;
     padding: 15px;
     text-align: right;
@@ -40,3 +40,13 @@
   .w-200 {
     width: 200px;
   }
+.tstc {
+  margin-left: 400px;
+
+  .link-tstc {
+    cursor: pointer;
+    color: red;
+    font-style: italic;
+    text-decoration: underline;
+  }
+}

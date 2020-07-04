@@ -53,4 +53,15 @@ export class ExchangeService {
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<any>(url, {headers: httpHeaders})
 	}
-}
+
+	uploadImage(files: File[]): Observable<any> {
+		let formData = new FormData();
+		for (let file of files) {
+		  formData.append('file', file);
+		}
+		formData.append('upload_preset', 'wuhiqv5l');
+		formData.append('api_key', '943929211546985');
+		const uri = `https://api.cloudinary.com/v1_1/dsww0ejaj/image/upload`
+		return this.http.post(uri, formData);
+	  }
+} 

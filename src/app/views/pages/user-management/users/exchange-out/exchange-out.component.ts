@@ -73,7 +73,7 @@ export class ExchangeOutComponent implements OnInit {
     });
     this.formId.get('idBank').valueChanges.subscribe((val) => {
       this.name = '';
-      if (val && Number(val) && val.length === 12) {
+      if (val && Number(this.formatNumber3(val)) && this.formatNumber3(val).length === 12) {
         this.getNguoiNhan(val);
       }
     });
@@ -95,8 +95,8 @@ export class ExchangeOutComponent implements OnInit {
       return;
     }
     const params = {
-      accountNumber: this.formId.get('idBank').value,
-      amount: this.formId.get('money').value,
+      accountNumber: this.formatNumber3(this.formId.get('idBank').value),
+      amount: this.formatNumber2(this.formId.get('money').value),
       fullName: this.name,
       pin: this.formPass.get('password').value,
       description: this.formId.get('note').value,
@@ -112,6 +112,10 @@ export class ExchangeOutComponent implements OnInit {
           if (res.message && res.message === 'Tranfer successfully') {
             this.show = false;
             this.show2 = false;
+            setTimeout(() => {
+              this.show = false;
+              this.show2 = false;
+            }, 100);
             const message = this.translate.instant('EXCHANGE.SUCCESS');
             this.layoutUtilsService.showActionNotification(message);
             setTimeout(() => {
@@ -120,6 +124,10 @@ export class ExchangeOutComponent implements OnInit {
           } else {
             this.show = false;
             this.show2 = true;
+            setTimeout(() => {
+              this.show = false;
+              this.show2 = true;
+            }, 100);
             this.idGd = res.message;
           }
         },
@@ -177,7 +185,7 @@ export class ExchangeOutComponent implements OnInit {
 
   onKeyBank() {
     this.formId.patchValue({
-      idBank: this.formatNumber(this.formId.get('idBank').value)
+      idBank: this.formatNumber1(this.formId.get('idBank').value)
     })
   }
 
@@ -189,12 +197,12 @@ export class ExchangeOutComponent implements OnInit {
     let params;
     if (this.form1.get('selectPT').value === '1') {
       params = {
-        term: id,
+        term: this.formatNumber3(id),
         type: 'ACCOUNTNUMBER',
       };
     } else {
       params = {
-        term: id,
+        term: this.formatNumber3(id),
         type: 'CARDNUMBER',
       };
     }
@@ -228,7 +236,7 @@ export class ExchangeOutComponent implements OnInit {
       this.layoutUtilsService.showActionNotification(message);
       return;
     }
-    const money = this.formId.get('money').value;
+    const money = this.formatNumber2(this.formId.get('money').value);
     if (!money) {
       const message = this.translate.instant('VALIDATION.MONEY_NONE');
       this.layoutUtilsService.showActionNotification(message);
@@ -245,7 +253,7 @@ export class ExchangeOutComponent implements OnInit {
       return;
     }
     if (this.soDu) {
-      const sodu = Number(this.formatNumber2(this.soDu));
+      const sodu = Number(this.formatNumber2(this.formatNumber2(this.soDu)));
       if (Number(money) > sodu) {
         const message = this.translate.instant('VALIDATION.MONEY_MAX');
         this.layoutUtilsService.showActionNotification(message);
@@ -284,9 +292,22 @@ export class ExchangeOutComponent implements OnInit {
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
   }
+  formatNumber1(n: any) {
+    if (n !== null) {
+      return n
+        .toString()
+        .replace(/\D/g, '')
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    }
+  }
   formatNumber2(n: any) {
     if (n !== null) {
       return n.toString().replace(/\,/g, '');
+    }
+  }
+  formatNumber3(n: any) {
+    if (n !== null) {
+      return n.toString().replace(/\ /g, '');
     }
   }
 }

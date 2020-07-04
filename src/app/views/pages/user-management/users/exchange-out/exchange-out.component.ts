@@ -164,7 +164,7 @@ export class ExchangeOutComponent implements OnInit {
 
   getAccount() {
     const userId = localStorage.getItem('userId');
-    this.account$ = this.userService.getListAccount(userId);
+    this.account$ = this.userService.getListAccountExchange(userId);
     this.account$.subscribe((val) => {
       val.forEach((element) => {
         this.account.push({

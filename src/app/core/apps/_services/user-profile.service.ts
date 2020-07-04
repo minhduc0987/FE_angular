@@ -31,4 +31,12 @@ export class UserProfileService {
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<User>(url, {headers : httpHeaders})
 	}
+
+	getListAccountExchange(userId): Observable<any> {
+		const url = API_USERS_URL + '/' + userId + '/useableAccounts';
+		const userToken = localStorage.getItem(environment.authTokenKey);
+		let httpHeaders = new HttpHeaders();
+		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
+		return this.http.get<User>(url, {headers : httpHeaders})
+	}
 }

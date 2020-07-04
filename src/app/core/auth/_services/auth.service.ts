@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 
-const API_LOGIN_URL =  environment.urlBE + 'api/user/auth/login';
+const API_LOGIN_URL =  environment.urlBE + 'api/admin/auth/login';
 const API_USERS_URL = environment.urlBE + 'api/users/current';
 
 @Injectable()

@@ -31,4 +31,9 @@ export class UserProfileService {
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<User>(url, {headers : httpHeaders})
 	}
+
+	getUser(params): Observable<User> {
+		const url = environment.urlBE + 'api/admin/user/find'
+		return this.http.post<User>(url, params)
+	}
 }

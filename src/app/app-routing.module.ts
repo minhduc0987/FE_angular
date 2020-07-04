@@ -20,27 +20,6 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./views/pages/dashboard/dashboard.module').then(m => m.DashboardModule),
       },
-      {
-        path: 'user-detail',
-        canActivate: [AuthGuard],
-        loadChildren: () => import('./views/pages/user-management/user-management.module').then(m => m.UserManagementModule),
-      },
-      {
-        path: 'about',
-        component: AboutComponent
-      },
-      {
-        path: 'tin-tuc',
-        component: TinTucComponent
-      },
-      {
-        path: 'contact',
-        component: ContactComponent
-      },
-      {
-        path: 'builder',
-        loadChildren: () => import('./views/theme/content/builder/builder.module').then(m => m.BuilderModule),
-      },
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       {path: '**', redirectTo: 'dashboard', pathMatch: 'full'},
     ],

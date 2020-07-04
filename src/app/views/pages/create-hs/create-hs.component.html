@@ -1,0 +1,47 @@
+<div class="container">
+  <mat-card class="fix-ht">
+    <h1 class="title d-flex align-items-center justify-content-center">{{ 'COMMON.BTN.HSV' | translate }}</h1>
+    <div class="title-content">{{ 'INFO_USER_VAY' | translate }}</div>
+    <form [formGroup]="formId">
+      <div>
+        <div class="label-left">Họ và tên</div>
+        <input type="text" class="input select" formControlName="idBank" required />
+      </div>
+      <div>
+        <div class="label-left">Số điện thoại</div>
+        <input type="text" class="input select" formControlName="money" required />
+      </div>
+      <div>
+        <div class="label-left">Địa chỉ</div>
+        <input type="text" class="input select" formControlName="money" required />
+      </div>
+      <div>
+        <div class="label-left">Số CMND/Hộ chiếu</div>
+        <input type="text" class="input select" formControlName="idBank" required />
+      </div>
+    </form>
+    <div class="title-content">{{ 'INFO_VAY' | translate }}</div>
+    <form [formGroup]="formId">
+      <div>
+        <div class="label-left">Số tiền cần vay</div>
+        <input type="text" class="input select" formControlName="note" required />
+      </div>
+      <div>
+        <div class="label-left">Thời gian vay</div>
+        <input type="text" class="input select" formControlName="note" required />
+      </div>
+      <div>
+        <div class="label-left">Lãi suất</div>
+        <input type="text" class="input select" formControlName="note" required />
+      </div>
+      <div>
+        <div class="label-left">Dự tính mỗi tháng trả</div>
+        <input type="text" class="input select" formControlName="note" required />
+      </div>
+      <div>
+        <div class="label-left">Giấy tờ xác minh</div>
+        <input type="text" class="input select" formControlName="note" required />
+      </div>
+    </form>
+  </mat-card>
+</div>

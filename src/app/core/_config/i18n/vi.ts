@@ -32,7 +32,12 @@ export const locale = {
         BACK: 'Quay lại',
         NEXT: 'Tiếp tục',
         CANCEL: 'Huỷ bỏ',
-        BTN: 'Cập nhật thông tin'
+        BTN: 'Cập nhật thông tin',
+        CK: 'Chuyển khoản',
+        GT: 'Gửi tiền',
+        RT: 'Rút tiền',
+        UNLOCK: 'Mở khoá',
+        HSV: 'Tạo hồ sơ vay tiền'
       },
     },
     VALIDATION: {
@@ -96,6 +101,8 @@ export const locale = {
     CMND: 'Số CMND/CCCD/Hộ chiếu',
     INFO: 'Thông tin cá nhân',
     INFOS: 'Thông tin các tài khoản',
-    CHOISE_HISTORY: 'Chọn tài khoản để xem lịch sử giao dịch'
+    CHOISE_HISTORY: 'Chọn tài khoản để xem lịch sử giao dịch',
+    INFO_VAY: 'Thông tin vay tiền',
+    INFO_USER_VAY: 'Thông tin khách hàng vay tiền',
   }
 };

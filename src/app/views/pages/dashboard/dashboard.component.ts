@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   constructor(private userProfileService: UserProfileService, private router: Router, private _formBuilder: FormBuilder) {}
   ngOnInit(): void {
     this.formId = this._formBuilder.group({
-      id: ['', Validators.required],
+      id: ['12312312300', Validators.required],
       select: ['IDCARDNUMBER', Validators.required],
     });
     this.formId.get('id').valueChanges.subscribe((val) => {

@@ -47,8 +47,8 @@ export class UserProfile4Component implements OnInit {
   /**
    * On init
    */
-  async ngOnInit(): Promise<void> {
-    this.user$ = await this.userProfileService.getUserProfile();
+  ngOnInit() {
+    this.user$ = this.userProfileService.getUserProfile();
     this.user$.subscribe(
       (user) => {
         localStorage.setItem('user', JSON.stringify(user));

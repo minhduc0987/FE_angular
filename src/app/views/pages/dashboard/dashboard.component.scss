@@ -29,3 +29,6 @@
   display: inline-block;
   margin: 0 10px;
 }
+.fix-ht {
+  min-height: calc(100vh - 200px);
+}

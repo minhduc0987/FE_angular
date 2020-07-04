@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-card>
+  <mat-card class="fix-ht">
     <h1 class="d-flex align-items-center justify-content-center">{{ 'USER_INFO' | translate }}</h1>
     <div>
       <form [formGroup]="formId">
@@ -76,8 +76,21 @@
           </mat-list-item>
           <mat-divider></mat-divider>
         </mat-list>
-        <div class="m-3 text-right">
-          <button mat-raised-button color="primary" (click)="update()">{{ 'COMMON.BTN.BTN' | translate }}</button>
+        <div class="d-flex justify-content-end">
+          <div class="m-3 text-right">
+            <button mat-raised-button color="primary" routerLink="/gui-tien">
+              {{ 'COMMON.BTN.GT' | translate }}
+            </button>
+          </div>
+          <div class="m-3 text-right">
+            <button mat-raised-button color="primary"  routerLink="/rut-tien">{{ 'COMMON.BTN.RT' | translate }}</button>
+          </div>
+          <div class="m-3 text-right">
+            <button mat-raised-button color="primary" (click)="update()">{{ 'COMMON.BTN.UNLOCK' | translate }}</button>
+          </div>
+          <div class="m-3 text-right">
+            <button mat-raised-button color="primary"  routerLink="/tao-ho-so">{{ 'COMMON.BTN.HSV' | translate }}</button>
+          </div>
         </div>
       </mat-card>
     </div>

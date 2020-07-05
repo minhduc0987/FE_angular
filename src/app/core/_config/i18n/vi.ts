@@ -56,6 +56,7 @@ export const locale = {
       PASSWORD: 'Vui lòng nhập password',
       PASSWORD_NO: 'Password sai định dạng, vui lòng nhập lại',
       OTP: 'Vui lòng nhập mã OTP',
+      CMND: 'Số CMND/CCCD/Hộ chiếu không hợp lệ',
     },
     EXCHANGE: {
       SUCCESS: 'Giao dịch thành công',
@@ -98,5 +99,5 @@ export const locale = {
     INFO: 'Thông tin cá nhân',
     INFOS: 'Thông tin các tài khoản',
     CHOISE_HISTORY: 'Chọn tài khoản để xem lịch sử giao dịch'
-  }
+  },
 };

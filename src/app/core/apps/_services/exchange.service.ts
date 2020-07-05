@@ -47,10 +47,15 @@ export class ExchangeService {
 	getlistCheque(accountId: any): Observable<any> {
 		const userId = sessionStorage.getItem('userId');
 		let url;
-			url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions';
+			url = API_USERS_URL + userId + '/accounts/' + accountId + '/cheques';
 		const userToken = sessionStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<any>(url, {headers: httpHeaders})
+	}
+
+	createSec(params,userId, id): Observable<any> {
+		let url = API_USERS_URL + userId + '/accounts/' + id + '/cheques';
+		return this.http.post<any>(url, params)
 	}
 }

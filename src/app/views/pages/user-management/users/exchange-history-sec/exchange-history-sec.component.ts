@@ -28,7 +28,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
   // Table fields
-  displayedColumns = ['id', 'amount', 'type', 'amountAfter', 'date'];
+  displayedColumns = ['id', 'name', 'info', 'money', 'date1', 'date2', 'status1', 'status2'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   accountId: any
   account$: Observable<any>;
@@ -68,12 +68,17 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
 
   change(event) {
     this.id = event.id
-    this.dataSource$ = this.exchangeService.getlistExchange(event.id);
+    this.dataSource$ = this.exchangeService.getlistCheque(event.id);
+    this.dataSource$.subscribe(val=> {
+      val.forEach(element => {
+        const date = new Date(element.createdAt) 
+      });
+    })
   }
-  setItems(event) {
-    const page = event.pageIndex + 1;
-    this.dataSource$ = this.exchangeService.getlistExchange(this.id, page);
-  }
+  // setItems(event) {
+  //   const page = event.pageIndex + 1;
+  //   this.dataSource$ = this.exchangeService.getlistCheque(this.id, page);
+  // }
   getAmount(n) {
     if(n && typeof n === 'number') {
       return this.formatNumber(Math.abs(n));

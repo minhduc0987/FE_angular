@@ -61,102 +61,16 @@ export class ExchangeInComponent implements OnInit {
       stk: [null, Validators.required],
     });
     this.formId = this._formBuilder.group({
-      idBank: ['', Validators.required],
+      name: ['', Validators.required],
+      cmnd: ['', Validators.required],
       money: ['', Validators.required],
-      note: ['', Validators.required],
-    });
-    this.formPass = this._formBuilder.group({
-      password: ['', Validators.required],
-    });
-    this.formPass2 = this._formBuilder.group({
-      password2: ['', Validators.required],
-    });
-    this.formId.get('idBank').valueChanges.subscribe((val) => {
-      this.name = '';
-      if (val && Number(val) && val.length === 12) {
-        this.getNguoiNhan(val);
-      }
     });
     this.getAccount();
   }
 
-  submit() {
-    if (!this.formPass.get('password').value) {
-      const message = this.translate.instant('VALIDATION.PASSWORD');
-      this.layoutUtilsService.showActionNotification(message);
-      return;
-    }
-    if (this.formPass.get('password').value.length !== 4) {
-      const message = this.translate.instant('VALIDATION.PASSWORD_NO');
-      this.layoutUtilsService.showActionNotification(message);
-      this.formPass.patchValue({
-        password: '',
-      });
-      return;
-    }
-    const params = {
-      accountNumber: this.formId.get('idBank').value,
-      amount: this.formId.get('money').value,
-      fullName: this.name,
-      pin: this.formPass.get('password').value,
-      description: this.formId.get('note').value,
-    };
-    this.account.forEach((val) => {
-      if (val.accountNumber === this.form1) {
-        return;
-      }
-    });
-    if (this.show) {
-      this.exchangeService.exchange(params, this.form1.get('stk').value).subscribe(
-        (res) => {
-          if (res.message && res.message === 'Tranfer successfully') {
-            this.show = false;
-            this.show2 = false;
-            const message = this.translate.instant('EXCHANGE.SUCCESS');
-            this.layoutUtilsService.showActionNotification(message);
-            setTimeout(() => {
-              this.router.navigateByUrl('/user-detail/lich-su-giao-dich');
-            }, 3000);
-          } else {
-            this.show = false;
-            this.show2 = true;
-            this.idGd = res.message;
-          }
-        },
-        (err) => {
-          const message = this.translate.instant('ERROR');
-          this.layoutUtilsService.showActionNotification(message);
-        },
-      );
-    }
-  }
-
-  submit2() {
-    const params = {
-      transactionQueueId: this.idGd,
-      otpCode: this.formPass2.get('password2').value,
-    };
-    if (this.show2) {
-      this.exchangeService.exchangeOTP(params).subscribe(
-        (val) => {
-          this.show2 = false;
-          const message = this.translate.instant('EXCHANGE.SUCCESS');
-          this.layoutUtilsService.showActionNotification(message);
-          setTimeout(() => {
-            this.router.navigateByUrl('/user-detail/lich-su-giao-dich');
-          }, 3000);
-        },
-        (_err: any) => {
-          const message = this.translate.instant('ERROR');
-          this.layoutUtilsService.showActionNotification(message);
-        },
-      );
-    }
-  }
-
   getAccount() {
     const userId = sessionStorage.getItem('userId');
-    this.account$ = this.userService.getListAccount(userId);
+    this.account$ = this.userService.getListAccountExchange(userId);
     this.account$.subscribe((val) => {
       val.forEach((element) => {
         this.account.push({
@@ -169,39 +83,8 @@ export class ExchangeInComponent implements OnInit {
     });
   }
 
-  onKeyMoney() {
-    this.formId.patchValue({
-      money: this.formatNumber(this.formId.get('money').value)
-    })
-  }
-
-  onKeyBank() {
-    this.formId.patchValue({
-      idBank: this.formatNumber(this.formId.get('idBank').value)
-    })
-  }
-
   changeI1(e) {
     this.soDu = this.formatNumber(e.amount);
-  }
-
-  getNguoiNhan(id: string) {
-    let params;
-    if (this.form1.get('selectPT').value === '1') {
-      params = {
-        term: id,
-        type: 'ACCOUNTNUMBER',
-      };
-    } else {
-      params = {
-        term: id,
-        type: 'CARDNUMBER',
-      };
-    }
-    this.userExchange$ = this.exchangeService.getUserExchange(params);
-    this.userExchange$.subscribe((val) => {
-      this.name = val.fullname;
-    });
   }
 
   next() {
@@ -218,17 +101,17 @@ export class ExchangeInComponent implements OnInit {
       this.layoutUtilsService.showActionNotification(message);
       return;
     }
-    if (!this.formId.get('idBank').value) {
+    if (!this.formId.get('name').value) {
       const message = this.translate.instant('VALIDATION.NGUOI_NHAN');
       this.layoutUtilsService.showActionNotification(message);
       return;
     }
-    if (!this.name) {
-      const message = this.translate.instant('VALIDATION.NGUOI_NHAN1');
+    if (!this.formId.get('cmnd').value || this.formId.get('cmnd').value.length !== 12) {
+      const message = this.translate.instant('VALIDATION.CMND');
       this.layoutUtilsService.showActionNotification(message);
       return;
     }
-    const money = this.formId.get('money').value;
+    const money = this.formatNumber2(this.formId.get('money').value);
     if (!money) {
       const message = this.translate.instant('VALIDATION.MONEY_NONE');
       this.layoutUtilsService.showActionNotification(message);
@@ -244,36 +127,31 @@ export class ExchangeInComponent implements OnInit {
       this.layoutUtilsService.showActionNotification(message);
       return;
     }
-    if (this.soDu) {
-      const sodu = Number(this.formatNumber2(this.soDu));
-      if (Number(money) > sodu) {
-        const message = this.translate.instant('VALIDATION.MONEY_MAX');
-        this.layoutUtilsService.showActionNotification(message);
-        return;
-      }
+
+    const params = {
+      recieverFullname: this.formId.get('name').value,
+      recieverIdCardNumber: Number(this.formId.get('cmnd').value),
+      transactionAmount: Number(this.formatNumber2(this.formId.get('money').value)),
     }
-    if (!this.formId.get('note').value) {
-      const message = this.translate.instant('VALIDATION.NOTE');
+
+    const userId = sessionStorage.getItem('userId');
+    const id = this.form1.get('stk').value
+
+    this.exchangeService.createSec(params,userId,id).subscribe((val) => {
+      const message = this.translate.instant('SUCCESS');
       this.layoutUtilsService.showActionNotification(message);
-      return;
+    },
+    (err)=>{
+      const message = this.translate.instant('ERROR');
+      this.layoutUtilsService.showActionNotification(message);
     }
-    this.show = true;
+    )
   }
 
-  next2() {
-    this.show = false;
-    this.show2 = true;
-  }
-
-  cancel() {
-    this.show = false;
-    this.show2 = false;
-    this.formPass.patchValue({
-      password: '',
-    });
-    this.formPass2.patchValue({
-      password2: '',
-    });
+  onKeyMoney() {
+    this.formId.patchValue({
+      money: this.formatNumber(this.formId.get('money').value)
+    })
   }
 
   formatNumber(n: any) {

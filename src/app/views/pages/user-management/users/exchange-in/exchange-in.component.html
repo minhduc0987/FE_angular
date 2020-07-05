@@ -46,44 +46,21 @@
   <mat-card>
     <form [formGroup]="formId">
       <div>
-        <div class="label-left">{{ 'EXCHANGE.NHAN' | translate }}</div>
-        <input type="text" class="input select" formControlName="idBank" (keyup)="onKeyBank()" required placeholder="{{ 'EXCHANGE.NHAN' | translate }}"/>
+        <div class="label-left">{{ 'EXCHANGE.NAME_NHAN' | translate }}</div>
+        <input type="text" class="input select" formControlName="name" required placeholder="{{ 'EXCHANGE.NAME_NHAN' | translate }}"/>
       </div>
       <div>
-        <div class="label-left">{{ 'EXCHANGE.NAME_NHAN' | translate }}</div>
-        <div class="select" *ngIf="userExchange$ | async as _ussr">{{ name }}</div>
+        <div class="label-left">{{ 'CMND' | translate }}</div>
+        <input type="text" class="input select" formControlName="cmnd" required placeholder="{{ 'CMND' | translate }}"/>
       </div>
       <div>
         <div class="label-left">{{ 'EXCHANGE.MONEY' | translate }}</div>
         <input type="text" class="input select" formControlName="money" (keyup)="onKeyMoney()" required placeholder="{{ 'EXCHANGE.MONEY' | translate }}"/>
-      </div>
-      <div>
-        <div class="label-left">{{ 'EXCHANGE.NOTE' | translate }}</div>
-        <input type="text" class="input select" formControlName="note" required placeholder="{{ 'EXCHANGE.NOTE' | translate }}"/>
       </div>
     </form>
   </mat-card>
   <div class="button-next">
     <div (click)="next()" class="next">{{ 'COMMON.BTN.NEXT' | translate }}</div>
   </div>
-  <div class="popup" *ngIf="show">
-    <div class="title-popup">{{ 'IN_PASSWORD' | translate }}</div>
-    <form [formGroup]="formPass">
-      <input type="password" class="input select" formControlName="password" required />
-    </form>
-    <div class="box-button">
-      <div class="button-popup" (click)="cancel()">{{ 'COMMON.BTN.CANCEL' | translate }}</div>
-      <div class="button-popup next" (click)="submit()">{{ 'COMMON.BTN.NEXT' | translate }}</div>
-    </div>
-  </div>
-  <div class="popup" *ngIf="show2">
-    <div class="title-popup">{{ 'IN_OTP' | translate }}</div>
-    <form [formGroup]="formPass2">
-      <input type="password" class="input select" formControlName="password2" required />
-    </form>
-    <div class="box-button">
-      <div class="button-popup" (click)="cancel()">{{ 'COMMON.BTN.CANCEL' | translate }}</div>
-      <div class="button-popup next" (click)="submit2()">{{ 'COMMON.BTN.CANCEL' | translate }}</div>
-    </div>
-  </div>
+  
 </div>

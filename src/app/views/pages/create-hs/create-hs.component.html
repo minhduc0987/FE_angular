@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container po_re">
   <mat-card class="fix-ht">
     <h1 class="title d-flex align-items-center justify-content-center">{{ 'COMMON.BTN.HSV' | translate }}</h1>
     <div class="title-content">{{ 'INFO_USER_VAY' | translate }}</div>
@@ -84,9 +84,19 @@
           </ng-container>
         </div>
         <div class="d-flex justify-content-end">
-          <button mat-raised-button color="primary" (click)="update()">Duyệt tài sản thế chấp</button>
+          <button mat-raised-button color="primary" (click)="submit()">Duyệt tài sản thế chấp</button>
         </div>
       </div>
     </form>
   </mat-card>
+  <div class="popup" *ngIf="isOtp">
+    <div class="title-popup">{{ 'IN_OTP' | translate }}</div>
+    <form [formGroup]="formPass2">
+      <input type="password" class="input select" formControlName="password2" required />
+    </form>
+    <div class="box-button">
+      <div class="button-popup" (click)="cancel()">{{ 'COMMON.BTN.CANCEL' | translate }}</div>
+      <div class="button-popup next" (click)="submit2()">Tiếp tục</div>
+    </div>
+  </div>
 </div>

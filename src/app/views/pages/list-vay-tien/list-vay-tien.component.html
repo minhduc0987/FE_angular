@@ -1,0 +1,80 @@
+<div class="container">
+  <kt-portlet>
+    <kt-portlet-header title="{{ 'COMMON.BTN.LISTHSV' | translate }}" [class]="'card-head-lg'">
+      <ng-container ktPortletTools> </ng-container>
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+      <div class="mat-table__wrapper">
+        <mat-table class="lmat-elevation-z8" #table [dataSource]="dataSource$">
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let account">FPTV072020{{dataSource$.id }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef>Số tiền vay</mat-header-cell>
+            <mat-cell *matCellDef="let account">{{ getAmount(account.amount) }} VNĐ</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef>Thời gian vay</mat-header-cell>
+            <mat-cell *matCellDef="let account">{{ account.loanInterestRate.months}} tháng</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="lai">
+            <mat-header-cell *matHeaderCellDef>Lãi suất</mat-header-cell>
+            <mat-cell *matCellDef="let account">{{ account.loanInterestRate.interestRate }} %</mat-cell>
+		  </ng-container>
+		  
+		  <ng-container matColumnDef="date2">
+            <mat-header-cell *matHeaderCellDef>Ngày tạo</mat-header-cell>
+            <mat-cell *matCellDef="let account">{{ account.createdAt }}</mat-cell>
+		  </ng-container>
+		  
+		  <ng-container matColumnDef="tstc">
+            <mat-header-cell *matHeaderCellDef>Tài sản thế chấp</mat-header-cell>
+            <mat-cell *matCellDef="let account">
+				<ng-container *ngFor="let tstc of account.assets">
+					<a>
+						{{ tstc.name }}
+					</a>
+				</ng-container>
+			</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>Trạng thái</mat-header-cell>
+            <mat-cell *matCellDef="let account">{{ getStatus(account) }}</mat-cell>
+		  </ng-container>
+		  
+		  <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef>ACTIONS</mat-header-cell>
+            <mat-cell *matCellDef="let account">
+				<button mat-icon-button color="primary">
+					<mat-icon>forward</mat-icon>
+				</button>
+				<button mat-icon-button color="warn" type="button">
+					<mat-icon>delete</mat-icon>
+				</button>
+			</mat-cell>
+		  </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </div>
+      <!-- <div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
+        <mat-paginator
+          [pageSize]="5"
+          [pageIndex]="dataSource.pageNumber - 1"
+          [pageSizeOptions]="[5]"
+          (page)="pageEvent = setItems($event)"
+          [length]="dataSource.totalCount"
+          [showFirstLastButtons]="true"
+        ></mat-paginator>
+      </div> -->
+    </kt-portlet-body>
+  </kt-portlet>
+</div>

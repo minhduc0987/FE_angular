@@ -38,7 +38,8 @@ export const locale = {
         GT: 'Gửi tiền',
         RT: 'Rút tiền',
         UNLOCK: 'Mở khoá',
-        HSV: 'Tạo hồ sơ vay tiền'
+        HSV: 'Tạo hồ sơ vay tiền',
+        LISTHSV: 'Danh sách hồ sơ vay tiền'
       },
     },
     VALIDATION: {

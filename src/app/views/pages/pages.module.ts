@@ -42,9 +42,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { InterceptService, HttpUtilsService, TypesUtilsService, LayoutUtilsService } from 'src/app/core/_base/crud';
 import { ActionNotificationComponent, FormTstcDialogComponent } from '../partials/content/crud';
 import { TranslateModule } from '@ngx-translate/core';
+import { ListVayTienComponent } from './list-vay-tien/list-vay-tien.component';
 
 @NgModule({
-  declarations: [TinTucComponent, AboutComponent, ContactComponent, RutTienComponent, GuiTienComponent, CreateHsComponent],
+  declarations: [TinTucComponent, AboutComponent, ContactComponent, RutTienComponent, GuiTienComponent, CreateHsComponent, ListVayTienComponent],
   exports: [],
   imports: [
     CommonModule,

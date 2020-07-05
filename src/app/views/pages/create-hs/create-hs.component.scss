@@ -50,3 +50,63 @@
     text-decoration: underline;
   }
 }
+.po_re {
+  position: relative;
+}
+.popup {
+  position: absolute;
+  z-index: 11;
+  width: 450px;
+  height: 180px;
+  left: calc(50% - 220px);
+  top: calc(40% - 75px);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  .title-popup {
+    height: 32px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    background-color: #ed1c24;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .select {
+    margin: 25px auto;
+    display: flex;
+    min-width: 100px;
+  }
+
+  .box-button {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .button-popup {
+      min-width: 90px;
+      height: 32px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+    .next {
+      background-color: #ed1c24;
+      color: #fff;
+      font-size: 16px;
+    }
+  }
+}

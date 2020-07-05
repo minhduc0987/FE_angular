@@ -17,13 +17,16 @@ import { Router } from '@angular/router';
 export class CreateHsComponent implements OnInit {
   formId: FormGroup;
   formId2: FormGroup;
+  formPass2: FormGroup;
   listHsv = [];
   loans = [];
   loan$: Observable<any>;
   userIn = [];
   userIn$: Observable<any>;
   isTstc = false;
+  isOtp = false;
   proId: any;
+  loanProfileId: any;
   constructor(
     private _formBuilder: FormBuilder,
     public dialog: MatDialog,
@@ -49,6 +52,9 @@ export class CreateHsComponent implements OnInit {
       money: ['', Validators.required],
       tk: ['', Validators.required],
       description: ['', Validators.required],
+    });
+    this.formPass2 = this._formBuilder.group({
+      password2: ['', Validators.required],
     });
     this.getLoan();
     this.getUserIn();
@@ -166,11 +172,49 @@ export class CreateHsComponent implements OnInit {
     const userId = JSON.parse(sessionStorage.getItem('userSearch')).id;
     const id = this.proId;
     this.exchangeService.addTstc(params,userId, id).subscribe(val => {
-      const message = this.translate.instant('SUCCESS');
+      const message = 'Thêm tài sản thế chấp thành công';
       this.layoutUtilsService.showActionNotification(message);
-      setTimeout(() => {
-        this.router.navigateByUrl('/user-detail/lich-su-giao-dich');
-      }, 3000);
+    },
+    (err)=> {
+      const message = this.translate.instant('ERROR');
+      this.layoutUtilsService.showActionNotification(message);
+    })
+  }
+
+  submit() {
+    const params = {
+      loanProfileId: this.proId
+    }
+    const userId = JSON.parse(sessionStorage.getItem('userSearch')).id;
+    this.exchangeService.approveHsv(params, userId).subscribe(val => {
+      const message = 'Xác nhận hồ sơ vay thành công';
+      this.layoutUtilsService.showActionNotification(message);
+      this.isOtp = true;
+      this.ref.markForCheck();
+    },
+    (err)=> {
+      const message = this.translate.instant('ERROR');
+      this.layoutUtilsService.showActionNotification(message);
+    })
+  }
+  cancel () {
+    this.isOtp = false;
+  }
+
+  submit2() {
+    const params = {
+      loanProfileId: this.proId,
+      otpCode: this.formPass2.get('password2').value
+    }
+    this.exchangeService.comfirmHsv(params).subscribe(val => {
+      this.isOtp = false;
+      this.ref.markForCheck();
+      const message = 'Xác nhận hồ sơ vay thành công';
+      this.layoutUtilsService.showActionNotification(message);
+    },
+    (err)=> {
+      const message = this.translate.instant('ERROR');
+      this.layoutUtilsService.showActionNotification(message);
     })
   }
 }

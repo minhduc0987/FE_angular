@@ -1,5 +1,5 @@
 // Angular
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 // RxJS
 import { Observable } from 'rxjs';
 // NGRX
@@ -17,6 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './user-profile4.component.html',
   styleUrls: ['./user-profile4.component.scss'],
   providers: [UserProfileService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserProfile4Component implements OnInit {
   // Public properties
@@ -38,6 +39,7 @@ export class UserProfile4Component implements OnInit {
     private userProfileService: UserProfileService,
     private router: Router,
     private translate: TranslateService,
+    private ref: ChangeDetectorRef,
   ) {}
 
   /**
@@ -52,6 +54,7 @@ export class UserProfile4Component implements OnInit {
     this.user$.subscribe(
       (user) => {
         sessionStorage.setItem('user', JSON.stringify(user));
+        this.ref.markForCheck();
       },
       (err) => {
         sessionStorage.removeItem(environment.authTokenKey);
@@ -59,7 +62,6 @@ export class UserProfile4Component implements OnInit {
         sessionStorage.removeItem('userId');
         sessionStorage.removeItem('user');
         this.router.navigate(['/auth/login']);
-        // document.location.reload();
       },
     );
     if (sessionStorage.getItem(environment.authTokenKey)) {

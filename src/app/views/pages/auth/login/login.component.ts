@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   initLoginForm() {
     this.loginForm = this.fb.group({
       username: [
-        'minhduc_1',
+        'employee_1',
         Validators.compose([
           Validators.required,
           Validators.minLength(3),

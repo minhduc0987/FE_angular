@@ -7,3 +7,30 @@
     color: #ed1c24;
     font-size: 24px;
 }
+::ng-deep {
+    .mat-column-id {
+        flex: 0 0 130px;
+    }
+    .mat-column-amount {
+        flex: 0 0 130px;
+        padding-right: 20px;
+        justify-content: flex-end;
+    }
+    .mat-header-cell, .mat-column-status1, .mat-column-status2 {
+        justify-content: center;
+    }
+    .mat-column-type {
+        flex: 0 0 80px;
+        justify-content: center;
+    }
+    .mat-column-amountAfter {
+        flex: 0 0 150px;
+        padding-right: 20px;
+        justify-content: flex-end;
+    }
+    .mat-column-date1, .mat-column-date2 {
+        flex: 0 0 150px;
+        padding-right: 20px;
+    }
+
+}

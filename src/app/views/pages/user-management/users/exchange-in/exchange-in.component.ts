@@ -71,16 +71,23 @@ export class ExchangeInComponent implements OnInit {
   getAccount() {
     const userId = sessionStorage.getItem('userId');
     this.account$ = this.userService.getListAccountExchange(userId);
-    this.account$.subscribe((val) => {
-      val.forEach((element) => {
-        this.account.push({
-          id: element.id,
-          amount: element.amount,
-          stk: element.accountNumber + ' - Số dư ' + this.formatNumber(element.amount) + ' VNĐ',
-          st: element.card.cardNumber,
+    this.account$.subscribe(
+      (val) => {
+        val.forEach((element) => {
+          this.account.push({
+            id: element.id,
+            amount: element.amount,
+            stk: element.accountNumber + ' - Số dư ' + this.formatNumber(element.amount) + ' VNĐ',
+            st: element.card.cardNumber,
+          });
         });
-      });
-    });
+      },
+      (err) => {
+        const message = this.translate.instant('ERROR');
+        this.layoutUtilsService.showActionNotification(message, 'danger');
+        return;
+      }
+    );
   }
 
   changeI1(e) {
@@ -132,26 +139,27 @@ export class ExchangeInComponent implements OnInit {
       recieverFullname: this.formId.get('name').value,
       recieverIdCardNumber: Number(this.formId.get('cmnd').value),
       transactionAmount: Number(this.formatNumber2(this.formId.get('money').value)),
-    }
+    };
 
     const userId = sessionStorage.getItem('userId');
-    const id = this.form1.get('stk').value
+    const id = this.form1.get('stk').value;
 
-    this.exchangeService.createSec(params,userId,id).subscribe((val) => {
-      const message = this.translate.instant('SUCCESS');
-      this.layoutUtilsService.showActionNotification(message);
-    },
-    (err)=>{
-      const message = this.translate.instant('ERROR');
-      this.layoutUtilsService.showActionNotification(message);
-    }
-    )
+    this.exchangeService.createSec(params, userId, id).subscribe(
+      (val) => {
+        const message = this.translate.instant('SUCCESS');
+        this.layoutUtilsService.showActionNotification(message);
+      },
+      (err) => {
+        const message = this.translate.instant('ERROR');
+        this.layoutUtilsService.showActionNotification(message);
+      },
+    );
   }
 
   onKeyMoney() {
     this.formId.patchValue({
-      money: this.formatNumber(this.formId.get('money').value)
-    })
+      money: this.formatNumber(this.formId.get('money').value),
+    });
   }
 
   formatNumber(n: any) {

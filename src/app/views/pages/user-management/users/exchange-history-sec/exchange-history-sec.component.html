@@ -38,33 +38,39 @@
 				</ng-container>
 
 				<ng-container matColumnDef="info">
-					<mat-header-cell *matHeaderCellDef>Số CMND người nhận</mat-header-cell>
+					<mat-header-cell *matHeaderCellDef>Số CMND</mat-header-cell>
 					<mat-cell *matCellDef="let account">{{account.recieverIdCardNumber}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="money">
-					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.SD_MONEY' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{formatNumber(account.transactionAmount)}}</mat-cell>
+					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.MONEY' | translate }}</mat-header-cell>
+					<mat-cell *matCellDef="let account">{{formatNumber(account.transactionAmount)}} VNĐ</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="date1">
 					<mat-header-cell *matHeaderCellDef>Ngày phát hành</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.createdAt}}</mat-cell>
+					<mat-cell *matCellDef="let account">
+						{{getDate(account.createdAt)}}
+					</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="date2">
 					<mat-header-cell *matHeaderCellDef>Ngày hết hạn</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.expiredDate}}</mat-cell>
+					<mat-cell *matCellDef="let account">{{getDate(account.expiredDate)}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="status1">
 					<mat-header-cell *matHeaderCellDef>Trạng thái giao dịch</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.status}}</mat-cell>
+					<mat-cell *matCellDef="let account">{{getStatus(account)}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="status2">
 					<mat-header-cell *matHeaderCellDef>Hành động</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.canceled}}</mat-cell>
+					<mat-cell *matCellDef="let account">
+						<button mat-icon-button color="warn" (click)=cancelSec(account) *ngIf="getStatus2(account.canceled)">
+							<mat-icon>delete</mat-icon>
+						</button>
+					</mat-cell>
 				</ng-container>
 
 				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -58,4 +58,9 @@ export class ExchangeService {
 		let url = API_USERS_URL + userId + '/accounts/' + id + '/cheques';
 		return this.http.post<any>(url, params)
 	}
+
+	deleteSec(userId, accId, id) : Observable<any> {
+		let url = API_USERS_URL + userId + '/accounts/' + accId + '/cheques/' + id + '/cancel';
+		return this.http.get<any>(url)
+	}
 }

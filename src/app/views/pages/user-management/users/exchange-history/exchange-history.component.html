@@ -54,7 +54,7 @@
 
 				<ng-container matColumnDef="date">
 					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.DATE' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.createdAt}}</mat-cell>
+					<mat-cell *matCellDef="let account">{{getDate(account.createdAt)}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="des">

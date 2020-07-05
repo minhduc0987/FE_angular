@@ -12,6 +12,8 @@ import { QueryParamsModel } from '../../../../../core/_base/crud';
 import { ExchangeService, UserProfileService } from 'src/app/core/apps';
 import {PageEvent} from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
+// @ts-ignore
+import moment from 'moment';
 
 // Table with EDIT item in MODAL
 // ARTICLE for table with sort/filter/paginator
@@ -85,5 +87,8 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
+  }
+  getDate(date) {
+    return moment(date).format('YYYY/MM/DD HH:mm');
   }
 }

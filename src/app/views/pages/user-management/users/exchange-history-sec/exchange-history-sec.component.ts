@@ -4,13 +4,15 @@ import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDe
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+// @ts-ignore
+import moment from 'moment';
 // RXJS
 import { Observable, Subscription } from 'rxjs';
 // Services
-import { QueryParamsModel } from '../../../../../core/_base/crud';
+import { QueryParamsModel, LayoutUtilsService } from '../../../../../core/_base/crud';
 // Models
 import { ExchangeService, UserProfileService } from 'src/app/core/apps';
-import {PageEvent} from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
 
 // Table with EDIT item in MODAL
@@ -30,7 +32,7 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
   // Table fields
   displayedColumns = ['id', 'name', 'info', 'money', 'date1', 'date2', 'status1', 'status2'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  accountId: any
+  accountId: any;
   account$: Observable<any>;
   dataSource$: Observable<any>;
   pageEvent: PageEvent;
@@ -39,8 +41,9 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   constructor(
     private exchangeService: ExchangeService,
+    private layoutUtilsService: LayoutUtilsService,
     private userService: UserProfileService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {}
 
   ngOnInit() {
@@ -51,44 +54,66 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((el) => el.unsubscribe());
   }
 
-  async loadListAccount() {
-
-  }
+  async loadListAccount() {}
   getType(amount) {
     if (Number(amount) > 0) {
-      return 'Nhận'
+      return 'Nhận';
     }
-    return 'Chuyển'
+    return 'Chuyển';
   }
 
   getAccount() {
-    const userId = sessionStorage.getItem('userId')
+    const userId = sessionStorage.getItem('userId');
     this.account$ = this.userService.getListAccount(userId);
   }
 
   change(event) {
-    this.id = event.id
+    this.id = event.id;
     this.dataSource$ = this.exchangeService.getlistCheque(event.id);
-    this.dataSource$.subscribe(val=> {
-      val.forEach(element => {
-        const date = new Date(element.createdAt) 
-      });
-    })
   }
-  // setItems(event) {
-  //   const page = event.pageIndex + 1;
-  //   this.dataSource$ = this.exchangeService.getlistCheque(this.id, page);
-  // }
+
+  getDate(date) {
+    return moment(date).format('YYYY/MM/DD HH:mm');
+  }
   getAmount(n) {
-    if(n && typeof n === 'number') {
+    if (n && typeof n === 'number') {
       return this.formatNumber(Math.abs(n));
     }
   }
   formatNumber(n: any) {
     if (n !== null) {
-      return n
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
+  }
+
+  getStatus(n) {
+    if (n.canceled) {
+      return 'Đã huỷ';
+    }
+    if (!n.status) {
+      return 'Chưa rút';
+    }
+    return 'Đã rút';
+  }
+
+  getStatus2(n) {
+    if (!n) {
+      return true;
+    }
+    return false;
+  }
+
+  cancelSec(item) {
+    const userId = sessionStorage.getItem('userId');
+    const accId = this.id;
+    const id = item.id;
+    this.exchangeService.deleteSec(userId, accId, id).subscribe(
+      (val) => {},
+      (err)=> {
+        const message = this.translate.instant('ERROR');
+        this.layoutUtilsService.showActionNotification(message, 'danger');
+        return;
+      }
+      );
   }
 }

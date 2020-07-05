@@ -220,7 +220,7 @@ export class ExchangeOutComponent implements OnInit {
     }
     if (!this.form1.get('stk').value) {
       const message = this.translate.instant('VALIDATION.STK');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     if (!this.formId.get('idBank').value) {
@@ -244,7 +244,7 @@ export class ExchangeOutComponent implements OnInit {
       this.layoutUtilsService.showActionNotification(message);
       return;
     }
-    if (Number(money) < 50000) {
+    if (Number(money) < 20000) {
       const message = this.translate.instant('VALIDATION.MONEY_MIN');
       this.layoutUtilsService.showActionNotification(message);
       return;

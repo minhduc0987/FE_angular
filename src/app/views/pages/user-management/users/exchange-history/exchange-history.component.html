@@ -28,8 +28,8 @@
 				*ngIf="dataSource$ | async as account">
 
 				<ng-container matColumnDef="id">
-					<mat-header-cell *matHeaderCellDef>STT</mat-header-cell>
-					<mat-cell *matCellDef="let account; let i = index;">{{i + 1}}</mat-cell>
+					<mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+					<mat-cell *matCellDef="let account">FPT072020{{account.id}}</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="key">
@@ -39,7 +39,7 @@
 
 				<ng-container matColumnDef="amount">
 					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.MONEYX' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{getAmount(account.amount)}}</mat-cell>
+					<mat-cell *matCellDef="let account">{{getAmount(account.amount)}} VNĐ</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="type">
@@ -49,12 +49,17 @@
 
 				<ng-container matColumnDef="amountAfter">
 					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.SD_MONEY' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{formatNumber(account.amountAfterTransaction)}}</mat-cell>
+					<mat-cell *matCellDef="let account">{{formatNumber(account.amountAfterTransaction)}} VNĐ</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="date">
 					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.DATE' | translate }}</mat-header-cell>
 					<mat-cell *matCellDef="let account">{{account.createdAt}}</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="des">
+					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.DES' | translate }}</mat-header-cell>
+					<mat-cell *matCellDef="let account">{{account.description}}</mat-cell>
 				</ng-container>
 
 				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

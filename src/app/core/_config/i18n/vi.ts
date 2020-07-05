@@ -50,7 +50,7 @@ export const locale = {
       NGUOI_NHAN1: 'Không tìm thấy người nhận trên hệ thống',
       MONEY_NONE: 'Số tiền chuyển không được bỏ trống',
       MONEY_NO: 'Vui lòng chỉ nhập số',
-      MONEY_MIN: 'Số tiền chuyển không được nhỏ hơn 50,000 đồng',
+      MONEY_MIN: 'Số tiền chuyển không được nhỏ hơn 20,000 đồng',
       MONEY_MAX: 'Số dư trong tài khoản của bạn không đủ',
       NOTE: 'Vui lòng nhập nội dung chuyển tiền',
       PASSWORD: 'Vui lòng nhập password',
@@ -74,7 +74,8 @@ export const locale = {
       DATE: 'Ngày giao dịch',
       KEY: 'Mã giao dịch',
       SEC: 'Tạo séc',
-      SEC_HISTORY: 'Lịch sử séc'
+      SEC_HISTORY: 'Lịch sử séc',
+      DES: 'Nội dung giao dịch',
     },
     STK: 'Số tài khoản',
     ST: 'Số thẻ',

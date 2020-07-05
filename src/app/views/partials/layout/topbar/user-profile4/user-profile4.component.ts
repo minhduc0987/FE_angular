@@ -62,7 +62,6 @@ export class UserProfile4Component implements OnInit {
         sessionStorage.removeItem('userId');
         sessionStorage.removeItem('user');
         this.router.navigate(['/auth/login']);
-        // document.location.reload();
       }
     );
     if (sessionStorage.getItem(environment.authTokenKey)) {

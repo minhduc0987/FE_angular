@@ -42,8 +42,8 @@ export class LayoutUtilsService {
    */
   showActionNotification(
     message: string,
-    type: MessageType = MessageType.Create,
-    duration: number = 4000,
+    type: string = '',
+    duration: number = 4000000,
     showCloseButton: boolean = true,
     showUndoButton: boolean = true,
     undoButtonDuration: number = 0,
@@ -51,12 +51,12 @@ export class LayoutUtilsService {
   ) {
     const data = {
       message,
+      type,
       snackBar: this.snackBar,
       showCloseButton,
       showUndoButton,
       undoButtonDuration,
       verticalPosition,
-      type,
       action: 'Undo'
     };
     return this.snackBar.openFromComponent(ActionNotificationComponent, {

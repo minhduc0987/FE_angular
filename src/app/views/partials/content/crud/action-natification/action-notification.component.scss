@@ -1,4 +1,22 @@
 .mat-snackbar-message {
-    word-break: break-all;
-    min-width: 300px;
+  word-break: break-all;
+  min-width: 300px;
+}
+::ng-deep {
+  .mat-snack-bar-container {
+    color: unset;
+    background: unset;
+    padding: 0;
+  }
+  .mat-snackbar {
+    padding: .75rem 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+    background: #323232;
+
+    &.danger {
+        background-color: #f64e60;
+        border-color: #f64e60;
+        color: #fff;
+    }
+  }
 }

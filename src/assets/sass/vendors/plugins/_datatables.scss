@@ -30,7 +30,7 @@ $dt-page-color-active: $white;
         // General
         th, td {
             font-weight: 400;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             vertical-align: middle;
             color: $dark-75;
             transition: $transition-link;
@@ -151,7 +151,7 @@ $dt-page-color-active: $white;
         // Group
         .group {
             th, td {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 font-weight: 500;
             }
         }
@@ -185,7 +185,7 @@ $dt-page-color-active: $white;
                     padding: 0.5rem;
                     text-align: center;
                     position: relative;
-                    font-size: 1.1rem;
+                    font-size: 1.2rem;
                     line-height: 1rem;
                     font-weight: 500;
                     @include border-radius($border-radius);
@@ -353,7 +353,7 @@ $dt-page-color-active: $white;
             height: 18px;
             width: 18px;
             margin-top: -9px;
-            font-size: 14px;
+            font-size: 16px;
             color: $primary;
             border: 0;
             background-color: transparent;

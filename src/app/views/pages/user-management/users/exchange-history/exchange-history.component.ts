@@ -28,7 +28,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   // Table fields
-  displayedColumns = ['id', 'amount', 'type', 'amountAfter', 'date'];
+  displayedColumns = ['id', 'amount', 'type', 'amountAfter', 'date', 'des'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   accountId: any
   account$: Observable<any>;

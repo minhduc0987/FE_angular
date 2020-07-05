@@ -67,7 +67,7 @@
 		// link text
 		.menu-text {
 			font-weight: get($item, link, text, font-weight);
-			font-size: get($item, link, text, font-size);
+			font-size: 1.2rem;
 			text-transform: get($item, link, text, font-transform);
 
 			@if has($item, link, text, padding) {

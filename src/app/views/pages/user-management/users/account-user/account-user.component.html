@@ -33,7 +33,7 @@
 
 				<ng-container matColumnDef="amount">
 					<mat-header-cell *matHeaderCellDef >{{ 'SD' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{formatNumber(getAmount(account.amount))}}</mat-cell>
+					<mat-cell *matCellDef="let account">{{formatNumber(getAmount(account.amount))}} VNĐ</mat-cell>
 				</ng-container>
 
 				<ng-container matColumnDef="member">

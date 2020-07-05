@@ -1,4 +1,4 @@
-<div class="mat-snackbar">
+<div class="mat-snackbar" [ngClass]="data?.type">
 	<div class="mat-snackbar-message">{{data.message}}</div>
 	<div class="mat-snackbar-close">
 		<button *ngIf="data.showCloseButton" 

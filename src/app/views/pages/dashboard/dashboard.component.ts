@@ -4,6 +4,7 @@ import { UserProfileService } from 'src/app/core/apps';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { LayoutUtilsService } from 'src/app/core/_base/crud';
 
 @Component({
   selector: 'kt-dashboard',
@@ -18,7 +19,7 @@ export class DashboardComponent implements OnInit {
     {key: 'PHONENUMBER', value: 'Số điện thoại'}
   ]
 
-  constructor(private userProfileService: UserProfileService, private router: Router, private _formBuilder: FormBuilder) {}
+  constructor(private userProfileService: UserProfileService, private layoutUtilsService: LayoutUtilsService, private router: Router, private _formBuilder: FormBuilder) {}
   ngOnInit(): void {
     this.formId = this._formBuilder.group({
       id: ['12312312300', Validators.required],
@@ -43,5 +44,24 @@ export class DashboardComponent implements OnInit {
       },
       (err)=>{console.log(err)},
       );
+  }
+
+  lock() {
+    const id =  JSON.parse(sessionStorage.getItem('userSearch')).id;
+    this.userProfileService.lock(id).subscribe(
+      val=>{const message = 'Thành công';
+      this.layoutUtilsService.showActionNotification(message);},
+      err=>{const message = 'Có lỗi vui lòng thao tác lại';
+      this.layoutUtilsService.showActionNotification(message);}
+    )
+  }
+  unlock() {
+    const id =  JSON.parse(sessionStorage.getItem('userSearch')).id;
+    this.userProfileService.lock(id).subscribe(
+      val=>{const message = 'Thành công';
+      this.layoutUtilsService.showActionNotification(message);},
+      err=>{const message = 'Có lỗi vui lòng thao tác lại';
+      this.layoutUtilsService.showActionNotification(message);}
+    )
   }
 }

@@ -43,9 +43,10 @@ import { InterceptService, HttpUtilsService, TypesUtilsService, LayoutUtilsServi
 import { ActionNotificationComponent, FormTstcDialogComponent } from '../partials/content/crud';
 import { TranslateModule } from '@ngx-translate/core';
 import { ListVayTienComponent } from './list-vay-tien/list-vay-tien.component';
+import { DepositComponent } from './deposit/deposit.component';
 
 @NgModule({
-  declarations: [TinTucComponent, AboutComponent, ContactComponent, RutTienComponent, GuiTienComponent, CreateHsComponent, ListVayTienComponent],
+  declarations: [TinTucComponent, AboutComponent, ContactComponent, RutTienComponent, GuiTienComponent, CreateHsComponent, ListVayTienComponent, DepositComponent],
   exports: [],
   imports: [
     CommonModule,

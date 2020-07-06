@@ -36,4 +36,14 @@ export class UserProfileService {
 		const url = environment.urlBE + 'api/admin/user/find'
 		return this.http.post<User>(url, params)
 	}
+
+	lock(id): Observable<User> {
+		const url = environment.urlBE + 'api/admin/user/lock'
+		return this.http.post<User>(url, id)
+	}
+
+	unlock(id): Observable<User> {
+		const url = environment.urlBE + 'api/admin/user/unlock'
+		return this.http.post<User>(url, id)
+	}
 }

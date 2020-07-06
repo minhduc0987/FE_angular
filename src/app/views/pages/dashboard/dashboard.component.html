@@ -86,7 +86,10 @@
             <button mat-raised-button color="primary"  routerLink="/rut-tien">{{ 'COMMON.BTN.RT' | translate }}</button>
           </div>
           <div class="m-3 text-right">
-            <button mat-raised-button color="primary" (click)="update()">{{ 'COMMON.BTN.UNLOCK' | translate }}</button>
+            <button mat-raised-button color="warn" (click)="lock()">{{ 'COMMON.BTN.LOCK' | translate }}</button>
+          </div>
+          <div class="m-3 text-right">
+            <button mat-raised-button color="primary" (click)="unlock()">{{ 'COMMON.BTN.UNLOCK' | translate }}</button>
           </div>
           <div class="m-3 text-right">
             <button mat-raised-button color="primary"  routerLink="/loans">{{ 'COMMON.BTN.LISTHSV' | translate }}</button>

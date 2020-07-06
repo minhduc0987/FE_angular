@@ -1,0 +1,101 @@
+.title {
+    height: 40px;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ed1c24;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+  }
+  .title-content {
+    color: #ed1c24;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .exchange {
+    background: #f3f4f4;
+    padding: 1rem;
+  }
+  .label-left {
+    width: 300px;
+    display: inline-block;
+    padding: 15px;
+    text-align: right;
+  }
+  .select {
+    display: inline-block;
+    width: calc(100% - 400px);
+    max-width: 400px;
+  }
+  .w-200 {
+    width: 300px;
+  }
+  
+  .button-next {
+    margin-top: 25px;
+    padding: 1rem;
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  
+    .next {
+      background-color: #ed1c24;
+      height: 32px;
+      min-width: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+  
+
+  
+    .box-button {
+      width: 100%;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      .button-popup {
+        min-width: 90px;
+        height: 32px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+      .next {
+        background-color: #ed1c24;
+        color: #fff;
+        font-size: 18px;
+      }
+  }
+  ::ng-deep {
+      .ng-select.ng-touched.ng-invalid {
+      .ng-select-container {
+        border-color: #f64e60 !important;
+      }
+    }
+  }
+  
+  :host {
+      width: 100%;
+  }

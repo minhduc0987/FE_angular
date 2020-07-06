@@ -46,4 +46,14 @@ export class UserProfileService {
 		const url = environment.urlBE + 'api/admin/user/unlock'
 		return this.http.post<User>(url, id)
 	}
+
+	guitien(param): Observable<User> {
+		const url = environment.urlBE + 'api/admin/account/deposit'
+		return this.http.post<User>(url, param)
+	}
+
+	ruttien(param): Observable<User> {
+		const url = environment.urlBE + 'api/admin/account/withdraw'
+		return this.http.post<User>(url, param)
+	}
 }

@@ -50,7 +50,8 @@ export class DashboardComponent implements OnInit {
     const id =  JSON.parse(sessionStorage.getItem('userSearch')).id;
     this.userProfileService.lock(id).subscribe(
       val=>{const message = 'Thành công';
-      this.layoutUtilsService.showActionNotification(message);},
+      this.layoutUtilsService.showActionNotification(message);
+      this.router.navigateByUrl('./dashboard')},
       err=>{const message = 'Có lỗi vui lòng thao tác lại';
       this.layoutUtilsService.showActionNotification(message);}
     )
@@ -59,7 +60,8 @@ export class DashboardComponent implements OnInit {
     const id =  JSON.parse(sessionStorage.getItem('userSearch')).id;
     this.userProfileService.lock(id).subscribe(
       val=>{const message = 'Thành công';
-      this.layoutUtilsService.showActionNotification(message);},
+      this.layoutUtilsService.showActionNotification(message);
+      this.router.navigateByUrl('./dashboard')},
       err=>{const message = 'Có lỗi vui lòng thao tác lại';
       this.layoutUtilsService.showActionNotification(message);}
     )

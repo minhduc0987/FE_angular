@@ -1,1 +1,35 @@
-<p>gui-tien works!</p>
+<mat-card>
+  <div class="">
+    <form [formGroup]="formId">
+      <div>
+        <div class="label-left">{{ 'EXCHANGE.NHAN' | translate }}</div>
+        <ng-select
+              [items]="account"
+              [clearable]="false"
+              placeholder="{{ 'CHOISE_STK' | translate }}"
+              formControlName="idBank"
+              class="select"
+              bindLabel="accountNumber"
+              bindValue="id"
+              [searchable]="false"
+            >
+            </ng-select>
+      </div>
+      <div>
+        <div class="label-left">{{ 'EXCHANGE.MONEY' | translate }}</div>
+        <input
+          type="text"
+          class="input select"
+          formControlName="money"
+          (keyup)="onKeyMoney()"
+          required
+          placeholder="{{ 'EXCHANGE.MONEY' | translate }}"
+        />
+      </div>
+    </form>
+    <div class="box-button">
+      <div class="button-popup" (click)="cancel()">{{ 'COMMON.BTN.CANCEL' | translate }}</div>
+      <div class="button-popup next" (click)="submit2()">{{ 'COMMON.BTN.NEXT' | translate }}</div>
+    </div>
+  </div>
+</mat-card>

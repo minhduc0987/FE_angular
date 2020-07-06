@@ -43,7 +43,7 @@ export class LayoutUtilsService {
   showActionNotification(
     message: string,
     type: string = '',
-    duration: number = 4000000,
+    duration: number = 4000,
     showCloseButton: boolean = true,
     showUndoButton: boolean = true,
     undoButtonDuration: number = 0,

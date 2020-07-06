@@ -51,10 +51,10 @@
 		  <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef>ACTIONS</mat-header-cell>
             <mat-cell *matCellDef="let account">
-				<button mat-icon-button color="primary">
-					<mat-icon>forward</mat-icon>
+				<button mat-icon-button color="primary" (click)="approval(account)" *ngIf="checkRole(account)">
+					<i class="fas fa-check-circle" style="color: #007bff"></i>
 				</button>
-				<button mat-icon-button color="warn" type="button">
+				<button mat-icon-button color="warn" type="button" (click)=reject(account) *ngIf="checkRole2(account)">
 					<mat-icon>delete</mat-icon>
 				</button>
 			</mat-cell>

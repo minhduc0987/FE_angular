@@ -97,4 +97,14 @@ export class ExchangeService {
     const uri = environment.urlBE + `api/admin/loanprofile/confirm`;
     return this.http.post(uri, params);
   }
+
+  approvalVT(param): Observable<any> {
+    const uri = environment.urlBE + `api/admin/loan-profiles/approved`;
+    return this.http.post(uri, param);
+  }
+
+  rejectVT(param): Observable<any> {
+    const uri = environment.urlBE + `api/admin/loan-profiles/reject`;
+    return this.http.post(uri, param);
+  }
 }

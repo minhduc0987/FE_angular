@@ -190,6 +190,7 @@ export class CreateHsComponent implements OnInit {
       const message = 'Xác nhận hồ sơ vay thành công';
       this.layoutUtilsService.showActionNotification(message);
       this.isOtp = true;
+      this.loanProfileId = val.message;
       this.ref.markForCheck();
     },
     (err)=> {
@@ -203,7 +204,7 @@ export class CreateHsComponent implements OnInit {
 
   submit2() {
     const params = {
-      loanProfileId: this.proId,
+      loanProfileId: Number(this.loanProfileId),
       otpCode: this.formPass2.get('password2').value
     }
     this.exchangeService.comfirmHsv(params).subscribe(val => {
@@ -211,6 +212,9 @@ export class CreateHsComponent implements OnInit {
       this.ref.markForCheck();
       const message = 'Xác nhận hồ sơ vay thành công';
       this.layoutUtilsService.showActionNotification(message);
+      setTimeout(()=> {
+        this.router.navigateByUrl('/loans');
+      },3000)
     },
     (err)=> {
       const message = this.translate.instant('ERROR');

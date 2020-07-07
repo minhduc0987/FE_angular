@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 import { QueryParamsModel, QueryResultsModel } from '../../_base/crud';
 import { environment } from '../../../../environments/environment';
 
-const API_USERS_URL = environment.url + 'api/auth/login';
+const API_USERS_URL = environment.url + 'api/user/auth/login';
 const API_PERMISSION_URL = 'api/permissions';
 const API_ROLES_URL = 'api/roles';
 

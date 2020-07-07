@@ -112,7 +112,7 @@ export class ExchangeOutComponent implements OnInit {
     if (this.show) {
       this.exchangeService.exchange(params, this.form1.get('stk').value).subscribe(
         (res) => {
-          if (res.message && res.message === 'Tranfer successfully') {
+          if (res.message && res.message === 'Transfer successfully') {
             this.show = false;
             this.show2 = false;
             const message = this.translate.instant('EXCHANGE.SUCCESS');

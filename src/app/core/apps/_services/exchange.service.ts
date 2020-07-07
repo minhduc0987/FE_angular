@@ -35,12 +35,12 @@ export class ExchangeService {
 
 	exchange(params, id) {
 		const userId = sessionStorage.getItem('userId');
-		const url = API_USERS_URL + userId + `/accounts/`+ id +`/tranferInternal/accountNumber`;
+		const url = API_USERS_URL + userId + `/accounts/`+ id +`/transferInternal/accountNumber`;
 		return this.http.post<any>(url, params)
 	}
 
 	exchangeOTP(params) {
-		const url = `http://localhost:8080/api/tranfer/confirm`;
+		const url = `http://localhost:8080/api/transfer/confirm`;
 		return this.http.post<any>(url, params)
 	}
 

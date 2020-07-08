@@ -20,7 +20,7 @@ export class InterceptService implements HttpInterceptor {
     // modify request
     request = request.clone({
     	setHeaders: {
-        Authorization: `Bearer ${sessionStorage.getItem(environment.authTokenKey)}`
+        Authorization: `Bearer ${localStorage.getItem(environment.authTokenKey)}`
     	}
     });
     // console.log('----request----');

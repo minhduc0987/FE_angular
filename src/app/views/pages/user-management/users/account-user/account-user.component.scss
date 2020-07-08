@@ -1,3 +1,23 @@
 .gold {
     color: #d3ae57;
 }
+
+.mat-column-id {
+    flex: 0 0 68px;
+    text-align: center;
+}
+.mat-cell {
+    text-align: center;
+}
+.mat-column-actions {
+    flex: 0 0 100px;
+}
+.btn {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    min-height: unset;
+    width: 80px;
+}

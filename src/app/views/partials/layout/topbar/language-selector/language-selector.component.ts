@@ -75,6 +75,7 @@ export class LanguageSelectorComponent implements OnInit {
       }
     });
     this.translationService.setLanguage(lang);
+    this.translationService.getSelectedLanguage();
   }
 
   /**

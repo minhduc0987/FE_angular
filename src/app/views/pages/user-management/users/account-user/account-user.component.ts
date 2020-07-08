@@ -6,21 +6,19 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 // RXJS
-import { debounceTime, distinctUntilChanged, tap, skip, take, delay } from 'rxjs/operators';
-import { fromEvent, merge, Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 // LODASH
-import { each, find } from 'lodash';
 // NGRX
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../../../../core/reducers';
 
 // Services
-import { LayoutUtilsService, MessageType, QueryParamsModel } from '../../../../../core/_base/crud';
+import { LayoutUtilsService, QueryParamsModel } from '../../../../../core/_base/crud';
 // Models
 import {
 } from '../../../../../core/auth';
 import { SubheaderService } from '../../../../../core/_base/layout';
-import { ListExchangeOnServer, UserProfileService, UserAccountRequested, listAccounts } from 'src/app/core/apps';
+import { UserProfileService } from 'src/app/core/apps';
 
 // Table with EDIT item in MODAL
 // ARTICLE for table with sort/filter/paginator
@@ -38,7 +36,7 @@ import { ListExchangeOnServer, UserProfileService, UserAccountRequested, listAcc
 export class AccountUserComponent implements OnInit, OnDestroy {
   // Table fields
   dataSource$: Observable<any>;
-  displayedColumns = ['id', 'accountNumber', 'card', 'amount', 'member'];
+  displayedColumns = ['id', 'accountNumber', 'card', 'amount', 'member', 'actions'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild('sort1', { static: true }) sort: MatSort;
   // Filter fields
@@ -59,12 +57,6 @@ export class AccountUserComponent implements OnInit, OnDestroy {
    * @param subheaderService: SubheaderService
    */
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private store: Store<AppState>,
-    private router: Router,
-    private layoutUtilsService: LayoutUtilsService,
-    private subheaderService: SubheaderService,
-    private cdr: ChangeDetectorRef,
     private userService: UserProfileService
   ) {}
   ngOnInit() {
@@ -76,14 +68,14 @@ export class AccountUserComponent implements OnInit, OnDestroy {
   loadUsersList() {
   }
   loadListAccount() {
-    const userId = sessionStorage.getItem('userId')
+    const userId = localStorage.getItem('userId')
     this.dataSource$ = this.userService.getListAccount(userId);
   }
   getAmount(amount) {
     return amount + ' VNĐ' ;
   }
   getMember() {
-    const u = JSON.parse(sessionStorage.getItem('user'));
+    const u = JSON.parse(localStorage.getItem('user'));
     return u.membership.name;
   }
   getClass() {
@@ -103,5 +95,8 @@ export class AccountUserComponent implements OnInit, OnDestroy {
 		if (n !== null) {
 			return n.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 		}
+  }
+  lock(account) {
+    
   }
 }

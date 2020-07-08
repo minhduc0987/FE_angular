@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   getUserByToken(): Observable<any> {
-    const userToken = sessionStorage.getItem(environment.authTokenKey);
+    const userToken = localStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<any>(API_USERS_URL, {headers : httpHeaders})

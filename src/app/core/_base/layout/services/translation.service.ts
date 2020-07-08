@@ -23,10 +23,10 @@ export class TranslationService {
    */
   constructor(private translate: TranslateService) {
     // add new langIds to the list
-    this.translate.addLangs(['vi']);
+    this.translate.addLangs(['en']);
 
     // this language will be used as a fallback when a translation isn't found in the current language
-    this.translate.setDefaultLang('vi');
+    this.translate.setDefaultLang('en');
   }
 
   /**
@@ -58,7 +58,7 @@ export class TranslationService {
     if (lang) {
       this.translate.use(this.translate.getDefaultLang());
       this.translate.use(lang);
-      sessionStorage.setItem('language', lang);
+      localStorage.setItem('language', lang);
     }
   }
 
@@ -66,6 +66,6 @@ export class TranslationService {
    * Returns selected language
    */
   getSelectedLanguage(): any {
-    return sessionStorage.getItem('language') || this.translate.getDefaultLang();
+    return localStorage.getItem('language') || this.translate.getDefaultLang();
   }
 }

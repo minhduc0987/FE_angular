@@ -63,7 +63,7 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
   }
 
   getAccount() {
-    const userId = sessionStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
     this.account$ = this.userService.getListAccount(userId);
   }
 
@@ -104,7 +104,7 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
   }
 
   cancelSec(item) {
-    const userId = sessionStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
     const accId = this.id;
     const id = item.id;
     this.exchangeService.deleteSec(userId, accId, id).subscribe(

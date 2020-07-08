@@ -1,15 +1,13 @@
 <!-- <div *ngIf="hasUserAccess$ | async">
     <router-outlet></router-outlet>
 </div> -->
-<div style="min-height: calc(100vh - 175px);" class="container">
-    <mat-card>
-        <div class="user-management">
-            <div class="aside-user">
-                <kt-aside-user></kt-aside-user>
-            </div>
-            <div class="content-user">
-                <router-outlet></router-outlet>
-            </div>
-        </div>
-    </mat-card>
+<div style="height: calc(100vh - 140px);">
+  <div class="user-management">
+    <div class="aside-user">
+      <kt-aside-user></kt-aside-user>
+    </div>
+    <div class="content-user">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

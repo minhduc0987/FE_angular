@@ -69,7 +69,7 @@ export class ExchangeInComponent implements OnInit {
   }
 
   getAccount() {
-    const userId = sessionStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
     this.account$ = this.userService.getListAccountExchange(userId);
     this.account$.subscribe(
       (val) => {
@@ -141,13 +141,14 @@ export class ExchangeInComponent implements OnInit {
       transactionAmount: Number(this.formatNumber2(this.formId.get('money').value)),
     };
 
-    const userId = sessionStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
     const id = this.form1.get('stk').value;
 
     this.exchangeService.createSec(params, userId, id).subscribe(
       (val) => {
         const message = this.translate.instant('SUCCESS');
         this.layoutUtilsService.showActionNotification(message);
+        this.router.navigateByUrl('/user-detail/exchange-sec-history')
       },
       (err) => {
         const message = this.translate.instant('ERROR');

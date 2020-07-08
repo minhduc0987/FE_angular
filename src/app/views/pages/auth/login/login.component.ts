@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.initLoginForm();
-    if (sessionStorage.getItem(environment.authTokenKey)) {
+    if (localStorage.getItem(environment.authTokenKey)) {
       this.router.navigateByUrl('/user-detail/thong-tin')
     }
   }
@@ -123,8 +123,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         tap((login) => {
           if (login) {
             this.store.dispatch(new Login({ authToken: login.accessToken }));
-            sessionStorage.setItem('login', JSON.stringify(login));
-            sessionStorage.setItem('userId', jwt_decode(login.accessToken).sub);
+            localStorage.setItem('login', JSON.stringify(login));
+            localStorage.setItem('userId', jwt_decode(login.accessToken).sub);
             this.router.navigateByUrl('/user-detail/thong-tin');
           } else {
             this.authNoticeService.setNotice(this.translate.instant('VALIDATION.INVALID_LOGIN'), 'danger');

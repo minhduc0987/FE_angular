@@ -12,14 +12,14 @@ export class ExchangeService {
 	}
 
 	getlistExchange(accountId: any, page?: any): Observable<any> {
-		const userId = sessionStorage.getItem('userId');
+		const userId = localStorage.getItem('userId');
 		let url;
 		if (page) {
 			url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions?page=' + page;
 		} else {
 			url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions';
 		}
-		const userToken = sessionStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<any>(url, {headers: httpHeaders})
@@ -27,14 +27,14 @@ export class ExchangeService {
 
 	getUserExchange(params: any): Observable<any> {
         const url = API_USERS_URL + 'find';
-		const userToken = sessionStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.post<any>(url, params)
 	}
 
 	exchange(params, id) {
-		const userId = sessionStorage.getItem('userId');
+		const userId = localStorage.getItem('userId');
 		const url = API_USERS_URL + userId + `/accounts/`+ id +`/transferInternal/accountNumber`;
 		return this.http.post<any>(url, params)
 	}
@@ -45,10 +45,10 @@ export class ExchangeService {
 	}
 
 	getlistCheque(accountId: any): Observable<any> {
-		const userId = sessionStorage.getItem('userId');
+		const userId = localStorage.getItem('userId');
 		let url;
 			url = API_USERS_URL + userId + '/accounts/' + accountId + '/cheques';
-		const userToken = sessionStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<any>(url, {headers: httpHeaders})

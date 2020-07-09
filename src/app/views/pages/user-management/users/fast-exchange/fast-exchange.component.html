@@ -3,40 +3,72 @@
   <div class="title-content">Thông tin vay tiền</div>
   <mat-card>
     <form [formGroup]="formId">
-      <div>
-        <div class="label-left">Họ và tên</div>
-        <input type="text" class="input select" formControlName="idBank" required />
+      <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+        <label>{{ 'SO_TIEN_VAY' | translate }} <span class="text-danger">*</span></label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="amount"
+          (keyup)="onKeyMoney()"
+          placeholder="{{ 'SO_TIEN_VAY' | translate }}"
+          onkeydown="return event.key != 'Enter';"
+        />
       </div>
-      <div>
-        <div class="label-left">Số điện thoại</div>
-        <input type="text" class="input select" formControlName="money" required />
+      <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+        <label>{{ 'MD_VAY' | translate }} <span class="text-danger">*</span></label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="description"
+          placeholder="{{ 'MD_VAY' | translate }}"
+          onkeydown="return event.key != 'Enter';"
+        />
       </div>
-      <div>
-        <div class="label-left">địa chỉ</div>
-        <input type="text" class="input select" formControlName="note" required />
+      <div class="col-lg-6 kt-margin-bottom-20-mobile form-group" *ngIf="loans.length !== 0">
+        <label>{{ 'TIME_VAY' | translate }} <span class="text-danger">*</span></label>
+        <ng-select
+          [items]="loans"
+          [clearable]="false"
+          placeholder="{{ 'CHOISE_STK' | translate }}"
+          formControlName="time"
+          class="select form-control"
+          bindLabel="months"
+          bindValue="id"
+          [searchable]="false"
+          (change)="changeLs()"
+        >
+        </ng-select>
       </div>
-      <div>
-        <div class="label-left">Số CMND/Hộ chiếu</div>
-        <input type="text" class="input select" formControlName="idBank" required />
+
+      <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+        <label>{{ 'LAI_SUAT' | translate }} <span class="text-danger">*</span></label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="ls"
+          placeholder="{{ 'LAI_SUAT' | translate }}"
+          onkeydown="return event.key != 'Enter';"
+        />
       </div>
-     
-      <div>
-        <div class="label-left">Số tiền cần vay</div>
-        <input type="text" class="input select" formControlName="note" required />
-      </div>
-      <div>
-        <div class="label-left">Thời gian vay</div>
-        <input type="text" class="input select" formControlName="note" required />
-      </div>
-      <div>
-        <div class="label-left">Lãi suất</div>
-        <input type="text" class="input select" formControlName="note" required />
-      </div>
-      <div>
-        <div class="label-left">Giấy tờ xác minh</div>
-        <input type="text" class="input select" formControlName="note" required />
+      <div class="col-lg-6 kt-margin-bottom-20-mobile form-group" *ngIf="account.length !== 0">
+        <label>{{ 'TK_NHAN' | translate }} <span class="text-danger">*</span></label>
+
+        <ng-select
+          [items]="account"
+          [clearable]="false"
+          placeholder="{{ 'TK_NHAN' | translate }}"
+          formControlName="tk"
+          class="select form-control"
+          bindLabel="stk"
+          bindValue="id"
+          [searchable]="false"
+        >
+        </ng-select>
       </div>
     </form>
   </mat-card>
+  <button type="submit" mat-raised-button color="primary" type="button" (click)="submit()">
+    {{ 'SAVE' | translate }}
+  </button>&nbsp;
   <!-- <div class="button-next"><div (click)="next()" class="next">Tiếp tục</div></div> -->
 </div>

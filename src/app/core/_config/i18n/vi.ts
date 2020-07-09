@@ -98,6 +98,12 @@ export const locale = {
     CMND: 'Số CMND/CCCD/Hộ chiếu',
     INFO: 'Thông tin cá nhân',
     INFOS: 'Thông tin các tài khoản',
-    CHOISE_HISTORY: 'Chọn tài khoản để xem lịch sử giao dịch'
+    CHOISE_HISTORY: 'Chọn tài khoản để xem lịch sử giao dịch',
+    SO_TIEN_VAY: 'Số tiền vay',
+    TK_NHAN: 'Tài khoản nhận',
+    LAI_SUAT: 'Lãi suất',
+    TIME_VAY: 'Thời gian vay',
+    MD_VAY: 'Mục đích vay',
+    SAVE: 'Lưu'
   },
 };

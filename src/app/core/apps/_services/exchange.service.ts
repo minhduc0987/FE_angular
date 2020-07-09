@@ -63,4 +63,9 @@ export class ExchangeService {
 		let url = API_USERS_URL + userId + '/accounts/' + accId + '/cheques/' + id + '/cancel';
 		return this.http.get<any>(url)
 	}
+
+	getLoan(): Observable<any> {
+		const uri = environment.urlBE + `api/loanInterestRates`;
+		return this.http.get(uri);
+	  }
 }

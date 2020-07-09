@@ -1,0 +1,34 @@
+:host {
+    width: 100%;
+    height: 100%;
+    margin-top: 25px;
+      ::ng-deep {
+          ngb-tabset > .nav-tabs {
+              display: none;
+          }
+      }
+  }
+  
+  .min-200 {
+    min-width: 200px;
+  }
+  
+  .fix-height {
+    height: unset !important;
+    min-height: 48px;
+    max-height: 100px;
+  
+    div, img {
+        height: unset !important;
+        min-height: 48px;
+        max-height: 100px;
+    }
+  }
+  .select {
+    width: 250px;
+    display: inline-block;
+    margin: 0 10px;
+  }
+  .fix-ht {
+    min-height: calc(100vh - 200px);
+  }

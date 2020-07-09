@@ -42,7 +42,7 @@ export class LayoutUtilsService {
    */
   showActionNotification(
     message: string,
-    type: MessageType = MessageType.Create,
+    type?: string,
     duration: number = 4000,
     showCloseButton: boolean = true,
     showUndoButton: boolean = true,

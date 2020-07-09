@@ -55,6 +55,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
+import { InpitOtpComponent } from './content/crud/inpit-otp/inpit-otp.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     StickyToolbarComponent,
     LanguageSelectorComponent,
     UserProfile4Component,
-    FormTstcDialogComponent
+    FormTstcDialogComponent,
+    InpitOtpComponent
   ],
   exports: [
     PortletModule,

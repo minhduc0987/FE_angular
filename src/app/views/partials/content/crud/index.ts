@@ -5,3 +5,4 @@ export { DeleteEntityDialogComponent } from './delete-entity-dialog/delete-entit
 export { AlertComponent } from './alert/alert.component';
 export { ActionNotificationComponent } from './action-natification/action-notification.component';
 export { FormTstcDialogComponent } from './form-tstc-dialog/form-tstc-dialog.component';
+export { InpitOtpComponent } from './inpit-otp/inpit-otp.component';

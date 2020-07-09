@@ -32,9 +32,9 @@ export class UserProfileService {
 		return this.http.get<User>(url, {headers : httpHeaders})
 	}
 
-	getUser(params): Observable<User> {
+	getUser(params): Observable<any> {
 		const url = environment.urlBE + 'api/admin/user/find'
-		return this.http.post<User>(url, params)
+		return this.http.post<any>(url, params)
 	}
 
 	lock(id): Observable<User> {
@@ -54,6 +54,11 @@ export class UserProfileService {
 
 	ruttien(param): Observable<User> {
 		const url = environment.urlBE + 'api/admin/account/withdraw'
+		return this.http.post<User>(url, param)
+	}
+
+	createUser(param): Observable<User> {
+		const url = environment.urlBE + 'api/admin/user/register'
 		return this.http.post<User>(url, param)
 	}
 }

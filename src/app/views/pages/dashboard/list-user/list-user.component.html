@@ -1,0 +1,91 @@
+<div class="container">
+  <kt-portlet>
+    <kt-portlet-header title="{{ 'LIST_USER' | translate }}" [class]="'card-head-lg'">
+      <ng-container ktPortletTools> </ng-container>
+    </kt-portlet-header>
+
+    <kt-portlet-body>
+      <div>
+        <form [formGroup]="formId">
+            <div class="d-flex justify-content-between">
+              <h4>Tìm kiếm khách hàng</h4>
+              <button type="submit" mat-raised-button color="primary" (click)="createUser()">
+                {{ 'CREATE' | translate }}
+              </button>
+            </div>
+            <div class="d-flex">
+                <ng-select
+              [items]="form1"
+              [clearable]="false"
+              placeholder="{{ '123123123' | translate }}"
+              formControlName="select"
+              class="select"
+              bindLabel="value"
+              bindValue="key"
+              [searchable]="false"
+            >
+            </ng-select>
+            <input type="text" class="input select" placeholder="Nhập thông tin để tìm kiếm" formControlName="id" required />
+            <button mat-raised-button color="primary" type="button" (click)="searchUser()">{{ 'SEARCH' | translate }}</button>
+            </div>
+          </form>
+      </div>
+      <div class="mat-table__wrapper">
+        <mat-table class="lmat-elevation-z8" #table [dataSource]="dataSource">
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let item">{{ item.id }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>{{ 'USERNAME' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let item">{{ item.username }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="info">
+            <mat-header-cell *matHeaderCellDef>{{ 'FULLNAME' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let item">{{ item.fullname }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="money">
+            <mat-header-cell *matHeaderCellDef>{{ 'CMND' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let item">{{ item.idCardNumber }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="date1">
+            <mat-header-cell *matHeaderCellDef>{{ 'ADDRESS' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let item">
+              {{ item.address }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="date2">
+            <mat-header-cell *matHeaderCellDef>{{ 'EMAIL' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let item">{{ item.email }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="status1">
+            <mat-header-cell *matHeaderCellDef>{{ 'PHONE' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let item">{{ item.phone }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="status2">
+            <mat-header-cell *matHeaderCellDef>{{ 'ACTION' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let item">
+              <button mat-icon-button color="primary" type="button" (click)="updateUser(item)">
+                <mat-icon>toc</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </div>
+      <!-- <div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
+                <mat-paginator [pageSize]="5" [pageIndex]="dataSource.pageNumber - 1" [pageSizeOptions]="[5]" (page)="pageEvent = setItems($event)" [length]="dataSource.totalCount" [showFirstLastButtons]="true"></mat-paginator>
+            </div> -->
+    </kt-portlet-body>
+  </kt-portlet>
+</div>

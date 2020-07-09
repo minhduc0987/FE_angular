@@ -1,0 +1,74 @@
+<div class="user">
+  <kt-portlet>
+    <kt-portlet-header title="{{ 'TTTK' | translate }}">
+      <ng-container ktPortletTools></ng-container>
+    </kt-portlet-header>
+    <kt-portlet-body>
+      <form class="kt-form" [formGroup]="userForm">
+        <div class="kt-portlet__body">
+          <div class="row">
+            <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+              <label>{{ 'USERNAME' | translate }} <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="username" placeholder="{{ 'USERNAME' | translate }}" onkeydown="return event.key != 'Enter';"/>
+            </div>
+            <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+              <label>{{ 'EMAIL' | translate }} <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" formControlName="email" placeholder="{{ 'EMAIL' | translate }}" onkeydown="return event.key != 'Enter';"/>
+            </div>
+            <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+              <label>{{ 'FULLNAME' | translate }} <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="fullname" placeholder="{{ 'FULLNAME' | translate }}" onkeydown="return event.key != 'Enter';"/>
+            </div>
+            <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+              <label>{{ 'DOB' | translate }} <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="birthday" placeholder="{{ 'USERNAME' | translate }}" onkeydown="return event.key != 'Enter';"/>
+            </div>
+            <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+              <label>{{ 'ADDRESS' | translate }} <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="address" placeholder="{{ 'ADDRESS' | translate }}" onkeydown="return event.key != 'Enter';"/>
+            </div>
+            <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+              <label>{{ 'GENDER' | translate }} <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="gender" placeholder="{{ 'FULLNAME' | translate }}" onkeydown="return event.key != 'Enter';"/>
+            </div>
+            <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+              <label>{{ 'CMND' | translate }} <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" formControlName="idCardNumber" placeholder="{{ 'CMND' | translate }}" onkeydown="return event.key != 'Enter';"/>
+            </div>
+            <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+              <label>{{ 'PHONE' | translate }} <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="phone" placeholder="{{ 'PHONE' | translate }}" onkeydown="return event.key != 'Enter';"/>
+            </div>
+            <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+              <label>{{ 'IMAGE' | translate }} <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="image" placeholder="{{ 'IMAGE' | translate }}" onkeydown="return event.key != 'Enter';"/>
+            </div>
+            <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
+              <label>{{ 'HANG_THE' | translate }} <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="membershipId" placeholder="{{ 'HANG_THE' | translate }}" onkeydown="return event.key != 'Enter';"/>
+            </div>
+          </div>
+        </div>
+        <div class="kt-portlet__foot kt-portlet__no-border kt-portlet__foot--fit">
+          <div class="kt-form__actions kt-form__actions--solid">
+            <div class="row text-right">
+              <div class="col-lg-12">
+                <button type="button" mat-raised-button cdkFocusInitial (click)="cancel()">
+                  {{ 'CANCEL' | translate }}</button>&nbsp;
+                <button type="submit" mat-raised-button color="warn" (click)="lock()" *ngIf="isLock">
+                  {{ 'LOCK' | translate }}
+                </button>&nbsp;
+                <button type="submit" mat-raised-button color="primary" (click)="unlock()" *ngIf="isUnLock">
+                  {{ 'UNLOCK' | translate }}
+                </button>&nbsp;
+                <button type="submit" mat-raised-button color="primary" (click)="submit()">
+                  {{ 'SAVE' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </kt-portlet-body>
+  </kt-portlet>
+</div>

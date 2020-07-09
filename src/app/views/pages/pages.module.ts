@@ -7,13 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PartialsModule } from '../partials/partials.module';
 // Pages
 import { CoreModule } from '../../core/core.module';
-import { TinTucComponent } from './tin-tuc/tin-tuc.component';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
 import { MatCardModule } from '@angular/material/card';
-import { RutTienComponent } from './rut-tien/rut-tien.component';
-import { GuiTienComponent } from './gui-tien/gui-tien.component';
-import { CreateHsComponent } from './create-hs/create-hs.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
@@ -42,11 +36,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { InterceptService, HttpUtilsService, TypesUtilsService, LayoutUtilsService } from 'src/app/core/_base/crud';
 import { ActionNotificationComponent, FormTstcDialogComponent } from '../partials/content/crud';
 import { TranslateModule } from '@ngx-translate/core';
-import { ListVayTienComponent } from './list-vay-tien/list-vay-tien.component';
-import { DepositComponent } from './deposit/deposit.component';
 
 @NgModule({
-  declarations: [TinTucComponent, AboutComponent, ContactComponent, RutTienComponent, GuiTienComponent, CreateHsComponent, ListVayTienComponent, DepositComponent],
+  declarations: [],
   exports: [],
   imports: [
     CommonModule,

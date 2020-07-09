@@ -107,4 +107,15 @@ export class ExchangeService {
     const uri = environment.urlBE + `api/admin/loan-profiles/reject`;
     return this.http.post(uri, param);
   }
+  
+  getListUsers(): Observable<any> {
+    const uri = environment.urlBE + `api/admin/users`;
+    return this.http.get(uri);
+  }
+  getAllLoans(): Observable<any> {
+    const uri = environment.urlBE + `api/admin/transaction-office/employee/loan-profiles`;
+    return this.http.get(uri);
+  }
+
+  
 }

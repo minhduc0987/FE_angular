@@ -8,7 +8,7 @@ const API_USERS_URL = environment.urlBE + 'api/users/';
 @Injectable({ providedIn: 'root' })
 export class ExchangeService {
   uploadImage(selectedFiles: File[]) {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   constructor(private http: HttpClient) {}
 
@@ -73,12 +73,14 @@ export class ExchangeService {
     const uri = environment.urlBE + `api/users/current/notifications/totalUnread`;
     return this.http.get(uri);
   }
-  
+
   updateSec(param): Observable<any> {
     const uri = environment.urlBE + `api/users/current/accounts/cheques/edit`;
     return this.http.post(uri, param);
   }
 
-  
-  
+  createLoan(param): Observable<any> {
+    const uri = environment.urlBE + `api/users/current/loanProfiles`;
+    return this.http.post(uri, param);
+  }
 }

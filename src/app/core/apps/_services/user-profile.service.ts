@@ -11,42 +11,57 @@ import { User } from '../../auth';
 const API_USERS_INFO_URL = environment.urlBE + 'api/users/current';
 const API_USERS_URL = environment.urlBE + 'api/users';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class UserProfileService {
-  createUser(param: { username: any; email: any; fullName: any; birthday: any; address: any; gender: any; idCardNumber: any; phone: any; image: any; membershipId: any; }) {
-    throw new Error("Method not implemented.");
+  createUser(param: {
+    username: any;
+    email: any;
+    fullName: any;
+    birthday: any;
+    address: any;
+    gender: any;
+    idCardNumber: any;
+    phone: any;
+    image: any;
+    membershipId: any;
+  }) {
+    throw new Error('Method not implemented.');
   }
   lock(id: any) {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
-	constructor(private http: HttpClient) {
-	}
+  constructor(private http: HttpClient) {}
 
-	getUserProfile(): Observable<User> {
-		const userToken = localStorage.getItem(environment.authTokenKey);
-		let httpHeaders = new HttpHeaders();
-		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
-		return this.http.get<User>(API_USERS_INFO_URL, {headers : httpHeaders})
-	}
+  getUserProfile(): Observable<User> {
+    const userToken = localStorage.getItem(environment.authTokenKey);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
+    return this.http.get<User>(API_USERS_INFO_URL, { headers: httpHeaders });
+  }
 
-	getListAccount(userId): Observable<any> {
-		const url = API_USERS_URL + '/' + userId + '/accounts';
-		const userToken = localStorage.getItem(environment.authTokenKey);
-		let httpHeaders = new HttpHeaders();
-		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
-		return this.http.get<User>(url, {headers : httpHeaders})
-	}
+  getListAccount(userId): Observable<any> {
+    const url = API_USERS_URL + '/' + userId + '/accounts';
+    const userToken = localStorage.getItem(environment.authTokenKey);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
+    return this.http.get<User>(url, { headers: httpHeaders });
+  }
 
-	getListAccountExchange(userId): Observable<any> {
-		const url = API_USERS_URL + '/' + userId + '/useableAccounts';
-		const userToken = localStorage.getItem(environment.authTokenKey);
-		let httpHeaders = new HttpHeaders();
-		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
-		return this.http.get<User>(url, {headers : httpHeaders})
-	}
-	lockAccount(param): Observable<any> {
-		const uri = environment.urlBE + `api/users/current/account/lock`;
-		return this.http.post(uri,param);
-	  }
+  getListAccountExchange(userId): Observable<any> {
+    const url = API_USERS_URL + '/' + userId + '/useableAccounts';
+    const userToken = localStorage.getItem(environment.authTokenKey);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
+    return this.http.get<User>(url, { headers: httpHeaders });
+  }
+  lockAccount(param): Observable<any> {
+    const uri = environment.urlBE + `api/users/current/account/lock`;
+    return this.http.post(uri, param);
+  }
+
+  getChiNhanh(): Observable<any> {
+    const uri = environment.urlBE + `api/transaction-offices`;
+    return this.http.get(uri);
+  }
 }

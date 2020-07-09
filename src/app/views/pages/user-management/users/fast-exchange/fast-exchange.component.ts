@@ -7,6 +7,7 @@ import { NgSelectConfig } from '@ng-select/ng-select';
 import { Observable } from 'rxjs';
 import { AuthNoticeService } from 'src/app/core/auth';
 import { TranslateService } from '@ngx-translate/core';
+import { LayoutUtilsService } from 'src/app/core/_base/crud';
 
 @Component({
   selector: 'kt-fast-exchange',
@@ -22,6 +23,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class FastExchangeComponent implements OnInit {
   loading = false;
   loans = [];
+  chiNhanh = [];
   formId: FormGroup;
   items = [
     { id: '1', label: 'Chuyển tiền qua số tài khoản' },
@@ -50,6 +52,7 @@ export class FastExchangeComponent implements OnInit {
     private config: NgSelectConfig,
     private authNoticeService: AuthNoticeService,
     private translate: TranslateService,
+    private layoutUtilsService: LayoutUtilsService,
     private ref: ChangeDetectorRef,
   ) {}
 
@@ -60,40 +63,53 @@ export class FastExchangeComponent implements OnInit {
       ls: [{ value: null, disabled: true }, Validators.required],
       tk: ['', Validators.required],
       description: ['', Validators.required],
+      chinhanh: ['', Validators.required],
     });
     this.getAccount();
-    this.getLoan()
+    this.getLoan();
+    this.getChiNhanh();
   }
 
   submit() {
-    // const params = {
-    //   accountNumber: this.formId.get('idBank').value,
-    //   amount: this.formId.get('money').value,
-    //   fullName: this.name,
-    //   pin: this.formPass.get('password').value,
-    //   description: this.formId.get('note').value,
-    // };
-    // this.account.forEach((val) => {
-    //   if (val.accountNumber === this.stk) {
-    //     return;
-    //   }
-    // });
-    // this.exchangeService.exchange(params, this.id).subscribe(
-    //   (response: any) => {
-    //     console.log(response);
-    //   },
-    //   (error: any) => {
-    //     if (error.status === 200) {
-    //       this.show = false;
-    //       this.show2 = true;
-    //     }
-    //   },
-    // );
+    const controls = this.formId.controls;
+    if (this.formId.invalid) {
+      Object.keys(controls).forEach((controlName) => controls[controlName].markAsTouched());
+      return;
+    }
+    const params = {
+      amount: this.formatNumber2(this.formId.get('amount').value),
+      description: this.formId.get('description').value,
+      loanInterestRateId: this.formId.get('time').value,
+      accountId: this.formId.get('tk').value,
+      transasctionOfficeId: this.formId.get('chinhanh').value,
+    };
+    this.exchangeService.createLoan(params).subscribe(
+      (response: any) => {
+        const message = 'Đăng kí vay tiền thành công';
+        this.layoutUtilsService.showActionNotification(message, 'danger');
+        this.router.navigateByUrl('user-detail/thong-tin')
+      },
+      (error: any) => {
+        const message = this.translate.instant('ERROR');
+        this.layoutUtilsService.showActionNotification(message, 'danger');
+      },
+    );
   }
 
   formatNumber(n: any) {
     if (n !== null) {
-      return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return n
+        .toString()
+        .replace(/\D/g, '')
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+  }
+
+  formatNumber2(n: any) {
+    if (n !== null) {
+      return n
+        .toString()
+        .replace(/\D/g, '')
     }
   }
 
@@ -133,13 +149,31 @@ export class FastExchangeComponent implements OnInit {
           st: element.card.cardNumber,
         });
       });
-      this.ref.markForCheck()
+      this.formId.patchValue({
+        tk: this.account[0].id,
+      });
+      this.ref.markForCheck();
     });
   }
-  
+
   changeLs() {
     this.formId.patchValue({
       ls: this.loans[this.formId.get('time').value - 1].interestRate,
+    });
+  }
+
+  getChiNhanh() {
+    this.userService.getChiNhanh().subscribe((val) => {
+      val.forEach((element) => {
+        this.chiNhanh.push({
+          id: element.id,
+          name: element.name + `-` + element.address,
+        });
+      });
+      this.formId.patchValue({
+        chinhanh: this.chiNhanh[0].id,
+      });
+      this.ref.markForCheck();
     });
   }
 }

@@ -31,9 +31,8 @@
   text-align: right;
 }
 .select {
-  display: inline-block;
-  width: calc(100% - 200px);
-  max-width: 400px;
+  flex: 0 0 50%;
+  max-width: 100%;
 }
 .w-200 {
   width: 200px;

@@ -57,6 +57,11 @@
 					<mat-cell *matCellDef="let account">{{getDate(account.createdAt)}}</mat-cell>
 				</ng-container>
 
+				<ng-container matColumnDef="from">
+					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.FS' | translate }}</mat-header-cell>
+					<mat-cell *matCellDef="let account">{{account.fromOrToAccountNumber}} - {{account.fromOrToFullName}}</mat-cell>
+				</ng-container>
+
 				<ng-container matColumnDef="des">
 					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.DES' | translate }}</mat-header-cell>
 					<mat-cell *matCellDef="let account">{{account.description}}</mat-cell>

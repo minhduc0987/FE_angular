@@ -30,7 +30,7 @@ import moment from 'moment';
 })
 export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   // Table fields
-  displayedColumns = ['id', 'amount', 'type', 'amountAfter', 'date', 'des'];
+  displayedColumns = ['id', 'amount', 'type', 'amountAfter', 'date', 'from','des'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   accountId: any
   account$: Observable<any>;

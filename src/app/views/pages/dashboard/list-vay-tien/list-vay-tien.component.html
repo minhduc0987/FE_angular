@@ -72,7 +72,7 @@
           <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
         </mat-table>
       </div>
-      <!-- <div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
+      <div class="mat-table__bottom" *ngIf="dataSource">
         <mat-paginator
           [pageSize]="5"
           [pageIndex]="dataSource.pageNumber - 1"
@@ -81,7 +81,7 @@
           [length]="dataSource.totalCount"
           [showFirstLastButtons]="true"
         ></mat-paginator>
-      </div> -->
+      </div>
     </kt-portlet-body>
   </kt-portlet>
 </div>

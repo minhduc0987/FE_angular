@@ -153,4 +153,12 @@ export class ListVayTienComponent implements OnInit {
       this.getListLoans();
     })
   }
+
+  setItems(event) {
+    const page = event.pageIndex + 1;
+    this.exchangeService.getAllLoans(page).subscribe((val) => {
+      this.dataSource = val;
+      this.ref.markForCheck();
+    });
+  }
 }

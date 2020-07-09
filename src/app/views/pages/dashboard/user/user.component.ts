@@ -47,16 +47,16 @@ export class UserComponent implements OnInit {
   createForm() {
     if (this.data) {
       this.userForm = this.userFB.group({
-        username: [{ value: this.data.username, disabled: true }, Validators.required],
-        fullname: [{ value: this.data.fullname, disabled: this.isDisable }, Validators.required],
-        email: [{ value: this.data.email, disabled: this.isDisable }, Validators.required],
-        birthday: [{ value: this.data.birthday, disabled: this.isDisable }, Validators.required],
-        gender: [{ value: this.data.gender, disabled: this.isDisable }, Validators.required],
-        idCardNumber: [{ value: this.data.idCardNumber, disabled: this.isDisable }, Validators.required],
-        image: [{ value: this.data.image, disabled: this.isDisable }, Validators.required],
-        phone: [{ value: this.data.phone, disabled: this.isDisable }, Validators.required],
-        address: [{ value: this.data.address, disabled: this.isDisable }, Validators.required],
-        membershipId: [{ value: this.data.membership.id.toString(), disabled: this.isDisable }, Validators.required],
+        username: [{ value: this.data?.username, disabled: true }, Validators.required],
+        fullname: [{ value: this.data?.fullname, disabled: this.isDisable }, Validators.required],
+        email: [{ value: this.data?.email, disabled: this.isDisable }, Validators.required],
+        birthday: [{ value: this.data?.birthday, disabled: this.isDisable }, Validators.required],
+        gender: [{ value: this.data?.gender, disabled: this.isDisable }, Validators.required],
+        idCardNumber: [{ value: this.data?.idCardNumber, disabled: this.isDisable }, Validators.required],
+        image: [{ value: this.data?.image, disabled: this.isDisable }, Validators.required],
+        phone: [{ value: this.data?.phone, disabled: this.isDisable }, Validators.required],
+        address: [{ value: this.data?.address, disabled: this.isDisable }, Validators.required],
+        membershipId: [{ value: this.data?.membership?.id.toString(), disabled: this.isDisable }, Validators.required],
       });
       this.image = this.data.image;
     } else {

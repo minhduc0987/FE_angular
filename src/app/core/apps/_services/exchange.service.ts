@@ -117,8 +117,13 @@ export class ExchangeService {
     }
     return this.http.get(uri);
   }
-  getAllLoans(): Observable<any> {
-    const uri = environment.urlBE + `api/admin/transaction-office/employee/loan-profiles`;
+  getAllLoans(page?): Observable<any> {
+    let uri;
+    if(!page) {
+      uri = environment.urlBE + `api/admin/transaction-office/employee/loan-profiles`;
+    } else {
+      uri = environment.urlBE + `api/admin/transaction-office/employee/loan-profiles?page=` + page;
+    }
     return this.http.get(uri);
   }
 

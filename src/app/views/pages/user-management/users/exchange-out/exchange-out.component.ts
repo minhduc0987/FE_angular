@@ -86,7 +86,7 @@ export class ExchangeOutComponent implements OnInit {
   submit() {
     if (!this.formPass.get('password').value) {
       const message = this.translate.instant('VALIDATION.PASSWORD');
-      this.layoutUtilsService.showActionNotification(message, 'danger');
+      this.layoutUtilsService.showActionNotification(message, 'success');
       return;
     }
     if (this.formPass.get('password').value.length !== 4) {
@@ -116,7 +116,7 @@ export class ExchangeOutComponent implements OnInit {
             this.show = false;
             this.show2 = false;
             const message = this.translate.instant('EXCHANGE.SUCCESS');
-            this.layoutUtilsService.showActionNotification(message, 'danger');
+            this.layoutUtilsService.showActionNotification(message, 'success');
             setTimeout(() => {
               this.router.navigateByUrl('/user-detail/lich-su-giao-dich');
             }, 3000);
@@ -148,7 +148,7 @@ export class ExchangeOutComponent implements OnInit {
             (val) => {
               this.show2 = false;
               const message = this.translate.instant('EXCHANGE.SUCCESS');
-              this.layoutUtilsService.showActionNotification(message);
+              this.layoutUtilsService.showActionNotification(message, 'success');
               setTimeout(() => {
                 this.router.navigateByUrl('/user-detail/lich-su-giao-dich');
               }, 3000);
@@ -156,7 +156,7 @@ export class ExchangeOutComponent implements OnInit {
             },
             (_err: any) => {
               const message = this.translate.instant('ERROR');
-              this.layoutUtilsService.showActionNotification(message);
+              this.layoutUtilsService.showActionNotification(message, 'danger');
             },
           );
         }

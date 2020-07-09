@@ -105,33 +105,33 @@ export class ExchangeInComponent implements OnInit {
     }
     if (!this.form1.get('stk').value) {
       const message = this.translate.instant('VALIDATION.STK');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     if (!this.formId.get('name').value) {
       const message = this.translate.instant('VALIDATION.NGUOI_NHAN');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     if (!this.formId.get('cmnd').value || this.formId.get('cmnd').value.length !== 12) {
       const message = this.translate.instant('VALIDATION.CMND');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     const money = this.formatNumber2(this.formId.get('money').value);
     if (!money) {
       const message = this.translate.instant('VALIDATION.MONEY_NONE');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     if (!Number(money)) {
       const message = this.translate.instant('VALIDATION.NO');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     if (Number(money) < 50000) {
       const message = this.translate.instant('VALIDATION.MONEY_MIN');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
 
@@ -148,12 +148,12 @@ export class ExchangeInComponent implements OnInit {
     this.exchangeService.createSec(params, userId, id).subscribe(
       (val) => {
         const message = this.translate.instant('SUCCESS');
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'success');
         this.router.navigateByUrl('/user-detail/exchange-sec-history')
       },
       (err) => {
         const message = this.translate.instant('ERROR');
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'danger');
       },
     );
   }

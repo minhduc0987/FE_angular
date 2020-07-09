@@ -52,6 +52,7 @@ import {} from '@angular/material/icon';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { UpdateComponent } from './users/update/update.component';
 import { ExchangeHistorySecComponent } from './users/exchange-history-sec/exchange-history-sec.component';
+import { NoticeExchangeComponent } from '../notice-exchange/notice-exchange.component';
 
 const routes: Routes = [
   {
@@ -94,6 +95,10 @@ const routes: Routes = [
       {
         path: 'update',
         component: UpdateComponent,
+      },
+      {
+        path: 'notice',
+        component: NoticeExchangeComponent
       },
     ],
   },

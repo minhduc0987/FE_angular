@@ -1,0 +1,38 @@
+<kt-portlet>
+	<kt-portlet-header title="Thông báo" [class]="'card-head-lg'">
+		<ng-container ktPortletTools>
+		</ng-container>
+	</kt-portlet-header>
+
+	<kt-portlet-body>
+		<div class="mat-table__wrapper">
+			<mat-table class="lmat-elevation-z8"
+				#table
+				[dataSource]="dataSource.items"
+				*ngIf="dataSource">
+
+				<ng-container matColumnDef="id">
+					<mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+					<mat-cell *matCellDef="let account">{{account.id}}</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="content">
+					<mat-header-cell *matHeaderCellDef>{{ 'CONTENT' | translate }}</mat-header-cell>
+					<mat-cell *matCellDef="let account">{{account.message}}</mat-cell>
+				</ng-container>
+
+				<ng-container matColumnDef="date">
+					<mat-header-cell *matHeaderCellDef>{{ 'DATE' | translate }}</mat-header-cell>
+					<mat-cell *matCellDef="let account">{{getDate(account.createdAt)}}</mat-cell>
+				</ng-container>
+
+				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+				<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+			</mat-table>
+		</div>
+		<div class="mat-table__bottom" *ngIf="dataSource">
+			<mat-paginator [pageSize]="5" [pageIndex]="dataSource.pageNumber - 1" [pageSizeOptions]="[5]" (page)="pageEvent = setItems($event)" [length]="dataSource.totalCount" [showFirstLastButtons]="true"></mat-paginator>
+		</div>
+	</kt-portlet-body>
+</kt-portlet>

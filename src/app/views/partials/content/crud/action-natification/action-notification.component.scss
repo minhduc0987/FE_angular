@@ -9,14 +9,19 @@
     padding: 0;
   }
   .mat-snackbar {
-    padding: .75rem 1.25rem;
+    padding: 0.75rem 1.25rem;
     color: rgba(255, 255, 255, 0.7);
     background: #323232;
 
     &.danger {
-        background-color: #f64e60;
-        border-color: #f64e60;
-        color: #fff;
+      background-color: #f64e60;
+      border-color: #f64e60;
+      color: #fff;
+    }
+    &.success {
+      background-color: #3699ff;
+      border-color: #3699ff;
+      color: #fff;
     }
   }
 }

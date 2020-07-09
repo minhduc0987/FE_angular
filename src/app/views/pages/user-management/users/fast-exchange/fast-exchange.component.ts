@@ -86,7 +86,7 @@ export class FastExchangeComponent implements OnInit {
     this.exchangeService.createLoan(params).subscribe(
       (response: any) => {
         const message = 'Đăng kí vay tiền thành công';
-        this.layoutUtilsService.showActionNotification(message, 'danger');
+        this.layoutUtilsService.showActionNotification(message, 'success');
         this.router.navigateByUrl('user-detail/thong-tin')
       },
       (error: any) => {

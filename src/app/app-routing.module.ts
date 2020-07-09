@@ -9,6 +9,7 @@ import { AuthGuard } from './core/auth';
 import { AboutComponent } from './views/pages/about/about.component';
 import { TinTucComponent } from './views/pages/tin-tuc/tin-tuc.component';
 import { ContactComponent } from './views/pages/contact/contact.component';
+import { NoticeExchangeComponent } from './views/pages/notice-exchange/notice-exchange.component';
 
 const routes: Routes = [
   {path: 'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule)},

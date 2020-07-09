@@ -83,4 +83,14 @@ export class ExchangeService {
     const uri = environment.urlBE + `api/users/current/loanProfiles`;
     return this.http.post(uri, param);
   }
+
+  getNoticelist(page?): Observable<any> {
+    let uri;
+    if(page) {
+      uri = environment.urlBE + `api/users/current/notifications?page=` + page;
+    } else {
+      uri = environment.urlBE + `api/users/current/notifications`
+    }
+    return this.http.get(uri);
+  }
 }

@@ -113,7 +113,7 @@ export class AccountUserComponent implements OnInit, OnDestroy {
         }
         this.userService.lockAccount(param).subscribe(
           val=> {const message = this.translate.instant('LOCK_SUCCESS');
-          this.layoutUtilsService.showActionNotification(message, 'danger');
+          this.layoutUtilsService.showActionNotification(message, 'success');
           this.loadListAccount();
         },
           err=> {

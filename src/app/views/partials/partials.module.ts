@@ -54,6 +54,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NoticeUserComponent } from './layout/topbar/notice-user/notice-user.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -71,6 +73,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     StickyToolbarComponent,
     LanguageSelectorComponent,
     UserProfile4Component,
+    NoticeUserComponent,
   ],
   exports: [
     PortletModule,
@@ -88,6 +91,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     StickyToolbarComponent,
     LanguageSelectorComponent,
     UserProfile4Component,
+    NoticeUserComponent
   ],
   imports: [
     CommonModule,
@@ -122,7 +126,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     NgbDropdownModule,
     NgbTabsetModule,
     NgbTooltipModule,
-    TranslateModule
+    TranslateModule,
+    MatBadgeModule
   ],
 })
 export class PartialsModule {

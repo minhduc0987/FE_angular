@@ -8,3 +8,4 @@ export { StickyToolbarComponent } from './sticky-toolbar/sticky-toolbar.componen
 // Topbar components
 export { LanguageSelectorComponent } from './topbar/language-selector/language-selector.component';
 export { UserProfile4Component } from './topbar/user-profile4/user-profile4.component';
+export { NoticeUserComponent } from './topbar/notice-user/notice-user.component';

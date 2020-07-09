@@ -78,7 +78,7 @@ export class FormTstcDialogComponent implements OnInit {
       (err) => {
         this.formId.patchValue({ image: null });
         const message = this.translate.instant('ERROR');
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'danger');
       };
   }
   onKeyMoney() {

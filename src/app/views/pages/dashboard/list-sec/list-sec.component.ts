@@ -81,7 +81,7 @@ export class ListSecComponent implements OnInit {
     this.exchangeService.rutSec(param).subscribe(
       val=>{
         const message = val?.message || 'Rút séc thành công';
-      this.layoutUtilsService.showActionNotification(message, 'danger');
+      this.layoutUtilsService.showActionNotification(message, 'success');
     },
       err=>{const message = err?.error?.message || 'Có lỗi vui lòng thao tác lại';
       this.layoutUtilsService.showActionNotification(message, 'danger');

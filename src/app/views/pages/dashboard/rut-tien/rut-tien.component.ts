@@ -38,11 +38,11 @@ export class RutTienComponent implements OnInit {
     }
     this.userProfileService.ruttien(param).subscribe(
       val=>{const message = 'Thành công';
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'success');
       this.router.navigateByUrl('./dashboard')
     },
       err=>{const message = 'Có lỗi vui lòng thao tác lại';
-      this.layoutUtilsService.showActionNotification(message);}
+      this.layoutUtilsService.showActionNotification(message, 'danger');}
     )
   }
 

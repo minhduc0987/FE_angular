@@ -78,17 +78,17 @@ export class CreateHsComponent implements OnInit {
   create() {
     if(!this.formId2.get('amount').value) {
       const message = this.translate.instant('VALIDATION.LOAN_MONEY');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     if(!this.formId2.get('description').value) {
       const message = this.translate.instant('VALIDATION.LOAN_MONEY_CONTENT');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     if(!this.formId2.get('tk').value) {
       const message = this.translate.instant('VALIDATION.LOAN_TK');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     const user = JSON.parse(localStorage.getItem('userSearch'));
@@ -107,7 +107,7 @@ export class CreateHsComponent implements OnInit {
       },
       (err) => {
         const message = err.error.message;
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'danger');
       },
     );
   }
@@ -173,11 +173,11 @@ export class CreateHsComponent implements OnInit {
     const id = this.proId;
     this.exchangeService.addTstc(params,userId, id).subscribe(val => {
       const message = 'Thêm tài sản thế chấp thành công';
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'success');
     },
     (err)=> {
       const message = this.translate.instant('ERROR');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
     })
   }
 
@@ -188,14 +188,14 @@ export class CreateHsComponent implements OnInit {
     const userId = JSON.parse(localStorage.getItem('userSearch')).id;
     this.exchangeService.approveHsv(params, userId).subscribe(val => {
       const message = 'Xác nhận hồ sơ vay thành công';
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'success');
       this.isOtp = true;
       this.loanProfileId = val.message;
       this.ref.markForCheck();
     },
     (err)=> {
       const message = this.translate.instant('ERROR');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
     })
   }
   cancel () {
@@ -211,14 +211,14 @@ export class CreateHsComponent implements OnInit {
       this.isOtp = false;
       this.ref.markForCheck();
       const message = 'Xác nhận hồ sơ vay thành công';
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'success');
       setTimeout(()=> {
         this.router.navigateByUrl('/loans');
       },3000)
     },
     (err)=> {
       const message = this.translate.instant('ERROR');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
     })
   }
 }

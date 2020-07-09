@@ -143,7 +143,7 @@ export class ExchangeService {
   }
 
   rutSec(param): Observable<any> {
-    const uri = environment.urlBE + `api/admin/cheques/deposit`;
+    const uri = environment.urlBE + `api/admin/cheques/withdraw`;
     return this.http.post(uri, param);
   }
 }

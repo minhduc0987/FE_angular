@@ -69,7 +69,7 @@ export class ListTransactionComponent implements OnInit {
       },
       (err) => {
         const message = this.translate.instant('NOT_FIND_USER');
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'danger');
       },
     );
   }

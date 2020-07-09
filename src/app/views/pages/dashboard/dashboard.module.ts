@@ -38,7 +38,7 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { InterceptService, HttpUtilsService, TypesUtilsService, LayoutUtilsService } from 'src/app/core/_base/crud';
-import { ActionNotificationComponent } from '../../partials/content/crud';
+import { ActionNotificationComponent, DeleteEntityDialogComponent } from '../../partials/content/crud';
 import { Aside1Component } from './aside/aside-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { ListTransactionComponent } from './list-transaction/list-transaction.component';
@@ -92,7 +92,7 @@ const routes: Routes = [
         component: ListSecComponent,
       },
       {
-        path: 'gui-tien',
+        path: 'add-money',
         component: GuiTienComponent,
       },
       {
@@ -163,7 +163,7 @@ const routes: Routes = [
     TypesUtilsService,
     LayoutUtilsService,
   ],
-  entryComponents: [ActionNotificationComponent, UserComponent, HsvtComponent, InpitOtpComponent],
+  entryComponents: [ActionNotificationComponent, DeleteEntityDialogComponent, UserComponent, HsvtComponent, InpitOtpComponent],
   declarations: [
     DashboardComponent,
     Aside1Component,

@@ -111,12 +111,12 @@ export class ListVayTienComponent implements OnInit {
     this.exchangeService.approvalVT({loanProfileId: item.id}).subscribe(
       (val) => {
         const message = 'Thao tác thành công';
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'success');
         this.router.navigateByUrl('/loans');
       },
       (err) => {
         const message = 'Có lỗi vui lòng thao tác lại';
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'danger');
       },
     );
   }
@@ -124,12 +124,12 @@ export class ListVayTienComponent implements OnInit {
     this.exchangeService.rejectVT({loanProfileId: item.id}).subscribe(
       (val) => {
         const message = 'Thao tác thành công';
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'success');
         this.router.navigateByUrl('/loans');
       },
       (err) => {
         const message = 'Có lỗi vui lòng thao tác lại';
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'danger');
       },
     );
   }

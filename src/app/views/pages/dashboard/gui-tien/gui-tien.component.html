@@ -1,30 +1,40 @@
 <mat-card>
   <div class="">
     <form [formGroup]="formId">
-      <div>
-        <div class="label-left">{{ 'EXCHANGE.NHAN' | translate }}</div>
-        <ng-select
+      <div class="kt-portlet__body">
+        <div class="label-left">Gửi tiền vào tài khoản</div>
+        <div class="row">
+          <div class="col-lg-6 offset-md-3 kt-margin-bottom-20-mobile form-group">
+            <label>Tìm người dùng <span class="text-danger">*</span></label>
+            <input type="text" class="input form-control" formControlName="stk" required placeholder="{{ 'SEARCH_TK' | translate }}" />
+          </div>
+          <div class="col-lg-6 offset-md-3 kt-margin-bottom-20-mobile form-group">
+            <label>Chọn tài khoản <span class="text-danger">*</span></label>
+            <ng-select
               [items]="account"
               [clearable]="false"
               placeholder="{{ 'CHOISE_STK' | translate }}"
               formControlName="idBank"
-              class="select"
+              class=""
               bindLabel="accountNumber"
               bindValue="id"
               [searchable]="false"
+              *ngIf="account"
             >
             </ng-select>
-      </div>
-      <div>
-        <div class="label-left">{{ 'EXCHANGE.MONEY' | translate }}</div>
-        <input
-          type="text"
-          class="input select"
-          formControlName="money"
-          (keyup)="onKeyMoney()"
-          required
-          placeholder="{{ 'EXCHANGE.MONEY' | translate }}"
-        />
+          </div>
+          <div class="col-lg-6 offset-md-3 kt-margin-bottom-20-mobile form-group">
+            <label>Số tiền gửi vào tài khoản <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              class="input form-control"
+              formControlName="money"
+              (keyup)="onKeyMoney()"
+              required
+              placeholder="{{ 'EXCHANGE.MONEY' | translate }}"
+            />
+          </div>
+        </div>
       </div>
     </form>
     <div class="box-button">

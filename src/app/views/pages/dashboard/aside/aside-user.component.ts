@@ -18,6 +18,7 @@ export class Aside1Component implements OnInit {
       {id: 1, name: 'Danh sách giao dịch', url: 'list-transaction'},
       {id: 2, name: 'Danh sách vay tiền', url: 'list-hsvt'},
       {id: 2, name: 'Rút séc', url: 'rut-sec'},
+      {id: 2, name: 'Gửi tiền', url: 'add-money'},
     ]
   }
 

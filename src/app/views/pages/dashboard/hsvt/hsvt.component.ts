@@ -308,7 +308,7 @@ export class HsvtComponent implements OnInit {
     this.exchangeService.approveHsv(params, this.data.item.user.id).subscribe(
       (val) => {
         const message = 'Gửi yêu cầu xác nhận thành công';
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'success');
         const dialog = this.dialog.open(InpitOtpComponent, {
           width: '600px',
           disableClose: true,
@@ -335,7 +335,7 @@ export class HsvtComponent implements OnInit {
         this.cancel();
         this.ref.markForCheck();
         const message = 'Xác nhận hồ sơ vay thành công';
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'success');
       },
       (err) => {
         const message = this.translate.instant('ERROR');

@@ -100,7 +100,7 @@ export class UserComponent implements OnInit {
     }
     this.userProfileService.createUser(param).subscribe(
       val=>{const message = 'Thành công';
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'success');
       this.router.navigateByUrl('/dashboard')},
       err=>{const message = 'Có lỗi vui lòng thao tác lại';
       this.layoutUtilsService.showActionNotification(message, 'danger');}
@@ -109,7 +109,7 @@ export class UserComponent implements OnInit {
   unlock() {
     this.userProfileService.lock(this.data.id).subscribe(
       val=>{const message = 'Thành công';
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'success');
       this.router.navigateByUrl('/dashboard')},
       err=>{const message = 'Có lỗi vui lòng thao tác lại';
       this.layoutUtilsService.showActionNotification(message, 'danger');}
@@ -118,7 +118,7 @@ export class UserComponent implements OnInit {
   lock() {
     this.userProfileService.lock(this.data.id).subscribe(
       val=>{const message = 'Thành công';
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'success');
       this.router.navigateByUrl('/dashboard')},
       err=>{const message = 'Có lỗi vui lòng thao tác lại';
       this.layoutUtilsService.showActionNotification(message, 'danger');}

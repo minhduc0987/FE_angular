@@ -96,7 +96,7 @@
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
       </mat-table>
     </div>
-    <div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
+    <div class="mat-table__bottom" *ngIf="dataSource.length !== 0">
       <mat-paginator
         [pageSize]="5"
         [pageIndex]="dataSource.pageNumber - 1"

@@ -32,4 +32,11 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   update() {
     this.router.navigateByUrl('/user-detail/update');
   }
+
+  getGt(item) {
+    if(item === 'male') {
+      return 'Nam'
+    }
+    return 'Nữ'
+  }
 }

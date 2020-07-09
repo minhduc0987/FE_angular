@@ -51,7 +51,7 @@
       </div>
       <div>
         <div class="label-left">{{ 'EXCHANGE.NAME_NHAN' | translate }}</div>
-        <div class="select" *ngIf="userExchange$ | async as _ussr">{{ name }}</div>
+        <div class="select" *ngIf="name">{{ name }}</div>
       </div>
       <div>
         <div class="label-left">{{ 'EXCHANGE.MONEY' | translate }}</div>

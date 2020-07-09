@@ -28,7 +28,7 @@ import { Observable, Subscription } from 'rxjs';
 			<ng-content *ngIf="!title" select="[ktPortletTitle]"></ng-content>
 			<h3 *ngIf="title" class="card-label" [innerHTML]="title"></h3>
 		</div>
-		<div class="card-toolbar" #refTools [hidden]="hideTools">
+		<div class="card-toolbar" #refTools>
 			<ng-content select="[ktPortletTools]"></ng-content>
 		</div>`
 })

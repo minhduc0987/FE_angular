@@ -14,6 +14,8 @@ import { QueryParamsModel, LayoutUtilsService } from '../../../../../core/_base/
 import { ExchangeService, UserProfileService } from 'src/app/core/apps';
 import { PageEvent } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material/dialog';
+import { FormUpdateSecComponent } from 'src/app/views/partials/content/crud';
 
 // Table with EDIT item in MODAL
 // ARTICLE for table with sort/filter/paginator
@@ -44,6 +46,7 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
     private layoutUtilsService: LayoutUtilsService,
     private userService: UserProfileService,
     private translate: TranslateService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -115,5 +118,12 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
         return;
       }
       );
+  }
+  view(item) {
+    this.dialog.open(FormUpdateSecComponent, {
+      data: {item},
+      width: '900px',
+      disableClose: true
+    })
   }
 }

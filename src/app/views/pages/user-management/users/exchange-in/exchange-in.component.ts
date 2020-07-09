@@ -143,6 +143,7 @@ export class ExchangeInComponent implements OnInit {
 
     const userId = localStorage.getItem('userId');
     const id = this.form1.get('stk').value;
+    
 
     this.exchangeService.createSec(params, userId, id).subscribe(
       (val) => {

@@ -19,6 +19,7 @@ import {
 } from '../../../../../core/auth';
 import { SubheaderService } from '../../../../../core/_base/layout';
 import { UserProfileService } from 'src/app/core/apps';
+import { TranslateService } from '@ngx-translate/core';
 
 // Table with EDIT item in MODAL
 // ARTICLE for table with sort/filter/paginator
@@ -57,7 +58,10 @@ export class AccountUserComponent implements OnInit, OnDestroy {
    * @param subheaderService: SubheaderService
    */
   constructor(
-    private userService: UserProfileService
+    private userService: UserProfileService,
+    private translate: TranslateService,
+    private ref: ChangeDetectorRef,
+    private layoutUtilsService: LayoutUtilsService,
   ) {}
   ngOnInit() {
     this.loadListAccount()
@@ -70,6 +74,7 @@ export class AccountUserComponent implements OnInit, OnDestroy {
   loadListAccount() {
     const userId = localStorage.getItem('userId')
     this.dataSource$ = this.userService.getListAccount(userId);
+    this.ref.markForCheck()
   }
   getAmount(amount) {
     return amount + ' VNĐ' ;
@@ -97,6 +102,27 @@ export class AccountUserComponent implements OnInit, OnDestroy {
 		}
   }
   lock(account) {
+    const dialog = this.layoutUtilsService.deleteElement(
+      'Khoá thẻ',
+      'Bạn chắc chắn muốn khoá thẻ này?'
+    );
+    dialog.afterClosed().subscribe(val=>{
+      if(val) {
+        const param = {
+          accountId: account.id
+        }
+        this.userService.lockAccount(param).subscribe(
+          val=> {const message = this.translate.instant('LOCK_SUCCESS');
+          this.layoutUtilsService.showActionNotification(message, 'danger');
+          this.loadListAccount();
+        },
+          err=> {
+            const message = this.translate.instant('ERROR');
+          this.layoutUtilsService.showActionNotification(message, 'danger');
+          }
+        )
+      }
+    })
     
   }
 }

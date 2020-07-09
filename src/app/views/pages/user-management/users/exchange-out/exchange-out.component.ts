@@ -86,12 +86,12 @@ export class ExchangeOutComponent implements OnInit {
   submit() {
     if (!this.formPass.get('password').value) {
       const message = this.translate.instant('VALIDATION.PASSWORD');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     if (this.formPass.get('password').value.length !== 4) {
       const message = this.translate.instant('VALIDATION.PASSWORD_NO');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       this.formPass.patchValue({
         password: '',
       });
@@ -116,7 +116,7 @@ export class ExchangeOutComponent implements OnInit {
             this.show = false;
             this.show2 = false;
             const message = this.translate.instant('EXCHANGE.SUCCESS');
-            this.layoutUtilsService.showActionNotification(message);
+            this.layoutUtilsService.showActionNotification(message, 'danger');
             setTimeout(() => {
               this.router.navigateByUrl('/user-detail/lich-su-giao-dich');
             }, 3000);
@@ -125,38 +125,43 @@ export class ExchangeOutComponent implements OnInit {
             this.show2 = true;
             this.idGd = res.message;
           }
-          this.ref.markForCheck()
+          this.ref.markForCheck();
         },
         (err) => {
           const message = this.translate.instant('ERROR');
-          this.layoutUtilsService.showActionNotification(message);
+          this.layoutUtilsService.showActionNotification(message, 'danger');
         },
       );
     }
   }
 
   submit2() {
-    const params = {
-      transactionQueueId: this.idGd,
-      otpCode: this.formPass2.get('password2').value,
-    };
-    if (this.show2) {
-      this.exchangeService.exchangeOTP(params).subscribe(
-        (val) => {
-          this.show2 = false;
-          const message = this.translate.instant('EXCHANGE.SUCCESS');
-          this.layoutUtilsService.showActionNotification(message);
-          setTimeout(() => {
-            this.router.navigateByUrl('/user-detail/lich-su-giao-dich');
-          }, 3000);
-          this.ref.markForCheck()
-        },
-        (_err: any) => {
-          const message = this.translate.instant('ERROR');
-          this.layoutUtilsService.showActionNotification(message);
-        },
-      );
-    }
+    const comfirm = this.layoutUtilsService.deleteElement('Chuyển tiền', 'Xác nhận chuyển tiền?');
+    comfirm.afterClosed().subscribe((val) => {
+      if (val) {
+        const params = {
+          transactionQueueId: this.idGd,
+          otpCode: this.formPass2.get('password2').value,
+        };
+        if (this.show2) {
+          this.exchangeService.exchangeOTP(params).subscribe(
+            (val) => {
+              this.show2 = false;
+              const message = this.translate.instant('EXCHANGE.SUCCESS');
+              this.layoutUtilsService.showActionNotification(message);
+              setTimeout(() => {
+                this.router.navigateByUrl('/user-detail/lich-su-giao-dich');
+              }, 3000);
+              this.ref.markForCheck();
+            },
+            (_err: any) => {
+              const message = this.translate.instant('ERROR');
+              this.layoutUtilsService.showActionNotification(message);
+            },
+          );
+        }
+      }
+    });
   }
 
   getAccount() {
@@ -176,14 +181,14 @@ export class ExchangeOutComponent implements OnInit {
 
   onKeyMoney() {
     this.formId.patchValue({
-      money: this.formatNumber(this.formId.get('money').value)
-    })
+      money: this.formatNumber(this.formId.get('money').value),
+    });
   }
 
   onKeyBank() {
     this.formId.patchValue({
-      idBank: this.formatNumber1(this.formId.get('idBank').value)
-    })
+      idBank: this.formatNumber1(this.formId.get('idBank').value),
+    });
   }
 
   changeI1(e) {
@@ -203,10 +208,16 @@ export class ExchangeOutComponent implements OnInit {
         type: 'CARDNUMBER',
       };
     }
-    this.userExchange$ = this.exchangeService.getUserExchange(params);
-    this.userExchange$.subscribe((val) => {
-      this.name = val.fullname;
-    });
+    // this.userExchange$ = this.exchangeService.getUserExchange(params);
+    this.exchangeService.getUserExchange(params).subscribe(
+      (val) => {
+        this.name = val.fullname;
+      },
+      (err) => {
+        const message = 'Không tìm thấy tài khoản trên hệ thống';
+        this.layoutUtilsService.showActionNotification(message, 'danger');
+      },
+    );
   }
 
   next() {

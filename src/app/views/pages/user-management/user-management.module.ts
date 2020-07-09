@@ -11,7 +11,7 @@ import { PartialsModule } from '../../partials/partials.module';
 // Services
 import { HttpUtilsService, TypesUtilsService, InterceptService, LayoutUtilsService } from '../../../core/_base/crud';
 // Shared
-import { ActionNotificationComponent } from '../../partials/content/crud';
+import { ActionNotificationComponent, DeleteEntityDialogComponent, FormUpdateSecComponent } from '../../partials/content/crud';
 // Components
 import { UserManagementComponent } from './user-management.component';
 import { UserInfoComponent } from './users/user-info/user-info.component';
@@ -155,7 +155,7 @@ const routes: Routes = [
     TypesUtilsService,
     LayoutUtilsService,
   ],
-  entryComponents: [ActionNotificationComponent, AsideUserComponent],
+  entryComponents: [ActionNotificationComponent, DeleteEntityDialogComponent, AsideUserComponent, FormUpdateSecComponent],
   declarations: [
     UserManagementComponent,
     UserInfoComponent,

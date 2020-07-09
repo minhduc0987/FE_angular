@@ -44,7 +44,7 @@
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef>Hành động</mat-header-cell>
           <mat-cell *matCellDef="let account">
-            <button (click)="lock(account)" class="btn btn-danger">
+            <button (click)="lock(account)" class="btn btn-danger" *ngIf="account.status === true">
               Khoá thẻ
             </button>
           </mat-cell>

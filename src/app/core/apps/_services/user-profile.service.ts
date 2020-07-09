@@ -13,6 +13,12 @@ const API_USERS_URL = environment.urlBE + 'api/users';
 
 @Injectable({providedIn: 'root'})
 export class UserProfileService {
+  createUser(param: { username: any; email: any; fullName: any; birthday: any; address: any; gender: any; idCardNumber: any; phone: any; image: any; membershipId: any; }) {
+    throw new Error("Method not implemented.");
+  }
+  lock(id: any) {
+    throw new Error("Method not implemented.");
+  }
 
 	constructor(private http: HttpClient) {
 	}
@@ -39,4 +45,8 @@ export class UserProfileService {
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<User>(url, {headers : httpHeaders})
 	}
+	lockAccount(param): Observable<any> {
+		const uri = environment.urlBE + `api/users/current/account/lock`;
+		return this.http.post(uri,param);
+	  }
 }

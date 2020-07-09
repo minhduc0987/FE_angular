@@ -104,6 +104,11 @@ export const locale = {
     LAI_SUAT: 'Lãi suất',
     TIME_VAY: 'Thời gian vay',
     MD_VAY: 'Mục đích vay',
-    SAVE: 'Lưu'
+    SAVE: 'Lưu',
+    LOCK_SUCCESS: 'Khoá thành công',
+    UPDATE_SEC: 'Cập nhật séc',
+    CANCEL_SEC: 'Huỷ séc',
+    FULLNAME: 'Họ và tên',
+    MONEY: 'Số tiền'
   },
 };

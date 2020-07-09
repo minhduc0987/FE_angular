@@ -56,6 +56,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NoticeUserComponent } from './layout/topbar/notice-user/notice-user.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import { FormUpdateSecComponent } from './content/crud/form-update-sec/form-update-sec.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     LanguageSelectorComponent,
     UserProfile4Component,
     NoticeUserComponent,
+    FormUpdateSecComponent,
   ],
   exports: [
     PortletModule,

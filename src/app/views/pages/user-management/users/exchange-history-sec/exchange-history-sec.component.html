@@ -1,85 +1,83 @@
 <kt-portlet>
-	<kt-portlet-header title="{{ 'EXCHANGE.SEC_HISTORY' | translate }}" [class]="'card-head-lg'">
-		<ng-container ktPortletTools>
-		</ng-container>
-	</kt-portlet-header>
+  <kt-portlet-header title="{{ 'EXCHANGE.SEC_HISTORY' | translate }}" [class]="'card-head-lg'">
+    <ng-container ktPortletTools> </ng-container>
+  </kt-portlet-header>
 
-	<kt-portlet-body>
-		<div>
-			<div *ngIf="account$ | async as _account">
-				<div class="label-left">{{ 'CHOISE_HISTORY' | translate }}</div>
-					<ng-select
-					[items]="_account"
-					placeholder="Chọn tài khoản"
-					[ngModel]="stk"
-					class="select"
-					bindLabel="accountNumber"
-					bindValue="id"
-					[searchable]="false"
-					(change)="change($event)"
-					>
-					</ng-select>
-			</div>
-		</div>
-		<div class="mat-table__wrapper">
-			<mat-table class="lmat-elevation-z8"
-				#table
-				[dataSource]="account"
-				*ngIf="dataSource$ | async as account">
+  <kt-portlet-body>
+    <div>
+      <div *ngIf="account$ | async as _account">
+        <div class="label-left">{{ 'CHOISE_HISTORY' | translate }}</div>
+        <ng-select
+          [items]="_account"
+          placeholder="Chọn tài khoản"
+          [ngModel]="stk"
+          class="select"
+          bindLabel="accountNumber"
+          bindValue="id"
+          [searchable]="false"
+          (change)="change($event)"
+        >
+        </ng-select>
+      </div>
+    </div>
+    <div class="mat-table__wrapper">
+      <mat-table class="lmat-elevation-z8" #table [dataSource]="account" *ngIf="dataSource$ | async as account">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let account">FPTS072020{{ account.id }}</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="id">
-					<mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
-					<mat-cell *matCellDef="let account">FPTS072020{{account.id}}</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Tên người nhận</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ account.recieverFullname }}</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="name">
-					<mat-header-cell *matHeaderCellDef>Tên người nhận</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.recieverFullname}}</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="info">
+          <mat-header-cell *matHeaderCellDef>Số CMND</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ account.recieverIdCardNumber }}</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="info">
-					<mat-header-cell *matHeaderCellDef>Số CMND</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.recieverIdCardNumber}}</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="money">
+          <mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.MONEY' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ formatNumber(account.transactionAmount) }} VNĐ</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="money">
-					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.MONEY' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{formatNumber(account.transactionAmount)}} VNĐ</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="date1">
+          <mat-header-cell *matHeaderCellDef>Ngày phát hành</mat-header-cell>
+          <mat-cell *matCellDef="let account">
+            {{ getDate(account.createdAt) }}
+          </mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="date1">
-					<mat-header-cell *matHeaderCellDef>Ngày phát hành</mat-header-cell>
-					<mat-cell *matCellDef="let account">
-						{{getDate(account.createdAt)}}
-					</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="date2">
+          <mat-header-cell *matHeaderCellDef>Ngày hết hạn</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ getDate(account.expiredDate) }}</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="date2">
-					<mat-header-cell *matHeaderCellDef>Ngày hết hạn</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{getDate(account.expiredDate)}}</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="status1">
+          <mat-header-cell *matHeaderCellDef>Trạng thái giao dịch</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ getStatus(account) }}</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="status1">
-					<mat-header-cell *matHeaderCellDef>Trạng thái giao dịch</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{getStatus(account)}}</mat-cell>
-				</ng-container>
-
-				<ng-container matColumnDef="status2">
-					<mat-header-cell *matHeaderCellDef>Hành động</mat-header-cell>
-					<mat-cell *matCellDef="let account">
-						<button mat-icon-button color="warn" (click)=cancelSec(account) *ngIf="getStatus2(account.canceled)">
+        <ng-container matColumnDef="status2">
+          <mat-header-cell *matHeaderCellDef>Hành động</mat-header-cell>
+          <mat-cell *matCellDef="let account">
+            <!-- <button mat-icon-button color="warn" (click)=cancelSec(account) *ngIf="getStatus2(account.canceled)">
 							<mat-icon>delete</mat-icon>
-						</button>
-					</mat-cell>
-				</ng-container>
+						</button> -->
+            <button mat-icon-button color="primary" type="button" (click)="view(account)">
+              <mat-icon>toc</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
 
-				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
-				<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-			</mat-table>
-		</div>
-		<!-- <div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+    <!-- <div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
 			<mat-paginator [pageSize]="5" [pageIndex]="dataSource.pageNumber - 1" [pageSizeOptions]="[5]" (page)="pageEvent = setItems($event)" [length]="dataSource.totalCount" [showFirstLastButtons]="true"></mat-paginator>
 		</div> -->
-	</kt-portlet-body>
+  </kt-portlet-body>
 </kt-portlet>

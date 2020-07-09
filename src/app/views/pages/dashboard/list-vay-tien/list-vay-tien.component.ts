@@ -75,7 +75,7 @@ export class ListVayTienComponent implements OnInit {
   }
 
   checkRole(item) {
-    const role = JSON.parse(sessionStorage.getItem('user')).authorities[0].authority;
+    const role = JSON.parse(localStorage.getItem('user')).authorities[0].authority;
     if(role == 'ROLE_EMPLOYEE') {
       return false
     }
@@ -91,7 +91,7 @@ export class ListVayTienComponent implements OnInit {
     return true;
   }
   checkRole2(item) {
-    const role = JSON.parse(sessionStorage.getItem('user')).authorities[0].authority;
+    const role = JSON.parse(localStorage.getItem('user')).authorities[0].authority;
     if(role == 'ROLE_EMPLOYEE') {
       return false
     }

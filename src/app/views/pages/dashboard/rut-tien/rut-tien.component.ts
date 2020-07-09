@@ -20,7 +20,7 @@ export class RutTienComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    const id = JSON.parse(sessionStorage.getItem('userSearch')).id;
+    const id = JSON.parse(localStorage.getItem('userSearch')).id;
     this.exchangeService.getUserIn(id).subscribe(val=>this.account = val);
     this.formId = this._formBuilder.group({
       idBank: ['', Validators.required],
@@ -30,7 +30,7 @@ export class RutTienComponent implements OnInit {
   }
 
   submit2() {
-    const id = JSON.parse(sessionStorage.getItem('userSearch')).id;
+    const id = JSON.parse(localStorage.getItem('userSearch')).id;
     const param = {
       userId: Number(id),
       accountId: Number(this.formatNumber2(this.formId.get('idBank').value)),

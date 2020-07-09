@@ -56,6 +56,7 @@ import { PageComponent } from './page/page.component';
 import { UserComponent } from './user/user.component';
 import { HsvtComponent } from './hsvt/hsvt.component';
 import { InpitOtpComponent } from '../../partials/content/crud/inpit-otp/inpit-otp.component';
+import { RutSecComponent } from './rut-sec/rut-sec.component';
 const routes: Routes = [
   {
     path: '',
@@ -85,6 +86,10 @@ const routes: Routes = [
       {
         path: 'rut-tien',
         component: RutTienComponent,
+      },
+      {
+        path: 'rut-sec',
+        component: ListSecComponent,
       },
       {
         path: 'gui-tien',
@@ -177,6 +182,7 @@ const routes: Routes = [
     PageComponent,
     UserComponent,
     HsvtComponent,
+    RutSecComponent,
   ],
 })
 export class DashboardModule {}

@@ -139,17 +139,20 @@
                 <button type="button" mat-raised-button cdkFocusInitial type="button" (click)="cancel()">
                   {{ 'CANCEL' | translate }}</button
                 >&nbsp;
-                <button type="submit" mat-raised-button color="primary" type="button" (click)="addTstc()" *ngIf="isAddTstc">
+                <button type="button" mat-raised-button color="primary" type="button" (click)="submit()" *ngIf="isCreate">
+                  {{ 'CREATE' | translate }}
+                </button>&nbsp;
+                <button type="button" mat-raised-button color="primary" type="button" (click)="addTstc()" *ngIf="isAddTstc">
                   {{ 'ADD_TSTC' | translate }}</button
                 >&nbsp;
-                <button type="submit" mat-raised-button color="primary" type="button" (click)="submit()" *ngIf="data ? false : true">
-                  {{ 'SAVE' | translate }}
+                <button type="button" mat-raised-button color="primary" type="button" (click)="submit()" *ngIf="isComfirm">
+                  {{ 'COMFIRM' | translate }}
                 </button>&nbsp;
-                <button type="submit" mat-raised-button color="primary" type="button" (click)="approval()" *ngIf="data ? true : false">
+                <button type="button" mat-raised-button color="primary" type="button" (click)="approval()" *ngIf="isApproval">
                   {{ 'APPROVAL' | translate }}
                 </button>
                 &nbsp;
-                <button type="submit" mat-raised-button color="primary" type="button" (click)="refuse()" *ngIf="data ? true : false">
+                <button type="button" mat-raised-button color="primary" type="button" (click)="refuse()" *ngIf="isRefuse">
                   {{ 'REFUSE' | translate }}
                 </button>
               </div>

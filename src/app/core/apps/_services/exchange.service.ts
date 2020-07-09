@@ -10,14 +10,14 @@ export class ExchangeService {
   constructor(private http: HttpClient) {}
 
   getlistExchange(accountId: any, page?: any): Observable<any> {
-    const userId = sessionStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
     let url;
     if (page) {
       url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions?page=' + page;
     } else {
       url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions';
     }
-    const userToken = sessionStorage.getItem(environment.authTokenKey);
+    const userToken = localStorage.getItem(environment.authTokenKey);
     let httpHeaders = new HttpHeaders();
     httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
     return this.http.get<any>(url, { headers: httpHeaders });
@@ -25,14 +25,14 @@ export class ExchangeService {
 
   getUserExchange(params: any): Observable<any> {
     const url = API_USERS_URL + 'find';
-    const userToken = sessionStorage.getItem(environment.authTokenKey);
+    const userToken = localStorage.getItem(environment.authTokenKey);
     let httpHeaders = new HttpHeaders();
     httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
     return this.http.post<any>(url, params);
   }
 
   exchange(params, id) {
-    const userId = sessionStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
     const url = API_USERS_URL + userId + `/accounts/` + id + `/tranferInternal/accountNumber`;
     return this.http.post<any>(url, params);
   }
@@ -43,10 +43,10 @@ export class ExchangeService {
   }
 
   getlistCheque(accountId: any): Observable<any> {
-    const userId = sessionStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
     let url;
     url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions';
-    const userToken = sessionStorage.getItem(environment.authTokenKey);
+    const userToken = localStorage.getItem(environment.authTokenKey);
     let httpHeaders = new HttpHeaders();
     httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
     return this.http.get<any>(url, { headers: httpHeaders });
@@ -108,8 +108,13 @@ export class ExchangeService {
     return this.http.post(uri, param);
   }
   
-  getListUsers(): Observable<any> {
-    const uri = environment.urlBE + `api/admin/users`;
+  getListUsers(page?: string): Observable<any> {
+    let uri
+    if (page) {
+      uri = environment.urlBE + `api/admin/users?page=` + page;
+    } else {
+      uri = environment.urlBE + `api/admin/users`;
+    }
     return this.http.get(uri);
   }
   getAllLoans(): Observable<any> {
@@ -117,5 +122,23 @@ export class ExchangeService {
     return this.http.get(uri);
   }
 
-  
+  getTransactionUser(userId: any,id: any,  page?: any): Observable<any> {
+    let url;
+    if (page) {
+      url = environment.urlBE + `api/admin/users/`+ userId + `/accounts/`+ id + `/transactions?page=` + page;
+    } else {
+      url = environment.urlBE + `api/admin/users/`+ userId + `/accounts/`+ id + `/transactions`;
+    }
+    return this.http.get<any>(url);
+  }
+
+  getSec(param): Observable<any> {
+    const uri = environment.urlBE + `api/admin/employee/cheques`;
+    return this.http.post(uri, param);
+  }
+
+  rutSec(param): Observable<any> {
+    const uri = environment.urlBE + `api/admin/cheques/deposit`;
+    return this.http.post(uri, param);
+  }
 }

@@ -18,11 +18,15 @@ import { InpitOtpComponent } from 'src/app/views/partials/content/crud/inpit-otp
 export class HsvtComponent implements OnInit {
   userForm: FormGroup;
   isDisable = false;
+  isCreate = false;
   isAddTstc = false;
   loans: any = [];
   userIn: any = [];
   listHsvt = [];
   proId: any;
+  isApproval = false;
+  isRefuse = false;
+  isComfirm = false;
   userId: any;
   constructor(
     public dialogRef: MatDialogRef<HsvtComponent>,
@@ -46,7 +50,6 @@ export class HsvtComponent implements OnInit {
     });
     this.getLoan();
     if (this.data) {
-      this.isAddTstc = true;
       this.proId = this.data.item.id;
       this.listHsvt = this.data.item.assets;
       this.userForm.patchValue({
@@ -57,8 +60,41 @@ export class HsvtComponent implements OnInit {
         time: this.data.item.loanInterestRate.months,
         ls: this.data.item.loanInterestRate.interestRate,
         amount: this.formatNumber(this.data.item.amount),
-        description: this.data.item.description
+        description: this.data.item.description,
       });
+      if (this.data.item.rejected) {
+        this.isRefuse = false;
+        this.isApproval = true;
+      } else {
+        switch (this.data.item.status) {
+          case '0':
+            this.isAddTstc = true;
+            this.isComfirm = true;
+            break;
+          case '1':
+            if (JSON.parse(localStorage.getItem('user')).authorities[0].authority === 'ROLE_EMPLOYEE') {
+              this.isRefuse = true;
+              this.isApproval = true;
+              this.isAddTstc = true;
+            }
+            break
+          case '2': 
+            if (JSON.parse(localStorage.getItem('user')).authorities[0].authority === 'ROLE_TRANSACTIONMANAGER') {
+              this.isRefuse = true;
+              this.isApproval = true;
+            }
+            break
+          case '3': 
+            if (JSON.parse(localStorage.getItem('user')).authorities[0].authority === 'ROLE_BRANCHMANAGER') {
+              this.isRefuse = true;
+              this.isApproval = true;
+            }
+            break
+        }
+      }
+    } else {
+      this.isCreate = true;
+      this.isAddTstc = true;
     }
   }
 
@@ -77,14 +113,16 @@ export class HsvtComponent implements OnInit {
   }
 
   update(params) {
-    this.exchangeService.addTstc(params, this.data.item.user.id, this.data.item.id).subscribe(val => {
-      const message = 'Thêm tài sản thế chấp thành công';
-      this.layoutUtilsService.showActionNotification(message);
-    },
-    (err)=> {
-      const message = this.translate.instant('ERROR');
-      this.layoutUtilsService.showActionNotification(message);
-    })
+    this.exchangeService.addTstc(params, this.data.item.user.id, this.data.item.id).subscribe(
+      (val) => {
+        const message = 'Thêm tài sản thế chấp thành công';
+        this.layoutUtilsService.showActionNotification(message);
+      },
+      (err) => {
+        const message = this.translate.instant('ERROR');
+        this.layoutUtilsService.showActionNotification(message);
+      },
+    );
     this.ref.markForCheck();
   }
 
@@ -102,10 +140,9 @@ export class HsvtComponent implements OnInit {
           idCardNumber: res.idCardNumber,
         });
         this.userId = res.id;
-        this.getUserIn(res.id)
+        this.getUserIn(res.id);
       },
-      (err) => {
-      },
+      (err) => {},
     );
   }
   getUserIn(id) {
@@ -177,17 +214,17 @@ export class HsvtComponent implements OnInit {
   submit() {
     if (!this.userForm.get('amount').value) {
       const message = this.translate.instant('VALIDATION.LOAN_MONEY');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     if (!this.userForm.get('description').value) {
       const message = this.translate.instant('VALIDATION.LOAN_MONEY_CONTENT');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     if (!this.userForm.get('tk').value) {
       const message = this.translate.instant('VALIDATION.LOAN_TK');
-      this.layoutUtilsService.showActionNotification(message);
+      this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
     const params = {
@@ -219,7 +256,7 @@ export class HsvtComponent implements OnInit {
       },
       (err) => {
         const message = 'Có lỗi vui lòng thao tác lại';
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'danger');
       },
     );
   }
@@ -232,7 +269,7 @@ export class HsvtComponent implements OnInit {
       },
       (err) => {
         const message = 'Có lỗi vui lòng thao tác lại';
-        this.layoutUtilsService.showActionNotification(message);
+        this.layoutUtilsService.showActionNotification(message, 'danger');
       },
     );
   }
@@ -262,51 +299,50 @@ export class HsvtComponent implements OnInit {
   }
 
   remove(i) {
-    this.listHsvt.splice(i, 1)
+    this.listHsvt.splice(i, 1);
   }
   approval() {
     const params = {
-      loanProfileId: this.proId
-    }
-    this.exchangeService.approveHsv(params, this.data.item.user.id).subscribe(val => {
-      const message = 'Gửi yêu cầu xác nhận thành công';
-      this.layoutUtilsService.showActionNotification(message);
-      const dialog =this.dialog.open(InpitOtpComponent, {
-        width: '600px',
-        disableClose: true
-      })
-      this.ref.markForCheck();
-      dialog.afterClosed().subscribe(val => {
-        this.comfirmOtp(val)
-      })
-    },
-    (err)=> {
-      const message = this.translate.instant('ERROR');
-      this.layoutUtilsService.showActionNotification(message);
-    })
+      loanProfileId: this.proId,
+    };
+    this.exchangeService.approveHsv(params, this.data.item.user.id).subscribe(
+      (val) => {
+        const message = 'Gửi yêu cầu xác nhận thành công';
+        this.layoutUtilsService.showActionNotification(message);
+        const dialog = this.dialog.open(InpitOtpComponent, {
+          width: '600px',
+          disableClose: true,
+        });
+        this.ref.markForCheck();
+        dialog.afterClosed().subscribe((val) => {
+          this.comfirmOtp(val);
+        });
+      },
+      (err) => {
+        const message = this.translate.instant('ERROR');
+        this.layoutUtilsService.showActionNotification(message, 'danger');
+      },
+    );
   }
 
   comfirmOtp(otp) {
     const params = {
       loanProfileId: Number(this.data.item.id),
-      otpCode: otp
-    }
-    this.exchangeService.comfirmHsv(params).subscribe(val => {
-      this.cancel()
-      this.ref.markForCheck();
-      const message = 'Xác nhận hồ sơ vay thành công';
-      this.layoutUtilsService.showActionNotification(message);
-    },
-    (err)=> {
-      const message = this.translate.instant('ERROR');
-      this.layoutUtilsService.showActionNotification(message);
-    })
+      otpCode: otp,
+    };
+    this.exchangeService.comfirmHsv(params).subscribe(
+      (val) => {
+        this.cancel();
+        this.ref.markForCheck();
+        const message = 'Xác nhận hồ sơ vay thành công';
+        this.layoutUtilsService.showActionNotification(message);
+      },
+      (err) => {
+        const message = this.translate.instant('ERROR');
+        this.layoutUtilsService.showActionNotification(message, 'danger');
+      },
+    );
   }
 
-  refuse() {
-
-  }
-
-
-  
+  refuse() {}
 }

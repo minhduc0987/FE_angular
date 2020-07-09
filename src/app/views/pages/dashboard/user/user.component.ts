@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserProfileService } from 'src/app/core/apps';
+import { UserProfileService, ExchangeService } from 'src/app/core/apps';
 import { LayoutUtilsService } from 'src/app/core/_base/crud';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'kt-user',
@@ -15,17 +16,29 @@ export class UserComponent implements OnInit {
   isDisable = false;
   isLock = false;
   isUnLock = false;
+  image='';
+  gender = [
+    { key: 'male', value: 'Nam'},
+    { key: 'female', value: 'Nữ'}
+  ]
+  ht = [
+    {key: '1', value: 'GOLD'},
+    {key: '2', value: 'PLATINUM'},
+    {key: '3', value: 'DIAMOND'}
+  ]
   constructor(
     public dialogRef: MatDialogRef<UserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private userFB: FormBuilder,
     private userProfileService: UserProfileService,private layoutUtilsService: LayoutUtilsService, private router: Router,
+    private exchangeService: ExchangeService,    private translate: TranslateService,
   ) {}
 
   ngOnInit(): void {
-    if(!this.data.locked) {
+    if(this.data && !this.data.locked) {
       this.isLock = true;
-    } else {
+    }
+    if(this.data && this.data.locked) {
       this.isUnLock = true;
     }
     this.createForm();
@@ -43,26 +56,36 @@ export class UserComponent implements OnInit {
         image: [{ value: this.data.image, disabled: this.isDisable }, Validators.required],
         phone: [{ value: this.data.phone, disabled: this.isDisable }, Validators.required],
         address: [{ value: this.data.address, disabled: this.isDisable }, Validators.required],
-        membershipId: [{ value: this.data.membership.name, disabled: this.isDisable }, Validators.required],
+        membershipId: [{ value: this.data.membership.id.toString(), disabled: this.isDisable }, Validators.required],
       });
+      this.image = this.data.image;
     } else {
       this.userForm = this.userFB.group({
         username: [null, Validators.required],
         fullname: [null, Validators.required],
         email: [null, Validators.required],
         birthday: [null, Validators.required],
-        gender: [null, Validators.required],
+        gender: ['male', Validators.required],
         idCardNumber: [null, Validators.required],
         image: [null, Validators.required],
         phone: [null, Validators.required],
         address: [null, Validators.required],
-        membershipId: [null, Validators.required],
+        membershipId: ['1', Validators.required],
       });
     }
   }
 
   submit() {
-    console.log(this.userForm.get('username').value)
+    const controls = this.userForm.controls;
+		/** check form */
+		if (this.userForm.invalid) {
+			Object.keys(controls).forEach(controlName =>
+				controls[controlName].markAsTouched()
+      );
+      const message = 'Vui lòng điền hết các trường';
+      this.layoutUtilsService.showActionNotification(message, 'danger');
+			return;
+		}
     const param = {
       username: this.userForm.get('username').value,
       email: this.userForm.get('email').value,
@@ -80,7 +103,7 @@ export class UserComponent implements OnInit {
       this.layoutUtilsService.showActionNotification(message);
       this.router.navigateByUrl('/dashboard')},
       err=>{const message = 'Có lỗi vui lòng thao tác lại';
-      this.layoutUtilsService.showActionNotification(message);}
+      this.layoutUtilsService.showActionNotification(message, 'danger');}
     )
   }
   unlock() {
@@ -89,7 +112,7 @@ export class UserComponent implements OnInit {
       this.layoutUtilsService.showActionNotification(message);
       this.router.navigateByUrl('/dashboard')},
       err=>{const message = 'Có lỗi vui lòng thao tác lại';
-      this.layoutUtilsService.showActionNotification(message);}
+      this.layoutUtilsService.showActionNotification(message, 'danger');}
     )
   }
   lock() {
@@ -98,10 +121,22 @@ export class UserComponent implements OnInit {
       this.layoutUtilsService.showActionNotification(message);
       this.router.navigateByUrl('/dashboard')},
       err=>{const message = 'Có lỗi vui lòng thao tác lại';
-      this.layoutUtilsService.showActionNotification(message);}
+      this.layoutUtilsService.showActionNotification(message, 'danger');}
     )
   }
   cancel() {
     this.dialogRef.close();
+  }
+
+  onSelectedFile(event) {
+    const selectedFiles: File[] = event.target.files;
+    this.exchangeService.uploadImage(selectedFiles).subscribe((val) => {
+      this.userForm.patchValue({
+        image: val.url
+      });
+      this.image = val.url
+    }),
+      (err) => {
+      };
   }
 }

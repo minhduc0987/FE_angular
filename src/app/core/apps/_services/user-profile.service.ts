@@ -18,7 +18,7 @@ export class UserProfileService {
 	}
 
 	getUserProfile(): Observable<User> {
-		const userToken = sessionStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<User>(API_USERS_INFO_URL, {headers : httpHeaders})
@@ -26,7 +26,7 @@ export class UserProfileService {
 
 	getListAccount(userId): Observable<any> {
 		const url = API_USERS_URL + '/' + userId + '/accounts';
-		const userToken = sessionStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem(environment.authTokenKey);
 		let httpHeaders = new HttpHeaders();
 		httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<User>(url, {headers : httpHeaders})
@@ -60,5 +60,9 @@ export class UserProfileService {
 	createUser(param): Observable<User> {
 		const url = environment.urlBE + 'api/admin/user/register'
 		return this.http.post<User>(url, param)
+	}
+	getAccountUser(id): Observable<User> {
+		const url = environment.urlBE + 'api/admin/users/'+id+'/accounts'
+		return this.http.get<User>(url)
 	}
 }

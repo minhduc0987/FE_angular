@@ -9,6 +9,7 @@ export const locale = {
     FULLNAME: 'Họ và tên',
     DOB: 'Ngày sinh',
     GENDER: 'Giới tính',
+    MONEY: 'Số tiền',
     ADDRESS: 'Địa chỉ',
     SEARCH: 'Tìm kiếm',
     PHONE: 'Số điện thoại',
@@ -17,7 +18,11 @@ export const locale = {
     UNLOCK: 'Mở khoá',
     CANCEL: 'Huỷ',
     HANG_THE: 'Hạng thẻ',
+    STATUS: 'Trạng thái',
     CREATE: 'Tạo mới',
+    CREATE_DATE: 'Ngày tạo',
+    ACTION: 'Hành động',
+    END_DATE: 'Ngày hết hạn',
     SAVE: 'Lưu',
     ST: 'Số thẻ',
     SD: 'Số dư',
@@ -41,14 +46,16 @@ export const locale = {
     TK_NHAN: 'Tài khoản nhận tiền',
     ADD_TSTC: 'Thêm tài sản thế chấp',
     SEARCH_TK: 'Tìm kiếm tài khoản',
+    COMFIRM: 'Gửi xác minh',
     IMAGE: 'Ảnh',
     INFO_USER: 'Thông tin liên hệ',
-    CMND: 'Số CMND/CCCD/Hộ chiếu',
+    CMND: 'Số CMND/CCCD',
     INFO: 'Thông tin cá nhân',
     INFOS: 'Thông tin các tài khoản',
     CHOISE_HISTORY: 'Chọn tài khoản để xem lịch sử giao dịch',
     INFO_VAY: 'Thông tin vay tiền',
     INFO_USER_VAY: 'Thông tin khách hàng vay tiền',
+    RUT_SEC: 'Rút séc',
     MENU: {
       DASHBOARD: 'Trang chủ',
     },
@@ -130,7 +137,9 @@ export const locale = {
       DATE: 'Ngày giao dịch',
       KEY: 'Mã giao dịch',
       SEC: 'Tạo séc',
-      SEC_HISTORY: 'Lịch sử séc'
+      SEC_HISTORY: 'Lịch sử séc',
+      DES: 'Nội dung',
+      FS: 'Gửi đến'
     },
    
   }

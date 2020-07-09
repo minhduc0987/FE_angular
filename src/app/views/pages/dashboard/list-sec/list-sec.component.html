@@ -1,3 +1,110 @@
-<div class="container">
+<kt-portlet>
+  <kt-portlet-header title="{{ 'RUT_SEC' | translate }}" [class]="'card-head-lg'">
+    <ng-container ktPortletTools> </ng-container>
+  </kt-portlet-header>
 
-</div>
+  <kt-portlet-body>
+    <div>
+      <form class="kt-form" [formGroup]="userForm">
+        <div class="user">
+          <kt-portlet>
+            <kt-portlet-body>
+              <form class="kt-form" [formGroup]="userForm">
+                <div class="kt-portlet__body">
+                  <div class="row">
+                    <div class="col-lg-4 kt-margin-bottom-20-mobile form-group">
+                      <label>{{ 'FULLNAME' | translate }} <span class="text-danger">*</span></label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="fullname"
+                        placeholder="{{ 'FULLNAME' | translate }}"
+                        onkeydown="return event.key != 'Enter';"
+                      />
+                    </div>
+                    <div class="col-lg-4 kt-margin-bottom-20-mobile form-group">
+                      <label>{{ 'CMND' | translate }} <span class="text-danger">*</span></label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        formControlName="idCardNumber"
+                        placeholder="{{ 'CMND' | translate }}"
+                        onkeydown="return event.key != 'Enter';"
+                      />
+					</div>
+					<div class="col-lg-4 kt-margin-bottom-20-mobile form-group d-flex align-items-end">
+						<button type="submit" mat-raised-button color="primary" (click)="submit()">
+							{{ 'SEARCH' | translate }}
+						  </button>
+					</div>
+                  </div>
+                </div>
+              </form>
+            </kt-portlet-body>
+          </kt-portlet>
+        </div>
+      </form>
+    </div>
+    <div class="mat-table__wrapper">
+      <mat-table class="lmat-elevation-z8" #table [dataSource]="dataSource" *ngIf="dataSource.length !== 0">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let account">FPT072020{{ account.id }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef>{{ 'MONEY' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ formatNumber(account.transactionAmount) }} VNĐ</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>{{ 'FULLNAME' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ account.recieverFullname }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cmnd">
+          <mat-header-cell *matHeaderCellDef>{{ 'CMND' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ account.recieverIdCardNumber }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date1">
+          <mat-header-cell *matHeaderCellDef>{{ 'CREATE_DATE' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ getDate(account.createdAt) }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date2">
+          <mat-header-cell *matHeaderCellDef>{{ 'END_DATE' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ getDate(account.expiredDate) }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef>{{ 'STATUS' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ getStatus(account) }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>{{ 'ACTION' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">
+            <button type="submit" mat-raised-button color="primary" (click)="rutSec(account)">
+							{{ 'RUT_SEC' | translate }}
+						  </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+    <div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
+      <mat-paginator
+        [pageSize]="5"
+        [pageIndex]="dataSource.pageNumber - 1"
+        [pageSizeOptions]="[5]"
+        (page)="pageEvent = setItems($event)"
+        [length]="dataSource.totalCount"
+        [showFirstLastButtons]="true"
+      ></mat-paginator>
+    </div>
+  </kt-portlet-body>
+</kt-portlet>

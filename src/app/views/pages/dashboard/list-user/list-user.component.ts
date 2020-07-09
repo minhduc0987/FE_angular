@@ -22,6 +22,7 @@ export class ListUserComponent implements OnInit {
   accountId: any;
   account$: Observable<any>;
   dataSource: any[] = [];
+  data: any;
   pageEvent: PageEvent;
   stk;
   id;
@@ -91,6 +92,7 @@ export class ListUserComponent implements OnInit {
 
   getListUsers() {
     this.exchangeService.getListUsers().subscribe((val: any) => {
+      this.data = val;
       this.dataSource = val.items;
       this.ref.markForCheck();
     });
@@ -100,6 +102,15 @@ export class ListUserComponent implements OnInit {
     this.dialog.open(UserComponent, {
       width: '900px',
       disableClose: true
+    });
+  }
+
+  setItems(event) {
+    const page = event.pageIndex + 1;
+    this.exchangeService.getListUsers(page).subscribe((val: any) => {
+      this.data = val;
+      this.dataSource = val.items;
+      this.ref.markForCheck();
     });
   }
 }

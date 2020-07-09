@@ -40,14 +40,14 @@ export class PageComponent implements OnInit {
     this.user$ = this.userProfileService.getUser(params)
     this.user$.subscribe(
       (res)=>{
-        sessionStorage.setItem('userSearch', JSON.stringify(res));
+        localStorage.setItem('userSearch', JSON.stringify(res));
       },
       (err)=>{console.log(err)},
       );
   }
 
   lock() {
-    const id =  JSON.parse(sessionStorage.getItem('userSearch')).id;
+    const id =  JSON.parse(localStorage.getItem('userSearch')).id;
     this.userProfileService.lock(id).subscribe(
       val=>{const message = 'Thành công';
       this.layoutUtilsService.showActionNotification(message);
@@ -57,7 +57,7 @@ export class PageComponent implements OnInit {
     )
   }
   unlock() {
-    const id =  JSON.parse(sessionStorage.getItem('userSearch')).id;
+    const id =  JSON.parse(localStorage.getItem('userSearch')).id;
     this.userProfileService.lock(id).subscribe(
       val=>{const message = 'Thành công';
       this.layoutUtilsService.showActionNotification(message);

@@ -83,9 +83,9 @@
           <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
         </mat-table>
       </div>
-      <!-- <div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
-                <mat-paginator [pageSize]="5" [pageIndex]="dataSource.pageNumber - 1" [pageSizeOptions]="[5]" (page)="pageEvent = setItems($event)" [length]="dataSource.totalCount" [showFirstLastButtons]="true"></mat-paginator>
-            </div> -->
+      <div class="mat-table__bottom" *ngIf="data">
+                <mat-paginator [pageSize]="5" [pageIndex]="data.pageNumber - 1" [pageSizeOptions]="[5]" (page)="pageEvent = setItems($event)" [length]="data.totalCount" [showFirstLastButtons]="true"></mat-paginator>
+            </div>
     </kt-portlet-body>
   </kt-portlet>
 </div>

@@ -1,0 +1,35 @@
+.label-left {
+    font-size: 20px;
+    margin: 10px 0;
+}
+.card-label {
+    text-transform: uppercase;
+    color: #ed1c24;
+    font-size: 24px;
+}
+::ng-deep {
+    .mat-column-id {
+        flex: 0 0 130px;
+    }
+    .mat-column-amount {
+        flex: 0 0 130px;
+        padding-right: 20px;
+        justify-content: flex-end;
+    }
+    .mat-header-cell {
+        justify-content: center;
+    }
+    .mat-column-type {
+        flex: 0 0 80px;
+        justify-content: center;
+    }
+    .mat-column-amountAfter {
+        flex: 0 0 150px;
+        padding-right: 20px;
+        justify-content: flex-end;
+    }
+    .mat-column-date {
+        flex: 0 0 150px;
+        padding-right: 20px;
+    }
+}

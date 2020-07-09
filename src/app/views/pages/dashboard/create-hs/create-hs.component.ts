@@ -38,7 +38,7 @@ export class CreateHsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const user = JSON.parse(sessionStorage.getItem('userSearch'));
+    const user = JSON.parse(localStorage.getItem('userSearch'));
     this.formId = this._formBuilder.group({
       name: [{ value: user.fullname, disabled: true }, Validators.required],
       phone: [{ value: user.phone, disabled: true }, Validators.required],
@@ -91,7 +91,7 @@ export class CreateHsComponent implements OnInit {
       this.layoutUtilsService.showActionNotification(message);
       return;
     }
-    const user = JSON.parse(sessionStorage.getItem('userSearch'));
+    const user = JSON.parse(localStorage.getItem('userSearch'));
     const params = {
       amount: Number(this.formatNumber2(this.formId2.get('amount').value)),
       description: this.formId2.get('description').value,
@@ -113,7 +113,7 @@ export class CreateHsComponent implements OnInit {
   }
 
   getUserIn() {
-    const user = JSON.parse(sessionStorage.getItem('userSearch'));
+    const user = JSON.parse(localStorage.getItem('userSearch'));
     this.userIn$ = this.exchangeService.getUserIn(user.id);
     this.userIn$.subscribe((val) => {
       val.forEach((element) => {
@@ -169,7 +169,7 @@ export class CreateHsComponent implements OnInit {
   }
 
   update(params) {
-    const userId = JSON.parse(sessionStorage.getItem('userSearch')).id;
+    const userId = JSON.parse(localStorage.getItem('userSearch')).id;
     const id = this.proId;
     this.exchangeService.addTstc(params,userId, id).subscribe(val => {
       const message = 'Thêm tài sản thế chấp thành công';
@@ -185,7 +185,7 @@ export class CreateHsComponent implements OnInit {
     const params = {
       loanProfileId: this.proId
     }
-    const userId = JSON.parse(sessionStorage.getItem('userSearch')).id;
+    const userId = JSON.parse(localStorage.getItem('userSearch')).id;
     this.exchangeService.approveHsv(params, userId).subscribe(val => {
       const message = 'Xác nhận hồ sơ vay thành công';
       this.layoutUtilsService.showActionNotification(message);

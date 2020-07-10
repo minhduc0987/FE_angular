@@ -6,7 +6,7 @@
 // Form group
 .form-group {
 	label {
-		font-size: $form-label-font-size;
+		font-size: 20px;
 		font-weight: $form-label-font-weight;
 		color: $dark-75;
 	}
@@ -26,6 +26,7 @@
 // Form control
 .form-control {
 	// Readonly state
+	font-size: 20px;
 	&[readonly] {
 		background-color: $input-readonly-bg;
 	}

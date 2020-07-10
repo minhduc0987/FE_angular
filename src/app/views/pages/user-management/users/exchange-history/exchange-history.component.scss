@@ -9,10 +9,10 @@
 }
 ::ng-deep {
     .mat-column-id {
-        flex: 0 0 130px;
+        flex: 0 0 150px;
     }
     .mat-column-amount {
-        flex: 0 0 130px;
+        flex: 0 0 200px;
         padding-right: 20px;
         justify-content: flex-end;
     }
@@ -20,16 +20,16 @@
         justify-content: center;
     }
     .mat-column-type {
-        flex: 0 0 80px;
+        flex: 0 0 123px;
         justify-content: center;
     }
     .mat-column-amountAfter {
-        flex: 0 0 150px;
+        flex: 0 0 200px;
         padding-right: 20px;
         justify-content: flex-end;
     }
     .mat-column-date {
-        flex: 0 0 150px;
+        flex: 0 0 200px;
         padding-right: 20px;
     }
 }

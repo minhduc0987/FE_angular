@@ -93,7 +93,7 @@
   height: 36px;
   border: 1px solid rgba(0, 0, 0, 0.42);
   border-radius: 4px;
-  font-size: 18px;
+  font-size: 20px;
 
   .ng-value-container {
     border-top: none;
@@ -104,31 +104,38 @@
   border-bottom: none;
 }
 .ng-option-label {
-  font-size: 18px;
+  font-size: 20px;
 }
 * {
-  font-size: 18px;
+  font-size: 20px;
 }
 .input {
   min-height: unset !important;
   height: 36px;
   border: 1px solid rgba(0, 0, 0, 0.42);
   border-radius: 4px;
-  font-size: 18px;
+  font-size: 20px;
   padding: 11px 15px;
 }
 .ng-invalid.ng-touched {
   border-color: #f64e60 !important;
 }
 .mat-cell,
-.mat-footer-cell {
-  font-size: 15px;
+.mat-footer-cell, .mat-header-cell {
+  font-size: 18px;
 }
 
 .header,
 .footer {
   background-color: #f3f4f4 !important;
 }
-.mat-cell {
+.mat-header-cell, .mat-cell {
   padding: 0 5px;
+  text-align: center;
+}
+.mat-column-accountNumber, .mat-column-card {
+  text-align: center;
+}
+.mat-column-amount {
+  padding-right: 10px;
 }

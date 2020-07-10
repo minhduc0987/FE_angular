@@ -1,15 +1,17 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserProfileService, ExchangeService } from 'src/app/core/apps';
 import { LayoutUtilsService } from 'src/app/core/_base/crud';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'kt-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent implements OnInit {
   userForm: FormGroup;
@@ -31,7 +33,7 @@ export class UserComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private userFB: FormBuilder,
     private userProfileService: UserProfileService,private layoutUtilsService: LayoutUtilsService, private router: Router,
-    private exchangeService: ExchangeService,    private translate: TranslateService,
+    private exchangeService: ExchangeService,    private translate: TranslateService,private ref: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -90,7 +92,7 @@ export class UserComponent implements OnInit {
       username: this.userForm.get('username').value,
       email: this.userForm.get('email').value,
       fullName: this.userForm.get('fullname').value,
-      birthday: this.userForm.get('birthday').value,
+      birthday: moment(this.userForm.get('birthday').value).format('DD/MM/YYYY'),
       address: this.userForm.get('address').value,
       gender: this.userForm.get('gender').value,
       idCardNumber: this.userForm.get('idCardNumber').value,
@@ -101,7 +103,9 @@ export class UserComponent implements OnInit {
     this.userProfileService.createUser(param).subscribe(
       val=>{const message = 'Thành công';
       this.layoutUtilsService.showActionNotification(message, 'success');
-      this.router.navigateByUrl('/dashboard')},
+      this.ref.markForCheck();
+      this.dialogRef.close();
+    },
       err=>{const message = 'Có lỗi vui lòng thao tác lại';
       this.layoutUtilsService.showActionNotification(message, 'danger');}
     )

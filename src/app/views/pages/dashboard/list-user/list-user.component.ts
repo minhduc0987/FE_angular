@@ -99,10 +99,13 @@ export class ListUserComponent implements OnInit {
   }
 
   createUser() {
-    this.dialog.open(UserComponent, {
+    const dialog = this.dialog.open(UserComponent, {
       width: '900px',
       disableClose: true
     });
+    dialog.afterOpened().subscribe(()=>{
+      this.getListUsers
+    })
   }
 
   setItems(event) {

@@ -1,29 +1,37 @@
 .user {
-    padding: 1rem;
+  padding: 1rem;
 }
 .kt-form {
-    padding: 1rem;
+  padding: 1rem;
 }
 .img {
-    width: 200px;
+  width: 200px;
+  display: block;
+  position: relative;
+
+  &:hover .input-image {
     display: block;
-    position: relative;
+  }
 
-    &:hover .input-image {
-        display: block;
+  .input-image {
+    position: absolute;
+    z-index: 1;
+    width: 100px;
+    left: 50px;
+    top: 25px;
+    height: 32px;
+    display: none;
+
+    &:hover {
+      display: block;
     }
-
-    .input-image {
-        position: absolute;
-        z-index: 1;
-        width: 100px;
-        left: 50px; 
-        top: 25px;
-        height: 32px;
-        display: none;
-
-        &:hover {
-            display: block;
-        }
-    }
+  }
+}
+::ng-deep {
+  .mat-datepicker-toggle {
+    position: absolute;
+    z-index: 1;
+    right: 15px;
+    bottom: 0;
+  }
 }

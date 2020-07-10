@@ -39,13 +39,18 @@
             </div>
             <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
               <label>{{ 'DOB' | translate }} <span class="text-danger">*</span></label>
-              <input
+              <!-- <input
                 type="text"
                 class="form-control"
                 formControlName="birthday"
-                placeholder="{{ 'USERNAME' | translate }}"
+                placeholder="{{ 'DOB' | translate }}"
                 onkeydown="return event.key != 'Enter';"
-              />
+              /> -->
+              <div class="po_re">
+                <input matInput [matDatepicker]="picker"  formControlName="birthday" class="form-control">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </div>
             </div>
             <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
               <label>{{ 'ADDRESS' | translate }} <span class="text-danger">*</span></label>
@@ -96,13 +101,7 @@
               <div class="img">
                 <img [src]="image" class="w-100" />
                 <div class="input-image">
-                  <input
-                    #fileInput
-                    hidden
-                    type="file"
-                    accept="image/*"
-                    (change)="onSelectedFile($event)"
-                  />
+                  <input #fileInput hidden type="file" accept="image/*" (change)="onSelectedFile($event)" />
                   <button mat-raised-button color="primary" (click)="fileInput.click()">Chọn ảnh</button>
                 </div>
               </div>

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ExchangeService } from '../../../../../core/apps/_services/exchange.service'
+import { ExchangeService } from 'src/app/core/apps';
 
 @Component({
-  selector: 'kt-notice-user',
-  templateUrl: './notice-user.component.html',
-  styleUrls: ['./notice-user.component.scss']
+  selector: 'kt-notice-chat',
+  templateUrl: './notice-chat.component.html',
+  styleUrls: ['./notice-chat.component.scss']
 })
-export class NoticeUserComponent implements OnInit {
+export class NoticeChatComponent implements OnInit {
   notice = 0;
   constructor(
     private exchangeService: ExchangeService
@@ -17,7 +17,7 @@ export class NoticeUserComponent implements OnInit {
   }
 
   getMess() {
-    this.exchangeService.getNotice().subscribe(val=> {
+    this.exchangeService.getNoticeChat().subscribe(val=> {
       this.notice = val.message;
       setTimeout(()=>{
         this.getMess()

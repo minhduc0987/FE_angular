@@ -57,6 +57,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NoticeUserComponent } from './layout/topbar/notice-user/notice-user.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { FormUpdateSecComponent } from './content/crud/form-update-sec/form-update-sec.component';
+import { NoticeChatComponent } from './layout/topbar/notice-chat/notice-chat.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,8 @@ import { FormUpdateSecComponent } from './content/crud/form-update-sec/form-upda
     UserProfile4Component,
     NoticeUserComponent,
     FormUpdateSecComponent,
+    NoticeChatComponent,
+    NoticeChatComponent
   ],
   exports: [
     PortletModule,
@@ -93,7 +96,8 @@ import { FormUpdateSecComponent } from './content/crud/form-update-sec/form-upda
     StickyToolbarComponent,
     LanguageSelectorComponent,
     UserProfile4Component,
-    NoticeUserComponent
+    NoticeUserComponent,
+    NoticeChatComponent
   ],
   imports: [
     CommonModule,

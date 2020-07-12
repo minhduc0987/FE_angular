@@ -32,7 +32,7 @@ import { FormUpdateSecComponent } from 'src/app/views/partials/content/crud';
 })
 export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
   // Table fields
-  displayedColumns = ['id', 'name', 'info', 'money', 'date1', 'date2', 'status1', 'status2'];
+  displayedColumns = ['id', 'name', 'info', 'actions'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   accountId: any;
   account$: Observable<any>;
@@ -57,7 +57,6 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((el) => el.unsubscribe());
   }
 
-  async loadListAccount() {}
   getType(amount) {
     if (Number(amount) > 0) {
       return 'Nhận';
@@ -90,13 +89,13 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
   }
 
   getStatus(n) {
-    if (n.canceled) {
+    if (n.cheque.canceled) {
       return 'Đã huỷ';
     }
-    if (!n.status) {
+    if (!n.cheque.status) {
       return 'Chưa rút';
     }
-    return 'Đã rút';
+    return 'Đã rút từ ' + n.cheque.withdrawEmployeeFullName;
   }
 
   getStatus2(n) {
@@ -120,10 +119,13 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
       );
   }
   view(item) {
-    this.dialog.open(FormUpdateSecComponent, {
+    const dialog = this.dialog.open(FormUpdateSecComponent, {
       data: {item},
       width: '900px',
       disableClose: true
     })
+    dialog.afterClosed().subscribe(
+      ()=> this.change(this.stk)
+    )
   }
 }

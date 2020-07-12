@@ -74,6 +74,11 @@ export class ExchangeService {
     return this.http.get(uri);
   }
 
+  getNoticeChat(): Observable<any> {
+    const uri = environment.urlBE + `api/users/current/conversations/total-unread`;
+    return this.http.get(uri);
+  }
+
   updateSec(param): Observable<any> {
     const uri = environment.urlBE + `api/users/current/accounts/cheques/edit`;
     return this.http.post(uri, param);
@@ -93,4 +98,19 @@ export class ExchangeService {
     }
     return this.http.get(uri);
   }
+
+  getListChat(): Observable<any> {
+    const uri = environment.urlBE + `api/users/current/conversations`;
+    return this.http.get(uri);
+  }
+  getChat(id): Observable<any> {
+    const uri = environment.urlBE + `api/users/current/conversations/` + id + `/messages`;
+    return this.http.get(uri);
+  }
+
+  chat(mess, id): Observable<any> {
+    const uri = environment.urlBE + `api/users/current/conversations/` + id + `/messages`;
+    return this.http.post(uri, mess);
+  }
+  
 }

@@ -24,34 +24,34 @@
       <mat-table class="lmat-elevation-z8" #table [dataSource]="account" *ngIf="dataSource$ | async as account">
         <ng-container matColumnDef="id">
           <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
-          <mat-cell *matCellDef="let account">FPTS072020{{ account.id }}</mat-cell>
+          <mat-cell *matCellDef="let account">FPTS07{{ account.cheque.id }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef>Tên người nhận</mat-header-cell>
-          <mat-cell *matCellDef="let account">{{ account.recieverFullname }}</mat-cell>
+          <mat-cell *matCellDef="let account">{{ account.cheque.recieverFullname }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="info">
           <mat-header-cell *matHeaderCellDef>Số CMND</mat-header-cell>
-          <mat-cell *matCellDef="let account">{{ account.recieverIdCardNumber }}</mat-cell>
+          <mat-cell *matCellDef="let account">{{ account.cheque.recieverIdCardNumber }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="money">
           <mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.MONEY' | translate }}</mat-header-cell>
-          <mat-cell *matCellDef="let account">{{ formatNumber(account.transactionAmount) }} VNĐ</mat-cell>
+          <mat-cell *matCellDef="let account">{{ formatNumber(account.cheque.transactionAmount) }} VNĐ</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="date1">
           <mat-header-cell *matHeaderCellDef>Ngày phát hành</mat-header-cell>
           <mat-cell *matCellDef="let account">
-            {{ getDate(account.createdAt) }}
+            {{ getDate(account.cheque.createdAt) }}
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="date2">
           <mat-header-cell *matHeaderCellDef>Ngày hết hạn</mat-header-cell>
-          <mat-cell *matCellDef="let account">{{ getDate(account.expiredDate) }}</mat-cell>
+          <mat-cell *matCellDef="let account">{{ getDate(account.cheque.expiredDate) }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="status1">

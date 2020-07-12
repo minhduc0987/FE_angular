@@ -131,11 +131,14 @@
 }
 .mat-header-cell, .mat-cell {
   padding: 0 5px;
-  text-align: center;
+  justify-content: center;
 }
 .mat-column-accountNumber, .mat-column-card {
   text-align: center;
 }
 .mat-column-amount {
   padding-right: 10px;
+}
+kt-base {
+  overflow: hidden;
 }

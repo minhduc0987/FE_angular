@@ -53,6 +53,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { UpdateComponent } from './users/update/update.component';
 import { ExchangeHistorySecComponent } from './users/exchange-history-sec/exchange-history-sec.component';
 import { NoticeExchangeComponent } from '../notice-exchange/notice-exchange.component';
+import { ChatUserComponent } from './users/chat-user/chat-user.component';
+import { ListChatComponent } from './users/list-chat/list-chat.component';
+import { NewChatComponent } from './users/new-chat/new-chat.component';
 
 const routes: Routes = [
   {
@@ -98,7 +101,11 @@ const routes: Routes = [
       },
       {
         path: 'notice',
-        component: NoticeExchangeComponent
+        component: NoticeExchangeComponent,
+      },
+      {
+        path: 'hoi-dap',
+        component: ListChatComponent,
       },
     ],
   },
@@ -160,7 +167,7 @@ const routes: Routes = [
     TypesUtilsService,
     LayoutUtilsService,
   ],
-  entryComponents: [ActionNotificationComponent, DeleteEntityDialogComponent, AsideUserComponent, FormUpdateSecComponent],
+  entryComponents: [ActionNotificationComponent, DeleteEntityDialogComponent, AsideUserComponent, FormUpdateSecComponent, ChatUserComponent, NewChatComponent],
   declarations: [
     UserManagementComponent,
     UserInfoComponent,
@@ -170,8 +177,11 @@ const routes: Routes = [
     ExchangeHistoryComponent,
     FastExchangeComponent,
     AccountUserComponent,
-	UpdateComponent,
-	ExchangeHistorySecComponent
+    UpdateComponent,
+    ExchangeHistorySecComponent,
+    ChatUserComponent,
+    ListChatComponent,
+    NewChatComponent,
   ],
 })
 export class UserManagementModule {}

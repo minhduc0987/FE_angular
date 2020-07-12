@@ -27,7 +27,7 @@ export class FormUpdateSecComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.data && !this.data.item.status) {
+    if (this.data && !this.data.item.cheque.status) {
       this.isCancel = true;
     }
     this.createForm();
@@ -36,9 +36,9 @@ export class FormUpdateSecComponent implements OnInit {
   createForm() {
     if (this.data) {
       this.userForm = this.userFB.group({
-        fullname: [{ value: this.data.item.recieverFullname, disabled: this.isDisable }, Validators.required],
-        cmnd: [{ value: this.data.item.recieverIdCardNumber, disabled: this.isDisable }, Validators.required],
-        money: [{ value: this.data.item.transactionAmount, disabled: this.isDisable }, Validators.required],
+        fullname: [{ value: this.data.item.cheque.recieverFullname, disabled: this.isDisable }, Validators.required],
+        cmnd: [{ value: this.data.item.cheque.recieverIdCardNumber, disabled: this.isDisable }, Validators.required],
+        money: [{ value: this.data.item.cheque.transactionAmount, disabled: this.isDisable }, Validators.required],
       });
     } else {
       this.userForm = this.userFB.group({
@@ -56,8 +56,8 @@ export class FormUpdateSecComponent implements OnInit {
     comfirm.afterClosed().subscribe((val) => {
       if (val) {
         const userId = localStorage.getItem('userId');
-        const Accid = this.data.item.account.id;
-        const id = this.data.item.id;
+        const Accid = this.data.item.cheque.account.id;
+        const id = this.data.item.cheque.id;
         this.exchangeService.deleteSec(userId, Accid, id).subscribe(
           (val) => {
             const message = 'Huỷ séc thành công';
@@ -77,7 +77,7 @@ export class FormUpdateSecComponent implements OnInit {
     comfirm.afterClosed().subscribe((val) => {
       if (val) {
         const param = {
-          chequeId: this.data.item.id,
+          chequeId: this.data.item.cheque.id,
           recieverFullname: this.userForm.get('fullname').value,
           recieverIdCardNumber: this.userForm.get('cmnd').value,
           transactionAmount: this.userForm.get('money').value,

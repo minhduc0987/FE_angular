@@ -129,9 +129,12 @@ export class ExchangeInComponent implements OnInit {
       this.layoutUtilsService.showActionNotification(message, 'danger');
       return;
     }
-    if (Number(money) < 50000) {
+    if (Number(money) < 20000) {
       const message = this.translate.instant('VALIDATION.MONEY_MIN');
       this.layoutUtilsService.showActionNotification(message, 'danger');
+      return;
+    }
+    if (Number(money) > 1000000000000) {
       return;
     }
 

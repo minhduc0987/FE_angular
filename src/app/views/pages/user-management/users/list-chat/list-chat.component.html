@@ -1,0 +1,44 @@
+<div class="user">
+    <kt-portlet>
+      <kt-portlet-header title="Hỏi đáp">
+        <ng-container ktPortletTools></ng-container>
+      </kt-portlet-header>
+      <kt-portlet-body>
+        <div class="d-flex justify-content-end">
+          <button type="submit" mat-raised-button color="primary" (click)="create()">
+            Tạo mới
+          </button>
+        </div>
+        <div class="mat-table__wrapper">
+            <mat-table class="lmat-elevation-z8" #table [dataSource]="account" *ngIf="dataSource$ | async as account">
+              <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef>Tiêu đề</mat-header-cell>
+                <mat-cell *matCellDef="let account">{{ account.title }}</mat-cell>
+              </ng-container>
+      
+              <ng-container matColumnDef="lastMessage">
+                <mat-header-cell *matHeaderCellDef>Tin nhắn cuối</mat-header-cell>
+                <mat-cell *matCellDef="let account">{{ account.lastMessage }}</mat-cell>
+              </ng-container>
+      
+              <ng-container matColumnDef="lastMessageAt">
+                <mat-header-cell *matHeaderCellDef>Thời gian</mat-header-cell>
+                <mat-cell *matCellDef="let account">{{ getTime(account.lastMessageAt) }}</mat-cell>
+              </ng-container>
+          
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef>Hành động</mat-header-cell>
+                <mat-cell *matCellDef="let account">
+                  <button mat-icon-button color="primary" type="button" (click)="view(account)">
+                    <mat-icon>toc</mat-icon>
+                  </button>
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+            </mat-table>
+          </div>
+      </kt-portlet-body>
+    </kt-portlet>
+  </div>
+  

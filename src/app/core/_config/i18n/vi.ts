@@ -77,7 +77,8 @@ export const locale = {
       SEC: 'Tạo séc',
       SEC_HISTORY: 'Lịch sử séc',
       DES: 'Nội dung giao dịch',
-      FS: 'Gửi đến'
+      FS: 'Gửi đến',
+      CHAT: 'Hỏi đáp'
     },
     STK: 'Số tài khoản',
     ST: 'Số thẻ',
@@ -113,6 +114,7 @@ export const locale = {
     MONEY: 'Số tiền',
     TK_GUI: 'Tài khoản nguồn',
     CREATE_VAY: 'Tạo hồ sơ vay',
-    CHI_NHANH: 'Chi nhánh'
+    CHI_NHANH: 'Chi nhánh',
+    CANCEL: 'Huỷ',
   },
 };

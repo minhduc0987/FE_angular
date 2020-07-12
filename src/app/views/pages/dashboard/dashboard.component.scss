@@ -13,8 +13,10 @@
 
   .content-user {
       width: calc(100% - 250px);
-      background-color: #eef0f8;
+      // background-color: #eef0f8;
+      background-color: #fff;
       padding: 0;
+      overflow: auto;
   }
 }
 :host {

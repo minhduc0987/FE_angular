@@ -57,6 +57,8 @@ import { UserComponent } from './user/user.component';
 import { HsvtComponent } from './hsvt/hsvt.component';
 import { InpitOtpComponent } from '../../partials/content/crud/inpit-otp/inpit-otp.component';
 import { RutSecComponent } from './rut-sec/rut-sec.component';
+import { ChatUserComponent } from './chat-user/chat-user.component';
+import { ListChatComponent } from './list-chat/list-chat.component';
 const routes: Routes = [
   {
     path: '',
@@ -102,6 +104,10 @@ const routes: Routes = [
       {
         path: 'loans',
         component: ListVayTienComponent,
+      },
+      {
+        path: 'hoi-dap',
+        component: ListChatComponent,
       },
     ],
   },
@@ -163,7 +169,7 @@ const routes: Routes = [
     TypesUtilsService,
     LayoutUtilsService,
   ],
-  entryComponents: [ActionNotificationComponent, DeleteEntityDialogComponent, UserComponent, HsvtComponent, InpitOtpComponent],
+  entryComponents: [ActionNotificationComponent, DeleteEntityDialogComponent, UserComponent, HsvtComponent, InpitOtpComponent,ChatUserComponent],
   declarations: [
     DashboardComponent,
     Aside1Component,
@@ -183,6 +189,8 @@ const routes: Routes = [
     UserComponent,
     HsvtComponent,
     RutSecComponent,
+    ListChatComponent,
+    ChatUserComponent
   ],
 })
 export class DashboardModule {}

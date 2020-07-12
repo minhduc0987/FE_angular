@@ -59,6 +59,9 @@ export class FormTstcDialogComponent implements OnInit {
    * Close dialog with true result
    */
   onYesClick(): void {
+    if (this.formId.invalid) {
+      return;
+    }
     const params = {
 		name: this.formId.get('name').value,
 		amount: this.format2(this.formId.get('amount').value),

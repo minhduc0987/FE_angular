@@ -28,7 +28,8 @@ import {
   ScrollTopComponent,
   SplashScreenComponent,
   StickyToolbarComponent,
-  UserProfile4Component
+  UserProfile4Component,
+  NoticeChatComponent
 } from './layout';
 // General
 import { NoticeComponent } from './content/general/notice/notice.component';
@@ -56,6 +57,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InpitOtpComponent } from './content/crud/inpit-otp/inpit-otp.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,8 @@ import { InpitOtpComponent } from './content/crud/inpit-otp/inpit-otp.component'
     LanguageSelectorComponent,
     UserProfile4Component,
     FormTstcDialogComponent,
-    InpitOtpComponent
+    InpitOtpComponent,
+    NoticeChatComponent
   ],
   exports: [
     PortletModule,
@@ -92,7 +95,8 @@ import { InpitOtpComponent } from './content/crud/inpit-otp/inpit-otp.component'
     StickyToolbarComponent,
     LanguageSelectorComponent,
     UserProfile4Component,
-    FormTstcDialogComponent
+    FormTstcDialogComponent,
+    NoticeChatComponent
   ],
   imports: [
     CommonModule,
@@ -127,7 +131,8 @@ import { InpitOtpComponent } from './content/crud/inpit-otp/inpit-otp.component'
     NgbDropdownModule,
     NgbTabsetModule,
     NgbTooltipModule,
-    TranslateModule
+    TranslateModule,
+    MatBadgeModule
   ],
 })
 export class PartialsModule {

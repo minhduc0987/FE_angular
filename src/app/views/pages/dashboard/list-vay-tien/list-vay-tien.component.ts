@@ -19,6 +19,9 @@ export class ListVayTienComponent implements OnInit {
   displayedColumns = ['id', 'amount', 'date', 'lai', 'date2', 'tstc', 'status', 'description' , 'action'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   accountId: any;
+  chinhanhs = [];
+  chinhanh;
+  disabled = true;
   dataSource: any = [];
   pageEvent: PageEvent;
   stk;
@@ -35,7 +38,25 @@ export class ListVayTienComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const role = JSON.parse(localStorage.getItem('user')).roles[0].name;
+    if(role === 'ROLE_BRANCHMANAGER') {
+      this.disabled = false;
+      this.chinhanhs = [];
+      this.exchangeService.getPGD().subscribe(val=> {
+        val.forEach(element => {
+          this.chinhanhs.push({
+            id: element.id,
+            value: element.name + `-` + element.address
+          })
+        });
+        this.ref.markForCheck();
+      })
+    }
     this.getListLoans();
+  }
+  change(event) {
+    this.chinhanh = event.id;
+    this.getListLoans()
   }
 
   ngOnDestroy() {
@@ -43,10 +64,23 @@ export class ListVayTienComponent implements OnInit {
   }
 
   getListLoans() {
-    this.exchangeService.getAllLoans().subscribe((val) => {
-      this.dataSource = val;
-      this.ref.markForCheck();
-    });
+    const role = JSON.parse(localStorage.getItem('user')).roles[0].name;
+    if(role === 'ROLE_EMPLOYEE') {
+      this.exchangeService.getAllLoans().subscribe((val) => {
+        this.dataSource = val;
+        this.ref.markForCheck();
+      });
+    } else if (role === 'ROLE_TRANSACTIONMANAGER') {
+      this.exchangeService.getAllLoans2().subscribe((val) => {
+        this.dataSource = val;
+        this.ref.markForCheck();
+      });
+    } else {
+      this.exchangeService.getAllLoans3(this.chinhanh).subscribe((val) => {
+        this.dataSource = val;
+        this.ref.markForCheck();
+      });
+    }
   }
 
   getAmount(n) {

@@ -49,7 +49,7 @@
       <mat-table class="lmat-elevation-z8" #table [dataSource]="dataSource" *ngIf="dataSource.length !== 0">
         <ng-container matColumnDef="id">
           <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
-          <mat-cell *matCellDef="let account">FPT072020{{ account.id }}</mat-cell>
+          <mat-cell *matCellDef="let account">FPT07{{ account.id }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="amount">
@@ -102,7 +102,7 @@
         [pageIndex]="dataSource.pageNumber - 1"
         [pageSizeOptions]="[5]"
         (page)="pageEvent = setItems($event)"
-        [length]="dataSource.totalCount"
+        [length]="dataSource.length"
         [showFirstLastButtons]="true"
       ></mat-paginator>
     </div>

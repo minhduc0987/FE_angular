@@ -125,7 +125,7 @@
                 <ng-container *ngFor="let hs of listHsvt; let i = index;">
                   <div class="d-flex justify-content-between w-200">
                     <a class="link-tstc">{{ hs.name }}</a>
-                    <a class="remove" (click)=remove(i)>Xoá</a>
+                    <a class="remove" (click)=remove(hs.id)>Xoá</a>
                   </div>
                 </ng-container>
               </div>

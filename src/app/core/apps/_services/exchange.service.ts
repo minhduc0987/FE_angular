@@ -127,6 +127,27 @@ export class ExchangeService {
     return this.http.get(uri);
   }
 
+  getAllLoans2(page?): Observable<any> {
+    let uri;
+    if(!page) {
+      uri = environment.urlBE + `api/admin/transaction-office/loan-profiles`;
+    } else {
+      uri = environment.urlBE + `api/admin/transaction-office/loan-profiles?page=` + page;
+    }
+    return this.http.get(uri);
+  }
+
+  getAllLoans3(tranId: string, page?: string, ): Observable<any> {
+    let uri;
+    if(!page) {
+      uri = environment.urlBE + `api/admin/branch-office/transaction-offices/` + tranId + `/loan-profiles`;
+    } else {
+      uri = environment.urlBE + `api/admin/branch-office/transaction-offices/` + tranId + `/loan-profiles?page=` + page;
+    }
+    return this.http.get(uri);
+  }
+
+
   getTransactionUser(userId: any,id: any,  page?: any): Observable<any> {
     let url;
     if (page) {
@@ -146,4 +167,44 @@ export class ExchangeService {
     const uri = environment.urlBE + `api/admin/cheques/withdraw`;
     return this.http.post(uri, param);
   }
+
+  removeTstc(i): Observable<any> {
+    const uri = environment.urlBE + `api/admin/loan-profile/assets`;
+    return this.http.post(uri, {assetId: i});
+  }
+  getNoticeChat(): Observable<any> {
+    const uri = environment.urlBE + `api/admin/current/total-unread`;
+    return this.http.get(uri);
+  }
+  getListChat(page?): Observable<any> {
+    let uri = environment.urlBE + `api/admin/no-response-conversations`;
+    if(page) {
+      uri = environment.urlBE + `api/admin/no-response-conversations?page=` + page;
+    }
+    return this.http.get(uri);
+  }
+  getListChat2(page?): Observable<any> {
+    let uri = environment.urlBE + `api/admin/responsed-conversations`;
+    if(page) {
+      uri = environment.urlBE + `api/admin/responsed-conversations?page=` + page;
+    }
+    return this.http.get(uri);
+  }
+  
+  getChat(id): Observable<any> {
+    const uri = environment.urlBE + `api/admin/current/conversations/` + id + `/messages`;
+    return this.http.get(uri);
+  }
+
+  chat(mess, id): Observable<any> {
+    const uri = environment.urlBE + `api/admin/current/conversations/` + id + `/messages`;
+    return this.http.post(uri, mess);
+  }
+
+  getPGD() : Observable<any> {
+    const uri = environment.urlBE + `api/transaction-offices`;
+    return this.http.get(uri);
+  }
+
+  
 }

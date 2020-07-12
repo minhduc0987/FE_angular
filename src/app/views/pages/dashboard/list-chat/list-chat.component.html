@@ -1,0 +1,65 @@
+<div class="user">
+  <kt-portlet>
+    <kt-portlet-header title="Hỏi đáp">
+      <ng-container ktPortletTools></ng-container>
+    </kt-portlet-header>
+    <kt-portlet-body>
+      <div class="d-flex" *ngIf="isDisabled">
+        <ng-select
+          [items]="form1"
+          [clearable]="false"
+          [(ngModel)]="select"
+          class="select w-50"
+          (change)="change()"
+          bindLabel="value"
+          bindValue="value"
+          [searchable]="false"
+        >
+        </ng-select>
+      </div>
+      <div class="mat-table__wrapper" *ngIf="dataSource$ | async as account">
+        <mat-table class="lmat-elevation-z8" #table [dataSource]="account.items">
+          <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Tiêu đề</mat-header-cell>
+            <mat-cell *matCellDef="let account">{{ account.title }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Người hỏi</mat-header-cell>
+            <mat-cell *matCellDef="let account">{{ account.questionerName }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="lastMessage">
+            <mat-header-cell *matHeaderCellDef>Tin nhắn cuối</mat-header-cell>
+            <mat-cell *matCellDef="let account">{{ account.message }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="lastMessageAt">
+            <mat-header-cell *matHeaderCellDef>Thời gian</mat-header-cell>
+            <mat-cell *matCellDef="let account">{{ getTime(account.lastMessageAt) }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Hành động</mat-header-cell>
+            <mat-cell *matCellDef="let account">
+              <button mat-icon-button color="primary" type="button" (click)="view(account)">
+                <mat-icon>toc</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </div>
+      <div class="mat-table__bottom" *ngIf="dataSource$ | async as account">
+        <mat-paginator
+          [pageSize]="5"
+          [pageIndex]="account.pageNumber - 1"
+          [pageSizeOptions]="[5]"
+          (page)="pageEvent = setItems($event)"
+          [length]="account.totalCount"
+          [showFirstLastButtons]="true"
+        ></mat-paginator>
+      </div>
+    </kt-portlet-body>
+  </kt-portlet>
+</div>

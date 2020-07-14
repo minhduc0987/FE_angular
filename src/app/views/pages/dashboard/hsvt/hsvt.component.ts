@@ -6,7 +6,7 @@ import { UserProfileService, ExchangeService } from 'src/app/core/apps';
 import { LayoutUtilsService } from 'src/app/core/_base/crud';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { FormTstcDialogComponent } from 'src/app/views/partials/content/crud';
+import { FormTstcDialogComponent, RejectComponent } from 'src/app/views/partials/content/crud';
 import { InpitOtpComponent } from 'src/app/views/partials/content/crud/inpit-otp/inpit-otp.component';
 
 @Component({
@@ -62,40 +62,34 @@ export class HsvtComponent implements OnInit {
         amount: this.formatNumber(this.data.item.amount),
         description: this.data.item.description,
       });
-      if (this.data.item.rejected) {
-        this.isRefuse = false;
-        this.isApproval = true;
-      } else {
-        console.log(JSON.parse(localStorage.getItem('user')))
-        switch (this.data.item.status) {
-          case '0':
+      switch (this.data.item.status) {
+        case '0':
+          this.isAddTstc = false;
+          this.isComfirm = false;
+          this.isRefuse = false;
+          this.isApproval = false;
+          break;
+        case '1':
+          if (JSON.parse(localStorage.getItem('user')).roles[0].name === 'ROLE_EMPLOYEE') {
             this.isAddTstc = true;
             this.isComfirm = true;
-            break;
-          case '1':
-            if (JSON.parse(localStorage.getItem('user')).roles[0].name === 'ROLE_EMPLOYEE') {
-              this.isRefuse = true;
-              this.isApproval = true;
-              this.isAddTstc = true;
-            }
-            break
-          case '2': 
-            if (JSON.parse(localStorage.getItem('user')).roles[0].name === 'ROLE_TRANSACTIONMANAGER') {
-              this.isRefuse = true;
-              this.isApproval = true;
-            }
-            break
-          case '3': 
-            if (JSON.parse(localStorage.getItem('user')).roles[0].name === 'ROLE_BRANCHMANAGER') {
-              this.isRefuse = true;
-              this.isApproval = true;
-            }
-            break
-        }
+            this.isRefuse = false;
+            this.isApproval = false;
+          }
+          break;
+        case '2':
+          if (JSON.parse(localStorage.getItem('user')).roles[0].name === 'ROLE_TRANSACTIONMANAGER') {
+            this.isRefuse = true;
+            this.isApproval = true;
+          }
+          break;
+        case '3':
+          if (JSON.parse(localStorage.getItem('user')).roles[0].name === 'ROLE_BRANCHMANAGER') {
+            this.isRefuse = true;
+            this.isApproval = true;
+          }
+          break;
       }
-    } else {
-      this.isCreate = true;
-      this.isAddTstc = true;
     }
   }
 
@@ -301,17 +295,17 @@ export class HsvtComponent implements OnInit {
 
   remove(i) {
     this.exchangeService.removeTstc(i).subscribe(
-      val=>{
+      (val) => {
         this.listHsvt.splice(i, 1);
         this.ref.markForCheck();
         const message = 'Đã xoá tài sản thế chấp';
         this.layoutUtilsService.showActionNotification(message, 'success');
       },
-      err=>{
+      (err) => {
         const message = this.translate.instant('ERROR');
         this.layoutUtilsService.showActionNotification(message, 'danger');
-      }
-    )
+      },
+    );
   }
   approval() {
     const params = {
@@ -321,6 +315,7 @@ export class HsvtComponent implements OnInit {
       (val) => {
         const message = 'Gửi yêu cầu xác nhận thành công';
         this.layoutUtilsService.showActionNotification(message, 'success');
+        this.cancel();
         this.ref.markForCheck();
       },
       (err) => {
@@ -350,12 +345,41 @@ export class HsvtComponent implements OnInit {
   }
 
   refuse() {
+    const dialog = this.dialog.open(RejectComponent, {
+      width: '900px',
+      disableClose: true
+    })
+    dialog.afterClosed().subscribe(val => {
+      const params = {
+        loanProfileId: this.proId,
+        rejectedReason: val
+      };
+      this.exchangeService.rejectVT(params).subscribe(
+        (val) => {
+          const message = 'Gửi yêu cầu xác nhận thành công';
+          this.cancel();
+          this.ref.markForCheck();
+        },
+        (err) => {
+          const message = this.translate.instant('ERROR');
+          this.layoutUtilsService.showActionNotification(message, 'danger');
+        },
+      );
+    })
+    
+  }
+
+  comfirm() {
     const params = {
       loanProfileId: this.proId,
     };
-    this.exchangeService.rejectVT(params).subscribe(
+    this.exchangeService.approveHsv(params, this.data.item.user.id).subscribe(
       (val) => {
         const message = 'Gửi yêu cầu xác nhận thành công';
+        this.layoutUtilsService.showActionNotification(message, 'success');
+        this.dialog.open(InpitOtpComponent).afterClosed().subscribe(val=> {
+          this.comfirmOtp(val);
+        })
         this.ref.markForCheck();
       },
       (err) => {

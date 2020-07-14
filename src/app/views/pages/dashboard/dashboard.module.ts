@@ -38,7 +38,7 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { InterceptService, HttpUtilsService, TypesUtilsService, LayoutUtilsService } from 'src/app/core/_base/crud';
-import { ActionNotificationComponent, DeleteEntityDialogComponent } from '../../partials/content/crud';
+import { ActionNotificationComponent, DeleteEntityDialogComponent, RejectComponent } from '../../partials/content/crud';
 import { Aside1Component } from './aside/aside-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { ListTransactionComponent } from './list-transaction/list-transaction.component';
@@ -169,7 +169,7 @@ const routes: Routes = [
     TypesUtilsService,
     LayoutUtilsService,
   ],
-  entryComponents: [ActionNotificationComponent, DeleteEntityDialogComponent, UserComponent, HsvtComponent, InpitOtpComponent,ChatUserComponent],
+  entryComponents: [ActionNotificationComponent, DeleteEntityDialogComponent, UserComponent, HsvtComponent, InpitOtpComponent,ChatUserComponent,RejectComponent,RutSecComponent],
   declarations: [
     DashboardComponent,
     Aside1Component,

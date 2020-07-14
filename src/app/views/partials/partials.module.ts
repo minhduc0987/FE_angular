@@ -58,6 +58,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InpitOtpComponent } from './content/crud/inpit-otp/inpit-otp.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import { RejectComponent } from './content/crud/reject/reject.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     UserProfile4Component,
     FormTstcDialogComponent,
     InpitOtpComponent,
-    NoticeChatComponent
+    NoticeChatComponent,
+    RejectComponent
   ],
   exports: [
     PortletModule,

@@ -15,7 +15,7 @@ import * as moment from 'moment';
 })
 export class ListChatComponent implements OnInit {
   dataSource$: Observable<any>;
-  isDisabled = true;
+  isDisabled = false;
   select = 'Danh sách tin nhắn chưa đọc';
   form1 = [{value: 'Danh sách tin nhắn chưa đọc'}, {value: 'Danh sách tin nhắn đã đọc'}];
   displayedColumns = ['title', 'name', 'lastMessage', 'lastMessageAt', 'actions'];
@@ -31,7 +31,7 @@ export class ListChatComponent implements OnInit {
   ngOnInit(): void {
     const role = JSON.parse(localStorage.getItem('user')).roles[0].name;
     if(role != 'ROLE_EMPLOYEE') {
-      this.isDisabled = false;
+      this.isDisabled = true;
     }
     this.getData();
   }

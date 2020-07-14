@@ -37,6 +37,7 @@ export class UserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.data)
     if(this.data && !this.data.locked) {
       this.isLock = true;
     }

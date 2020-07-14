@@ -14,7 +14,7 @@ export class Aside1Component implements OnInit {
 
   ngOnInit(): void {
     this.menuUsers = [
-      {id: 1, name: 'Danh sách user', url: 'list-user'},
+      {id: 1, name: 'Danh sách khách hàng', url: 'list-user'},
       {id: 1, name: 'Danh sách giao dịch', url: 'list-transaction'},
       {id: 2, name: 'Danh sách vay tiền', url: 'list-hsvt'},
       {id: 2, name: 'Rút séc', url: 'rut-sec'},

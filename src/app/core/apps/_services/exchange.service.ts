@@ -104,7 +104,7 @@ export class ExchangeService {
   }
 
   rejectVT(param): Observable<any> {
-    const uri = environment.urlBE + `api/admin/loan-profiles/reject`;
+    const uri = environment.urlBE + `api/admin/loan-profiles/rejected`;
     return this.http.post(uri, param);
   }
   

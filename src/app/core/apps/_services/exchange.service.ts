@@ -12,13 +12,20 @@ export class ExchangeService {
   }
   constructor(private http: HttpClient) {}
 
-  getlistExchange(accountId: any, page?: any): Observable<any> {
+  getlistExchange(param: any, page?: any): Observable<any> {
     const userId = localStorage.getItem('userId');
     let url;
+    url = API_USERS_URL + userId + '/accounts/' + param.id + '/transactions';
     if (page) {
-      url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions?page=' + page;
+      url += '?page=' + page;
     } else {
-      url = API_USERS_URL + userId + '/accounts/' + accountId + '/transactions';
+      url += '?page=1';
+    }
+    if (param.nam) {
+      url += '&year=' + param.nam;
+    }
+    if (param.thang) {
+      url += '&month=' + param.thang;
     }
     const userToken = localStorage.getItem(environment.authTokenKey);
     let httpHeaders = new HttpHeaders();
@@ -110,6 +117,11 @@ export class ExchangeService {
 
   chat(mess, id): Observable<any> {
     const uri = environment.urlBE + `api/users/current/conversations/` + id + `/messages`;
+    return this.http.post(uri, mess);
+  }
+
+  newChat(mess): Observable<any> {
+    const uri = environment.urlBE + `api/users/current/conversations`;
     return this.http.post(uri, mess);
   }
   

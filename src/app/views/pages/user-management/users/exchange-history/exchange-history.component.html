@@ -1,79 +1,103 @@
 <kt-portlet>
-	<kt-portlet-header title="{{ 'EXCHANGE.HISTORY' | translate }}" [class]="'card-head-lg'">
-		<ng-container ktPortletTools>
-		</ng-container>
-	</kt-portlet-header>
+  <kt-portlet-header title="{{ 'EXCHANGE.HISTORY' | translate }}" [class]="'card-head-lg'">
+    <ng-container ktPortletTools> </ng-container>
+  </kt-portlet-header>
 
-	<kt-portlet-body>
-		<div>
-			<div *ngIf="account$ | async as _account">
-				<div class="label-left">{{ 'CHOISE_HISTORY' | translate }}</div>
-					<ng-select
-					[items]="_account"
-					placeholder="Chọn tài khoản gửi tiền"
-					[ngModel]="stk"
-					class="select"
-					bindLabel="accountNumber"
-					bindValue="id"
-					[searchable]="false"
-					(change)="change($event)"
-					>
-					</ng-select>
-			</div>
-		</div>
-		<div class="mat-table__wrapper">
-			<mat-table class="lmat-elevation-z8"
-				#table
-				[dataSource]="account.items"
-				*ngIf="dataSource$ | async as account">
+  <kt-portlet-body>
+    <div>
+      <div *ngIf="account$ | async as _account">
+        <div class="label-left">{{ 'CHOISE_HISTORY' | translate }}</div>
+        <div class="d-flex">
+          <ng-select
+          [items]="nams"
+          placeholder="Chọn Năm"
+          [(ngModel)]="nam"
+          class="select w-50 pr-3 mb-3"
+          bindLabel="value"
+          bindValue="value"
+          [searchable]="false"
+        >
+        </ng-select>
+        <ng-select
+          [items]="thangs"
+          placeholder="Chọn tháng"
+          [(ngModel)]="thang"
+          class="select w-50 mb-3"
+          bindLabel="value"
+          bindValue="value"
+          [searchable]="false"
+        >
+        </ng-select>
+        </div>
+        <ng-select
+          [items]="_account"
+          placeholder="Chọn tài khoản gửi tiền"
+          [ngModel]="stk"
+          class="select mb-3"
+          bindLabel="accountNumber"
+          bindValue="id"
+          [searchable]="false"
+          (change)="change($event)"
+        >
+        </ng-select>
+      </div>
+    </div>
+    <div class="mat-table__wrapper">
+      <mat-table class="lmat-elevation-z8" #table [dataSource]="account.items" *ngIf="dataSource$ | async as account">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let account">FPT072020{{ account.id }}</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="id">
-					<mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
-					<mat-cell *matCellDef="let account">FPT072020{{account.id}}</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="key">
+          <mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.KEY' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ account.id }}</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="key">
-					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.KEY' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.id}}</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.MONEYX' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ getAmount(account.amount) }} VNĐ</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="amount">
-					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.MONEYX' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{getAmount(account.amount)}} VNĐ</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.TYPE' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ getType(account.amount) }}</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="type">
-					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.TYPE' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{getType(account.amount)}}</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="amountAfter">
+          <mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.SD_MONEY' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ formatNumber(account.amountAfterTransaction) }} VNĐ</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="amountAfter">
-					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.SD_MONEY' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{formatNumber(account.amountAfterTransaction)}} VNĐ</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.DATE' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ getDate(account.createdAt) }}</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="date">
-					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.DATE' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{getDate(account.createdAt)}}</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="from">
+          <mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.FS' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ account.fromOrToAccountNumber }} - {{ account.fromOrToFullName }}</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="from">
-					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.FS' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.fromOrToAccountNumber}} - {{account.fromOrToFullName}}</mat-cell>
-				</ng-container>
+        <ng-container matColumnDef="des">
+          <mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.DES' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let account">{{ account.description }}</mat-cell>
+        </ng-container>
 
-				<ng-container matColumnDef="des">
-					<mat-header-cell *matHeaderCellDef>{{ 'EXCHANGE.DES' | translate }}</mat-header-cell>
-					<mat-cell *matCellDef="let account">{{account.description}}</mat-cell>
-				</ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
-				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-
-				<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-			</mat-table>
-		</div>
-		<div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
-			<mat-paginator [pageSize]="5" [pageIndex]="dataSource.pageNumber - 1" [pageSizeOptions]="[5]" (page)="pageEvent = setItems($event)" [length]="dataSource.totalCount" [showFirstLastButtons]="true"></mat-paginator>
-		</div>
-	</kt-portlet-body>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+    <div class="mat-table__bottom" *ngIf="dataSource$ | async as dataSource">
+      <mat-paginator
+        [pageSize]="5"
+        [pageIndex]="dataSource.pageNumber - 1"
+        [pageSizeOptions]="[5]"
+        (page)="pageEvent = setItems($event)"
+        [length]="dataSource.totalCount"
+        [showFirstLastButtons]="true"
+      ></mat-paginator>
+    </div>
+  </kt-portlet-body>
 </kt-portlet>

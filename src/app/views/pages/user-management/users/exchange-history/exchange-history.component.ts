@@ -32,7 +32,11 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   // Table fields
   displayedColumns = ['id', 'amount', 'type', 'amountAfter', 'date', 'from','des'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  accountId: any
+  accountId: any;
+  nams = [{value: 'Tất cả'},{value: '2010'}, {value: '2011'}, {value: '2012'}, {value: '2013'}, {value: '2014'}, {value: '2015'}, {value: '2016'}, {value: '2017'}, {value: '2018'}, {value: '2019'}, {value: '2020'}]
+  thangs = [{value: 'Tất cả'},{value: '1'}, {value: '2'}, {value: '3'}, {value: '4'}, {value: '5'}, {value: '6'}, {value: '7'}, {value: '8'}, {value: '9'}, {value: '10'}, {value: '11'}, {value: '12'}]
+  nam;
+  thang;
   account$: Observable<any>;
   dataSource$: Observable<any>;
   pageEvent: PageEvent;
@@ -70,11 +74,21 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
 
   change(event) {
     this.id = event.id
-    this.dataSource$ = this.exchangeService.getlistExchange(event.id);
+    const param = {
+      id: event.id,
+      nam : this.nam == 'Tất cả' ? undefined : this.nam,
+      thang: this.thang == 'Tất cả' ? undefined : this.thang
+    }
+    this.dataSource$ = this.exchangeService.getlistExchange(param);
   }
   setItems(event) {
     const page = event.pageIndex + 1;
-    this.dataSource$ = this.exchangeService.getlistExchange(this.id, page);
+    const param = {
+      id: this.id,
+      nam : this.nam == 'Tất cả' ? undefined : this.nam,
+      thang: this.thang == 'Tất cả' ? undefined : this.thang
+    }
+    this.dataSource$ = this.exchangeService.getlistExchange(param, page);
   }
   getAmount(n) {
     if(n && typeof n === 'number') {

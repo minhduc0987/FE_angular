@@ -32,7 +32,7 @@ import { FormUpdateSecComponent } from 'src/app/views/partials/content/crud';
 })
 export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
   // Table fields
-  displayedColumns = ['id', 'name', 'info', 'actions'];
+  displayedColumns = ['id', 'name', 'info', 'money','date1', 'date2', 'status1', 'status2'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   accountId: any;
   account$: Observable<any>;
@@ -95,7 +95,7 @@ export class ExchangeHistorySecComponent implements OnInit, OnDestroy {
     if (!n.cheque.status) {
       return 'Chưa rút';
     }
-    return 'Đã rút từ ' + n.cheque.withdrawEmployeeFullName;
+    return 'Đã rút từ ' + n.withdrawEmployeeFullName;
   }
 
   getStatus2(n) {

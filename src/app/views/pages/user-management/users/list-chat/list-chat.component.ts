@@ -45,5 +45,9 @@ export class ListChatComponent implements OnInit {
     const dialog = this.dialog.open(NewChatComponent, {
       width: '600px'
     })
+    dialog.afterClosed().subscribe(()=>{
+      this.dataSource$ = this.exchangeService.getListChat();
+      this.ref.markForCheck()
+    })
   }
 }

@@ -8,12 +8,12 @@
           <ng-container *ngFor="let item of dataItem">
             <div class="row">
               <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
-                <div *ngIf="item.messageType">
+                <div *ngIf="item.messageType" class="mess">
                   {{item.messageDetail}}
                 </div>
               </div>
-              <div class="col-lg-6 kt-margin-bottom-20-mobile form-group">
-                <div *ngIf="!item.messageType" class="text-right">
+              <div class="col-lg-6 kt-margin-bottom-20-mobile form-group" style="display: flex; justify-content: flex-end;">
+                <div *ngIf="!item.messageType" class="text-right mess">
                   {{item.messageDetail}}
                 </div>
               </div>

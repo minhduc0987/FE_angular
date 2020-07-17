@@ -56,6 +56,7 @@ export const locale = {
     INFO_VAY: 'Thông tin vay tiền',
     INFO_USER_VAY: 'Thông tin khách hàng vay tiền',
     RUT_SEC: 'Rút séc',
+    EMAIL: 'Email',
     MENU: {
       DASHBOARD: 'Trang chủ',
     },

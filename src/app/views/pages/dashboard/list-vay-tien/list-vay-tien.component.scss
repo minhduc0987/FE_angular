@@ -16,8 +16,15 @@
     }
     .mat-column-amount {
         flex: 0 0 270px;
+        justify-content: flex-end;
     }
     .mat-column-action {
         flex: 0 0 100px;
+    }
+    .mat-column-status {
+        justify-content: flex-start;
+    }
+    .mat-column-description {
+        justify-content: flex-start;
     }
 }

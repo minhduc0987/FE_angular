@@ -12,3 +12,6 @@
     flex: 0 0 110px;
     padding-right: 5px;
 }
+.mat-column-name, .mat-column-info, .mat-column-date1, .mat-column-date2 {
+    justify-content: flex-start;
+}

@@ -124,5 +124,9 @@ export class ExchangeService {
     const uri = environment.urlBE + `api/users/current/conversations`;
     return this.http.post(uri, mess);
   }
-  
+
+  getListVay(): Observable<any> {
+    const uri = environment.urlBE + `api/users/current/loanProfiles`;
+    return this.http.get(uri);
+  }
 }

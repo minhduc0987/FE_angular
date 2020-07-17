@@ -3,6 +3,7 @@ export const locale = {
   lang: 'vi',
   data: {
     ERROR: 'Có lỗi vui lòng thao tác lại',
+    CHANGE_PASSWORD: 'Đổi mật khẩu',
     MENU: {
       DASHBOARD: 'Trang chủ',
     },
@@ -78,7 +79,8 @@ export const locale = {
       SEC_HISTORY: 'Lịch sử séc',
       DES: 'Nội dung giao dịch',
       FS: 'Gửi đến',
-      CHAT: 'Hỏi đáp'
+      CHAT: 'Hỏi đáp',
+      LIST_VAY: 'Danh sách hồ sơ vay tiền'
     },
     STK: 'Số tài khoản',
     ST: 'Số thẻ',

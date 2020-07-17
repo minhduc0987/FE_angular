@@ -56,6 +56,8 @@ import { NoticeExchangeComponent } from '../notice-exchange/notice-exchange.comp
 import { ChatUserComponent } from './users/chat-user/chat-user.component';
 import { ListChatComponent } from './users/list-chat/list-chat.component';
 import { NewChatComponent } from './users/new-chat/new-chat.component';
+import { ChangePasswordComponent } from './users/change-password/change-password.component';
+import { ListVayTienComponent } from './users/list-vay-tien/list-vay-tien.component';
 
 const routes: Routes = [
   {
@@ -106,6 +108,14 @@ const routes: Routes = [
       {
         path: 'hoi-dap',
         component: ListChatComponent,
+      },
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent,
+      },
+      {
+        path: 'list-vay-tien',
+        component: ListVayTienComponent,
       },
     ],
   },
@@ -182,6 +192,8 @@ const routes: Routes = [
     ChatUserComponent,
     ListChatComponent,
     NewChatComponent,
+    ChangePasswordComponent,
+    ListVayTienComponent,
   ],
 })
 export class UserManagementModule {}

@@ -64,4 +64,9 @@ export class UserProfileService {
     const uri = environment.urlBE + `api/transaction-offices`;
     return this.http.get(uri);
   }
+
+  changePassword(param): Observable<any> {
+    const uri = environment.urlBE + `api/users/current/change-password`;
+    return this.http.post(uri, param);
+  }
 }

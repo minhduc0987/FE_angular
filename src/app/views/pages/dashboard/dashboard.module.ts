@@ -59,6 +59,7 @@ import { InpitOtpComponent } from '../../partials/content/crud/inpit-otp/inpit-o
 import { RutSecComponent } from './rut-sec/rut-sec.component';
 import { ChatUserComponent } from './chat-user/chat-user.component';
 import { ListChatComponent } from './list-chat/list-chat.component';
+import { ListChatUnreadComponent } from './list-chat-unread/list-chat-unread.component';
 const routes: Routes = [
   {
     path: '',
@@ -108,6 +109,10 @@ const routes: Routes = [
       {
         path: 'hoi-dap',
         component: ListChatComponent,
+      },
+      {
+        path: 'list-chat-unread',
+        component: ListChatUnreadComponent,
       },
     ],
   },
@@ -190,7 +195,8 @@ const routes: Routes = [
     HsvtComponent,
     RutSecComponent,
     ListChatComponent,
-    ChatUserComponent
+    ChatUserComponent,
+    ListChatUnreadComponent
   ],
 })
 export class DashboardModule {}

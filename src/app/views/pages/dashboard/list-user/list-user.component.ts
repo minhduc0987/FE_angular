@@ -47,7 +47,7 @@ export class ListUserComponent implements OnInit {
   ngOnInit() {
     this.getListUsers();
     this.formId = this._formBuilder.group({
-      id: ['12312312300', Validators.required],
+      id: ['', Validators.required],
       select: ['0', Validators.required],
     });
     // this.formId.get('id').valueChanges.subscribe((val) => {

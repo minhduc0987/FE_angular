@@ -6,6 +6,7 @@ import { ExchangeService, UserProfileService } from 'src/app/core/apps';
 import { TranslateService } from '@ngx-translate/core';
 import { LayoutUtilsService } from 'src/app/core/_base/crud';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'kt-list-sec',
@@ -26,13 +27,13 @@ export class ListSecComponent implements OnInit {
     private fb: FormBuilder,
     private ref: ChangeDetectorRef,
     private userProfileService: UserProfileService,
-    private layoutUtilsService: LayoutUtilsService,
+    private layoutUtilsService: LayoutUtilsService,private router: Router,
   ) {}
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      fullname: ['LE THI XUAN HOA', Validators.required],
-      idCardNumber: ['123123124001', Validators.required],
+      fullname: ['', Validators.required],
+      idCardNumber: ['', Validators.required],
     });
   }
 
@@ -53,7 +54,9 @@ export class ListSecComponent implements OnInit {
     }
     this.exchangeService.getSec(param).subscribe(
       val=>{this.dataSource = val; this.ref.markForCheck()},
-      err=>{const message = err?.error?.message || 'Có lỗi vui lòng thao tác lại';
+      err=>{
+        // const message = err?.error?.message || 'Có lỗi vui lòng thao tác lại';
+        const message = 'Không có thông tin séc này trên hệ thông';
       this.layoutUtilsService.showActionNotification(message, 'danger');}
     )
   }
@@ -82,6 +85,8 @@ export class ListSecComponent implements OnInit {
       val=>{
         const message = val?.message || 'Rút séc thành công';
       this.layoutUtilsService.showActionNotification(message, 'success');
+      this.router.navigateByUrl('/dashboard/list-transaction');
+      this.ref.markForCheck()
     },
       err=>{const message = err?.error?.message || 'Có lỗi vui lòng thao tác lại';
       this.layoutUtilsService.showActionNotification(message, 'danger');

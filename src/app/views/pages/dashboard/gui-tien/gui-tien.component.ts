@@ -30,7 +30,6 @@ export class GuiTienComponent implements OnInit {
       stk: ['', Validators.required],
       idBank: ['', Validators.required],
       money: ['', Validators.required],
-      note: ['', Validators.required],
     });
     this.formId.get('stk').valueChanges.subscribe((val) => {
       if (val && val.length == 12) {

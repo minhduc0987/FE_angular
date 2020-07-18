@@ -147,6 +147,27 @@ export class ExchangeService {
     return this.http.get(uri);
   }
 
+  getAllLoans4(status: string, page?: string, ): Observable<any> {
+    let uri;
+    if(page) {
+      uri = environment.urlBE + `api/admin/transaction-office/loan-profiles?page=`+ page +`&status=` + status;
+    } else {
+      uri = environment.urlBE + `api/admin/transaction-office/loan-profiles?page=1&status=` + status;
+    }
+    return this.http.get(uri);
+  }
+
+
+  getAllLoans5(transactionOfficeId: string, status: string, page?: string, ): Observable<any> {
+    let uri;
+    if(page) {
+      uri = environment.urlBE + `api/admin/branch-office/transaction-offices/` + transactionOfficeId + `/loan-profiles?page=`+ page + `&status=` + status;
+    } else {
+      // tslint:disable-next-line: max-line-length
+      uri = environment.urlBE + `api/admin/branch-office/transaction-offices/` + transactionOfficeId + `/loan-profiles?page=1&status=` + status;
+    }
+    return this.http.get(uri);
+  }
 
   getTransactionUser(userId: any,id: any,  page?: any): Observable<any> {
     let url;
@@ -184,13 +205,14 @@ export class ExchangeService {
     return this.http.get(uri);
   }
   getListChat2(page?): Observable<any> {
-    let uri = environment.urlBE + `api/admin/responsed-conversations`;
-    if(page) {
-      uri = environment.urlBE + `api/admin/responsed-conversations?page=` + page;
-    }
+    let uri = environment.urlBE + `api/admin/current/employee/conversations`;
     return this.http.get(uri);
   }
-  
+  getListChat3(page?): Observable<any> {
+    let uri = environment.urlBE + `api/admin/current/employee/conversations`;
+    return this.http.get(uri);
+  }
+
   getChat(id): Observable<any> {
     const uri = environment.urlBE + `api/admin/current/conversations/` + id + `/messages`;
     return this.http.get(uri);

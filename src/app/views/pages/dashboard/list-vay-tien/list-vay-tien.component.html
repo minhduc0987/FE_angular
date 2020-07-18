@@ -5,7 +5,7 @@
     </kt-portlet-header>
 
     <kt-portlet-body>
-      <div *ngIf="!disabled">
+      <div *ngIf="!disabled" class="from-group">
         <label>Danh sách chi nhánh<span class="text-danger">*</span></label>
         <ng-select
           [items]="chinhanhs"
@@ -17,6 +17,20 @@
           [searchable]="false"
           *ngIf="chinhanhs.length != 0"
           (change)="change($event)"
+        >
+        </ng-select>
+      </div>
+      <div *ngIf="!isDisable1" class="from-group">
+        <ng-select
+          [items]="statuss"
+          [clearable]="false"
+          placeholder="{{ 'Trạng thái' | translate }}"
+          class="select"
+          [(ngModel)]="status"
+          bindLabel="value"
+          bindValue="key"
+          [searchable]="false"
+          (change)="change2($event)"
         >
         </ng-select>
       </div>

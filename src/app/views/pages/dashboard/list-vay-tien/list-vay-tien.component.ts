@@ -26,6 +26,16 @@ export class ListVayTienComponent implements OnInit {
   pageEvent: PageEvent;
   stk;
   id;
+  statuss = [
+    {key: '5', value: 'Tất cả'},
+    {key: '0', value: 'Chưa xác nhận'},
+    {key: '1', value: 'Chờ xác minh'},
+    {key: '2', value: 'Chờ xem xét'},
+    {key: '3', value: 'Chờ phê duyệt'},
+    {key: '4', value: 'Đã phê duyệt'}
+  ]
+  status = '5';
+  isDisable1 = true;
   private subscriptions: Subscription[] = [];
   constructor(
     private exchangeService: ExchangeService,
@@ -39,6 +49,11 @@ export class ListVayTienComponent implements OnInit {
 
   ngOnInit() {
     const role = JSON.parse(localStorage.getItem('user')).roles[0].name;
+    if (role === 'ROLE_EMPLOYEE') {
+      this.isDisable1 = true;
+    } else {
+      this.isDisable1 = false;
+    }
     if(role === 'ROLE_BRANCHMANAGER') {
       this.disabled = false;
       this.chinhanhs = [];
@@ -109,7 +124,7 @@ export class ListVayTienComponent implements OnInit {
   }
 
   checkRole(item) {
-    const role = JSON.parse(localStorage.getItem('user')).authorities[0].authority;
+    const role = JSON.parse(localStorage.getItem('user')).roles[0].name
     if(role == 'ROLE_EMPLOYEE') {
       return false
     }
@@ -125,7 +140,7 @@ export class ListVayTienComponent implements OnInit {
     return true;
   }
   checkRole2(item) {
-    const role = JSON.parse(localStorage.getItem('user')).authorities[0].authority;
+    const role = JSON.parse(localStorage.getItem('user')).roles[0].name
     if(role == 'ROLE_EMPLOYEE') {
       return false
     }
@@ -190,9 +205,54 @@ export class ListVayTienComponent implements OnInit {
 
   setItems(event) {
     const page = event.pageIndex + 1;
-    this.exchangeService.getAllLoans(page).subscribe((val) => {
-      this.dataSource = val;
-      this.ref.markForCheck();
-    });
+    // this.exchangeService.getAllLoans(page).subscribe((val) => {
+    //   this.dataSource = val;
+    //   this.ref.markForCheck();
+    // });
+
+    const role = JSON.parse(localStorage.getItem('user')).roles[0].name
+    if(role == 'ROLE_EMPLOYEE') {
+      this.exchangeService.getAllLoans(page).subscribe((val) => {
+        this.dataSource = val;
+        this.ref.markForCheck();
+      });
+    }
+    if (role == 'ROLE_TRANSACTIONMANAGER') {
+      this.exchangeService.getAllLoans4(this.status, page).subscribe((val) => {
+        this.dataSource = val;
+        this.ref.markForCheck();
+      });
+    }
+    if(role == 'ROLE_BRANCHMANAGER') {
+      this.exchangeService.getAllLoans5(this.chinhanh, this.status).subscribe((val) => {
+        this.dataSource = val;
+        this.ref.markForCheck();
+      });
+    }
+  }
+
+  change2(item) {
+    const param = {
+      status: this.status
+    }
+    const role = JSON.parse(localStorage.getItem('user')).roles[0].name
+    if(role == 'ROLE_EMPLOYEE') {
+      this.exchangeService.getAllLoans().subscribe((val) => {
+        this.dataSource = val;
+        this.ref.markForCheck();
+      });
+    }
+    if (role == 'ROLE_TRANSACTIONMANAGER') {
+      this.exchangeService.getAllLoans4(this.status).subscribe((val) => {
+        this.dataSource = val;
+        this.ref.markForCheck();
+      });
+    }
+    if (role == 'ROLE_BRANCHMANAGER') {
+      this.exchangeService.getAllLoans5(this.chinhanh, this.status).subscribe((val) => {
+        this.dataSource = val;
+        this.ref.markForCheck();
+      });
+    }
   }
 }

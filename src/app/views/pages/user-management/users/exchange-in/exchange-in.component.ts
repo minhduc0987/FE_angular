@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthNoticeService } from 'src/app/core/auth';
 import { LayoutUtilsService } from 'src/app/core/_base/crud';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'kt-exchange-in',
@@ -53,6 +54,7 @@ export class ExchangeInComponent implements OnInit {
     private authNoticeService: AuthNoticeService,
     private translate: TranslateService,
     private layoutUtilsService: LayoutUtilsService,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -86,7 +88,7 @@ export class ExchangeInComponent implements OnInit {
         const message = this.translate.instant('ERROR');
         this.layoutUtilsService.showActionNotification(message, 'danger');
         return;
-      }
+      },
     );
   }
 
@@ -146,19 +148,24 @@ export class ExchangeInComponent implements OnInit {
 
     const userId = localStorage.getItem('userId');
     const id = this.form1.get('stk').value;
-    
 
-    this.exchangeService.createSec(params, userId, id).subscribe(
-      (val) => {
-        const message = this.translate.instant('SUCCESS');
-        this.layoutUtilsService.showActionNotification(message, 'success');
-        this.router.navigateByUrl('/user-detail/exchange-sec-history')
-      },
-      (err) => {
-        const message = this.translate.instant('ERROR');
-        this.layoutUtilsService.showActionNotification(message, 'danger');
-      },
-    );
+    const dialog = this.layoutUtilsService.deleteElement('Tạo séc', 'Bạn chắc chắn muốn tạo séc');
+
+    dialog.afterClosed().subscribe((e) => {
+      if (e) {
+        this.exchangeService.createSec(params, userId, id).subscribe(
+          (val) => {
+            const message = this.translate.instant('SUCCESS');
+            this.layoutUtilsService.showActionNotification(message, 'success');
+            this.router.navigateByUrl('/user-detail/exchange-sec-history');
+          },
+          (err) => {
+            const message = this.translate.instant('ERROR');
+            this.layoutUtilsService.showActionNotification(message, 'danger');
+          },
+        );
+      }
+    });
   }
 
   onKeyMoney() {

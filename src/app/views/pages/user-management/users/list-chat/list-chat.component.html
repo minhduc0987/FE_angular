@@ -13,7 +13,7 @@
             <mat-table class="lmat-elevation-z8" #table [dataSource]="account" *ngIf="dataSource$ | async as account">
               <ng-container matColumnDef="title">
                 <mat-header-cell *matHeaderCellDef>Tiêu đề</mat-header-cell>
-                <mat-cell *matCellDef="let account">{{ account.title }}</mat-cell>
+                <mat-cell *matCellDef="let account" [ngClass]="{'read': !account.read}">{{ account.title }}</mat-cell>
               </ng-container>
       
               <ng-container matColumnDef="lastMessage">

@@ -129,4 +129,18 @@ export class ExchangeService {
     const uri = environment.urlBE + `api/users/current/loanProfiles`;
     return this.http.get(uri);
   }
+
+
+  getlistExchange2(param: any, page?: any): Observable<any> {
+    const userId = localStorage.getItem('userId');
+    let url;
+    url = API_USERS_URL + `current/accounts/`+ param.id +`/transactions/search?term=` + param.term;
+    if (page) {
+      url += '&page=' + page;
+    }
+    const userToken = localStorage.getItem(environment.authTokenKey);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + userToken);
+    return this.http.get<any>(url, { headers: httpHeaders });
+  }
 }

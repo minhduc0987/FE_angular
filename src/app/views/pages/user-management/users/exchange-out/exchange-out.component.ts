@@ -117,9 +117,8 @@ export class ExchangeOutComponent implements OnInit {
             this.show2 = false;
             const message = this.translate.instant('EXCHANGE.SUCCESS');
             this.layoutUtilsService.showActionNotification(message, 'success');
-            setTimeout(() => {
-              this.router.navigateByUrl('/user-detail/lich-su-giao-dich');
-            }, 3000);
+            this.ref.markForCheck();
+            this.router.navigateByUrl('/user-detail/lich-su-giao-dich');
           } else {
             this.show = false;
             this.show2 = true;

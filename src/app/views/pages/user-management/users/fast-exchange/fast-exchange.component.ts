@@ -83,17 +83,23 @@ export class FastExchangeComponent implements OnInit {
       accountId: this.formId.get('tk').value,
       transasctionOfficeId: this.formId.get('chinhanh').value,
     };
-    this.exchangeService.createLoan(params).subscribe(
-      (response: any) => {
-        const message = 'Đăng kí vay tiền thành công';
-        this.layoutUtilsService.showActionNotification(message, 'success');
-        this.router.navigateByUrl('user-detail/thong-tin')
-      },
-      (error: any) => {
-        const message = this.translate.instant('ERROR');
-        this.layoutUtilsService.showActionNotification(message, 'danger');
-      },
-    );
+    this.layoutUtilsService.deleteElement('Tạo hồ sơ vay tiền', 'Bạn chắc chắn muốn tạo hồ sơ vay tiền?').afterClosed().subscribe(
+      val=> {
+        if(val) {
+          this.exchangeService.createLoan(params).subscribe(
+            (response: any) => {
+              const message = 'Đăng kí vay tiền thành công';
+              this.layoutUtilsService.showActionNotification(message, 'success');
+              this.router.navigateByUrl('user-detail/list-vay-tien')
+            },
+            (error: any) => {
+              const message = 'Tài khoản này đã có 1 khoản vay';
+              this.layoutUtilsService.showActionNotification(message, 'danger');
+            },
+          );
+        }
+      }
+    )
   }
 
   formatNumber(n: any) {

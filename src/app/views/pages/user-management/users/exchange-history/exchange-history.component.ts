@@ -1,5 +1,5 @@
 // Angular
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 // Material
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
@@ -37,6 +37,7 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   thangs = [{value: 'Tất cả'},{value: '1'}, {value: '2'}, {value: '3'}, {value: '4'}, {value: '5'}, {value: '6'}, {value: '7'}, {value: '8'}, {value: '9'}, {value: '10'}, {value: '11'}, {value: '12'}]
   nam;
   thang;
+  term;
   account$: Observable<any>;
   dataSource$: Observable<any>;
   pageEvent: PageEvent;
@@ -46,7 +47,7 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   constructor(
     private exchangeService: ExchangeService,
     private userService: UserProfileService,
-    private translate: TranslateService
+    private translate: TranslateService,private ref: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
@@ -73,9 +74,10 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   }
 
   change(event) {
-    this.id = event.id
+    this.id = event.id;
     const param = {
       id: event.id,
+      term: this.term ? undefined : this.term,
       nam : this.nam == 'Tất cả' ? undefined : this.nam,
       thang: this.thang == 'Tất cả' ? undefined : this.thang
     }
@@ -85,6 +87,7 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
     const page = event.pageIndex + 1;
     const param = {
       id: this.id,
+      term: this.term ? undefined : this.term,
       nam : this.nam == 'Tất cả' ? undefined : this.nam,
       thang: this.thang == 'Tất cả' ? undefined : this.thang
     }
@@ -104,5 +107,16 @@ export class ExchangeHistoryComponent implements OnInit, OnDestroy {
   }
   getDate(date) {
     return moment(date).format('YYYY/MM/DD HH:mm');
+  }
+
+  search() {
+    this.nam = 'Tất cả';
+    this.thang = 'Tất cả';
+    this.ref.markForCheck();
+    const param = {
+      id: this.id,
+      term: this.term ? this.term : undefined
+    }
+    this.dataSource$ = this.exchangeService.getlistExchange2(param);
   }
 }

@@ -3,14 +3,13 @@
 	<div [ngClass]="footerContainerClasses" class=" d-flex flex-column flex-md-row align-items-center justify-content-between">
     <!--begin::Copyright-->
     <div class="text-dark order-2 order-md-1">
-			<span class="text-muted font-weight-bold mr-2">{{today | date:'yyyy'}} &copy;</span>
-      <a routerLink="/dashboard" class="text-dark-75 text-hover-primary">FPT Bank</a>
+      <a routerLink="/dashboard" class="text-dark-75 text-hover-primary">FPT Banking System</a>
 		</div>
     <!--end::Copyright-->
 
     <!--begin::Nav-->
     <div class="nav nav-dark order-1 order-md-2">
-			<a routerLink="/tin-tuc" class="nav-link pr-3 pl-0">About</a>
+      <span class="text-muted font-weight-bold mr-2">{{today | date:'yyyy/MM/dd hh:mm:ss'}}</span>
 		</div>
 	</div>
 </div>

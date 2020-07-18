@@ -1,5 +1,5 @@
 .label-left {
-    font-size: 20px;
+    font-size: 24px;
     margin: 10px 0;
 }
 .card-label {
@@ -31,5 +31,8 @@
     .mat-column-date {
         flex: 0 0 200px;
         padding-right: 20px;
+    }
+    .mat-column-des ,.mat-column-from{
+        justify-content: flex-start;
     }
 }

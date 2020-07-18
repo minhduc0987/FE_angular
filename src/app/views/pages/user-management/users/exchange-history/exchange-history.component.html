@@ -40,6 +40,9 @@
           (change)="change($event)"
         >
         </ng-select>
+        <div class="kt-margin-bottom-20-mobile form-group">
+          <input type="text" class="w-100" [(ngModel)]="term" (keyup.enter)="search()" placeholder="Nhập Để tìm kiếm">
+        </div>
       </div>
     </div>
     <div class="mat-table__wrapper">
